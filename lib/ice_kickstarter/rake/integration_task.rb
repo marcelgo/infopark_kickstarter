@@ -48,6 +48,7 @@ module IceKickstarter
           sh "cd #{app_path} && bundle exec rails generate cms:model news"
           sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
           sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
+          sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
         end
       end
 

@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ice_kickstarter (0.0.4)
-      haml-rails
+      haml
       infopark_cloud_connector (>= 6.8.2.7.128454143)
       infopark_rails_connector (>= 6.8.2.7.128454143)
       jquery-rails
@@ -54,29 +54,25 @@ GEM
     generator_spec (0.8.7)
       activerecord (>= 3.0, < 4.0)
       railties (>= 3.0, < 4.0)
-    haml (3.1.8)
-    haml-rails (0.3.5)
-      actionpack (>= 3.1, < 4.1)
-      activesupport (>= 3.1, < 4.1)
-      haml (~> 3.1)
-      railties (>= 3.1, < 4.1)
+    haml (4.0.0)
+      tilt
     helpful_configuration (0.1.0)
     hike (1.2.1)
     httparty (0.10.2)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.1)
-    infopark_cloud_connector (6.8.2.36.82613853)
+    infopark_cloud_connector (6.8.3.67.110847540)
       aws-sdk (~> 1.3.6)
-      kvom (= 6.8.2.36.82613853)
+      kvom (= 6.8.3.67.110847540)
       rest-client (~> 1.6)
     infopark_crm_connector (1.0.0)
       activeresource (>= 3)
       backports (>= 2.3)
-    infopark_rails_connector (6.8.2.36.82613853)
+    infopark_rails_connector (6.8.3.67.110847540)
       helpful_configuration (~> 0.1.0)
       infopark_crm_connector (~> 1.0.0)
-      jquery-rails (~> 1.0.19)
+      jquery-rails (~> 2.2.1)
       json (>= 1.5.1)
       liquid (~> 2.4.0)
       maruku (~> 0.6.0)
@@ -85,14 +81,14 @@ GEM
       ruby-recaptcha (~> 1.0.5)
       will_paginate (~> 3.0.2)
     journey (1.0.4)
-    jquery-rails (1.0.19)
-      railties (~> 3.0)
-      thor (~> 0.14)
+    jquery-rails (2.2.1)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
     json (1.7.7)
-    kvom (6.8.2.36.82613853)
+    kvom (6.8.3.67.110847540)
       activemodel (>= 3)
       activesupport (>= 3)
-      multi_json (~> 1.3)
+      multi_json (>= 1.5.1)
     less (2.2.2)
       commonjs (~> 0.2.6)
     less-rails (2.2.6)
@@ -110,7 +106,7 @@ GEM
       syntax (>= 1.0.0)
     method_source (0.8.1)
     mime-types (1.21)
-    multi_json (1.6.0)
+    multi_json (1.6.1)
     multi_xml (0.5.3)
     nokogiri (1.5.6)
     polyglot (0.3.3)
@@ -184,7 +180,7 @@ PLATFORMS
 
 DEPENDENCIES
   generator_spec
-  haml-rails
+  haml
   ice_kickstarter!
   infopark_cloud_connector (>= 6.8.2.7.128454143)
   infopark_rails_connector (>= 6.8.2.7.128454143)

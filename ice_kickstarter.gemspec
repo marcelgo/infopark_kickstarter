@@ -26,7 +26,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'rails', '~> 3.2.12'
   gem.add_dependency 'jquery-rails'
-  gem.add_dependency 'haml-rails'
+  gem.add_dependency 'haml'
   gem.add_dependency 'less-rails-bootstrap'
   gem.add_dependency 'infopark_rails_connector', '>= 6.8.2.7.128454143'
   gem.add_dependency 'infopark_cloud_connector', '>= 6.8.2.7.128454143'
