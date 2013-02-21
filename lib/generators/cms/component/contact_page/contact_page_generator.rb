@@ -23,7 +23,7 @@ module Cms
           gem('valid_email', '0.0.4')
 
           Bundler.with_clean_env do
-            run('bundle')
+            run('bundle --quiet')
           end
         end
 

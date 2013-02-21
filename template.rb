@@ -20,6 +20,12 @@ gsub_file("app/views/layouts/application.html.erb", %r{<%= yield %>}, %{
   <%= link_to 'Login', user_path(action: 'login') %>
 })
 
+create_file 'deploy/before_migrate.rb', %{
+  run "cd #\{release_path\}/config && ln -s /opt/infopark/rails_connector.yml"
+  run "cd #\{release_path\}/config && ln -s /opt/infopark/custom_cloud.yml"
+  run "bundle exec rake assets:precompile RAILS_ENV=production"
+}
+
 # WebCRM
 gsub_file('config/initializers/rails_connector.rb', '# :crm,', ' :crm,')
 remove_file 'config/initializers/crm_connector.rb'
