@@ -15,6 +15,7 @@ class BoxGoogleMaps < Obj
       map_type: self.google_maps_map_type,
       latitude: self.latitude,
       longitude: self.longitude,
+      dom_identifier: self.dom_identifier,
     }
   end
 end
