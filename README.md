@@ -141,6 +141,10 @@ To add a language switch functionality to the app:
 
     $ rails generate cms:component:language_switch
 
+To add a google maps box type to the app:
+
+    $ rails generate cms:component:google_maps
+
 ## Rake Tasks
 
 To get an overview of all provided rake tasks:

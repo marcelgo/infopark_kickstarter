@@ -1,4 +1,8 @@
 = v0.0.5
+  * A new google maps box type was added. It allows to easily create a map and place pins on it.
+    The new box type is part of the base Infopark Kickstarter functionality but is also
+    available as a separate generator. Call ```rails generate cms:component:google_maps --help```
+    for more information.
   * The user manager now allows to find an user by id. The remote user with this id is retrieved and
     then mapped to an application user.
   * haml-rails is not longer required by the dashboard, but only haml. This prevents the default
