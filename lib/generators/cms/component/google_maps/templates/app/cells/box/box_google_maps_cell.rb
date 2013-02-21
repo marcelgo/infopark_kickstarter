@@ -1,5 +1,8 @@
 class Box::BoxGoogleMapsCell < BoxCell
-  cache :show, :if => proc {|cell, page, box| cell.session[:live_environment]} do |cell, page, box|
-    [RailsConnector::Workspace.current.revision_id, box.id]
+  def show(page, box)
+    @id = "map_canvas_#{box.id}"
+    @url = google_map_path(box, dom_identifier: @id, format: :json)
+
+    super
   end
 end

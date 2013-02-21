@@ -171,10 +171,6 @@ module Cms
         directory('spec')
       end
 
-      def add_initital_components
-        Rails::Generators.invoke('cms:component:google_maps', ["--with_example_to_path=#{boxes_path}"])
-      end
-
       def extend_gitignore
         append_file('.gitignore', 'config/deploy.yml')
       end
@@ -187,8 +183,12 @@ module Cms
 
       def bundle
         Bundler.with_clean_env do
-          run('bundle')
+          run('bundle --quiet')
         end
+      end
+
+      def add_initital_components
+        Rails::Generators.invoke('cms:component:google_maps', ["--cms_path=#{boxes_path}"])
       end
 
       private

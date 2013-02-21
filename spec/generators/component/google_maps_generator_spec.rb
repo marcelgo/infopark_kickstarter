@@ -8,7 +8,7 @@ describe Cms::Generators::Component::GoogleMapsGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--with_example_to_path=testdirectory']
+  arguments ['--cms_path=testdirectory']
 
   before do
     prepare_destination
@@ -17,20 +17,21 @@ describe Cms::Generators::Component::GoogleMapsGenerator do
   end
 
   def prepare_environments
-    layouts_environments_path = "#{destination_root}/app/views/layouts/"
-    javascripts_environments_path = "#{destination_root}/app/assets/javascripts/"
-    config_environments_path = "#{destination_root}/config/"
+    layouts_environments_path = "#{destination_root}/app/views/layouts"
+    javascripts_environments_path = "#{destination_root}/app/assets/javascripts"
+    config_environments_path = "#{destination_root}/config"
 
     mkdir_p(layouts_environments_path)
     mkdir_p(javascripts_environments_path)
     mkdir_p(config_environments_path)
 
-    File.open("#{layouts_environments_path}application.html.haml", 'w') { |f| f.write("= javascript_include_tag('application')") }
-    File.open("#{javascripts_environments_path}application.js", 'w') { |f| f.write("//= require infopark_rails_connector") }
-    File.open("#{config_environments_path}routes.rb", 'w') { |f| f.write(" ") }
+    File.open("#{layouts_environments_path}/application.html.haml", 'w') { |f| f.write("= javascript_include_tag('application')") }
+    File.open("#{javascripts_environments_path}/application.js", 'w') { |f| f.write("//= require infopark_rails_connector\n") }
+    File.open("#{destination_root}/Gemfile", 'w')
+    File.open("#{config_environments_path}/routes.rb", 'w')
   end
 
-  it 'creates view' do
+  it 'creates app files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
@@ -42,47 +43,70 @@ describe Cms::Generators::Component::GoogleMapsGenerator do
             end
           end
         end
-      end
-    }
-  end
 
-  it 'creates model file' do
-    destination_root.should have_structure {
-      directory 'app' do
         directory 'models' do
           file 'box_google_maps.rb'
           file 'google_maps_pin.rb'
+        end
+
+        directory 'controllers' do
+          file 'google_maps_controller.rb'
+        end
+
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'google_maps_map_type.rb'
+              file 'google_maps_address.rb'
+              file 'latitude.rb'
+              file 'longitude.rb'
+            end
+          end
         end
       end
     }
   end
 
-  it 'creates test file' do
+  it 'creates test files' do
     destination_root.should have_structure {
       directory 'spec' do
         directory 'models' do
-          file 'box_google_maps.rb'
-          file 'google_maps_pin.rb'
+          file 'box_google_maps_spec.rb'
+          file 'google_maps_pin_spec.rb'
         end
       end
     }
   end
 
-  it 'creates migration file' do
+  it 'creates migration files' do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_google_maps'
+          migration 'create_google_maps_example'
         end
       end
     }
   end
 
-  it 'creates example migration file' do
+  it 'creates asset files' do
     destination_root.should have_structure {
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_google_maps_example'
+      directory 'app' do
+        directory 'assets' do
+          directory 'javascripts' do
+            directory 'google_maps' do
+              file 'app.js.coffee'
+
+              directory 'model' do
+                file 'map.js.coffee'
+                file 'pin.js.coffee'
+              end
+            end
+          end
+
+          directory 'stylesheets' do
+            file 'google_maps.css.scss'
+          end
         end
       end
     }

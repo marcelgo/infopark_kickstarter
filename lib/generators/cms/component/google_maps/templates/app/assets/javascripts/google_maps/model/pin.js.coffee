@@ -1,42 +1,44 @@
-class window.GoogleMap.Model.Pin
-  self = null
-  body = null
-  title = null
-  latitude = null
-  longitude = null
-
+class GoogleMap.Model.Pin
   constructor: (data)->
-    self = this
-    self.title = data.title
-    self.body = data.body
-    self.latitude = data.latitude
-    self.longitude = data.longitude
+    @title = data.title
+    @body = data.body
+    @latitude = data.latitude
+    @longitude = data.longitude
 
-  googleMapMarker: ->
-    marker = new google.maps.Marker {
-      position: new window.google.maps.LatLng(self.latitude, self.longitude)
-      title: self.title
-    }
+  getMarker: ->
+    @marker ||= new google.maps.Marker(
+      position: new google.maps.LatLng(@latitude, @longitude)
+      title: @title
+    )
+
+  getInfoWindow: ->
+    @infoWindow ||= new google.maps.InfoWindow(
+      content: @content()
+    )
+
+  getBounds: ->
+    new google.maps.LatLng(@latitude, @longitude);
 
   setMap: (map)->
-    marker = self.googleMapMarker()
-
-    infowindow = new google.maps.InfoWindow {
-      content: self.content()
-    }
-
-    window.google.maps.event.addListener marker, 'click', ->
-      infowindow.open(map, marker)
+    marker = @getMarker()
 
     marker.setMap(map)
+
+  setInfoWindow: (map)->
+    marker = @getMarker()
+    infoWindow = @getInfoWindow()
+
+    google.maps.event.addListener(marker, 'click', ->
+      infoWindow.open(map, marker)
+    )
 
   content: ->
     contentString = ''
 
-    if self.title
-      contentString += '<h3>' + self.title + '</h3>'
+    if @title?
+      contentString += "<h3>#{@title}</h3>"
 
-    if self.body
-      contentString += '<p>' + self.body + '</p>'
+    if @body?
+      contentString += "<p>#{@body}</p>"
 
     contentString

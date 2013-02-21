@@ -1,20 +1,12 @@
 class GoogleMapsPin < Obj
-
-  def longitude
-    self.google_maps_pin_longitude
-  end
-
-  def latitude
-    self.google_maps_pin_latitude
-  end
+  include Cms::Attributes::GoogleMapsAddress
 
   def as_json(options = {})
     {
       :title => self.title,
       :body => self.body,
-      :longitude => self.longitude.to_f,
-      :latitude => self.latitude.to_f
+      :latitude => self.latitude,
+      :longitude => self.longitude,
     }
   end
-
 end

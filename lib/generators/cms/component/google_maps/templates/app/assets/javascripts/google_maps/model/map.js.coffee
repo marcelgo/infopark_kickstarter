@@ -1,45 +1,66 @@
-class window.GoogleMap.Model.Map
-  self = null
-  pins = []
-  map = null
-  mapType = 0
-  zoomLevel = 0
-  domIdentifier = ''
-  centerLatitude = 0
-  centerLongitude = 0
+class GoogleMap.Model.Map
+  constructor: (options = {})->
+    @mapType = options.map_type ? 'ROADMAP'
+    @latitude = options.latitude ? 0
+    @longitude = options.longitude ? 0
+    @domIdentifier = options.dom_identifier ? 'map'
 
-  constructor: (config = {})->
-    self = this
-    self.assignConfig(config)
+    for data in options.pins
+      @addPin(data)
 
-  assignConfig: (config = {})->
-    self.mapType = config.map_type
-    self.zoomLevel = config.zoom_level
-    self.domIdentifier = config.dom_identifier
-    self.centerLatitude = config.center_latitude
-    self.centerLongitude = config.center_longitude
+  init: ->
+    map = @getMap()
+    pins = @getPins()
 
-    #defaults
-    self.mapType ?= 'ROADMAP'
-    self.zoomLevel ?= 8
-    self.domIdentifier ?= '.map'
-    self.centerLatitude ?= 0
-    self.centerLongitude ?= 0
+    # Use the map data as a pin, if there are no pins given.
+    if pins.length == 0
+      @addPin(
+        latitude: @latitude
+        longitude: @longitude
+      )
 
-  googleMapConfig: ->
-    return {
-      center: new window.google.maps.LatLng(self.centerLatitude, self.centerLongitude),
-      zoom: self.zoomLevel,
-      mapTypeId: eval('google.maps.MapTypeId.' + self.mapType)
-    }
+    @placePins(map, pins)
+    @fitToPins(map, pins)
 
-  googleMap: ->
-    map = new window.google.maps.Map(
-      $.find(self.domIdentifier)[0],
-      self.googleMapConfig()
+  getMap: ->
+    @map ||= new google.maps.Map(
+      document.getElementById(@domIdentifier),
+      mapTypeId: eval("google.maps.MapTypeId.#{@mapType}")
     )
 
-    self.pins.map (pin)->
+  getPins: ->
+    @pins ||= new Array()
+
+  addPin: (data)->
+    pin = new GoogleMap.Model.Pin(data)
+    @getPins().push(pin)
+
+  placePins: (map, pins)->
+    for pin in pins
+      pin.setInfoWindow(map)
       pin.setMap(map)
 
-    map
+  fitToPins: (map, pins)->
+    bounds = new google.maps.LatLngBounds()
+
+    for pin in pins
+      latLng = pin.getBounds()
+      bounds.extend(latLng)
+
+    # Extend the boundary a little bit if there they are too close to adjust the zoom level.
+    if bounds.getNorthEast().equals(bounds.getSouthWest())
+      delta = 0.01
+      latLng1 = new google.maps.LatLng(
+        bounds.getNorthEast().lat() + delta,
+        bounds.getNorthEast().lng() + delta
+      )
+
+      latLng2 = new google.maps.LatLng(
+        bounds.getNorthEast().lat() - delta,
+        bounds.getNorthEast().lng() - delta
+      )
+
+      bounds.extend(latLng1)
+      bounds.extend(latLng2)
+
+    map.fitBounds(bounds)
