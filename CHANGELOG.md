@@ -1,4 +1,11 @@
 = v0.0.5
+  * The airbrake generator now reads in the api_key from the ```custom_cloud.yml```, extends the
+    local ```custom_cloud.yml``` file, runs ```bundle --quiet``` because it adds a new gem and
+    prints a notice to update the custom cloud platform configuration.
+  * The ```custom_cloud.yml``` is now loaded in an initializer and is available as a hash in the
+    global Rails configuration as ```Rails.application.config.cloud```. The initializer is created
+    in such a way, that it is loaded before the rest of the initializers are run, so that it can be
+    used in the following initializers as well.
   * A new google maps box type was added. It allows to easily create a map and place pins on it.
     The new box type is part of the base Infopark Kickstarter functionality but is also
     available as a separate generator. Call ```rails generate cms:widget:google_maps --help```
