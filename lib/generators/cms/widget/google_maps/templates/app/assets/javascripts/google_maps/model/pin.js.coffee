@@ -7,7 +7,7 @@ class GoogleMap.Model.Pin
 
   getMarker: ->
     @marker ||= new google.maps.Marker(
-      position: new google.maps.LatLng(@latitude, @longitude)
+      position: @getBounds()
       title: @title
     )
 

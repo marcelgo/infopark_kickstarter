@@ -6,14 +6,11 @@ class GoogleMap.App
   constructor: (selector)->
     for element in $(selector)
       url = element.getAttribute('data-url')
-      id = element.id
 
       options =
         type: 'GET'
         dataType: 'json'
-        success: (data) => @loadCallback(data)
+        success: (data) ->
+          new GoogleMap.Model.Map(data).init()
 
       $.ajax(url, options)
-
-  loadCallback: (data)->
-    new GoogleMap.Model.Map(data).init()
