@@ -170,6 +170,19 @@ To get deployment status for last deployment (or given deployment id):
 
     $ rake cms:deploy:status[id]
 
+Custom configuration parameters are included in the Rails application on each deployment. This is
+done automatically by the Infopark infrastructure. Configuration parameters like access keys or
+passwords should not be checked into version control. In order to manipulate this cloud
+configuration, you can use the three rake tasks:
+
+    $ rake cms:cloud_config:edit
+    $ rake cms:cloud_config:download
+    $ rake cms:cloud_config:upload
+
+The edit task is a highlevel task. It builds upon download and upload and spawns your $EDITOR
+between those to actually edit the file. Local backups of the uploaded config are stored in tmp/
+with a timestamp suffix.
+
 To list github users allowed to access the project repository:
 
     $ rake cms:github:list
