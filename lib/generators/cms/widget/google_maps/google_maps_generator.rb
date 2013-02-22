@@ -2,7 +2,7 @@ require 'generators/cms/migration'
 
 module Cms
   module Generators
-    module Component
+    module Widget
       class GoogleMapsGenerator < ::Rails::Generators::Base
         include Migration
 

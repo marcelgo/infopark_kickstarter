@@ -12,5 +12,5 @@ Example:
     Gem: geocoder
     Route: google_maps
 
-    `rails generate cms:component:google_maps`
-    `rails generate cms:component:google_maps --cms_path=/website/de/_boxes`
+    `rails generate cms:widget:google_maps`
+    `rails generate cms:widget:google_maps --cms_path=/website/de/_boxes`

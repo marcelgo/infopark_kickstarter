@@ -93,6 +93,8 @@ Together with the CMS hierarchy, some CMS object classes and attributes are crea
 * source:linklist
 * caption:string
 * sort_key:string
+* google_maps_address: string
+* google_maps_map_type: enum (ROADMAP SATELLITE HYBRID TERRAIN)
 
 ### Object Classes ###
 
@@ -106,6 +108,8 @@ Together with the CMS hierarchy, some CMS object classes and attributes are crea
 * SearchPage
 * BoxText
 * BoxImage
+* BoxGoogleMaps
+* GoogleMapsPin
 
 ## Generators
 
@@ -143,7 +147,7 @@ To add a language switch functionality to the app:
 
 To add a google maps box type to the app:
 
-    $ rails generate cms:component:google_maps
+    $ rails generate cms:widget:google_maps
 
 ## Rake Tasks
 

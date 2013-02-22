@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/google_maps/google_maps_generator.rb'
+require 'generators/cms/widget/google_maps/google_maps_generator.rb'
 
-describe Cms::Generators::Component::GoogleMapsGenerator do
+describe Cms::Generators::Widget::GoogleMapsGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)

@@ -188,7 +188,7 @@ module Cms
       end
 
       def add_initital_components
-        Rails::Generators.invoke('cms:component:google_maps', ["--cms_path=#{boxes_path}"])
+        Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{boxes_path}"])
       end
 
       private

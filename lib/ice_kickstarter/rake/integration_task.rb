@@ -49,7 +49,7 @@ module IceKickstarter
           sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
           sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
           sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:google_maps --cms_path=/website/de/_boxes"
+          sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --cms_path=/website/de/_boxes"
         end
       end
 
