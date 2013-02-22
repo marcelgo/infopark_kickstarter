@@ -94,6 +94,10 @@ describe Cms::Generators::Component::GoogleMapsGenerator do
       directory 'app' do
         directory 'assets' do
           directory 'javascripts' do
+            file 'application.js' do
+              contains "new GoogleMap.App('.google_maps .map');"
+            end
+
             directory 'google_maps' do
               file 'app.js.coffee'
 
@@ -108,6 +112,14 @@ describe Cms::Generators::Component::GoogleMapsGenerator do
             file 'google_maps.css.scss'
           end
         end
+      end
+    }
+  end
+
+  it 'extends Gemfile' do
+    destination_root.should have_structure {
+      file 'Gemfile' do
+        contains 'gem "geocoder"'
       end
     }
   end
