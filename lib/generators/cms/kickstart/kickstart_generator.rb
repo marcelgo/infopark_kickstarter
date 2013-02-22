@@ -183,8 +183,12 @@ module Cms
 
       def bundle
         Bundler.with_clean_env do
-          run('bundle')
+          run('bundle --quiet')
         end
+      end
+
+      def add_initital_components
+        Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{boxes_path}"])
       end
 
       private
@@ -193,6 +197,26 @@ module Cms
         content = File.read("#{Rails.root}/config/rails_connector.yml")
 
         YAML.load(content)['cms_api']['http_host']
+      end
+
+      def website_path
+        '/website'
+      end
+
+      def resources_path
+        '/resources'
+      end
+
+      def homepage_path
+        "#{website_path}/de"
+      end
+
+      def configuration_path
+        "#{homepage_path}/_configuration"
+      end
+
+      def boxes_path
+        "#{homepage_path}/_boxes"
       end
     end
   end
