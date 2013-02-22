@@ -1,4 +1,7 @@
 = v0.0.5
+  * The newrelic generator now extends the local ```custom_cloud.yml``` file, runs
+    ```bundle --quiet``` because it adds a new gem and prints a notice to update the custom cloud
+    platform configuration.
   * The airbrake generator now reads in the api_key from the ```custom_cloud.yml```, extends the
     local ```custom_cloud.yml``` file, runs ```bundle --quiet``` because it adds a new gem and
     prints a notice to update the custom cloud platform configuration.

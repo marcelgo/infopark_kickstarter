@@ -2,7 +2,7 @@ run "bundle exec rake environment airbrake:deploy TO=#{new_resource.environment[
 
 user = %x(whoami).strip
 revision = %x(git rev-parse HEAD).strip
-newrelic_deploy_key = node['custom_cloud']['newrelic']['deploy_key']
+newrelic_deploy_key = node['custom_cloud']['newrelic']['api_key']
 
 newrelic_app_name = case new_resource.environment['RAILS_ENV']
   when 'staging'
