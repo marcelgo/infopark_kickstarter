@@ -41,7 +41,7 @@ module Cms
         gem('simple_form', '2.0.4')
 
         Bundler.with_clean_env do
-          run('bundle')
+          run('bundle --quiet')
         end
 
         generate('simple_form:install --bootstrap --template-engine=haml')
@@ -69,7 +69,7 @@ module Cms
         end
 
         Bundler.with_clean_env do
-          run('bundle')
+          run('bundle --quiet')
         end
 
         generate('rspec:install')

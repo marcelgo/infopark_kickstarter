@@ -9,7 +9,7 @@ gem_group(:test, :development) do
   gem('ice_kickstarter', path: '../../../')
 end
 
-run('bundle install')
+run('bundle --quiet')
 
 generate('rails_connector:install', '--force')
 
