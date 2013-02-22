@@ -92,7 +92,7 @@ module Cms
         end
       end
 
-      def install_twitter_bootstrap
+      def install_css_framework
         gem_group(:assets) do
           gem('less-rails-bootstrap', '2.2.1')
         end
