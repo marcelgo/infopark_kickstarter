@@ -82,6 +82,8 @@ module IceKickstarter
       end
 
       def pretty_print(json)
+        # MultiJson does not output pretty printed JSON under Ruby 1.9, so we
+        # use JSON.pretty_generate instead.
         # MultiJson.dump(MultiJson.load(json), :pretty => true)
         JSON.pretty_generate(MultiJson.load(json))
       end
