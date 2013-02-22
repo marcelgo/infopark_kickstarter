@@ -3,6 +3,9 @@
     The new box type is part of the base Infopark Kickstarter functionality but is also
     available as a separate generator. Call ```rails generate cms:widget:google_maps --help```
     for more information.
+  * Added three additional rake tasks to easily edit the cloud config file, that holds configuration
+    parameters that should not be checked in to the version control system. See
+    ```rake -T cms:cloud_config``` for more details on the tasks.
   * The user manager now allows to find an user by id. The remote user with this id is retrieved and
     then mapped to an application user.
   * haml-rails is not longer required by the dashboard, but only haml. This prevents the default

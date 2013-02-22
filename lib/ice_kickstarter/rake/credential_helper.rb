@@ -10,7 +10,7 @@ module IceKickstarter
       end
 
       def config
-        YAML.load_file(File.join(Rails.root, 'config/deploy.yml'))
+        YAML.load_file(Rails.root + 'config/deploy.yml')
       end
     end
   end
