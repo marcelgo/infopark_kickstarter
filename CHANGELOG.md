@@ -1,4 +1,6 @@
 = v0.0.5
+  * The [Thin Webserver](http://code.macournoyer.com/thin/) is now part of the development tools
+    that we recommend to use instead of the default WEBRick server.
   * The BoxText and BoxImage widgets are now a separate generator and can therefore be called with
     ```rake cms:widget:text```. If you also want to create an example, you can add the
     ```--cms_path``` option. Both widgets are still included in the Infopark Kickstarter base

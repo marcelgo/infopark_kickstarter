@@ -56,6 +56,7 @@ module Cms
           gem('rails-footnotes', '3.7.9')
           gem('better_errors', '0.5.0')
           gem('binding_of_caller', '0.6.8')
+          gem('thin')
         end
 
         developer_initializer_path = 'config/initializers/developer.rb'
