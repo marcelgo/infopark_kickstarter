@@ -35,7 +35,6 @@ class CreateStructure < ::RailsConnector::Migration
     try_create_obj(_path: "<%= resources_path %>/pdfs", _obj_class: 'Container', title: 'Pdfs')
 
     try_create_obj(_path: "<%= boxes_path %>", _obj_class: 'Container', title: '_Boxes')
-    try_create_obj(_path: "<%= boxes_path %>/box_image", _obj_class: 'BoxImage', title: 'BoxImage', caption: 'Inhalt von BoxImage', source: [{url: 'http://lorempixel.com/400/200/sports/1/'}], sort_key: '2')
   end
 
   private

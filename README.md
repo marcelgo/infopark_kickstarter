@@ -148,6 +148,7 @@ To add a language switch functionality to the app:
 To add different kinds of widgets to the app:
 
     $ rails generate cms:widget:text
+    $ rails generate cms:widget:image
     $ rails generate cms:widget:google_maps
 
 ## Rake Tasks

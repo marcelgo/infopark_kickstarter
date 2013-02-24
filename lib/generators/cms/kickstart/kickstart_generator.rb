@@ -149,11 +149,6 @@ module Cms
         Rails::Generators.invoke('cms:attribute', ['redirect_after_logout_link', '--type=linklist', '--title=Logout Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:scaffold', ['LoginPage', '--title=Page: Login', '--attributes=show_in_navigation', 'redirect_after_login_link', 'redirect_after_logout_link'])
 
-        Rails::Generators.invoke('cms:attribute', ['source', '--type=linklist', '--title=Source'])
-        Rails::Generators.invoke('cms:attribute', ['caption', '--type=string', '--title=Caption'])
-        Rails::Generators.invoke('cms:attribute', ['link_to', '--type=linklist', '--title=Link'])
-        Rails::Generators.invoke('cms:model', ['BoxImage', '--title=Box: Image', '--attributes=source', 'caption', 'link_to', 'sort_key'])
-
         Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
         Rails::Generators.invoke('cms:model', ['Redirect', '--title=Redirect', '--attributes=sort_key', 'redirect_link', 'show_in_navigation'])
 
@@ -188,6 +183,7 @@ module Cms
 
       def add_initital_components
         Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{boxes_path}"])
+        Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{boxes_path}"])
         Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{boxes_path}"])
       end
 
