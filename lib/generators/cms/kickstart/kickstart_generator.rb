@@ -152,7 +152,6 @@ module Cms
         Rails::Generators.invoke('cms:attribute', ['source', '--type=linklist', '--title=Source'])
         Rails::Generators.invoke('cms:attribute', ['caption', '--type=string', '--title=Caption'])
         Rails::Generators.invoke('cms:attribute', ['link_to', '--type=linklist', '--title=Link'])
-        Rails::Generators.invoke('cms:model', ['BoxText', '--title=Box: Text', '--attributes=sort_key'])
         Rails::Generators.invoke('cms:model', ['BoxImage', '--title=Box: Image', '--attributes=source', 'caption', 'link_to', 'sort_key'])
 
         Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
@@ -188,6 +187,7 @@ module Cms
       end
 
       def add_initital_components
+        Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{boxes_path}"])
         Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{boxes_path}"])
       end
 

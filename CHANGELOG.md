@@ -1,4 +1,8 @@
 = v0.0.5
+  * The BoxText widget is now a separate generator and can therefore be called with
+    ```rake cms:widget:text```. If you also want to create an example, you can add the
+    ```--cms_path``` option. The BoxText widget is still included in the Infopark Kickstarter base
+    generator.
   * Added support for boolean attribute type. It fakes a boolean by creating an enum with "Yes" and
     "No" values and provides query method in the attribute module.
   * The newrelic generator now extends the local ```custom_cloud.yml``` file, runs
