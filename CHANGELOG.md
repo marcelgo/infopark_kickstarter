@@ -1,4 +1,6 @@
 = v0.0.5
+  * Added support for boolean attribute type. It fakes a boolean by creating an enum with "Yes" and
+    "No" values and provides query method in the attribute module.
   * The newrelic generator now extends the local ```custom_cloud.yml``` file, runs
     ```bundle --quiet``` because it adds a new gem and prints a notice to update the custom cloud
     platform configuration.

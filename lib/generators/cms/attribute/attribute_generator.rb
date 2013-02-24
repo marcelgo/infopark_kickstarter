@@ -11,7 +11,7 @@ module Cms
         type: :string,
         aliases: '-t',
         default: 'string',
-        desc: 'Type of the CMS attribute (string | text | html | enum | multienum | linklist | date).'
+        desc: 'Type of the CMS attribute (string | text | html | enum | boolean | multienum | linklist | date).'
 
       class_option :values,
         type: :array,
