@@ -1,5 +1,3 @@
-require 'generators/cms/migration'
-
 module Cms
   module Generators
     module Component

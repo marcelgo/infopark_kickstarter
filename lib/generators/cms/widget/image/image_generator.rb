@@ -1,10 +1,9 @@
-require 'generators/cms/migration'
-
 module Cms
   module Generators
     module Widget
       class ImageGenerator < ::Rails::Generators::Base
         include Migration
+        include BasePaths
 
         class_option :cms_path,
           type: :string,
@@ -18,31 +17,31 @@ module Cms
           begin
             validate_attribute(sort_key_attribute_name)
             Rails::Generators.invoke('cms:attribute', [sort_key_attribute_name, '--type=string', '--title=Sort Key'])
-          rescue Cms::Generators::DuplicateResourceError
+          rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(caption_attribute_name)
             Rails::Generators.invoke('cms:attribute', [caption_attribute_name, '--type=string', '--title=Caption'])
-          rescue Cms::Generators::DuplicateResourceError
+          rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(link_to_attribute_name)
             Rails::Generators.invoke('cms:attribute', [link_to_attribute_name, '--type=linklist', '--title=Link'])
-          rescue Cms::Generators::DuplicateResourceError
+          rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(source_attribute_name)
             Rails::Generators.invoke('cms:attribute', [source_attribute_name, '--type=linklist', '--title=Source'])
-          rescue Cms::Generators::DuplicateResourceError
+          rescue DuplicateResourceError
           end
 
           begin
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Image', "--attributes=#{source_attribute_name}", caption_attribute_name, link_to_attribute_name, sort_key_attribute_name])
-          rescue Cms::Generators::DuplicateResourceError
+          rescue DuplicateResourceError
           end
 
           if behavior == :invoke

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/widget/google_maps/google_maps_generator.rb'
+require 'generators/cms/attribute/attribute_generator'
+require 'generators/cms/model/model_generator'
 
 describe Cms::Generators::Widget::GoogleMapsGenerator do
   include GeneratorSpec::TestCase
@@ -9,6 +11,11 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
   destination File.expand_path('../../../../tmp', __FILE__)
 
   arguments ['--cms_path=testdirectory']
+
+  before(:all) do
+    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+  end
 
   before do
     prepare_destination
@@ -82,8 +89,8 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_google_maps'
-          migration 'create_google_maps_example'
+          migration 'create_box_google_maps'
+          migration 'create_box_google_maps_example'
         end
       end
     }

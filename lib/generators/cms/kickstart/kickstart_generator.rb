@@ -1,10 +1,10 @@
 require 'uri'
-require 'generators/cms/migration'
 
 module Cms
   module Generators
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
+      include BasePaths
 
       source_root File.expand_path('../templates', __FILE__)
       class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
@@ -95,7 +95,7 @@ module Cms
 
       def install_css_framework
         gem_group(:assets) do
-          gem('less-rails-bootstrap', '2.2.1')
+          gem('less-rails-bootstrap', '2.3.0')
         end
       end
 
@@ -130,7 +130,7 @@ module Cms
       end
 
       def create_structure_migration_file
-        Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=enum', '--values=Yes', 'No'])
+        Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
         Rails::Generators.invoke('cms:attribute', ['error_404_page_link', '--title=Error 404 Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['search_page_link', '--title=Search Page', '--type=linklist'])
@@ -183,9 +183,9 @@ module Cms
       end
 
       def add_initital_components
-        Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{boxes_path}"])
-        Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{boxes_path}"])
-        Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{boxes_path}"])
+        Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
+        Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
+        Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{widgets_path}"])
       end
 
       private
@@ -194,26 +194,6 @@ module Cms
         content = File.read("#{Rails.root}/config/rails_connector.yml")
 
         YAML.load(content)['cms_api']['http_host']
-      end
-
-      def website_path
-        '/website'
-      end
-
-      def resources_path
-        '/resources'
-      end
-
-      def homepage_path
-        "#{website_path}/de"
-      end
-
-      def configuration_path
-        "#{homepage_path}/_configuration"
-      end
-
-      def boxes_path
-        "#{homepage_path}/_boxes"
       end
     end
   end

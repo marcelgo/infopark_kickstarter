@@ -1,8 +1,8 @@
-class CreateGoogleMapsExample < ::RailsConnector::Migrations::Migration
+class CreateBoxGoogleMapsExample < ::RailsConnector::Migrations::Migration
   def up
     create_obj(
       _path: box_path,
-      _obj_class: 'BoxGoogleMaps',
+      _obj_class: '<%= map_class_name %>',
       title: 'BoxGoogleMaps',
       body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -14,27 +14,27 @@ class CreateGoogleMapsExample < ::RailsConnector::Migrations::Migration
       '<%= map_type_attribute_name %>' => 'ROADMAP'
     )
 
-    puts "Created 'BoxGoogleMaps' object at '#{box_path}'..."
+    puts "Created '<%= map_class_name %>' object at '#{box_path}'..."
 
     create_obj(
       _path: "#{box_path}/pin-1",
-      _obj_class: 'GoogleMapsPin',
+      _obj_class: '<%= pin_class_name %>',
       title: 'Pin 1',
       body: 'Lorem ipsum dolor sit amet.',
       '<%= address_attribute_name %>' => 'Pariser Platz 1, Berlin, Germany'
     )
 
-    puts "Created 'GoogleMapsPin' object at '#{box_path}/pin-1'..."
+    puts "Created '<%= pin_class_name %>' object at '#{box_path}/pin-1'..."
 
     create_obj(
       _path: "#{box_path}/pin-2",
-      _obj_class: 'GoogleMapsPin',
+      _obj_class: '<%= pin_class_name %>',
       title: 'Pin 2',
       body: 'Lorem ipsum dolor sit amet.',
-      '<%= address_attribute_name %>' => 'Leipziger Strasse 15, Berlin, Germany'
+      '<%= address_attribute_name %>' => 'Kitzingstrasse 12, 12277, Berlin, Germany'
     )
 
-    puts "Created 'GoogleMapsPin' object at '#{box_path}/pin-2'..."
+    puts "Created '<%= pin_class_name %>' object at '#{box_path}/pin-2'..."
   end
 
   private

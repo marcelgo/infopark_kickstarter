@@ -1,5 +1,3 @@
-require 'generators/cms/migration'
-
 module Cms
   module Generators
     module Widget
@@ -23,7 +21,7 @@ module Cms
 
           begin
             validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', ['BoxText', '--title=Box: Text', "--attributes=#{sort_key_attribute_name}"])
+            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Text', "--attributes=#{sort_key_attribute_name}"])
           rescue Cms::Generators::DuplicateResourceError
           end
 

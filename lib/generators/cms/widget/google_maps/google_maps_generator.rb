@@ -1,5 +1,3 @@
-require 'generators/cms/migration'
-
 module Cms
   module Generators
     module Widget
@@ -14,24 +12,43 @@ module Cms
 
         source_root File.expand_path('../templates', __FILE__)
 
-        def copy_app_directory
-          directory('app')
-          directory('spec')
-        end
-
         def create_migration
-          validate_obj_class(map_class_name)
-          validate_obj_class(pin_class_name)
+          begin
+            validate_attribute(map_type_attribute_name)
 
-          validate_attribute(map_type_attribute_name)
-          validate_attribute(address_attribute_name)
+            Rails::Generators.invoke('cms:attribute', [map_type_attribute_name, '--type=enum', '--title=Map Type', '--values=ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'])
+          rescue Cms::Generators::DuplicateResourceError
+          end
 
-          migration_template('migration.rb', 'cms/migrate/create_google_maps.rb')
+          begin
+            validate_attribute(address_attribute_name)
+
+            Rails::Generators.invoke('cms:attribute', [address_attribute_name, '--type=string', '--title=Address'])
+          rescue Cms::Generators::DuplicateResourceError
+          end
+
+          begin
+            validate_obj_class(pin_class_name)
+
+            Rails::Generators.invoke('cms:model', [pin_class_name, "--attributes=#{address_attribute_name}", '--title=GoogleMaps: Pin'])
+          rescue Cms::Generators::DuplicateResourceError
+          end
+
+          begin
+            validate_obj_class(map_class_name)
+
+            Rails::Generators.invoke('cms:model', [map_class_name, "--attributes=#{map_type_attribute_name}", address_attribute_name, '--title=Box: GoogleMaps'])
+          rescue Cms::Generators::DuplicateResourceError
+          end
 
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
-        rescue Cms::Generators::DuplicateResourceError
+        end
+
+        def copy_app_directory
+          directory('app', force: true)
+          directory('spec', force: true)
         end
 
         def update_routes
@@ -70,7 +87,7 @@ module Cms
 
         def add_example
           if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_google_maps_example.rb')
+            migration_template('example_migration.rb', 'cms/migrate/create_box_google_maps_example.rb')
           end
         end
 

@@ -1,4 +1,5 @@
 = v0.0.5
+  * Updated ```less-rails-bootstrap``` to version 2.3.0 and ```rspec``` to version 2.13.0.
   * The [Thin Webserver](http://code.macournoyer.com/thin/) is now part of the development tools
     that we recommend to use instead of the default WEBRick server.
   * The BoxText and BoxImage widgets are now a separate generator and can therefore be called with
