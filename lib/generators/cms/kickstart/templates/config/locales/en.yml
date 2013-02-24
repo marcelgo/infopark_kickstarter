@@ -1,7 +1,4 @@
-de:
-  login: 'Login'
-  logout: 'Logout'
-
+en:
   flash:
     login:
       success: 'You logged in successfully.'

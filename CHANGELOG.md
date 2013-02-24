@@ -1,4 +1,5 @@
 = v0.0.5
+  * Changed default homepage to ```en``` and updated examples accordingly.
   * Updated ```less-rails-bootstrap``` to version 2.3.0 and ```rspec``` to version 2.13.0.
   * The [Thin Webserver](http://code.macournoyer.com/thin/) is now part of the development tools
     that we recommend to use instead of the default WEBRick server.
@@ -31,7 +32,7 @@
     rails template engine to be set for the host application. (Thanks @mremolt)
   * A website object can now be asked for all its homepages and returns a list of all Homepage
     objects.
-  * A language switch allows to navigate from one language homepage to another. All languages are #
+  * A language switch allows to navigate from one language homepage to another. All languages are
     listed in the sidebar. The current language is not linked.
 = v0.0.4
   * Added README information on how to create a ```deploy.yml``` file and what content it needs to

@@ -109,18 +109,6 @@ module Cms
         log(:info, "set timezone to 'Berlin'")
       end
 
-      def set_default_language
-        gsub_file(
-          'config/application.rb',
-          "# config.i18n.default_locale = :de",
-          "config.i18n.default_locale = :de"
-        )
-
-        remove_file('config/locales/en.yml')
-
-        log(:info, "set default language to 'de'")
-      end
-
       def rails_connector_monkey_patch
         template('date_attribute.rb', 'config/initializers/date_attribute.rb')
       end
@@ -164,6 +152,8 @@ module Cms
         directory('config')
         directory('deploy')
         directory('spec')
+
+        template('homepage.rb', 'app/models/homepage.rb')
       end
 
       def extend_gitignore

@@ -10,7 +10,7 @@ module Cms
       end
 
       def homepage_path
-        "#{website_path}/de"
+        "#{website_path}/en"
       end
 
       def configuration_path
