@@ -60,7 +60,7 @@ module Cms
         end
 
         developer_initializer_path = 'config/initializers/developer.rb'
-        append_file('.gitignore', developer_initializer_path)
+        append_file('.gitignore', developer_initializer_path + "\n")
         template('developer.rb', developer_initializer_path)
       end
 
@@ -157,7 +157,7 @@ module Cms
       end
 
       def extend_gitignore
-        append_file('.gitignore', 'config/deploy.yml')
+        append_file('.gitignore', "config/deploy.yml\n")
       end
 
       def create_box_model
