@@ -1,0 +1,26 @@
+.row-fluid
+  .span11
+    = link_to cms_path(@entry), class: 'pull-right' do
+      %h2= @entry.title
+    .row-fluid
+      .span2
+        .author_image
+          = image_tag author_image_path_for_entry(@entry)
+      .span8
+        .meta
+          .date
+            = @entry.publish_date
+          .author
+            = mail_to @entry.author_email, @entry.author_name
+.row-fluid
+  %p.span11.text= @entry.truncated_body
+.row-fluid
+  .span3
+    = render_cell(:blog_entry, :facebook, @entry)
+  .span3
+    = render_cell(:blog_entry, :twitter, @entry)
+.row-fluid
+  .span8
+    .tags= tag_link_list
+  .span3
+    = link_to 'more >', cms_path(@entry), class: 'pull-right'
