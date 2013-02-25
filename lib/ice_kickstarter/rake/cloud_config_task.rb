@@ -31,29 +31,6 @@ module IceKickstarter
 
       private
 
-      # edit
-        # download
-        # if editor?
-          # open editor for "tmp/custom_cloud_config.json"
-        # else
-          # print message "edit 'tmp/custom_cloud_config.json' and run rake cms:cloud_config:upload"
-        # upload
-
-      # download
-        # download config via curl
-        # save config in "tmp/cloud_config.json"
-        # load config in "tmp/cloud_config.json"
-        # extract "custom_cloud" section
-        # save section in "tmp/custom_cloud_config.json"
-
-      # upload
-        # load "tmp/custom_cloud_config.json"
-        # load config in "tmp/cloud_config.json"
-        # exchange "custom_cloud" section
-        # save config in "tmp/cloud_config.json"
-        # upload config via curl
-        # backup in "tmp/cloud_config-1234567.json"
-
       def edit
         download
 
@@ -73,28 +50,35 @@ module IceKickstarter
       end
 
       def download
-        config = RestClient.get("#{url}/cloud_config", params: { token: api_key })
-        save_config(config)
+        config = begin
+          RestClient.get("#{url}/cloud_config", params: { token: api_key })
+        rescue RestClient::InternalServerError
+          puts 'Aborted. Cloud config could not be loaded.'
+          puts 'Please make sure that you have at least one live server configured.'
+
+          exit
+        end
+
+        config = MultiJson.load(config)
+
+        # TODO Workaround for not putting back the entire config, but only the custom_cloud part.
+        # Should be removed once the ICE Konsole is fixed.
+        config = { 'custom_cloud' => config['custom_cloud'] }
+
+        save_config(config.to_json)
       end
 
       def upload
         config = load_config
-        puts config
+
+        puts pretty_print(config.to_json)
 
         if yes?('Upload this config to the ICE Konsole? [yn]')
           puts 'Uploading...'
 
-          config_and_token = {
-            token: api_key,
-            cloud_config: config,
-          }
-
-          RestClient.put("#{url}/cloud_config", config_and_token.to_json, content_type: :json, accept: :json)
-
-          puts "Local backup: #{config_backup_path}"
-          cp(config_path, config_backup_path, verbose: false)
+          upload_config(config)
         else
-          puts 'Aborting.'
+          puts 'Aborted. Custom cloud configuration not uploaded.'
         end
       rescue MultiJson::LoadError => e
         puts "ERROR: #{config_path} contains syntax errors. Please fix."
@@ -103,22 +87,52 @@ module IceKickstarter
       end
 
       def load_config
-        MultiJson.load(File.read(config_path))
+        json = File.read(config_path)
+
+        MultiJson.load(json)
       end
 
       def save_config(config)
-        File.write(config_path, pretty_print(config))
+        json = pretty_print(config)
+
+        File.write(config_path, json)
+      end
+
+      def upload_config(config)
+        endpoint = "#{url}/cloud_config"
+
+        data = {
+          token: api_key,
+          cloud_config: config,
+        }.to_json
+
+        options = {
+          content_type: :json,
+          accept: :json,
+        }
+
+        RestClient.put(endpoint, data, options)
+
+        backup
+      end
+
+      def backup
+        puts "Local backup: #{config_backup_path}"
+
+        cp(config_path, config_backup_path, verbose: false)
       end
 
       def pretty_print(json)
-        # MultiJson does not output pretty printed JSON under Ruby 1.9, so we
-        # use JSON.pretty_generate instead.
-        # MultiJson.dump(MultiJson.load(json), :pretty => true)
-        JSON.pretty_generate(MultiJson.load(json))
+        config = MultiJson.load(json)
+
+        # TODO MultiJson does not output pretty printed JSON under Ruby 1.9, so we use
+        # JSON.pretty_generate instead.
+        # MultiJson.dump(config, pretty: true)
+        JSON.pretty_generate(config)
       end
 
       def config_path
-        Rails.root + 'tmp/cloud_config.json'
+        @config_path ||= Rails.root + 'tmp/cloud_config.json'
       end
 
       def config_backup_path
