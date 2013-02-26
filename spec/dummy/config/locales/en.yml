@@ -1,5 +1,26 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+de:
+  login: 'Login'
+  logout: 'Logout'
 
-en:
-  hello: "Hello world"
+  flash:
+    login:
+      success: 'You logged in successfully.'
+    logout:
+      success: 'You logged out successfully.'
+    authorization_failed: "This page is protected. You either don't have neccessary access rights or you are not logged in."
+
+  search:
+    specify_query: 'Please enter a search term.'
+    search_disabled: 'Because of maintainance issues the search currently is not available. Please excuse any inconveniences.'
+    placeholder: 'Search'
+    hits_found: "Your search query '%{query}' has the following results:"
+    no_hits: "Your search query '%{query}' did not have any results."
+    no_index: 'The current workspace does not have a search index.'
+
+  meta_navigation:
+    show:
+      meta: 'Meta'
+
+  redirect:
+    index:
+      link_undefined: 'Please configure a redirect target.'

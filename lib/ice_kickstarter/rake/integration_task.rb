@@ -37,7 +37,9 @@ module IceKickstarter
 
       def create_application
         Bundler.with_clean_env do
-          sh "rails new #{app_path} --skip-test-unit --skip-active-record --template template.rb"
+          sh "rails new #{app_path} --skip-test-unit --skip-active-record --skip-bundle --template template.rb"
+
+          sh 'bundle --quiet'
 
           sh "cd #{app_path} && bundle exec rake cms:migrate"
         end
@@ -46,8 +48,11 @@ module IceKickstarter
       def call_generators
         Bundler.with_clean_env do
           sh "cd #{app_path} && bundle exec rails generate cms:model news"
+          sh "cd #{app_path} && bundle exec rails generate cms:component:airbrake"
+          sh "cd #{app_path} && bundle exec rails generate cms:component:newrelic \"Test Website\""
           sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
           sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
+          sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
         end
       end
 

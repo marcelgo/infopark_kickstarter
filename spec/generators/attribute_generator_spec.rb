@@ -94,7 +94,7 @@ describe Cms::Generators::AttributeGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp', __FILE__)
-  arguments ['news', '--type=enum', '--values=Yes', 'No']
+  arguments ['news', '--type=enum', '--values=Yes', 'No', 'Something']
 
   before do
     prepare_destination
@@ -102,6 +102,35 @@ describe Cms::Generators::AttributeGenerator do
   end
 
   it 'generates enum attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_news_attribute' do
+            contains 'class CreateNewsAttribute < ::RailsConnector::Migration'
+            contains 'create_attribute('
+            contains "name: 'news',"
+            contains "type: 'enum',"
+            contains "title: '',"
+            contains 'values: ["Yes", "No", "Something"]'
+          end
+        end
+      end
+    }
+  end
+end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['news', '--type=boolean']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates boolean (enum) attribute migration' do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do

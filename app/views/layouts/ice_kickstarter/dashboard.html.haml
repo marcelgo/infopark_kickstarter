@@ -16,7 +16,6 @@
       = javascript_include_tag('http://html5shim.googlecode.com/svn/trunk/html5.js')
 
     = stylesheet_link_tag('ice_kickstarter/dashboard', media: 'all')
-    = stylesheet_link_tag('twitter/bootstrap-responsive', media: 'all')
     = stylesheet_link_tag('ice_kickstarter/print', media: 'print')
 
   %body
@@ -44,4 +43,4 @@
         .span10
           = yield
 
-    = javascript_include_tag('application')
+    = javascript_include_tag('ice_kickstarter/dashboard')

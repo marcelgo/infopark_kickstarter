@@ -1,7 +1,4 @@
 de:
-  login: 'Anmelden'
-  logout: 'Abmelden'
-
   flash:
     login:
       success: 'Sie haben sich erfolgreich angemeldet.'
@@ -16,6 +13,10 @@ de:
     hits_found: "Ihre Suchanfrage nach '%{query}' lieferte folgende Treffer:"
     no_hits: "Ihre Suchanfrage nach '%{@query}' lieferte keine Treffer."
     no_index: 'Der aktuelle Workspace besitzt keinen Suchindex.'
+
+  meta_navigation:
+    show:
+      meta: 'Meta'
 
   redirect:
     index:

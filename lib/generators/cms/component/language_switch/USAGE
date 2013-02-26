@@ -1,0 +1,5 @@
+Description:
+    Generates a language menu. It will link to the homepages below the current website.
+
+Example:
+    `rails generate cms:component:language_switch`

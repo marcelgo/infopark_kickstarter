@@ -9,11 +9,11 @@ class Homepage < Obj
   def self.for_hostname(hostname)
     find_by_path(
       case hostname
-      when /foo\.de/, /foo-(live|staging)\.infopark\.de/, /foo\.dev/
-        '/foo/de'
+      when /foo\.com/, /foo-(live|staging)\.infopark\.com/, /foo\.dev/
+        '/foo/en'
       else
         # Default homepage
-        '/website/de'
+        '<%= homepage_path %>'
       end
     )
   end
@@ -21,11 +21,11 @@ class Homepage < Obj
   # TODO edit mapping from homepages to hostnames
   # Inverse of #for_hostname
   def desired_hostname
-    if path.start_with?('/foo/de')
-      Rails.env.staging? ? 'foo-staging.infopark.de' : 'www.foo.de'
+    if path.start_with?('/foo/en')
+      Rails.env.staging? ? 'foo-staging.infopark.com' : 'www.foo.com'
     else
       # Default hostname
-      Rails.env.staging? ? 'website-staging.infopark.de' : 'www.website.de'
+      Rails.env.staging? ? 'website-staging.infopark.com' : 'www.website.com'
     end
   end
 

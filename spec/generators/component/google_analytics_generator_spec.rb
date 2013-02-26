@@ -2,12 +2,19 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/google_analytics/google_analytics_generator.rb'
+require 'generators/cms/attribute/attribute_generator'
+require 'generators/cms/model/model_generator'
 
 describe Cms::Generators::Component::GoogleAnalyticsGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)
   arguments ['--anonymize_ip_default=Yes', '--tracking_id_default=1234']
+
+  before(:all) do
+    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+  end
 
   before do
     prepare_destination
@@ -61,9 +68,11 @@ describe Cms::Generators::Component::GoogleAnalyticsGenerator do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_google_analytics' do
-            contains "'google_analytics_anonymize_ip' => 'Yes'"
+          migration 'create_google_analytics'
+
+          migration 'integrate_google_analytics' do
             contains "'google_analytics_tracking_id' => '1234'"
+            contains "'google_analytics_anonymize_ip' => 'Yes'"
           end
         end
       end

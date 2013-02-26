@@ -1,10 +1,10 @@
 require 'uri'
-require 'generators/cms/migration'
 
 module Cms
   module Generators
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
+      include BasePaths
 
       source_root File.expand_path('../templates', __FILE__)
       class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
@@ -41,7 +41,7 @@ module Cms
         gem('simple_form', '2.0.4')
 
         Bundler.with_clean_env do
-          run('bundle')
+          run('bundle --quiet')
         end
 
         generate('simple_form:install --bootstrap --template-engine=haml')
@@ -56,20 +56,21 @@ module Cms
           gem('rails-footnotes', '3.7.9')
           gem('better_errors', '0.5.0')
           gem('binding_of_caller', '0.6.8')
+          gem('thin')
         end
 
         developer_initializer_path = 'config/initializers/developer.rb'
-        append_file('.gitignore', developer_initializer_path)
+        append_file('.gitignore', developer_initializer_path + "\n")
         template('developer.rb', developer_initializer_path)
-
-        Bundler.with_clean_env do
-          run('bundle')
-        end
       end
 
       def install_test_framework
         gem_group(:test, :development) do
           gem('rspec-rails', '2.12.2')
+        end
+
+        Bundler.with_clean_env do
+          run('bundle --quiet')
         end
 
         generate('rspec:install')
@@ -78,12 +79,12 @@ module Cms
       def create_deploy_hooks
         create_file('deploy/after_restart.rb')
         create_file('deploy/before_symlink.rb')
-        create_file('deploy/before_migrate.rb')
+        prepend_file('deploy/before_migrate.rb', 'deploy/before_migrate.rb')
         empty_directory('deploy/templates')
       end
 
       def include_and_configure_template_engine
-        gem('haml-rails', '0.3.5')
+        gem('haml-rails', '0.4')
 
         application_erb_file = 'app/views/layouts/application.html.erb'
 
@@ -92,9 +93,9 @@ module Cms
         end
       end
 
-      def install_twitter_bootstrap
+      def install_css_framework
         gem_group(:assets) do
-          gem('less-rails-bootstrap', '2.2.1')
+          gem('less-rails-bootstrap', '2.3.0')
         end
       end
 
@@ -108,18 +109,6 @@ module Cms
         log(:info, "set timezone to 'Berlin'")
       end
 
-      def set_default_language
-        gsub_file(
-          'config/application.rb',
-          "# config.i18n.default_locale = :de",
-          "config.i18n.default_locale = :de"
-        )
-
-        remove_file('config/locales/en.yml')
-
-        log(:info, "set default language to 'de'")
-      end
-
       def rails_connector_monkey_patch
         template('date_attribute.rb', 'config/initializers/date_attribute.rb')
       end
@@ -129,7 +118,7 @@ module Cms
       end
 
       def create_structure_migration_file
-        Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=enum', '--values=Yes', 'No'])
+        Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
         Rails::Generators.invoke('cms:attribute', ['error_404_page_link', '--title=Error 404 Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['search_page_link', '--title=Search Page', '--type=linklist'])
@@ -149,12 +138,6 @@ module Cms
         Rails::Generators.invoke('cms:attribute', ['redirect_after_logout_link', '--type=linklist', '--title=Logout Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:scaffold', ['LoginPage', '--title=Page: Login', '--attributes=show_in_navigation', 'redirect_after_login_link', 'redirect_after_logout_link'])
 
-        Rails::Generators.invoke('cms:attribute', ['source', '--type=linklist', '--title=Source'])
-        Rails::Generators.invoke('cms:attribute', ['caption', '--type=string', '--title=Caption'])
-        Rails::Generators.invoke('cms:attribute', ['link_to', '--type=linklist', '--title=Link'])
-        Rails::Generators.invoke('cms:model', ['BoxText', '--title=Box: Text', '--attributes=sort_key'])
-        Rails::Generators.invoke('cms:model', ['BoxImage', '--title=Box: Image', '--attributes=source', 'caption', 'link_to', 'sort_key'])
-
         Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
         Rails::Generators.invoke('cms:model', ['Redirect', '--title=Redirect', '--attributes=sort_key', 'redirect_link', 'show_in_navigation'])
 
@@ -169,10 +152,12 @@ module Cms
         directory('config')
         directory('deploy')
         directory('spec')
+
+        template('homepage.rb', 'app/models/homepage.rb')
       end
 
       def extend_gitignore
-        append_file('.gitignore', 'config/deploy.yml')
+        append_file('.gitignore', "config/deploy.yml\n")
       end
 
       def create_box_model
@@ -183,8 +168,14 @@ module Cms
 
       def bundle
         Bundler.with_clean_env do
-          run('bundle')
+          run('bundle --quiet')
         end
+      end
+
+      def add_initital_components
+        Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
+        Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
+        Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{widgets_path}"])
       end
 
       private
