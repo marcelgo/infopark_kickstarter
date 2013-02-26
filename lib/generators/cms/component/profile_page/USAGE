@@ -1,7 +1,16 @@
 Description:
-    Installs the profile component including profile_page template.
+    Installs the profile component including a profile page example connected to a homepage. The
+    homepage can be configured with the ```---homepage_path``` parameter.
 
 Example:
     `rails generate cms:component:profile`
+    `rails generate cms:component:profile --homepage_path=/website/en`
 
-    Gems: validates_email_format_of
+    CMS: obj_class ProfilePage
+    CMS: attribute show_in_navigation (enum)
+    CMS: attribute profile_page_link (linklist)
+    Misc: extends app/models/homepage.rb
+    Misc: extends app/cells/meta_navigation_cell.rb
+    Misc: extends app/cells/meta_navigation/show.html.haml
+    Gems: valid_email
+    Gems: localized_country_select

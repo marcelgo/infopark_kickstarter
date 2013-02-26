@@ -3,10 +3,16 @@ en:
     profile_page:
       success: 'Your changes have been saved!'
 
+  profile_page:
+    index:
+      user_legend: 'User Details'
+      company_legend: 'Company and Job Details'
+
   helpers:
     submit:
-      contact_page_presenter:
-        create: 'Submit'
+      profile_page_presenter:
+        create: 'Save profile'
+        reset: 'test'
 
   activemodel:
     errors:
@@ -16,40 +22,37 @@ en:
   simple_form:
     labels:
       profile_page_presenter:
-        account_id: 'account ID'
-        country: 'country'
-        email: 'email'
-        extended_address: 'extended address'
-        fax: 'fax'
-        first_name: 'first name'
-        gender: 'gender'
-        job_title: 'position'
-        language: 'language'
-        last_name: 'last name'
-        locality: 'city'
-        login: 'username'
-        mobile_phone: 'cell phone'
-        name_prefix: 'name prefix'
-        org_name_address: 'company'
-        org_unit_address: 'department'
-        phone: 'phone'
-        postalcode: 'zip code'
-        region: 'region'
-        role_names: 'roles'
-        street_address: 'street'
-        tags: 'tags'
-        want_email: 'by email'
-        want_geo_location: 'geolocation'
-        want_phonecall: 'by phone'
-        want_snailmail: 'by mail'
-        submit: 'save'
+        country: 'Country'
+        email: 'Email'
+        first_name: 'Firstname'
+        gender: 'Gender'
+        job_title: 'Position'
+        language: 'Language'
+        last_name: 'Last name'
+        locality: 'City'
+        mobile_phone: 'Cell phone'
+        org_name_address: 'Company'
+        phone: 'Phone'
+        postalcode: 'Zip code'
+        street_address: 'Street'
+        want_email: 'Yes, I would like to be contacted by email.'
+
+    hints:
+      profile_page_presenter:
+        email: 'Please use a valid email adress.'
+
+    placeholders:
+      profile_page_presenter:
+        email: 'firstname@lastname.com'
+        postalcode: '12345'
+        mobile_phone: '001 123 1234567'
 
     options:
       profile_page_presenter:
         language:
-          de: 'german'
-          en: 'english'
+          de: 'German'
+          en: 'English'
 
         gender:
-          M: 'male'
-          F: 'female'
+          M: 'Male'
+          F: 'Female'

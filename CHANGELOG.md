@@ -1,4 +1,7 @@
 = v0.0.5
+  * Added a profile page generator that adds a link in the meta navigation when the user is logged
+    in. On the profile page, the user can edit all kinds of attributes that will be saved to the web
+    crm.
   * Changed default homepage to ```en``` and updated examples accordingly.
   * Updated ```less-rails-bootstrap``` to version 2.3.0 and ```rspec``` to version 2.13.0.
   * The [Thin Webserver](http://code.macournoyer.com/thin/) is now part of the development tools

@@ -3,10 +3,15 @@ de:
     profile_page:
       success: 'Ihre Änderungen wurde erfolgreich gespeichert.'
 
+  profile_page:
+    index:
+      user_legend: 'Benutzerangaben'
+      company_legend: 'Informationen zum Unternehmen'
+
   helpers:
     submit:
       profile_page_presenter:
-        create: 'Abschicken'
+        create: 'Profil speichern'
 
   activemodel:
     errors:
@@ -16,33 +21,30 @@ de:
   simple_form:
     labels:
       profile_page_presenter:
-        account_id: 'Account ID'
         country: 'Land'
-        email: 'Email'
-        extended_address: 'Adress Zusatz'
-        fax: 'Fax'
+        email: 'E-Mail Adresse'
         first_name: 'Vorname'
         gender: 'Geschlecht'
         job_title: 'Position'
         language: 'Sprache'
         last_name: 'Nachname'
-        locality: 'Ort'
-        login: 'Benutzername'
+        city: 'Ort'
         mobile_phone: 'Mobiltelefon'
-        name_prefix: 'Titel'
-        org_name_address: 'Firma'
-        org_unit_address: 'Abteilung'
+        company: 'Unternehmen'
         phone: 'Telefon'
         postalcode: 'Postleitzahl'
-        region: 'Region'
-        role_names: 'Rollen'
         street_address: 'Straße'
-        tags: 'Tags'
-        want_email: 'per Email'
-        want_geo_location: 'Geolocation'
-        want_phonecall: 'per Telefon'
-        want_snailmail: 'per Post'
-        submit: 'Speichern'
+        want_email: 'Ja, ich möchte per Email kontaktiert werden.'
+
+    hints:
+      profile_page_presenter:
+        email: 'Bitte achten Sie darauf eine valide E-Mail-Adresse anzugeben.'
+
+    placeholders:
+      profile_page_presenter:
+        email: 'vorname@nachname.de'
+        postalcode: '12345'
+        mobile_phone: '0049 123 12345678'
 
     options:
       profile_page_presenter:
@@ -51,5 +53,5 @@ de:
           en: 'Englisch'
 
         gender:
-          M: 'männlich'
-          F: 'weiblich'
+          M: 'Männlich'
+          F: 'Weiblich'
