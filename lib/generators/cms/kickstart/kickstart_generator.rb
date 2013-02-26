@@ -37,8 +37,8 @@ module Cms
       end
 
       def form_tools
-        gem('active_attr', '0.7.0')
-        gem('simple_form', '2.0.4')
+        gem('active_attr')
+        gem('simple_form')
 
         Bundler.with_clean_env do
           run('bundle --quiet')
@@ -53,11 +53,9 @@ module Cms
 
       def include_dev_tools
         gem_group(:test, :development) do
-          gem('pry-rails', '0.2.2')
-          gem('rails-footnotes', '3.7.9')
-          gem('better_errors', '0.5.0')
-          gem('binding_of_caller', '0.6.8')
-          gem('thin')
+          gem('pry-rails')
+          gem('better_errors')
+          gem('binding_of_caller')
         end
 
         developer_initializer_path = 'config/initializers/developer.rb'
@@ -67,7 +65,7 @@ module Cms
 
       def install_test_framework
         gem_group(:test, :development) do
-          gem('rspec-rails', '2.12.2')
+          gem('rspec-rails')
         end
 
         Bundler.with_clean_env do
@@ -85,7 +83,7 @@ module Cms
       end
 
       def include_and_configure_template_engine
-        gem('haml-rails', '0.4')
+        gem('haml-rails')
 
         application_erb_file = 'app/views/layouts/application.html.erb'
 
@@ -162,7 +160,7 @@ module Cms
       end
 
       def create_box_model
-        gem('cells', '3.8.8')
+        gem('cells')
 
         template('cells_error_handling.rb', 'config/initializers/cells.rb')
       end
