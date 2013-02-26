@@ -47,6 +47,7 @@ module Cms
         generate('simple_form:install --bootstrap --template-engine=haml')
 
         remove_file('config/locales/simple_form.de.yml')
+        remove_file('config/locales/simple_form.en.yml')
         remove_dir('lib/templates')
       end
 

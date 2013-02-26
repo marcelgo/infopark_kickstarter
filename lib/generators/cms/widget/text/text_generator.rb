@@ -22,20 +22,18 @@ module Cms
           begin
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Text', "--attributes=#{sort_key_attribute_name}"])
+
+            gsub_file(
+              'app/models/box_text.rb',
+              'include Page',
+              'include Box'
+            )
           rescue Cms::Generators::DuplicateResourceError
           end
 
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
-        end
-
-        def adopt_model
-          gsub_file(
-            'app/models/box_text.rb',
-            'include Page',
-            'include Box'
-          )
         end
 
         def copy_app_directory
