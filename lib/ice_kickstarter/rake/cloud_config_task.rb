@@ -61,10 +61,6 @@ module IceKickstarter
 
         config = MultiJson.load(config)
 
-        # TODO Workaround for not putting back the entire config, but only the custom_cloud part.
-        # Should be removed once the ICE Konsole is fixed.
-        config = { 'custom_cloud' => config['custom_cloud'] }
-
         save_config(config.to_json)
       end
 
