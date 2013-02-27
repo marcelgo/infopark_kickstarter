@@ -1,18 +1,8 @@
 module Cms
   module Attributes
     module ContactPageLink
-      def contact_page_link_attribute
-        :contact_page_link
-      end
-
-      def default_contact_page_link
-        RailsConnector::LinkList.new(nil)
-      ensure
-        Cms::Errors::MissingAttribute.notify(self, __FILE__)
-      end
-
       def contact_page_link
-        self[contact_page_link_attribute] || default_contact_page_link
+        self[:contact_page_link] || RailsConnector::LinkList.new(nil)
       end
 
       def contact_page_link?
