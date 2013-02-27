@@ -3,6 +3,8 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
 
+require 'support/test_destination_root'
+
 Rails.backtrace_cleaner.remove_silencers!
 
 RSpec.configure do |config|

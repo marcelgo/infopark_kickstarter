@@ -1,0 +1,10 @@
+Description:
+    Generates a text widget that displays a title and main body and is sortable.
+
+Example:
+    CMS: obj_class BoxText
+    CMS: attribute title (string)
+    CMS: attribute body (html)
+    CMS: attribute sort_key (string)
+
+    `rails generate cms:widget:text`

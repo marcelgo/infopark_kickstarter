@@ -1,5 +1,6 @@
 class Obj < ::RailsConnector::BasicObj
   include Cms::Attributes::SortKey
+  include Cms::Attributes::ShowInNavigation
 
   def self.homepage
     default_homepage
@@ -50,11 +51,20 @@ class Obj < ::RailsConnector::BasicObj
     nil
   end
 
-  def show_in_navigation?
-    self[:show_in_navigation] == 'Yes'
-  end
-
   def locale
     homepage.locale
+  end
+
+  # Overrides RailsConnector::BasicObj#body_data_url
+  #
+  # Removes protocol http: so that the URLs work fine with pages delivered over https.
+  def body_data_url
+    url = super
+
+    if url.to_s =~ /^http:(.*?s3\.amazonaws\.com.*)$/
+      $1
+    else
+      url
+    end
   end
 end

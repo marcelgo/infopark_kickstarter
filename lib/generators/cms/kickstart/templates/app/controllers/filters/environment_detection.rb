@@ -9,11 +9,11 @@ module Filters
       end
 
       def preview_environment?
-        !!session[:preview_environment]
+        session[:preview_environment]
       end
 
       def live_environment?
-        !!session[:live_environment]
+        session[:live_environment]
       end
 
       private
@@ -23,7 +23,7 @@ module Filters
       end
 
       def preview_host?
-        !!(request.host =~ /elb\.amazonaws\.com|\.dev|localhost$/)
+        request.host =~ /elb\.amazonaws\.com|\.dev|localhost$/
       end
 
       def authenticated?

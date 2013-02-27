@@ -1,0 +1,11 @@
+- if @flash[:alert]
+  = render({state: :flash_message}, :alert, 'alert-error')
+
+- if @flash[:notice]
+  = render({state: :flash_message}, :notice, 'alert-success')
+
+- if @flash[:warning]
+  = render({state: :flash_message}, :warning, 'alert-warning')
+
+- if @flash[:info]
+  = render({state: :flash_message}, :info, 'alert-info')

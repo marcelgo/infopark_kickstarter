@@ -1,11 +1,19 @@
 Description:
     Generates a contact page that creates an activity in the WebCRM and prefills
-    the form if an user is logged in. The given homepage (default: /website/de)
-    is extended with a configuration link to the contact page.
+    the form if an user is logged in. The given homepage is extended with a
+    configuration link to the contact page.
 
 Example:
     `rails generate cms:component:contact_page`
+    `rails generate cms:component:contact_page --homepage_path=/website/en`
 
+    CMS: obj_class ContactPage
+    CMS: attribute title (string)
+    CMS: attribute body (html)
+    CMS: attribute show_in_navigation (enum)
+    CMS: attribute crm_activity_type (string)
+    CMS: attribute contact_page_link (linklist)
+    CMS: attribute redirect_after_submit_link (linklist)
     CMS: <path to homepage>/_configuration/contact
          "contact_page_link" added to object class "Homepage"
     CRM: Activity type 'contact-form' with attributes 'email' and 'message'

@@ -1,0 +1,1 @@
+Rails.application.config.cloud = YAML.load_file(Rails.root + 'config/custom_cloud.yml')

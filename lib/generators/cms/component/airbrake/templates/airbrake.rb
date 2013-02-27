@@ -1,3 +1,3 @@
 Airbrake.configure do |config|
-  config.api_key = 'TODO: Insert your airbrake api key.'
+  config.api_key = Rails.application.config.cloud['airbrake']['api_key']
 end

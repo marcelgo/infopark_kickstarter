@@ -8,6 +8,10 @@ module Cms
           gem_group :production, :staging do
             gem 'newrelic_rpm'
           end
+
+          Bundler.with_clean_env do
+            run('bundle --quiet')
+          end
         end
 
         def create_template_file
@@ -24,6 +28,26 @@ module Cms
           append_file('deploy/before_symlink.rb') do
             File.read(find_in_source_paths('before_symlink.rb'))
           end
+        end
+
+        def update_local_custom_cloud_file
+          append_file('config/custom_cloud.yml') do
+            File.read(find_in_source_paths('custom_cloud.yml'))
+          end
+        end
+
+        def display_notice
+          notice = if behavior == :invoke
+            'Please run "rake cms:cloud_config:edit" to add
+              "newrelic": { "api_key": "<your api key>" } to the platform
+              configuration.'
+          else
+            'Please run "rake cms:cloud_config:edit" to remove
+              "newrelic": { "api_key": "<your api key>" } from the platform
+              configuration.'
+          end
+
+          log(:config, notice)
         end
       end
     end

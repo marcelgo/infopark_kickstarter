@@ -2,11 +2,18 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/contact_page/contact_page_generator.rb'
+require 'generators/cms/attribute/attribute_generator'
+require 'generators/cms/model/model_generator'
 
 describe Cms::Generators::Component::ContactPageGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)
+
+  before(:all) do
+    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+  end
 
   before do
     prepare_destination
@@ -31,30 +38,6 @@ describe Cms::Generators::Component::ContactPageGenerator do
     File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write('= display_title(@search_page)') }
   end
 
-  it 'creates view' do
-    destination_root.should have_structure {
-      directory 'app' do
-        directory 'views' do
-          directory 'contact_page' do
-            file 'index.html.haml'
-          end
-        end
-
-        directory 'cells' do
-          file 'meta_navigation_cell.rb' do
-            contains '@contact_page = page.homepage.contact_page'
-          end
-
-          directory 'meta_navigation' do
-            file 'show.html.haml' do
-              contains '= link_to(cms_path(@contact_page)) do'
-            end
-          end
-        end
-      end
-    }
-  end
-
   it 'adds email validation gem' do
     destination_root.should have_structure {
       file 'Gemfile' do
@@ -63,31 +46,33 @@ describe Cms::Generators::Component::ContactPageGenerator do
     }
   end
 
-  it 'creates model file' do
+  it 'creates app file' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
           file 'contact_page.rb'
-        end
-      end
-    }
-  end
 
-  it 'creates presenter file' do
-    destination_root.should have_structure {
-      directory 'app' do
+          file 'homepage.rb' do
+            contains 'include Cms::Attributes::ContactPageLink'
+          end
+        end
+
         directory 'presenters' do
           file 'contact_page_presenter.rb'
         end
-      end
-    }
-  end
 
-  it 'creates service file' do
-    destination_root.should have_structure {
-      directory 'app' do
         directory 'services' do
           file 'contact_activity_service.rb'
+        end
+
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'contact_page_link.rb'
+              file 'crm_activity_type.rb'
+              file 'redirect_after_submit_link.rb'
+            end
+          end
         end
       end
     }
@@ -98,33 +83,6 @@ describe Cms::Generators::Component::ContactPageGenerator do
       directory 'config' do
         directory 'locales' do
           file 'de.contact_page.yml'
-        end
-      end
-    }
-  end
-
-  it 'creates cms attribute files' do
-    destination_root.should have_structure {
-      directory 'app' do
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'contact_page_link.rb'
-              file 'crm_activity_type.rb'
-            end
-          end
-        end
-      end
-    }
-  end
-
-  it 'extends homepage class' do
-    destination_root.should have_structure {
-      directory 'app' do
-        directory 'models' do
-          file 'homepage.rb' do
-            contains 'include Cms::Attributes::ContactPageLink'
-          end
         end
       end
     }
@@ -148,11 +106,12 @@ describe Cms::Generators::Component::ContactPageGenerator do
     }
   end
 
-  it 'creates migration file' do
+  it 'creates migration files' do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_contact_page'
+          migration 'create_contact_page_example'
         end
       end
     }

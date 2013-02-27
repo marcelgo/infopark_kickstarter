@@ -1,3 +1,53 @@
+= v0.0.5
+  * Renamed ```error_404``` to ```error_not_found```.
+  * Moved flash messages and workspace toggle into its own cell for better
+    reusability and separation of concerns.
+  * Simplified cms attribute concerns for easier understanding and extensibility.
+  * Added support for https S3 urls in ```obj.rb```. (Thanks @thomasritz)
+  * Added Https before filter to force https in live environment. Make sure to set a hostname in
+    ```app/controllers/filters/https.rb``` before deployment. (Thanks @thomasritz)
+  * Bugfix: There was an UTF encoding issue in the contact page generator. (Thanks @mremolt)
+  * Removed fixed versions on most of the base gems to install newest versions on project setup.
+  * Removed ```rails-footnotes``` as ```better_errors``` made it superfluous in most situations.
+  * Added a profile page generator that adds a link in the meta navigation when the user is logged
+    in. On the profile page, the user can edit all kinds of attributes that will be saved to the web
+    crm.
+  * Changed default homepage to ```en``` and updated examples accordingly.
+  * Updated ```less-rails-bootstrap``` to version 2.3.0 and ```rspec``` to version 2.13.0.
+  * The BoxText and BoxImage widgets are now a separate generator and can therefore be called with
+    ```rake cms:widget:text```. If you also want to create an example, you can add the
+    ```--cms_path``` option. Both widgets are still included in the Infopark Kickstarter base
+    generator.
+  * Added support for boolean attribute type. It fakes a boolean by creating an enum with "Yes" and
+    "No" values and provides query method in the attribute module.
+  * The newrelic generator now extends the local ```custom_cloud.yml``` file, runs
+    ```bundle --quiet``` because it adds a new gem and prints a notice to update the custom cloud
+    platform configuration.
+  * The airbrake generator now reads in the api_key from the ```custom_cloud.yml```, extends the
+    local ```custom_cloud.yml``` file, runs ```bundle --quiet``` because it adds a new gem and
+    prints a notice to update the custom cloud platform configuration.
+  * The ```custom_cloud.yml``` is now loaded in an initializer and is available as a hash in the
+    global Rails configuration as ```Rails.application.config.cloud```. The initializer is created
+    in such a way, that it is loaded before the rest of the initializers are run, so that it can be
+    used in the following initializers as well.
+  * A new google maps box type was added. It allows to easily create a map and place pins on it.
+    The new box type is part of the base Infopark Kickstarter functionality but is also
+    available as a separate generator. Call ```rails generate cms:widget:google_maps --help```
+    for more information.
+  * Added three additional rake tasks to easily edit the cloud config file, that holds configuration
+    parameters that should not be checked in to the version control system. See
+    ```rake -T cms:cloud_config``` for more details on the tasks.
+  * The user manager now allows to find an user by id. The remote user with this id is retrieved and
+    then mapped to an application user.
+  * haml-rails is not longer required by the dashboard, but only haml. This prevents the default
+    rails template engine to be set for the host application. (Thanks @mremolt)
+  * A website object can now be asked for all its homepages and returns a list of all Homepage
+    objects.
+  * A language switch allows to navigate from one language homepage to another. All languages are
+    listed in the sidebar. The current language is not linked.
+= v0.0.4
+  * Added README information on how to create a ```deploy.yml``` file and what content it needs to
+    hold.
 = v0.0.3
   * Added two new rake tasks ```rake cms:info:attributes[workspace]``` which returns a list of
     attributes and their type and ```rake cms:info:obj_classes[workspace]``` which returns a list of

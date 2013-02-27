@@ -1,0 +1,26 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # html: '<abbr title="required">*</abbr>'
+
+    error_notification:
+      default_message: 'Please check the fields below:'
+      login_presenter: 'Login failed. Please try it again.'
+
+    labels:
+      login_presenter:
+        login: 'Username'
+        password: 'Password'
+        submit: 'test'
+
+    hints:
+      defaults:
+
+  helpers:
+    submit:
+      login_presenter:
+        create: 'Login'

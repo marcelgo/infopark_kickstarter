@@ -1,0 +1,8 @@
+.box.google_maps.well
+  %h3
+    = display_field(@box, :title)
+
+  %p
+    = display_field(@box, :body)
+
+  %div.map{id: @id, data: { url: @url }}

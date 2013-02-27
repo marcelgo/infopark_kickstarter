@@ -1,8 +1,12 @@
 Description:
     Creates a CMS migration for a new CMS attribute. Per default the attribute type is set to
-    "string". The "values" option is only available for "enum" or "multi-enum" types.
+    "string". The "values" option is only available for "enum" or "multi-enum" types. The "max-size"
+    option is only available for "linklist" types.
 
 Example:
-    `rails generate cms:attribute show_in_navigation --type=enum --values=yes no`
+    `rails generate cms:attribute show_in_navigation --type=boolean`
+    `rails generate cms:attribute caption --type=string --title=Caption`
+    `rails generate cms:attribute content --type=html --title=Content`
+    `rails generate cms:attribute page --type=linklist --title=Page --max-size=1`
 
     Migration: cms/migrate/123456_create_show_in_navigation_attribute.rb

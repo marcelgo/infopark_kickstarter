@@ -1,18 +1,8 @@
 module Cms
   module Attributes
     module SearchPageLink
-      def search_page_link_attribute
-        :search_page_link
-      end
-
-      def default_search_page_link
-        RailsConnector::LinkList.new(nil)
-      ensure
-        Cms::Errors::MissingAttribute.notify(self, __FILE__)
-      end
-
       def search_page_link
-        self[search_page_link_attribute] || default_search_page_link
+        self[:search_page_link] || RailsConnector::LinkList.new(nil)
       end
 
       def search_page_link?

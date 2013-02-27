@@ -29,18 +29,4 @@ class MainNavigationCell < Cell::Rails
 
     render
   end
-
-  def workspace_toggle
-    @workspaces = RailsConnector::CmsRestApi.get('workspaces')['results']
-
-    @current_workspace = @workspaces.detect do |workspace|
-      workspace['id'] == RailsConnector::Workspace.current.id
-    end
-
-    @workspaces.each do |workspace|
-      workspace['title'] ||= 'Published'
-    end
-
-    render
-  end
 end

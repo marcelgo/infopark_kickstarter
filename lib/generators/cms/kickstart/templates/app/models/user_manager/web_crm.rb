@@ -14,6 +14,14 @@ module UserManager
       user.role_names.include?('cmsadmin')
     end
 
+    # Finds a remote user with the given id and provides an application user in
+    # return.
+    def find_user(id)
+      contact = find(id)
+
+      create_user(contact.attributes)
+    end
+
     # Creates a new using and prefills it with the given attributes. As a new
     # user needs an ID, it has to be provided in the attributes.
     def create_user(attributes)
