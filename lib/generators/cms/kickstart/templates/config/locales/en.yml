@@ -17,6 +17,8 @@ en:
   meta_navigation:
     show:
       meta: 'Meta'
+      login: 'Login'
+      logout: 'Logout'
 
   redirect:
     index:

@@ -76,10 +76,14 @@ module Cms
       end
 
       def create_deploy_hooks
+        empty_directory('deploy/templates')
+
         create_file('deploy/after_restart.rb')
         create_file('deploy/before_symlink.rb')
-        prepend_file('deploy/before_migrate.rb', 'deploy/before_migrate.rb')
-        empty_directory('deploy/templates')
+
+        prepend_file('deploy/before_migrate.rb') do
+          File.read(find_in_source_paths('deploy/before_migrate.rb'))
+        end
       end
 
       def include_and_configure_template_engine
@@ -118,11 +122,11 @@ module Cms
 
       def create_structure_migration_file
         Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
-        Rails::Generators.invoke('cms:attribute', ['error_404_page_link', '--title=Error 404 Page', '--type=linklist'])
+        Rails::Generators.invoke('cms:attribute', ['error_not_found_page_link', '--title=Error Not Found Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['search_page_link', '--title=Search Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['locale', '--title=Locale', '--type=string'])
-        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_404_page_link', 'login_page_link', 'search_page_link', 'locale', 'show_in_navigation'])
+        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_not_found_page_link', 'login_page_link', 'search_page_link', 'locale', 'show_in_navigation'])
 
         Rails::Generators.invoke('cms:model', ['Root', '--title=Root'])
         Rails::Generators.invoke('cms:model', ['Website', '--title=Website'])
@@ -149,7 +153,6 @@ module Cms
         directory('app')
         directory('lib')
         directory('config')
-        directory('deploy')
         directory('spec')
 
         template('homepage.rb', 'app/models/homepage.rb')
@@ -174,7 +177,6 @@ module Cms
       def add_initital_components
         Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
         Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
-        Rails::Generators.invoke('cms:widget:google_maps', ["--cms_path=#{widgets_path}"])
       end
 
       private

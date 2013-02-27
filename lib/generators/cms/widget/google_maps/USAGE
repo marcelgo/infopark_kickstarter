@@ -11,6 +11,7 @@ Example:
     CMS: attribute google_maps_map_type (enum)
     Gem: geocoder
     Route: google_maps
+    Misc: extends application.js
 
     `rails generate cms:widget:google_maps`
     `rails generate cms:widget:google_maps --cms_path=/website/en/_boxes`

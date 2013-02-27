@@ -1,4 +1,12 @@
 = v0.0.5
+  * Renamed ```error_404``` to ```error_not_found```.
+  * Moved flash messages and workspace toggle into its own cell for better
+    reusability and separation of concerns.
+  * Simplified cms attribute concerns for easier understanding and extensibility.
+  * Added support for https S3 urls in ```obj.rb```. (Thanks @thomasritz)
+  * Added Https before filter to force https in live environment. Make sure to set a hostname in
+    ```app/controllers/filters/https.rb``` before deployment. (Thanks @thomasritz)
+  * Bugfix: There was an UTF encoding issue in the contact page generator. (Thanks @mremolt)
   * Removed fixed versions on most of the base gems to install newest versions on project setup.
   * Removed ```rails-footnotes``` as ```better_errors``` made it superfluous in most situations.
   * Added a profile page generator that adds a link in the meta navigation when the user is logged

@@ -70,7 +70,6 @@ describe Cms::Generators::Component::ProfilePageGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'profile_page_link.rb'
-              file 'show_in_navigation.rb'
             end
           end
         end

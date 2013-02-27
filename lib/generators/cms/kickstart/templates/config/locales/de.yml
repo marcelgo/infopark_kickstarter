@@ -17,6 +17,8 @@ de:
   meta_navigation:
     show:
       meta: 'Meta'
+      login: 'Anmelden'
+      logout: 'Abmelden'
 
   redirect:
     index:

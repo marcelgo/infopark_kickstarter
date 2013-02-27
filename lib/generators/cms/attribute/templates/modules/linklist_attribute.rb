@@ -1,18 +1,10 @@
 module Cms
   module Attributes
+    # This is a linklist attribute concern. It should be included via +include
+    # Cms::Attributes::<%= class_name %>+ in all CMS models that use this attribute.
     module <%= class_name %>
-      def <%= file_name %>_attribute
-        :<%= file_name %>
-      end
-
-      def default_<%= file_name %>
-        RailsConnector::LinkList.new(nil)
-      ensure
-        Cms::Errors::MissingAttribute.notify(self, __FILE__)
-      end
-
       def <%= file_name %>
-        self[<%= file_name %>_attribute] || default_<%= file_name %>
+        self[:<%= file_name %>] || RailsConnector::LinkList.new(nil)
       end
 
       def <%= file_name %>?

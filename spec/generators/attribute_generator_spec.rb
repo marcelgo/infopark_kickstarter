@@ -33,7 +33,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module News'
                 contains 'def news'
-                contains "self[:news] || ''"
+                contains "self[:news].to_s"
               end
             end
           end
@@ -79,7 +79,10 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module News'
                 contains 'def news_link'
-                contains 'self[news_link_attribute] || default_news_link'
+                contains 'self[:news_link] || RailsConnector::LinkList.new(nil)'
+                contains 'def news_link?'
+                contains 'news_link.present?'
+                contains 'def first_news_link'
                 contains 'news_link.destination_objects.first'
               end
             end

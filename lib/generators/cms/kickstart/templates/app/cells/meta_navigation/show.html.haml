@@ -6,11 +6,11 @@
     %li
       - if @current_user.logged_in?
         = link_to(cms_path(@login_page), method: :delete) do
-          = display_title(@login_page)
+          = t('.logout')
 
       - else
         = link_to(cms_path(@login_page)) do
-          = display_title(@login_page)
+          = t('.login')
 
     %li
       = link_to(cms_path(@search_page)) do
