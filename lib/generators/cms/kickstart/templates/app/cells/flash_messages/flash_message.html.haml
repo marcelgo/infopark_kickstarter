@@ -1,5 +1,5 @@
-.alert{class: class_name}
+.alert{class: @class_name}
   %button.close{type: 'button', :'data-dismiss' => 'alert'}
     &times;
 
-  = flash[type]
+  = @flash[@type]

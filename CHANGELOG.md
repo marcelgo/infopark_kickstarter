@@ -1,8 +1,19 @@
 = v0.0.5
+  * Renamed ```error_404``` to ```error_not_found```.
+  * Moved flash messages and workspace toggle into its own cell for better
+    reusability and separation of concerns.
+  * Simplified cms attribute concerns for easier understanding and extensibility.
+  * Added support for https S3 urls in ```obj.rb```. (Thanks @thomasritz)
+  * Added Https before filter to force https in live environment. Make sure to set a hostname in
+    ```app/controllers/filters/https.rb``` before deployment. (Thanks @thomasritz)
+  * Bugfix: There was an UTF encoding issue in the contact page generator. (Thanks @mremolt)
+  * Removed fixed versions on most of the base gems to install newest versions on project setup.
+  * Removed ```rails-footnotes``` as ```better_errors``` made it superfluous in most situations.
+  * Added a profile page generator that adds a link in the meta navigation when the user is logged
+    in. On the profile page, the user can edit all kinds of attributes that will be saved to the web
+    crm.
   * Changed default homepage to ```en``` and updated examples accordingly.
   * Updated ```less-rails-bootstrap``` to version 2.3.0 and ```rspec``` to version 2.13.0.
-  * The [Thin Webserver](http://code.macournoyer.com/thin/) is now part of the development tools
-    that we recommend to use instead of the default WEBRick server.
   * The BoxText and BoxImage widgets are now a separate generator and can therefore be called with
     ```rake cms:widget:text```. If you also want to create an example, you can add the
     ```--cms_path``` option. Both widgets are still included in the Infopark Kickstarter base

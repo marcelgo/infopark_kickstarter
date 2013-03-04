@@ -65,8 +65,6 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
             directory 'attributes' do
               file 'google_maps_map_type.rb'
               file 'google_maps_address.rb'
-              file 'latitude.rb'
-              file 'longitude.rb'
             end
           end
         end

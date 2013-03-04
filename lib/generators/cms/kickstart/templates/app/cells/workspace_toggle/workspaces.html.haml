@@ -1,0 +1,13 @@
+%a.dropdown-toggle{:'data-toggle' => 'dropdown', href: '#'}
+  Workspace:
+  = @current_workspace['title']
+
+  %b.caret
+
+%ul.dropdown-menu
+  - @workspaces.each do |workspace|
+    - next if workspace['id'] == @current_workspace['id']
+
+    %li
+      = link_to("#{request.path}?_rc-ws=#{workspace['id']}") do
+        = workspace['title']

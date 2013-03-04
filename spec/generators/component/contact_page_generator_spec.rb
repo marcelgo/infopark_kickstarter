@@ -70,7 +70,6 @@ describe Cms::Generators::Component::ContactPageGenerator do
             directory 'attributes' do
               file 'contact_page_link.rb'
               file 'crm_activity_type.rb'
-              file 'show_in_navigation.rb'
               file 'redirect_after_submit_link.rb'
             end
           end

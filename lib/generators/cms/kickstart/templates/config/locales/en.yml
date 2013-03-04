@@ -8,7 +8,7 @@ en:
 
   search:
     specify_query: 'Please enter a search term.'
-    search_disabled: 'Because of maintainance issues the search currently is not available. Please excuse any inconveniences.'
+    search_disabled: 'The search is currently unavailable due to maintenance.'
     placeholder: 'Search'
     hits_found: "Your search query '%{query}' has the following results:"
     no_hits: "Your search query '%{query}' did not have any results."
@@ -17,6 +17,8 @@ en:
   meta_navigation:
     show:
       meta: 'Meta'
+      login: 'Login'
+      logout: 'Logout'
 
   redirect:
     index:

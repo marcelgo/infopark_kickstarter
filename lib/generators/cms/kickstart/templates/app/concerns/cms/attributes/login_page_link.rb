@@ -1,18 +1,8 @@
 module Cms
   module Attributes
     module LoginPageLink
-      def login_page_link_attribute
-        :login_page_link
-      end
-
-      def default_login_page_link
-        RailsConnector::LinkList.new(nil)
-      ensure
-        Cms::Errors::MissingAttribute.notify(self, __FILE__)
-      end
-
       def login_page_link
-        self[login_page_link_attribute] || default_login_page_link
+        self[:login_page_link] || RailsConnector::LinkList.new(nil)
       end
 
       def login_page_link?

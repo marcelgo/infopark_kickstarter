@@ -8,8 +8,6 @@ module I18nSupport
   private
 
   def set_locale
-    locale = @obj.try(:locale)
-
-    Filters::LocaleSetter.filter(self, locale)
+    I18n.locale = session[:locale] = @obj.try(:locale) || session[:locale].presence || I18n.default_locale
   end
 end

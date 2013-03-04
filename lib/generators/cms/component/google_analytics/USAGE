@@ -5,4 +5,9 @@ Description:
 Example:
     `rails generate cms:component:google_analytics`
 
+    CMS: obj_class GoogleAnalytics
+    CMS: attribute google_analytics_tracking_id (string)
+    CMS: attribute google_analytics_anonymize_ip (enum)
+    CMS: attribute google_analytics (linklist)
     CMS: <path to homepage>/_configuration/google_analytics
+    Misc: extends app/views/layouts/application.html.haml

@@ -11,22 +11,20 @@ module IceKickstarter
       def initialize
         namespace :cms do
           namespace :cloud_config do
-
-            desc "Edit the cloud config as stored in the ICE Konsole"
+            desc 'Edit the cloud config as stored in the ICE Konsole'
             task :edit => :environment do
               edit
             end
 
-            desc "Download the cloud config from the ICE Konsole to edit it locally"
+            desc 'Download the cloud config from the ICE Konsole to edit it locally'
             task :download => :environment do
               download
             end
 
-            desc "Upload the edited cloud config to the ICE Konsole"
+            desc 'Upload the edited cloud config to the ICE Konsole'
             task :upload => :environment do
               upload
             end
-
           end
         end
       end
@@ -35,37 +33,48 @@ module IceKickstarter
 
       def edit
         download
-        if ENV["EDITOR"].to_s != ""
-          sh "#{ENV["EDITOR"]} #{config_path}", verbose: false
+
+        if editor?
+          sh("#{ENV['EDITOR']} #{config_path}", verbose: false)
+
           upload
         else
-          puts "No $EDITOR specified."
+          puts 'No $EDITOR specified.'
           puts "Edit #{config_path}"
-          puts "Finally upload with rake cms:cloud_config:upload"
+          puts 'Finally upload with rake cms:cloud_config:upload'
         end
       end
 
+      def editor?
+        ENV['EDITOR'].to_s != ''
+      end
+
       def download
-        config = RestClient.get("#{url}/cloud_config", params: {token: api_key})
-        save_config(config)
+        config = begin
+          RestClient.get("#{url}/cloud_config", params: { token: api_key })
+        rescue RestClient::InternalServerError
+          puts 'Aborted. Cloud config could not be loaded.'
+          puts 'Please make sure that you have at least one live server configured.'
+
+          exit
+        end
+
+        config = MultiJson.load(config)
+
+        save_config(config.to_json)
       end
 
       def upload
         config = load_config
-        puts config
 
-        if yes?("Upload this config to the ICE Konsole? [yn]")
-          puts "Uploading..."
-          config_and_token = {
-            token: api_key,
-            cloud_config: config,
-          }
-          RestClient.put("#{url}/cloud_config", config_and_token.to_json, content_type: :json, accept: :json)
+        puts pretty_print(config.to_json)
 
-          puts "Local backup: #{config_backup_path}"
-          cp config_path, config_backup_path, verbose: false
+        if yes?('Upload this config to the ICE Konsole? [yn]')
+          puts 'Uploading...'
+
+          upload_config(config)
         else
-          puts "Aborting."
+          puts 'Aborted. Custom cloud configuration not uploaded.'
         end
       rescue MultiJson::LoadError => e
         puts "ERROR: #{config_path} contains syntax errors. Please fix."
@@ -74,31 +83,66 @@ module IceKickstarter
       end
 
       def load_config
-        MultiJson.load(File.read(config_path))
+        json = File.read(config_path)
+
+        MultiJson.load(json)
       end
 
       def save_config(config)
-        File.write(config_path, pretty_print(config))
+        json = pretty_print(config)
+
+        File.write(config_path, json)
+      end
+
+      def upload_config(config)
+        endpoint = "#{url}/cloud_config"
+
+        data = {
+          token: api_key,
+          cloud_config: config,
+        }.to_json
+
+        options = {
+          content_type: :json,
+          accept: :json,
+        }
+
+        RestClient.put(endpoint, data, options)
+
+        backup
+      end
+
+      def backup
+        puts "Local backup: #{config_backup_path}"
+
+        cp(config_path, config_backup_path, verbose: false)
       end
 
       def pretty_print(json)
-        # MultiJson does not output pretty printed JSON under Ruby 1.9, so we
-        # use JSON.pretty_generate instead.
-        # MultiJson.dump(MultiJson.load(json), :pretty => true)
-        JSON.pretty_generate(MultiJson.load(json))
+        config = MultiJson.load(json)
+
+        # TODO MultiJson does not output pretty printed JSON under Ruby 1.9, so we use
+        # JSON.pretty_generate instead.
+        # MultiJson.dump(config, pretty: true)
+        JSON.pretty_generate(config)
       end
 
       def config_path
-        Rails.root + "tmp/cloud_config.json"
+        @config_path ||= Rails.root + 'tmp/cloud_config.json'
       end
 
       def config_backup_path
-        @config_backup_path ||= "#{config_path}-#{Time.now.strftime('%Y%m%d%H%M')}"
+        @config_backup_path ||= "#{config_path}-#{current_time}"
+      end
+
+      def current_time
+        Time.now.strftime('%Y%m%d%H%M')
       end
 
       def yes?(text)
         puts text.to_s
-        $stdin.gets.tap{|text| text.strip! if text}.to_s =~ /^y/
+
+        $stdin.gets.tap { |text| text.strip! if text }.to_s =~ /^y/
       end
     end
   end

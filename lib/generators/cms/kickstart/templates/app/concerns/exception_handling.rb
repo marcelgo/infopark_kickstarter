@@ -15,10 +15,10 @@ module ExceptionHandling
 
     respond_to do |type|
       type.html do
-        @obj = Homepage.for_hostname(request.host).error_404_page
+        @obj = Homepage.for_hostname(request.host).error_not_found_page
 
         if @obj.present?
-          options[:template] = 'error_page/index'
+          options[:template] = "#{@obj.class.to_s.underscore}/index"
         else
           options[:file] = 'public/404'
           options[:layout] = false
