@@ -1,6 +1,10 @@
 class Blog < Obj
   include Page
   include Cms::Attributes::BlogEntryTruncation
+  include Cms::Attributes::BlogDisqusShortname
+  include Cms::Attributes::BlogEneableDisqusComments
+  include Cms::Attributes::BlogEneableFacebookButton
+  include Cms::Attributes::BlogEneableTwitterButton
 
   def tags
     tags = []
@@ -23,6 +27,22 @@ class Blog < Obj
     }
 
     filtered_entries
+  end
+
+  def eneable_twitter_button?
+    self.blog_eneable_twitter_button?
+  end
+
+  def eneable_facebook_button?
+    self.blog_eneable_facebook_button?
+  end
+
+  def disqus_shortname
+    self.blog_disqus_shortname
+  end
+
+  def eneable_disqus_comments?
+    self.blog_eneable_disqus_comments?
   end
 
   def entry_truncation

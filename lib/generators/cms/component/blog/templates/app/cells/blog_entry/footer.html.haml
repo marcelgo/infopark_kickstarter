@@ -1,0 +1,9 @@
+.row-fluid
+  .span12
+    .tags= tag_link_list
+.row-fluid
+  .span12
+    = render_cell(:blog_entry, :facebook, @entry)
+    = render_cell(:blog_entry, :twitter, @entry)
+
+= render_cell(:blog_entry, :comment, @entry)

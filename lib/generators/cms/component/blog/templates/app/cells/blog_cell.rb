@@ -26,4 +26,11 @@ class BlogCell < Cell::Rails
 
     render
   end
+
+  def disqus_snippet(blog)
+    @disqus_shortname = blog.disqus_shortname
+
+    render
+  end
+
 end

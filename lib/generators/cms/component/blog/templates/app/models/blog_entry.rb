@@ -3,12 +3,17 @@ class BlogEntry < Obj
   include Cms::Attributes::BlogEntryTags
   include Cms::Attributes::BlogEntryAuthorId
   include Cms::Attributes::BlogEntryPublicationDate
+  include Cms::Attributes::BlogEntryEneableTwitterButton
+  include Cms::Attributes::BlogEntryEneableDisqusComments
+  include Cms::Attributes::BlogEntryEneableFacebookButton
 
-  def truncated_body
-    if self.body.length > truncation
-      "#{self.body[0..truncation]}..."
+  def preview
+    text = first_text_box.body || ''
+
+    if text.length > truncation
+      "#{text[0..truncation]}..."
     else
-      self.body
+      text
     end
   end
 
@@ -60,5 +65,27 @@ class BlogEntry < Obj
 
   def author_email
     self.author.try(:email)
+  end
+
+  def eneable_twitter_button?
+    self.blog.eneable_twitter_button? && self.blog_entry_eneable_twitter_button?
+  end
+
+  def eneable_facebook_button?
+    self.blog.eneable_facebook_button? && self.blog_entry_eneable_facebook_button?
+  end
+
+  def eneable_disqus_comments?
+    self.blog.eneable_disqus_comments? && self.blog_entry_eneable_disqus_comments?
+  end
+
+  def disqus_shortname
+    self.parent.disqus_shortname
+  end
+
+  def first_text_box
+    self.boxes.each { |child|
+      return child if child.class.eql?(BoxText)
+    }
   end
 end
