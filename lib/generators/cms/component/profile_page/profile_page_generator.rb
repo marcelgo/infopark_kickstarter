@@ -10,6 +10,11 @@ module Cms
           :default => nil,
           :desc => 'Path to a CMS homepage, for which to create the contact form.'
 
+        class_option :skip_translation_import,
+          :type => :boolean,
+          :default => false,
+          :desc => 'Skip import of country translation files.'
+
         source_root File.expand_path('../templates', __FILE__)
 
         def add_gems
@@ -22,8 +27,10 @@ module Cms
         end
 
         def import_translations
-          run('rake import:country_select LOCALE=de')
-          run('rake import:country_select LOCALE=en')
+          unless options[:skip_translation_import]
+            run('rake import:country_select LOCALE=en')
+            run('rake import:country_select LOCALE=de')
+          end
         end
 
         def extend_homepage

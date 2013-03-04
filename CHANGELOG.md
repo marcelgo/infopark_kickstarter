@@ -1,4 +1,7 @@
 # v1.0.0
+  * Profile Page Component: Added option to skip the import of country translations.
+  * Bugfix: ```application``` javascript manifest needs to be loaded before
+    ```rails_connector_after_content_tags```. (Thanks @apepper)
   * Added support for markdown attribute type.
 
 # v0.0.5
