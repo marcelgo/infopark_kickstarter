@@ -1,4 +1,7 @@
-= v0.0.5
+# v1.0.0
+  * Added support for markdown attribute type.
+
+# v0.0.5
   * Renamed ```error_404``` to ```error_not_found```.
   * Moved flash messages and workspace toggle into its own cell for better
     reusability and separation of concerns.
@@ -45,10 +48,12 @@
     objects.
   * A language switch allows to navigate from one language homepage to another. All languages are
     listed in the sidebar. The current language is not linked.
-= v0.0.4
+
+# v0.0.4
   * Added README information on how to create a ```deploy.yml``` file and what content it needs to
     hold.
-= v0.0.3
+
+# v0.0.3
   * Added two new rake tasks ```rake cms:info:attributes[workspace]``` which returns a list of
     attributes and their type and ```rake cms:info:obj_classes[workspace]``` which returns a list of
     object classes and their attributes. For each task the workspace can optionally be provided.
@@ -81,5 +86,5 @@
     be configured in the CMS for each homepage. Default settings can be given as generator
     options.
 
-= v0.0.2
+# v0.0.2
   * initial functionality

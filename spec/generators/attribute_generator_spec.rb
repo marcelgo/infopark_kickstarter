@@ -210,7 +210,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module BodyMd'
                 contains 'def body_md'
-                contains "self[:body_md].to_s"
+                contains "self[:body_md].to_s.html_safe"
               end
             end
           end
