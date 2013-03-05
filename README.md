@@ -43,11 +43,24 @@ details.
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b feature/my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin feature/my-new-feature`)
-5. Create new Pull Request
+1. Signup for a [free Infopark Cloud Express account](https://www.infopark.de/) and setup a test CMS and CRM tenant in the
+   Infopark Konsole.
+2. Fork and clone the Infopark Kickstarter Github repository.
+3. Download the configuration files from the Infopark Konsole and unzip all files into the test
+   application.
+    ```
+    spec/dummy/config/rails_connector.yml
+    spec/dummy/config/custom_cloud.yml
+    spec/dummy/config/deploy.yml
+    ```
+4. Setup the local configuration file (`cp config/local.yml.template config/local.yml`) and provide the same credentials
+   you just downloaded from the Infopark Konsole.
+5. Run `rake spec` and `rake test:integration` to make sure everything is working and tests are
+   green.
+6. Create your feature branch (`git checkout -b feature/my-new-feature`)
+7. Commit your changes (`git commit -am 'Add some feature'`)
+8. Push to the branch (`git push origin feature/my-new-feature`)
+9. Create new Pull Request on Github.
 
 
 ## License
