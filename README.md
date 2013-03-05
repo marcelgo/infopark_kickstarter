@@ -43,11 +43,24 @@ details.
 
 ## Contributing
 
-1. Signup for a [free Infopark Cloud Express account](https://www.infopark.de/) and setup a test CMS and CRM tenant in the
-   Infopark Konsole.
-2. Fork and clone Infopark Kickstarter Github repository. Make sure to use a Ruby version >= 1.9.3.
+We would be very happy and thankful if you open new issues in order to further improve the Infopark
+Kickstarter. If you want to go a step further and extend the functionality or fix a problem
+yourself, you can do so any time by following the steps below.
+
+1. Signup for a [free Infopark Cloud Express account](https://www.infopark.de/) and setup a test CMS
+   and CRM tenant in the Infopark Konsole.
+2. Fork and clone Infopark Kickstarter Github repository.
+
+        git clone git@github.com:<your github username>/ice_kickstarter.git
+        cd ice_kickstarter
+
+3. We suggest using RVM or rbenv. Anyway, compare your local ruby version with the version given in
+   `.ruby-version` and install it if necessary.
+
+        ruby --version
+
 3. Download the configuration files from the Infopark Konsole and unzip all files into the test
-   application.
+   application that is part of the Infopark Kickstarter gem.
 
         spec/dummy/config/rails_connector.yml
         spec/dummy/config/custom_cloud.yml
@@ -57,8 +70,10 @@ details.
    Infopark Konsole.
 
         cp config/local.yml.template config/local.yml
+        open config/local.yml
 
-5. Create the bundle and run all test to make sure everything is working.
+5. Create the bundle and run all test to make sure everything is working before you add your own
+   changes.
 
         bundle
         rake spec
