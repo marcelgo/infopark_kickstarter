@@ -55,23 +55,24 @@ yourself, you can do so any time by following the steps below.
         git clone git@github.com:<your github username>/ice_kickstarter.git
         cd ice_kickstarter
 
-3. We suggest using [rbenv](https://github.com/sstephenson/rbenv/). Anyway, compare your local ruby version with the version given in
-   `.ruby-version` and install it if necessary.
+3. We suggest using [rbenv](https://github.com/sstephenson/rbenv/). Anyway, compare your local ruby
+   version with the version given in `.ruby-version` and install it if necessary.
 
         ruby --version
 
 3. Download the configuration files from the Infopark Console and unzip all files into the test
-   application that is part of the Infopark Kickstarter gem.
+   application that is part of the Infopark Kickstarter gem. Currently, you also have to create the
+   `deploy.yml` file manually. See the second step in the
+   [installation instructions](https://kb.infopark.de/89b37c1667cda31a/kurzanleitung-zum-gebrauch?locale=en).
 
         spec/dummy/config/rails_connector.yml
         spec/dummy/config/custom_cloud.yml
         spec/dummy/config/deploy.yml
 
-4. Setup the local configuration file and provide the same credentials you just downloaded from the
-   Infopark Console.
+4. Setup and edit the local configuration file and provide the same credentials you just downloaded
+   from the Infopark Console.
 
         cp config/local.yml.template config/local.yml
-        open config/local.yml
 
 5. Create the bundle and run all test to make sure everything is working before you add your own
    changes. You find some more details about testing above in the __Testing__ section.
@@ -80,10 +81,9 @@ yourself, you can do so any time by following the steps below.
         rake spec
         rake test:integration
 
-6. Create your feature branch (`git checkout -b feature/my-new-feature`)
-7. Commit your changes (`git commit -am 'Add some feature'`)
-8. Push to the branch (`git push origin feature/my-new-feature`)
-9. Create new Pull Request on Github against the `develop` branch.
+6. Create your feature branch and create a pull request against the `develop` branch. Please take a
+   look at already existing generators and rake tasks to get a feel of what your feature might look
+   like.
 
 
 ## License
