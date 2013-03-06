@@ -20,7 +20,8 @@ Please visit our Knowledge Base to get the
 ## Testing
 
 There are two types of tests. First there are standard rspec tests of the ICE Kickstarter engine.
-You can run these tests by simply calling:
+Those include tests for the dashboard and for all generators. You can run these tests by simply
+calling:
 
     $ rake spec
 
@@ -48,18 +49,18 @@ Kickstarter. If you want to go a step further and extend the functionality or fi
 yourself, you can do so any time by following the steps below.
 
 1. Signup for a [free Infopark Cloud Express account](https://www.infopark.de/) and setup a test CMS
-   and CRM tenant in the Infopark Konsole.
+   and CRM tenant in the Infopark Console.
 2. Fork and clone Infopark Kickstarter Github repository.
 
         git clone git@github.com:<your github username>/ice_kickstarter.git
         cd ice_kickstarter
 
-3. We suggest using RVM or rbenv. Anyway, compare your local ruby version with the version given in
+3. We suggest using [rbenv](https://github.com/sstephenson/rbenv/). Anyway, compare your local ruby version with the version given in
    `.ruby-version` and install it if necessary.
 
         ruby --version
 
-3. Download the configuration files from the Infopark Konsole and unzip all files into the test
+3. Download the configuration files from the Infopark Console and unzip all files into the test
    application that is part of the Infopark Kickstarter gem.
 
         spec/dummy/config/rails_connector.yml
@@ -67,13 +68,13 @@ yourself, you can do so any time by following the steps below.
         spec/dummy/config/deploy.yml
 
 4. Setup the local configuration file and provide the same credentials you just downloaded from the
-   Infopark Konsole.
+   Infopark Console.
 
         cp config/local.yml.template config/local.yml
         open config/local.yml
 
 5. Create the bundle and run all test to make sure everything is working before you add your own
-   changes.
+   changes. You find some more details about testing above in the __Testing__ section.
 
         bundle
         rake spec
