@@ -44,23 +44,23 @@ details.
 
 ## Contributing
 
-We would be very happy and thankful if you open new issues in order to further improve the Infopark
-Kickstarter. If you want to go a step further and extend the functionality or fix a problem
-yourself, you can do so any time by following the steps below.
+We would be very happy and thankful if you open new issues in order to further improve Infopark
+Kickstarter. If you want to go a step further and extend the functionality or fix a problem, you can
+do so any time by following the steps below.
 
 1. Signup for a [free Infopark Cloud Express account](https://www.infopark.de/) and setup a test CMS
-   and CRM tenant in the Infopark Console.
-2. Fork and clone Infopark Kickstarter Github repository.
+   and CRM tenant in the Infopark console.
+2. Fork and clone the Infopark Kickstarter Github repository.
 
-        git clone git@github.com:<your github username>/ice_kickstarter.git
+        git clone git@github.com:_username_/ice_kickstarter.git
         cd ice_kickstarter
 
-3. We suggest using [rbenv](https://github.com/sstephenson/rbenv/). Anyway, compare your local ruby
+3. We suggest using [rbenv](https://github.com/sstephenson/rbenv/). Anyway, compare your local Ruby
    version with the version given in `.ruby-version` and install it if necessary.
 
         ruby --version
 
-3. Download the configuration files from the Infopark Console and unzip all files into the test
+3. Download the configuration files from the Infopark console and unzip all files into the test
    application that is part of the Infopark Kickstarter gem. Currently, you also have to create the
    `deploy.yml` file manually. See the second step in the
    [installation instructions](https://kb.infopark.de/89b37c1667cda31a/kurzanleitung-zum-gebrauch?locale=en).
@@ -69,8 +69,8 @@ yourself, you can do so any time by following the steps below.
         spec/dummy/config/custom_cloud.yml
         spec/dummy/config/deploy.yml
 
-4. Setup and edit the local configuration file and provide the same credentials you just downloaded
-   from the Infopark Console.
+4. Set up and edit the local configuration file and provide the same credentials you just downloaded
+   from the Infopark console.
 
         cp config/local.yml.template config/local.yml
 
@@ -81,9 +81,9 @@ yourself, you can do so any time by following the steps below.
         rake spec
         rake test:integration
 
-6. Create your feature branch and create a pull request against the `develop` branch. Please take a
-   look at already existing generators and rake tasks to get a feel of what your feature might look
-   like.
+6. Create your feature branch and create a pull request for the `develop` branch. Please take a
+   look at the already existing generators and rake tasks to get an impression of our coding style
+   and the general architecture.
 
 
 ## License
