@@ -1,4 +1,8 @@
 # v1.0.0
+  * Updated contribution section in the README, which should make it easier for developers to setup
+    and add features to the project.
+  * Updated Infopark gems and required ```bundler >= 1.3.1``` to also work with newer
+    RubyGems versions.
   * Profile Page Component: Added option to skip the import of country translations.
   * Bugfix: ```application``` javascript manifest needs to be loaded before
     ```rails_connector_after_content_tags```. (Thanks @apepper)
