@@ -31,6 +31,7 @@ module IceKickstarter
       def create_configuration_files
         ConfigurationHelper.new(local_configuration_file, :cms, "#{config_path}/rails_connector.yml").write
         ConfigurationHelper.new(local_configuration_file, :crm, "#{config_path}/custom_cloud.yml").write
+        ConfigurationHelper.new(local_configuration_file, :deploy, "#{config_path}/deploy.yml").write
 
         puts 'created configuration files...'
       end

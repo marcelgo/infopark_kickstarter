@@ -50,6 +50,13 @@ module IceKickstarter
         }
       end
 
+      def deploy_configuration
+        {
+          'url' => choose_correct_value(local_configuration['integration_test_tenant_url']),
+          'api_key' => choose_correct_value(local_configuration['integration_test_tenant_api_key']),
+        }
+      end
+
       def local_configuration
         content = File.read(file)
 
