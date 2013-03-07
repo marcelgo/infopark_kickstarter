@@ -1,4 +1,5 @@
 # v1.0.0
+  * Bugfix: The contact form raised an error when there was no user logged in.
   * Airbrake component now includes secure option by default and does not depend on the kickstart
     generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
     error notifications on deployment.
