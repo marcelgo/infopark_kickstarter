@@ -1,4 +1,5 @@
 # v1.0.0
+  * Bugfix: Newrelic generator did not insert the correct website name in the deploy files.
   * Bugfix: The dashboard does no longer depend on the flash messages of the
     host application.
   * Bugfix: The contact form raised an error when there was no user logged in.

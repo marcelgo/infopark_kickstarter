@@ -15,17 +15,27 @@ module Cms
         end
 
         def create_template_file
-          template('newrelic.yml.erb', File.join('deploy/templates', 'newrelic.yml.erb'))
+          template('newrelic.yml.erb', 'deploy/templates/newrelic.yml.erb')
         end
 
         def append_after_restart_file
-          append_file('deploy/after_restart.rb') do
-            File.read(find_in_source_paths('after_restart.rb'))
+          destination = 'deploy/after_restart.rb'
+
+          unless File.exist?(destination)
+            create_file(destination)
           end
+
+          append_template('after_restart.rb', destination)
         end
 
         def append_before_symlink_file
-          append_file('deploy/before_symlink.rb') do
+          destination = 'deploy/before_symlink.rb'
+
+          unless File.exist?(destination)
+            create_file(destination)
+          end
+
+          append_file(destination) do
             File.read(find_in_source_paths('before_symlink.rb'))
           end
         end
@@ -48,6 +58,18 @@ module Cms
           end
 
           log(:config, notice)
+        end
+
+        private
+
+        def append_template(source, destination)
+          source = find_in_source_paths(source)
+          context = instance_eval('binding')
+          content = ERB.new(::File.binread(source)).result(context)
+
+          append_file(destination) do
+            content
+          end
         end
       end
     end

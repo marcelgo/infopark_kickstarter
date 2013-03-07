@@ -17,16 +17,12 @@ describe Cms::Generators::Component::NewrelicGenerator do
 
   def prepare_environments
     config_path = "#{destination_root}/config"
-    deploy_path = "#{destination_root}/deploy"
     initializers_path = "#{config_path}/initializers"
 
     mkdir_p(initializers_path)
-    mkdir_p(deploy_path)
 
     File.open("#{destination_root}/Gemfile", 'w')
     File.open("#{config_path}/custom_cloud.yml", 'w')
-    File.open("#{deploy_path}/after_restart.rb", 'w')
-    File.open("#{deploy_path}/before_symlink.rb", 'w')
   end
 
   it 'appends custom cloud file' do
@@ -40,11 +36,18 @@ describe Cms::Generators::Component::NewrelicGenerator do
     }
   end
 
-  it 'creates newrelic configuration file' do
+  it 'creates deploy files' do
     destination_root.should have_structure {
       directory 'deploy' do
         directory 'templates' do
-          file 'newrelic.yml.erb'
+          file 'newrelic.yml.erb' do
+            contains 'app_name: "Test Website"'
+            contains 'app_name: "Test Website (Staging)"'
+          end
+        end
+
+        file 'after_restart.rb' do
+          contains "newrelic_app_name = 'Test Website'"
         end
       end
     }
