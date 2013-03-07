@@ -1,4 +1,6 @@
 # v1.0.0
+  * Bugfix: The dashboard does no longer depend on the flash messages of the
+    host application.
   * Bugfix: The contact form raised an error when there was no user logged in.
   * Airbrake component now includes secure option by default and does not depend on the kickstart
     generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
