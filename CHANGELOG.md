@@ -1,4 +1,7 @@
 # v1.0.0
+  * Airbrake component now includes secure option by default and does not depend on the kickstart
+    generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
+    error notifications on deployment.
   * Updated contribution section in the README, which should make it easier for developers to setup
     and add features to the project.
   * Updated Infopark gems and required ```bundler >= 1.3.1``` to also work with newer

@@ -39,7 +39,21 @@ describe Cms::Generators::Component::AirbrakeGenerator do
     destination_root.should have_structure {
       directory 'config' do
         directory 'initializers' do
-          file 'airbrake.rb'
+          file 'airbrake.rb' do
+            contains "configuration = YAML.load_file(Rails.root + 'config/custom_cloud.yml')"
+            contains "config.api_key = configuration['airbrake']['api_key']"
+            contains 'config.secure = true'
+          end
+        end
+      end
+    }
+  end
+
+  it 'appends deploy file' do
+    destination_root.should have_structure {
+      directory 'deploy' do
+        file 'after_restart.rb' do
+          contains 'run "bundle exec rake environment airbrake:deploy TO=#{new_resource.environment[\'RAILS_ENV\']}"'
         end
       end
     }

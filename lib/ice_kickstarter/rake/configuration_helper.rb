@@ -1,3 +1,5 @@
+require 'yaml'
+
 module IceKickstarter
   module Rake
     class ConfigurationHelper
@@ -51,7 +53,7 @@ module IceKickstarter
       def local_configuration
         content = File.read(file)
 
-        YAML.load(content)
+        ::YAML.load(content)
       end
 
       def choose_correct_value(value)
