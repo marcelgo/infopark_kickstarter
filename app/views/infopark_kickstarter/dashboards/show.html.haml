@@ -1,0 +1,17 @@
+.row-fluid
+  %h1
+    Object Classes and Attributes
+
+  %p
+    All active Object Classes and their Attributes are listed. Please use CMS Migrations to adopt the
+    list to your needs. You can easily create a new CMS Migration executing
+    <strong>rails generate cms:migration NAME</strong>, or use any of the more specific migration
+    generators, like <strong>rails generate cms:model</strong> or
+    <strong>rails generate cms:attribute</strong>.
+
+.row-fluid
+  = render('layouts/infopark_kickstarter/dashboard/workspace_toggle')
+
+  = render('infopark_kickstarter/dashboards/show/obj_class_details', stats: @meta_stats)
+
+  = render('infopark_kickstarter/dashboards/show/attribute_details', stats: @meta_stats)

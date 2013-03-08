@@ -1,4 +1,5 @@
 # v1.0.0
+  * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
   * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
     does not depend on the kickstart generator anymore.
   * Bugfix: The dashboard does no longer depend on the flash messages of the
@@ -81,7 +82,7 @@
   * Included [BetterErrors](https://github.com/charliesome/better_errors) and
     [BindingOfCaller](https://github.com/banister/binding_of_caller) as core development gems. Also
     added an developer initializer file that is ignored by default.
-  * The ICE Kickstarter now depends on Ruby 1.9.3. Please make sure to upgrade your Ruby version and
+  * The Infopark Kickstarter now depends on Ruby 1.9.3. Please make sure to upgrade your Ruby version and
     use the latest Infopark gems. We recommend to use the new hash syntax throughout the project.
   * Added authorization support to simply protect access to a page via a before filter. Use
     ```before_filter Filters::Authorization``` in your controller to protect the entire page.
@@ -92,7 +93,7 @@
     Have a look at ```app/models/user.rb``` for how it is implemented exactly.
   * Added optional contact_page component that is connected to the WebCRM and prefills email, when
     user is logged in. Call ```rails generate cms:component:contact_page```.
-  * Added ICE Developer Dashboard mounted under ```/cms/dashboard```. The dashboard
+  * Added Infopark Developer Dashboard mounted under ```/cms/dashboard```. The dashboard
     is only available for local requests and completely separated from your Ruby on Rails
     application.
   * Bugfix: Workspace Toggle no longer displays an empty list, when there is only one workspace.

@@ -42,21 +42,21 @@ class CreateStructure < ::RailsConnector::Migration
     update_obj_class(id, attributes)
   rescue RailsConnector::ClientError => error
     puts error.message
-    puts 'Some aspects of the ICE Kickstarter may not work as expected.'
+    puts 'Some aspects of the Infopark Kickstarter may not work as expected.'
   end
 
   def try_create_obj(attributes = {})
     create_obj(attributes)
   rescue RailsConnector::ClientError => error
     puts error.message
-    puts 'Some aspects of the ICE Kickstarter may not work as expected.'
+    puts 'Some aspects of the Infopark Kickstarter may not work as expected.'
   end
 
   def try_update_obj(id, attributes = {})
     update_obj(id, attributes)
   rescue RailsConnector::ClientError => error
     puts error.message
-    puts 'Some aspects of the ICE Kickstarter may not work as expected.'
+    puts 'Some aspects of the Infopark Kickstarter may not work as expected.'
   end
 
   def delete_obj_by_path(path)

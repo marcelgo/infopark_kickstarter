@@ -1,4 +1,4 @@
-# ICE Kickstarter
+# Infopark Kickstarter
 
 The Kickstarter provides generators and rake tasks to quickly setup or enhance an [Infopark
 Cloud Express](http://infopark.de/infopark-cloud-express) Ruby on Rails project. All generated code
@@ -19,9 +19,9 @@ Please visit our Knowledge Base to get the
 
 ## Testing
 
-There are two types of tests. First there are standard rspec tests of the ICE Kickstarter engine.
-Those include tests for the dashboard and for all generators. You can run these tests by simply
-calling:
+There are two types of tests. First there are standard rspec tests of the Infopark Kickstarter
+engine. Those include tests for the dashboard and for all generators. You can run these tests by
+simply calling:
 
     $ rake spec
 
@@ -30,7 +30,7 @@ There are also integration tests, that can be run by:
     $ rake test:integration
 
 In order to run them successfully, you need to create a ```config/local.yml``` file and put in your
-test tenant data. See [local.yml.template](https://github.com/infopark/ice_kickstarter/blob/master/config/local.yml.template)
+test tenant data. See [local.yml.template](https://github.com/infopark/infopark_kickstarter/blob/master/config/local.yml.template)
 for what is needed exactly. The integration tests create an entire new application execute
 ```rails generate cms:kickstart``` and run a few other generators and then execute the tests of the
 newly created application.
@@ -38,7 +38,7 @@ newly created application.
 
 ## Changelog
 
-See [Changelog](https://github.com/infopark/ice_kickstarter/blob/master/CHANGELOG.md) for more
+See [Changelog](https://github.com/infopark/infopark_kickstarter/blob/master/CHANGELOG.md) for more
 details.
 
 
@@ -52,8 +52,8 @@ do so any time by following the steps below.
    and CRM tenant in the Infopark console.
 2. Fork and clone the Infopark Kickstarter Github repository.
 
-        git clone git@github.com:_username_/ice_kickstarter.git
-        cd ice_kickstarter
+        git clone git@github.com:_username_/infopark_kickstarter.git
+        cd infopark_kickstarter
 
 3. We suggest using [rbenv](https://github.com/sstephenson/rbenv/). Anyway, compare your local Ruby
    version with the version given in `.ruby-version` and install it if necessary.
