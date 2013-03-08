@@ -22,7 +22,7 @@ class BlogEntryCell < Cell::Rails
   def facebook(entry)
     @entry = entry
 
-    if @entry.eneable_facebook_button?
+    if @entry.enable_facebook_button?
       render
     end
   end
@@ -30,7 +30,7 @@ class BlogEntryCell < Cell::Rails
   def twitter(entry)
     @entry = entry
 
-    if @entry.eneable_twitter_button?
+    if @entry.enable_twitter_button?
       render
     end
   end
@@ -50,7 +50,7 @@ class BlogEntryCell < Cell::Rails
   def comment(entry)
     @entry = entry
 
-    if @entry.eneable_disqus_comments?
+    if @entry.enable_disqus_comments?
       render
     end
   end

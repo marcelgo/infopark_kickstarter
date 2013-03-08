@@ -9,8 +9,8 @@ class CreateBlogExample < ::RailsConnector::Migration
       _obj_class: '<%= blog_class_name %>',
       title: 'Blog',
       "<%= blog_entry_truncation_attribute_name %>" => '500',
-      "<%= blog_eneable_facebook_button_attribute_name %>" => 'Yes',
-      "<%= blog_eneable_twitter_button_attribute_name %>" => 'Yes'
+      "<%= blog_enable_facebook_button_attribute_name %>" => 'Yes',
+      "<%= blog_enable_twitter_button_attribute_name %>" => 'Yes'
     )
 
     create_obj(
@@ -20,8 +20,8 @@ class CreateBlogExample < ::RailsConnector::Migration
       "<%= blog_entry_tags_attribute_name %>" => '"Fun", "Lorem"',
       "<%= blog_entry_author_id_attribute_name %>" => "",
       "<%= blog_entry_publication_date_attribute_name %>" => Time.now.strftime("%d.%m.%Y"),
-      "<%= blog_entry_eneable_facebook_button_attribute_name %>" => 'Yes',
-      "<%= blog_entry_eneable_twitter_button_attribute_name %>" => 'Yes'
+      "<%= blog_entry_enable_facebook_button_attribute_name %>" => 'Yes',
+      "<%= blog_entry_enable_twitter_button_attribute_name %>" => 'Yes'
     )
 
     create_obj(
@@ -47,7 +47,7 @@ class CreateBlogExample < ::RailsConnector::Migration
       _path: "#{path}/entry-2",
       _obj_class: '<%= blog_entry_class_name %>',
       title: 'Curabitur eget erat vitae risus aliquam ultricies ac',
-      "<%= blog_entry_tags_attribute_name %>" => '"General", "Lorem"',
+      "<%= blog_entry_tags_attribute_name %>" => 'General Lorem',
       "<%= blog_entry_author_id_attribute_name %>" => "",
       "<%= blog_entry_publication_date_attribute_name %>" => Time.now.strftime("%d.%m.%Y"),
     )

@@ -9,83 +9,65 @@ class BlogEntry < Obj
 
   def preview
     text = first_text_box.body || ''
-
-    if text.length > truncation
-      "#{text[0..truncation]}..."
-    else
-      text
-    end
-  end
-
-  def truncation
-    self.blog.entry_truncation
+    text.truncate(blog.entry_truncation)
   end
 
   def blog
-    self.parent
+    parent.blog
   end
 
   def publish_date
-    self.blog_entry_publication_date
+    blog_entry_publication_date
   end
 
   def tags
-    tags = []
-    tags_string = self.blog_entry_tags
-
-    tags_string.scan(/"{1}[a-zA-Z\s\w]*"{1}/) {|m|
-      tags << m[1..-2]
-    }
-
-    tags
-  end
-
-  def has_tag?(tag)
-    self.tags.include?(tag)
+    blog_entry_tags.split
   end
 
   def author_id
-    self.blog_entry_author_id
+    blog_entry_author_id
   end
 
   def author
-    @user_manager ||= Rails.application.config.user_manager
-    @user ||= @user_manager.find_user(self.author_id)
+    @author ||= Rails.application.config.user_manager.find_user(author_id)
   rescue UserManager::UserNotFound
     nil
   end
 
   def author_name
-    if self.author.present?
-      "#{self.author.first_name} #{self.author.last_name}"
+    if author.present?
+      [
+        author.first_name,
+        author.last_name
+      ].compact.join(' ')
     else
       ''
     end
   end
 
   def author_email
-    self.author.try(:email)
+    author.try(:email)
   end
 
-  def eneable_twitter_button?
-    self.blog.eneable_twitter_button? && self.blog_entry_eneable_twitter_button?
+  def enable_twitter_button?
+    blog.enable_twitter_button? && blog_entry_enable_twitter_button?
   end
 
-  def eneable_facebook_button?
-    self.blog.eneable_facebook_button? && self.blog_entry_eneable_facebook_button?
+  def enable_facebook_button?
+    blog.enable_facebook_button? && blog_entry_enable_facebook_button?
   end
 
-  def eneable_disqus_comments?
-    self.blog.eneable_disqus_comments? && self.blog_entry_eneable_disqus_comments?
+  def enable_disqus_comments?
+    blog.enable_disqus_comments? && blog_entry_enable_disqus_comments?
   end
 
   def disqus_shortname
-    self.parent.disqus_shortname
+    blog.disqus_shortname
   end
 
   def first_text_box
-    self.boxes.each { |child|
-      return child if child.class.eql?(BoxText)
-    }
+    boxes.detect do |box|
+      box.is_a?(BoxText)
+    end
   end
 end

@@ -24,12 +24,12 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_eneable_disqus_comments_attribute_name)
+            validate_attribute(blog_enable_disqus_comments_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_eneable_disqus_comments_attribute_name,
+                blog_enable_disqus_comments_attribute_name,
                 '--type=boolean',
                 '--title=Enable Disqus Comments?'
               ]
@@ -38,12 +38,12 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_eneable_facebook_button_attribute_name)
+            validate_attribute(blog_enable_facebook_button_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_eneable_facebook_button_attribute_name,
+                blog_enable_facebook_button_attribute_name,
                 '--type=boolean',
                 '--title=Enable Facebook Like Button?'
               ]
@@ -52,12 +52,12 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_eneable_twitter_button_attribute_name)
+            validate_attribute(blog_enable_twitter_button_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_eneable_twitter_button_attribute_name,
+                blog_enable_twitter_button_attribute_name,
                 '--type=boolean',
                 '--title=Enable Twitter Button?'
               ]
@@ -122,12 +122,12 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_entry_eneable_disqus_comments_attribute_name)
+            validate_attribute(blog_entry_enable_disqus_comments_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_entry_eneable_disqus_comments_attribute_name,
+                blog_entry_enable_disqus_comments_attribute_name,
                 '--type=boolean',
                 '--title=Enable Disqus Comments?'
               ]
@@ -136,12 +136,12 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_entry_eneable_facebook_button_attribute_name)
+            validate_attribute(blog_entry_enable_facebook_button_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_entry_eneable_facebook_button_attribute_name,
+                blog_entry_enable_facebook_button_attribute_name,
 
                 '--type=boolean',
                 '--title=Enable Facebook Like Button?'
@@ -151,12 +151,12 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_entry_eneable_twitter_button_attribute_name)
+            validate_attribute(blog_entry_enable_twitter_button_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_entry_eneable_twitter_button_attribute_name,
+                blog_entry_enable_twitter_button_attribute_name,
                 '--type=boolean',
                 '--title=Enable Twitter Button?'
               ]
@@ -173,9 +173,9 @@ module Cms
                 blog_class_name,
                 "--attributes=#{blog_entry_truncation_attribute_name}",
                 blog_disqus_shortname_attribute_name,
-                blog_eneable_twitter_button_attribute_name,
-                blog_eneable_disqus_comments_attribute_name,
-                blog_eneable_facebook_button_attribute_name,
+                blog_enable_twitter_button_attribute_name,
+                blog_enable_disqus_comments_attribute_name,
+                blog_enable_facebook_button_attribute_name,
                 '--title=Page: Blog'
               ]
             )
@@ -192,9 +192,9 @@ module Cms
                 "--attributes=#{blog_entry_tags_attribute_name}",
                 blog_entry_author_id_attribute_name,
                 blog_entry_publication_date_attribute_name,
-                blog_entry_eneable_twitter_button_attribute_name,
-                blog_entry_eneable_facebook_button_attribute_name,
-                blog_entry_eneable_disqus_comments_attribute_name,
+                blog_entry_enable_twitter_button_attribute_name,
+                blog_entry_enable_facebook_button_attribute_name,
+                blog_entry_enable_disqus_comments_attribute_name,
                 '--title=Blog: Entry'
               ]
             )
@@ -248,32 +248,32 @@ module Cms
           'blog_disqus_shortname'
         end
 
-        def blog_eneable_disqus_comments_attribute_name
-          'blog_eneable_disqus_comments'
+        def blog_enable_disqus_comments_attribute_name
+          'blog_enable_disqus_comments'
         end
 
-        def blog_eneable_facebook_button_attribute_name
-          'blog_eneable_facebook_button'
+        def blog_enable_facebook_button_attribute_name
+          'blog_enable_facebook_button'
         end
 
-        def blog_eneable_twitter_button_attribute_name
-          'blog_eneable_twitter_button'
+        def blog_enable_twitter_button_attribute_name
+          'blog_enable_twitter_button'
         end
 
         def blog_entry_publication_date_attribute_name
           'blog_entry_publication_date'
         end
 
-        def blog_entry_eneable_disqus_comments_attribute_name
-          'blog_entry_eneable_disqus_comments'
+        def blog_entry_enable_disqus_comments_attribute_name
+          'blog_entry_enable_disqus_comments'
         end
 
-        def blog_entry_eneable_facebook_button_attribute_name
-          'blog_entry_eneable_facebook_button'
+        def blog_entry_enable_facebook_button_attribute_name
+          'blog_entry_enable_facebook_button'
         end
 
-        def blog_entry_eneable_twitter_button_attribute_name
-          'blog_entry_eneable_twitter_button'
+        def blog_entry_enable_twitter_button_attribute_name
+          'blog_entry_enable_twitter_button'
         end
 
         def blog_class_name

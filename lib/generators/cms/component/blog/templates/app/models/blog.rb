@@ -6,6 +6,10 @@ class Blog < Obj
   include Cms::Attributes::BlogEneableFacebookButton
   include Cms::Attributes::BlogEneableTwitterButton
 
+  def blog
+    self
+  end
+
   def tags
     tags = []
     self.entries.map { |entry|
@@ -23,26 +27,26 @@ class Blog < Obj
     filtered_entries = []
 
     self.entries.each { |entry|
-      filtered_entries << entry if entry.has_tag?(tag)
+      filtered_entries << entry if entry.include?(tag)
     }
 
     filtered_entries
   end
 
-  def eneable_twitter_button?
-    self.blog_eneable_twitter_button?
+  def enable_twitter_button?
+    self.blog_enable_twitter_button?
   end
 
-  def eneable_facebook_button?
-    self.blog_eneable_facebook_button?
+  def enable_facebook_button?
+    self.blog_enable_facebook_button?
   end
 
   def disqus_shortname
     self.blog_disqus_shortname
   end
 
-  def eneable_disqus_comments?
-    self.blog_eneable_disqus_comments?
+  def enable_disqus_comments?
+    self.blog_enable_disqus_comments?
   end
 
   def entry_truncation
