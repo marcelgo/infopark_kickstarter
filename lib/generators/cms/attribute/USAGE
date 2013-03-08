@@ -8,5 +8,6 @@ Example:
     `rails generate cms:attribute caption --type=string --title=Caption`
     `rails generate cms:attribute content --type=html --title=Content`
     `rails generate cms:attribute page --type=linklist --title=Page --max-size=1`
+    `rails generate cms:attribute body_md --type=markdown`
 
     Migration: cms/migrate/123456_create_show_in_navigation_attribute.rb

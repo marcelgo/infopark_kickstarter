@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'pry'
 
-module IceKickstarter
+module InfoparkKickstarter
   describe DashboardsController do
     let(:editors) { [mock('Editor')] }
     let(:developers) { [mock('Developer')] }
@@ -43,7 +43,7 @@ module IceKickstarter
       it 'renders dashboard layout' do
         get action, use_route: 'cms'
 
-        response.should render_template('ice_kickstarter/dashboard')
+        response.should render_template('infopark_kickstarter/dashboard')
       end
     end
 

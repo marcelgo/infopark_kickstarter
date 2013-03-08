@@ -56,8 +56,8 @@
     .container
       = render_cell(:footer, :show)
 
-    = rails_connector_after_content_tags
-
     = javascript_include_tag('application')
+
+    = rails_connector_after_content_tags
 
     = render_cell(:main_navigation, :highlight, @obj)

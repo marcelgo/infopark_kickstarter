@@ -1,4 +1,4 @@
-IceKickstarter::Engine.routes.draw do
+InfoparkKickstarter::Engine.routes.draw do
   resource :dashboard, only: [:show] do
     collection do
       get 'help'
@@ -9,5 +9,5 @@ IceKickstarter::Engine.routes.draw do
 end
 
 Rails.application.routes.draw do
-  mount IceKickstarter::Engine => '/cms'
+  mount InfoparkKickstarter::Engine => '/cms'
 end

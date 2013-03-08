@@ -4,6 +4,11 @@ module Cms
       class AirbrakeGenerator < ::Rails::Generators::Base
         source_root File.expand_path('../templates', __FILE__)
 
+        class_option :skip_deployment_notification,
+          :type => :boolean,
+          :default => false,
+          :desc => 'Skip to notify airbrake on new deployments.'
+
         def include_gemfile
           gem('airbrake')
 
@@ -19,6 +24,18 @@ module Cms
         def update_local_custom_cloud_file
           append_file('config/custom_cloud.yml') do
             File.read(find_in_source_paths('custom_cloud.yml'))
+          end
+        end
+
+        def add_deployment_notification
+          unless options[:skip_deployment_notification]
+            unless File.exist?('deploy/after_restart.rb')
+              create_file('deploy/after_restart.rb')
+            end
+
+            append_file('deploy/after_restart.rb') do
+              File.read(find_in_source_paths('after_restart.rb'))
+            end
           end
         end
 

@@ -98,7 +98,7 @@ module Cms
 
       def install_css_framework
         gem_group(:assets) do
-          gem('less-rails-bootstrap', '2.3.0')
+          gem('less-rails-bootstrap')
         end
       end
 

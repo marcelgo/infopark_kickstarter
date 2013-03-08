@@ -1,4 +1,23 @@
-= v0.0.5
+# v1.0.0
+  * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
+    does not depend on the kickstart generator anymore.
+  * Bugfix: The dashboard does no longer depend on the flash messages of the
+    host application.
+  * Bugfix: The contact form raised an error when there was no user logged in.
+  * Airbrake component now includes secure option by default and does not depend on the kickstart
+    generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
+    error notifications on deployment.
+  * Updated contribution section in the README, which should make it easier for developers to setup
+    and add features to the project.
+  * Updated Infopark gems and required ```bundler >= 1.3.1``` to also work with newer
+    RubyGems versions.
+  * Profile Page Component: Added option to skip the import of country translations.
+  * Bugfix: ```application``` javascript manifest needs to be loaded before
+    ```rails_connector_after_content_tags```. (Thanks @apepper)
+  * Added support for markdown attribute type.
+
+# v0.0.5
   * Renamed ```error_404``` to ```error_not_found```.
   * Moved flash messages and workspace toggle into its own cell for better
     reusability and separation of concerns.
@@ -45,10 +64,12 @@
     objects.
   * A language switch allows to navigate from one language homepage to another. All languages are
     listed in the sidebar. The current language is not linked.
-= v0.0.4
+
+# v0.0.4
   * Added README information on how to create a ```deploy.yml``` file and what content it needs to
     hold.
-= v0.0.3
+
+# v0.0.3
   * Added two new rake tasks ```rake cms:info:attributes[workspace]``` which returns a list of
     attributes and their type and ```rake cms:info:obj_classes[workspace]``` which returns a list of
     object classes and their attributes. For each task the workspace can optionally be provided.
@@ -61,7 +82,7 @@
   * Included [BetterErrors](https://github.com/charliesome/better_errors) and
     [BindingOfCaller](https://github.com/banister/binding_of_caller) as core development gems. Also
     added an developer initializer file that is ignored by default.
-  * The ICE Kickstarter now depends on Ruby 1.9.3. Please make sure to upgrade your Ruby version and
+  * The Infopark Kickstarter now depends on Ruby 1.9.3. Please make sure to upgrade your Ruby version and
     use the latest Infopark gems. We recommend to use the new hash syntax throughout the project.
   * Added authorization support to simply protect access to a page via a before filter. Use
     ```before_filter Filters::Authorization``` in your controller to protect the entire page.
@@ -72,7 +93,7 @@
     Have a look at ```app/models/user.rb``` for how it is implemented exactly.
   * Added optional contact_page component that is connected to the WebCRM and prefills email, when
     user is logged in. Call ```rails generate cms:component:contact_page```.
-  * Added ICE Developer Dashboard mounted under ```/cms/dashboard```. The dashboard
+  * Added Infopark Developer Dashboard mounted under ```/cms/dashboard```. The dashboard
     is only available for local requests and completely separated from your Ruby on Rails
     application.
   * Bugfix: Workspace Toggle no longer displays an empty list, when there is only one workspace.
@@ -81,5 +102,5 @@
     be configured in the CMS for each homepage. Default settings can be given as generator
     options.
 
-= v0.0.2
+# v0.0.2
   * initial functionality

@@ -179,3 +179,43 @@ describe Cms::Generators::AttributeGenerator do
     }
   end
 end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['body_md', '--type=markdown']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates markdown attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_body_md_attribute' do
+            contains "create_attribute(name: 'body_md', type: 'markdown', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'body_md.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module BodyMd'
+                contains 'def body_md'
+                contains "self[:body_md].to_s.html_safe"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end
