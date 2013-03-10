@@ -5,6 +5,7 @@
     is no Github repository configured. (Thanks @awendt)
   * Added attribute generator option to set the name of getter method. (Thanks @cocodercoder)
   * Added support for integer and float attribute types.
+  * Newrelic generator now sets up developer mode. (Thanks @Kieran Hayes)
   * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
     does not depend on the kickstart generator anymore.
   * Bugfix: The dashboard does no longer depend on the flash messages of the
