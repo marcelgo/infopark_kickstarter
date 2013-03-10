@@ -299,3 +299,43 @@ describe Cms::Generators::AttributeGenerator do
     }
   end
 end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['foo', '--type=string', '--method_name=bar']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates float attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_foo_attribute' do
+            contains "create_attribute(name: 'foo', type: 'string', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'foo.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module Foo'
+                contains 'def bar'
+                contains "self[:foo].to_s"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end
