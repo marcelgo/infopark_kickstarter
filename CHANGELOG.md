@@ -1,5 +1,6 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Added support for float attribute type.
   * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
     does not depend on the kickstart generator anymore.
   * Bugfix: The dashboard does no longer depend on the flash messages of the

@@ -219,3 +219,43 @@ describe Cms::Generators::AttributeGenerator do
     }
   end
 end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['latitude', '--type=float']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates float attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_latitude_attribute' do
+            contains "create_attribute(name: 'latitude', type: 'string', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'latitude.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module Latitude'
+                contains 'def latitude'
+                contains "(self[:latitude] || 0.0).to_f"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end
