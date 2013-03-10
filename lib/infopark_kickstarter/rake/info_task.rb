@@ -1,11 +1,17 @@
 require 'rake'
 require 'rake/tasklib'
+require 'launchy'
 
 module InfoparkKickstarter
   module Rake
     class InfoTask < ::Rake::TaskLib
       def initialize
         namespace :cms do
+          desc 'Open the Infopark console in your web browser'
+          task :console do
+            Launchy.open('https://admin.saas.infopark.net/tenant_management')
+          end
+
           namespace :info do
             desc 'Get information about all object classes in the given workspace (default "published")'
             task :obj_classes, [:workspace] => :environment do |_, args|

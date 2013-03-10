@@ -1,5 +1,8 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
+    This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
+    gem. (Thanks @thomasritz)
   * Bugfix: The CMS webservice returns `RestClient::PreconditionFailed` not
     `RestClient::InternalServerError` when asked for the Github users when there
     is no Github repository configured. (Thanks @awendt)
