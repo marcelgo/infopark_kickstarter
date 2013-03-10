@@ -259,3 +259,43 @@ describe Cms::Generators::AttributeGenerator do
     }
   end
 end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['count', '--type=integer']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates float attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_count_attribute' do
+            contains "create_attribute(name: 'count', type: 'string', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'count.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module Count'
+                contains 'def count'
+                contains "(self[:count] || 0).to_i"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end

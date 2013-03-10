@@ -9,7 +9,7 @@ module Cms
         type: :string,
         aliases: '-t',
         default: 'string',
-        desc: 'Type of the CMS attribute (string | text | html | markdown | enum | boolean | multienum | linklist | date | float).'
+        desc: 'Type of the CMS attribute (string | text | html | markdown | enum | boolean | multienum | linklist | date | integer | float).'
 
       class_option :values,
         type: :array,
