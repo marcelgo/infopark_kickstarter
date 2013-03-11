@@ -1,5 +1,7 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Added video obj class to the kickstart generator. This allows to upload and handle videos in a
+    dedicated obj class.
   * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
     This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
     gem. (Thanks @thomasritz)
