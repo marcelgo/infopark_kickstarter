@@ -6,7 +6,7 @@ class CreateContactWidgetExample < ::RailsConnector::Migrations::Migration
       _path: box_path,
       _obj_class: '<%= obj_class_name %>',
       title: 'BoxContact',
-      contact_id: 'example-id']
+      contact_id: 'example-id'
     )
 
     puts "Created '<%= obj_class_name %>' object at '#{box_path}'..."
