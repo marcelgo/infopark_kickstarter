@@ -9,7 +9,7 @@ module Cms
         type: :string,
         aliases: '-t',
         default: 'string',
-        desc: 'Type of the CMS attribute (string | text | html | markdown | enum | boolean | multienum | linklist | date).'
+        desc: 'Type of the CMS attribute (string | text | html | markdown | enum | boolean | multienum | linklist | date | integer | float).'
 
       class_option :values,
         type: :array,
@@ -31,6 +31,11 @@ module Cms
         type: :numeric,
         default: 0,
         desc: 'Maximum number of links in a linklist.'
+
+      class_option :method_name,
+        type: :string,
+        default: nil,
+        desc: 'Method name to access the CMS attribute. Defaults to the name of the attribute.'
 
       def create_migration_file
         validate_attribute(file_name)
@@ -63,6 +68,10 @@ module Cms
 
       def values
         options[:values].inspect
+      end
+
+      def method_name
+        options[:method_name] || file_name
       end
     end
   end

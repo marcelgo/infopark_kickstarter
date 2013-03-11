@@ -53,6 +53,18 @@ describe Cms::Generators::Component::NewrelicGenerator do
     }
   end
 
+  it 'creates developer mode configuration' do
+    destination_root.should have_structure {
+      directory 'config' do
+        file 'newrelic.yml' do
+          contains "license_key: ''"
+          contains 'app_name: "Test Website"'
+          contains 'app_name: "Test Website (Staging)"'
+        end
+      end
+    }
+  end
+
   it 'adds gem' do
     destination_root.should have_structure {
       file 'Gemfile' do

@@ -5,17 +5,16 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         def include_gemfile
-          gem_group :production, :staging do
-            gem 'newrelic_rpm'
-          end
+          gem('newrelic_rpm')
 
           Bundler.with_clean_env do
             run('bundle --quiet')
           end
         end
 
-        def create_template_file
+        def create_configuration_files
           template('newrelic.yml.erb', 'deploy/templates/newrelic.yml.erb')
+          template('newrelic_developer.yml', 'config/newrelic.yml')
         end
 
         def append_after_restart_file

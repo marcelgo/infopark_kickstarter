@@ -121,6 +121,20 @@ module Cms
       end
 
       def create_structure_migration_file
+        begin
+          validate_obj_class('Image')
+
+          Rails::Generators.invoke('cms:model', ['Image', '--type=generic', '--title=Image'])
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
+        begin
+          validate_obj_class('Video')
+
+          Rails::Generators.invoke('cms:model', ['Video', '--type=generic', '--title=Video'])
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
         Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
         Rails::Generators.invoke('cms:attribute', ['error_not_found_page_link', '--title=Error Not Found Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])

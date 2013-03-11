@@ -1,5 +1,16 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Added video obj class to the kickstart generator. This allows to upload and handle videos in a
+    dedicated obj class.
+  * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
+    This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
+    gem. (Thanks @thomasritz)
+  * Bugfix: The CMS webservice returns `RestClient::PreconditionFailed` not
+    `RestClient::InternalServerError` when asked for the Github users when there
+    is no Github repository configured. (Thanks @awendt)
+  * Added attribute generator option to set the name of getter method. (Thanks @cocodercoder)
+  * Added support for integer and float attribute types.
+  * Newrelic generator now sets up developer mode. (Thanks @Kieran Hayes)
   * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
     does not depend on the kickstart generator anymore.
   * Bugfix: The dashboard does no longer depend on the flash messages of the
