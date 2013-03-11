@@ -9,7 +9,6 @@ class Box::BoxGalleryCell < BoxCell
   def show(page, box)
     @id = "gallery_#{box.id}"
     @images = box.gallery_images
-    #binding.pry
     super
   end
 end

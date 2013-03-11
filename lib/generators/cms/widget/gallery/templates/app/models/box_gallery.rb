@@ -17,7 +17,7 @@ class BoxGallery < Obj
 
   def delay
   	_delay = gallery_delay
-	_delay = 2000 if _delay.blank?
+	_delay = 4000 if _delay.blank?
 
 	_delay
   end
