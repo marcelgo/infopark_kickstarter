@@ -5,7 +5,6 @@
 
 = render_cell(:blog_entry, :header, @entry)
 
-.row-fluid
-  %p.span11.text= @entry.preview
+= render_cell(:blog_entry, :preview_box, @entry)
 
 = render_cell(:blog_entry, :preview_footer, @entry)

@@ -47,11 +47,27 @@ class BlogEntryCell < Cell::Rails
     render
   end
 
+  def preview_box(entry)
+    @box = entry.boxes.first
+    @entry = entry
+
+    render view: preview_name_for_box(@box)
+
+  rescue ActionView::MissingTemplate
+    render view: 'box_previews/box_missing_preview'
+  end
+
   def comment(entry)
     @entry = entry
 
     if @entry.enable_disqus_comments?
       render
     end
+  end
+
+  private
+
+  def preview_name_for_box(box)
+    "box_previews/#{box.class.to_s.underscore}_preview"
   end
 end

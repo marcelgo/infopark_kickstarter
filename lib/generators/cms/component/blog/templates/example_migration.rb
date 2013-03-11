@@ -17,7 +17,7 @@ class CreateBlogExample < ::RailsConnector::Migration
       _path: "#{path}/entry-1",
       _obj_class: '<%= blog_entry_class_name %>',
       title: 'Nulla viverra metus vitae nunc iaculis dignissim',
-      "<%= blog_entry_tags_attribute_name %>" => '"Fun", "Lorem"',
+      "<%= blog_entry_tags_attribute_name %>" => 'Fun Lorem',
       "<%= blog_entry_author_id_attribute_name %>" => "",
       "<%= blog_entry_publication_date_attribute_name %>" => Time.now.strftime("%d.%m.%Y"),
       "<%= blog_entry_enable_facebook_button_attribute_name %>" => 'Yes',

@@ -7,9 +7,8 @@ class BlogEntry < Obj
   include Cms::Attributes::BlogEntryEnableDisqusComments
   include Cms::Attributes::BlogEntryEnableFacebookButton
 
-  def preview
-    text = first_text_box.body || ''
-    text.truncate(blog.entry_truncation)
+  def truncation
+    blog.entry_truncation
   end
 
   def blog
@@ -63,11 +62,5 @@ class BlogEntry < Obj
 
   def disqus_shortname
     blog.disqus_shortname
-  end
-
-  def first_text_box
-    boxes.detect do |box|
-      box.is_a?(BoxText)
-    end
   end
 end

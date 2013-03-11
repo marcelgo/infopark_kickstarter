@@ -11,10 +11,9 @@ class Blog < Obj
   end
 
   def tags
-    tags = []
-    self.entries.map { |entry|
-      tags += (entry.tags)
-    }
+    tags = self.entries.inject([]) do |tags, entry|
+      tags += entry.tags
+    end
 
     tags.uniq
   end
@@ -24,13 +23,13 @@ class Blog < Obj
   end
 
   def entries_by_tag(tag)
-    filtered_entries = []
+    self.entries.inject([]) do |filtered, entry|
+      if entry.tags.include?(tag)
+        filtered << entry
+      end
 
-    self.entries.each { |entry|
-      filtered_entries << entry if entry.include?(tag)
-    }
-
-    filtered_entries
+      filtered
+    end
   end
 
   def enable_twitter_button?
