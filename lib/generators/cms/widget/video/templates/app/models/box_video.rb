@@ -3,6 +3,7 @@ class BoxVideo < Obj
   include Cms::Attributes::VideoWidth
   include Cms::Attributes::VideoHeight
   include Cms::Attributes::VideoAutoplay
+  include Cms::Attributes::VideoPreviewImage
   include Cms::Attributes::SortKey
   include Box
 
@@ -37,6 +38,16 @@ class BoxVideo < Obj
 
   def video_mime_type
     first_video_link.destination_object.mime_type
+  end
+
+  def video_preview_url?
+    first_video_preview_image.present?
+  end
+
+  def video_preview_url
+    if video_preview_url?
+      'http:' << first_video_preview_image.destination_object.body_data_url
+    end
   end
 
   def video_provider?

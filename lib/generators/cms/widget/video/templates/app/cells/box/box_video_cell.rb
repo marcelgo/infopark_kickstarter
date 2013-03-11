@@ -26,7 +26,7 @@ class Box::BoxVideoCell < BoxCell
         'false'
       end
 
-      render(view: 'video_generic', locals: { width: box.video_width, height: box.video_height, src: box.video_url, mime_type: box.video_mime_type, autoplay: autoplay })
+      render(view: 'video_generic', locals: { width: box.video_width, height: box.video_height, src: box.video_url, mime_type: box.video_mime_type, autoplay: autoplay, preview: box.video_preview_url })
     end
   end
 end
