@@ -2,9 +2,9 @@ class Blog < Obj
   include Page
   include Cms::Attributes::BlogEntryTruncation
   include Cms::Attributes::BlogDisqusShortname
-  include Cms::Attributes::BlogEneableDisqusComments
-  include Cms::Attributes::BlogEneableFacebookButton
-  include Cms::Attributes::BlogEneableTwitterButton
+  include Cms::Attributes::BlogEnableDisqusComments
+  include Cms::Attributes::BlogEnableFacebookButton
+  include Cms::Attributes::BlogEnableTwitterButton
 
   def blog
     self

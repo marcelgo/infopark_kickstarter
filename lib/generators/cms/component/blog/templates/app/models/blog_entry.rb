@@ -3,9 +3,9 @@ class BlogEntry < Obj
   include Cms::Attributes::BlogEntryTags
   include Cms::Attributes::BlogEntryAuthorId
   include Cms::Attributes::BlogEntryPublicationDate
-  include Cms::Attributes::BlogEntryEneableTwitterButton
-  include Cms::Attributes::BlogEntryEneableDisqusComments
-  include Cms::Attributes::BlogEntryEneableFacebookButton
+  include Cms::Attributes::BlogEntryEnableTwitterButton
+  include Cms::Attributes::BlogEntryEnableDisqusComments
+  include Cms::Attributes::BlogEntryEnableFacebookButton
 
   def preview
     text = first_text_box.body || ''
