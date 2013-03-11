@@ -5,7 +5,7 @@ class CreateGalleryWidgetExample < ::RailsConnector::Migrations::Migration
     create_obj(
       _path: box_path,
       _obj_class: '<%= obj_class_name %>',
-      title: 'BoxGallery']
+      title: 'BoxGallery'
     )
 
     puts "Created '<%= obj_class_name %>' object at '#{box_path}'..."
