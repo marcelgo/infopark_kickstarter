@@ -6,7 +6,7 @@ class CreateVideoWidgetExample < ::RailsConnector::Migrations::Migration
       _path: box_path,
       _obj_class: '<%= obj_class_name %>',
       title: 'BoxVideo',
-      video_link: [{ url: 'http://www.youtube-nocookie.com/embed/--6V1EIbHQ0' }]
+      video_link: [{ url: 'http://www.youtube.com/watch?v=--6V1EIbHQ0' }]
     )
 
     puts "Created '<%= obj_class_name %>' object at '#{box_path}'..."

@@ -73,6 +73,12 @@ module Cms
           end
 
           begin
+            validate_attribute(video_preview_image_attribute_name)
+            Rails::Generators.invoke('cms:attribute', [video_preview_image_attribute_name, '--type=linklist', '--title=Video: Image-Preview', '--max-size=1'])
+          rescue DuplicateResourceError
+          end
+
+          begin
             validate_attribute(video_width_attribute_name)
             Rails::Generators.invoke('cms:attribute', [video_width_attribute_name, '--type=string', '--title=Width (optional)'])
           rescue DuplicateResourceError
@@ -131,6 +137,10 @@ module Cms
 
         def video_link_attribute_name
           'video_link'
+        end
+
+        def video_image_preview_attribute_name
+          'video_image_preview'
         end
 
         def video_width_attribute_name
