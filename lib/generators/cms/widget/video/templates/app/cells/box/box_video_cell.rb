@@ -6,31 +6,27 @@ class Box::BoxVideoCell < BoxCell
     ]
   end
 
-  def video(box)
-    video = box.video
-    return if video.blank?
-
-    if video.provider.present?
-      case video.provider
-      when 'YouTube'
-        render(view: 'video_youtube', locals: { width: box.width, height: box.height, src: video_url(box) })
-      when 'Vimeo'
-        render(view: 'video_vimeo', locals: { width: box.width, height: box.height, src: video_url(box) })
-      else        
-        render(view: 'video_generic', locals: { video: box })
-      end
-    end
+  def show(page, box)
+    @id = "video_#{box.id}"
+    super
   end
 
-  private
+  def video(box)
+    return if !box.video_provider?
 
-  def video_url(box)
-    value = if box.video_autoplay?
-      '1'
-    else
-      '0'
+    case box.video_provider
+    when 'YouTube'
+      render(view: 'video_youtube', locals: { width: box.video_width, height: box.video_height, src: box.video_url })
+    when 'Vimeo'
+      render(view: 'video_vimeo', locals: { width: box.video_width, height: box.video_height, src: box.video_url })
+    when 'generic'        
+      autoplay = if box.video_autoplay?
+        'true'
+      else
+        'false'
+      end
+
+      render(view: 'video_generic', locals: { width: box.video_width, height: box.video_height, src: box.video_url, mime_type: box.video_mime_type, autoplay: autoplay })
     end
-
-    box.video.embed_url << "?autoplay=#{value}"
   end
 end

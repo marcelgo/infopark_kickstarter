@@ -9,18 +9,16 @@ module Cms
         ratio(video_width)
       end
 
-      def height
-        video_height
-      end
-
       private
 
       def ratio(width)
-        if video.width.present? && video.height.present?
-          width * video.height / video.width
-        else
-          width / 3 * 2
+        if video.present?
+          if video.width.present? && video.height.present?
+            return width * video.height / video.width
+          end
         end
+
+        width / 3 * 2
       end
     end
   end
