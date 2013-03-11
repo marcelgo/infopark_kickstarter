@@ -7,4 +7,4 @@
       .date
         = @entry.publish_date
       .author
-        = mail_to @entry.author_email, @entry.author_name
+        = mail_to author_email(@entry), author_name(@entry)

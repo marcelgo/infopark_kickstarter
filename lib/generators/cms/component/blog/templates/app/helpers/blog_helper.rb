@@ -13,12 +13,6 @@ module BlogHelper
     (links * ' | ').html_safe
   end
 
-  def author_image_path_for_entry(entry)
-    user_id = entry.author_id
-    @user_image_service ||= ::UserImageService.new
-    @user_image_service.image_path(user_id)
-  end
-
   def rss_feed_path
     feed_path('rss')
   end
@@ -39,5 +33,26 @@ module BlogHelper
     obj = obj.parent while !obj.class.eql?(Blog)
 
     obj
+  end
+
+  def author_image_path_for_entry(entry)
+    user_id = entry.author_id
+    @user_image_service ||= ::UserImageService.new
+    @user_image_service.image_path(user_id)
+  end
+
+  def author_name(entry)
+    if entry.author.present?
+      [
+        entry.author.first_name,
+        entry.author.last_name
+      ].compact.join(' ')
+    else
+      ''
+    end
+  end
+
+  def author_email(entry)
+    entry.author.try(:email)
   end
 end

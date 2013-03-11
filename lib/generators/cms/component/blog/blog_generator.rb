@@ -17,7 +17,8 @@ module Cms
               [
                 blog_disqus_shortname_attribute_name,
                 '--type=string',
-                '--title=Disqus Shortname'
+                '--title=Disqus Shortname',
+                '--method_name=disqus_shortname'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -31,7 +32,8 @@ module Cms
               [
                 blog_enable_disqus_comments_attribute_name,
                 '--type=boolean',
-                '--title=Enable Disqus Comments?'
+                '--title=Enable Disqus Comments?',
+                '--method_name=enable_disqus_comments'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -45,7 +47,8 @@ module Cms
               [
                 blog_enable_facebook_button_attribute_name,
                 '--type=boolean',
-                '--title=Enable Facebook Like Button?'
+                '--title=Enable Facebook Like Button?',
+                '--method_name=enable_facebook_button'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -59,7 +62,8 @@ module Cms
               [
                 blog_enable_twitter_button_attribute_name,
                 '--type=boolean',
-                '--title=Enable Twitter Button?'
+                '--title=Enable Twitter Button?',
+                '--method_name=enable_twitter_button'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -72,8 +76,9 @@ module Cms
               'cms:attribute',
               [
                 blog_entry_truncation_attribute_name,
-                '--type=string',
-                '--title=Number of characters in preview'
+                '--type=integer',
+                '--title=Number of characters in preview',
+                '--method_name=entry_truncation'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -87,7 +92,8 @@ module Cms
               [
                 blog_entry_tags_attribute_name,
                 '--type=string',
-                '--title=Tags'
+                '--title=Tags',
+                '--method_name=tags'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -101,7 +107,8 @@ module Cms
               [
                 blog_entry_author_id_attribute_name,
                 '--type=string',
-                '--title=Author ID'
+                '--title=Author ID',
+                '--method_name=author_id'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -115,50 +122,8 @@ module Cms
               [
                 blog_entry_publication_date_attribute_name,
                 '--type=string',
-                '--title=Date'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_enable_disqus_comments_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_enable_disqus_comments_attribute_name,
-                '--type=boolean',
-                '--title=Enable Disqus Comments?'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_enable_facebook_button_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_enable_facebook_button_attribute_name,
-
-                '--type=boolean',
-                '--title=Enable Facebook Like Button?'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_enable_twitter_button_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_enable_twitter_button_attribute_name,
-                '--type=boolean',
-                '--title=Enable Twitter Button?'
+                '--title=Date',
+                '--method_name=publish_date'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -192,9 +157,9 @@ module Cms
                 "--attributes=#{blog_entry_tags_attribute_name}",
                 blog_entry_author_id_attribute_name,
                 blog_entry_publication_date_attribute_name,
-                blog_entry_enable_twitter_button_attribute_name,
-                blog_entry_enable_facebook_button_attribute_name,
-                blog_entry_enable_disqus_comments_attribute_name,
+                blog_enable_twitter_button_attribute_name,
+                blog_enable_facebook_button_attribute_name,
+                blog_enable_disqus_comments_attribute_name,
                 '--title=Blog: Entry'
               ]
             )
@@ -262,18 +227,6 @@ module Cms
 
         def blog_entry_publication_date_attribute_name
           'blog_entry_publication_date'
-        end
-
-        def blog_entry_enable_disqus_comments_attribute_name
-          'blog_entry_enable_disqus_comments'
-        end
-
-        def blog_entry_enable_facebook_button_attribute_name
-          'blog_entry_enable_facebook_button'
-        end
-
-        def blog_entry_enable_twitter_button_attribute_name
-          'blog_entry_enable_twitter_button'
         end
 
         def blog_class_name

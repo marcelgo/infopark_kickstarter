@@ -31,28 +31,4 @@ class Blog < Obj
       filtered
     end
   end
-
-  def enable_twitter_button?
-    self.blog_enable_twitter_button?
-  end
-
-  def enable_facebook_button?
-    self.blog_enable_facebook_button?
-  end
-
-  def disqus_shortname
-    self.blog_disqus_shortname
-  end
-
-  def enable_disqus_comments?
-    self.blog_enable_disqus_comments?
-  end
-
-  def entry_truncation
-    if self.blog_entry_truncation.to_i <= 0
-      @entry_truncation = 500
-    end
-
-    @entry_truncation ||= self.blog_entry_truncation.to_i
-  end
 end

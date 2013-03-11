@@ -20,8 +20,8 @@ class CreateBlogExample < ::RailsConnector::Migration
       "<%= blog_entry_tags_attribute_name %>" => 'Fun Lorem',
       "<%= blog_entry_author_id_attribute_name %>" => "",
       "<%= blog_entry_publication_date_attribute_name %>" => Time.now.strftime("%d.%m.%Y"),
-      "<%= blog_entry_enable_facebook_button_attribute_name %>" => 'Yes',
-      "<%= blog_entry_enable_twitter_button_attribute_name %>" => 'Yes'
+      "<%= blog_enable_facebook_button_attribute_name %>" => 'Yes',
+      "<%= blog_enable_twitter_button_attribute_name %>" => 'Yes'
     )
 
     create_obj(
@@ -69,6 +69,16 @@ class CreateBlogExample < ::RailsConnector::Migration
       netus et malesuada fames ac turpis egestas. Aliquam in felis quis neque aliquet rutrum.
       Morbi interdum aliquet sollicitudin. Curabitur eget erat vitae risus aliquam ultricies ac
       ut leo. Praesent eget lectus lorem, eu luctus velit. Proin rhoncus consequat consectetur.',
+      sort_key: '2'
+    )
+
+    create_obj(
+      _path: "#{path}/entry-2/_boxes/image-1",
+      _obj_class: 'BoxImage',
+      title: 'BoxImage',
+      caption: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+      source: [{ url: 'http://lorempixel.com/660/370/sports' }],
+      sort_key: '1'
     )
   end
 end
