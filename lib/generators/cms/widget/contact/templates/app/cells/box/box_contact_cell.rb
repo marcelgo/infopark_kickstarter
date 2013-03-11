@@ -6,13 +6,8 @@ class Box::BoxContactCell < BoxCell
     ]
   end
 
-  def image(source, link_to)
-    return if source.blank?
-
-    if link_to.present?
-      render(view: 'image_with_link', locals: { source: source, link_to: link_to })
-    else
-      render(view: 'image_without_link', locals: { source: source })
-    end
+  def show(page, box)
+    @contact = box.contact
+    super
   end
 end

@@ -1,10 +1,18 @@
 .box.box_image.well
   = render(state: :edit_marker)
 
-  = render({state: 'image'}, @box.source, @box.link_to)
-
   %h3
-    = display_field(@box, :title)
+    = @contact.first_name << " " << @contact.last_name
 
-  %p.caption
-    = display_field(@box, :caption)
+  %p.company
+    %strong
+      = @contact.org_name_address
+    %br
+    = @contact.street_address
+    %br
+    = @contact.postalcode << " " << @contact.locality
+
+  %p.contact
+    = @contact.phone
+    %br
+    = mail_to(@contact.email)

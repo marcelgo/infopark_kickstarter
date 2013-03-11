@@ -15,6 +15,6 @@ class CreateContactWidgetExample < ::RailsConnector::Migrations::Migration
   private
 
   def box_path
-    "<%= cms_path %>/box-image-example"
+    "<%= cms_path %>/box-contact-example"
   end
 end
