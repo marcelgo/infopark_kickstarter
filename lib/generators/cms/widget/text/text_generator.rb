@@ -3,6 +3,7 @@ module Cms
     module Widget
       class TextGenerator < ::Rails::Generators::Base
         include Migration
+        include Actions
 
         class_option :cms_path,
           type: :string,
@@ -23,11 +24,7 @@ module Cms
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Text', "--attributes=#{sort_key_attribute_name}"])
 
-            gsub_file(
-              'app/models/box_text.rb',
-              'include Page',
-              'include Box'
-            )
+            turn_model_into_box('box_text.rb')
           rescue Cms::Generators::DuplicateResourceError
           end
 

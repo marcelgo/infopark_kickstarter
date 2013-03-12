@@ -1,9 +1,12 @@
+# This class represents the Ruby on Rails model equivialent to a CMS object class.
 class Homepage < Obj
+  # Includes behavior common to all CMS pages.
+  include Page
+
   include Cms::Attributes::ErrorNotFoundPageLink
   include Cms::Attributes::SearchPageLink
   include Cms::Attributes::LoginPageLink
   include Cms::Attributes::Locale
-  include Page
 
   # TODO edit mapping from hostnames to homepages
   def self.for_hostname(hostname)

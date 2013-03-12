@@ -4,6 +4,7 @@ module Cms
       class ImageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
+        include Actions
 
         class_option :cms_path,
           type: :string,
@@ -42,11 +43,7 @@ module Cms
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Image', "--attributes=#{source_attribute_name}", caption_attribute_name, link_to_attribute_name, sort_key_attribute_name])
 
-            gsub_file(
-              'app/models/box_image.rb',
-              'include Page',
-              'include Box'
-            )
+            turn_model_into_box('box_image.rb')
           rescue DuplicateResourceError
           end
 
