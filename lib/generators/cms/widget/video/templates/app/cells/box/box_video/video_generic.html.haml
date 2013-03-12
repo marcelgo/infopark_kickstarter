@@ -1,2 +1,3 @@
-%video{id: "#{@id}", class: 'projekktor', poster: preview, width: width, height: height, controls: 'controls', data: { autoplay: autoplay }}
-  %source{src: src, type: mime_type}
+%video.projekktor{id: @id, poster: preview, width: width, height: height, data: { autoplay: autoplay }}
+  / %source{src: cms_path(src), type: mime_type}
+  %source{src: cms_path(src)}

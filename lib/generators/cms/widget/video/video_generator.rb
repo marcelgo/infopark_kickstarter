@@ -32,11 +32,11 @@ module Cms
           data << '//= require projekktor'
           data << ''
           data << '$(document).ready(function() {'
-          data << '  $(".projekktor").each(function(event) {'
-          data << '    projekktor("#"+$(this).attr("id"), {'
-          data << '      playerFlashMP4: "/assets/jarisplayer.swf",'
-          data << '      playerFlashMP3: "/assets/jarisplayer.swf",'
-          data << '      autoplay: $(this).data("autoplay")'
+          data << "  $('.projekktor').each(function(event) {"
+          data << "    projekktor('#' + $(this).attr('id'), {"
+          data << "      playerFlashMP4: '/assets/jarisplayer.swf',"
+          data << "      playerFlashMP3: '/assets/jarisplayer.swf',"
+          data << "      autoplay: $(this).data('autoplay')"
           data << '    });'
           data << '  });'
           data << '});'
@@ -74,25 +74,25 @@ module Cms
 
           begin
             validate_attribute(video_preview_image_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_preview_image_attribute_name, '--type=linklist', '--title=Video: Image-Preview', '--max-size=1'])
+            Rails::Generators.invoke('cms:attribute', [video_preview_image_attribute_name, '--type=linklist', '--title=Banner Image', '--max-size=1'])
           rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(video_width_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_width_attribute_name, '--type=string', '--title=Width (optional)'])
+            Rails::Generators.invoke('cms:attribute', [video_width_attribute_name, '--type=string', '--title=Width'])
           rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(video_height_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_height_attribute_name, '--type=string', '--title=Height (optional)'])
+            Rails::Generators.invoke('cms:attribute', [video_height_attribute_name, '--type=string', '--title=Height'])
           rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(video_autoplay_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_autoplay_attribute_name, '--type=enum', '--title=Autoplay this video?', '--values=Yes', 'No'])
+            Rails::Generators.invoke('cms:attribute', [video_autoplay_attribute_name, '--type=boolean', '--title=Autoplay this video?'])
           rescue DuplicateResourceError
           end
 
@@ -100,10 +100,6 @@ module Cms
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Video', "--attributes=#{video_link_attribute_name}", video_preview_image_attribute_name, video_width_attribute_name, video_height_attribute_name, video_autoplay_attribute_name, sort_key_attribute_name])
           rescue DuplicateResourceError
-          end
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 
@@ -114,6 +110,12 @@ module Cms
         def add_example
           if example?
             migration_template('example_migration.rb', 'cms/migrate/create_video_widget_example.rb')
+          end
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 
