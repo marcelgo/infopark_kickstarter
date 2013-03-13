@@ -20,6 +20,16 @@ module Cms
           'include Box'
         )
       end
+
+      def turn_model_into_resource(class_name)
+        file_name = "#{class_name.underscore}.rb"
+
+        gsub_file(
+          "app/models/#{file_name}",
+          '# include Resource',
+          'include Resource'
+        )
+      end
     end
   end
 end

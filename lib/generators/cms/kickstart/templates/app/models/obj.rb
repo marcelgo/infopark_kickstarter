@@ -1,3 +1,5 @@
+# This class represents the base class of all CMS objects and implements behavior that all CMS
+# objects, regardless whether they are pages, boxes or resources have in common.
 class Obj < ::RailsConnector::BasicObj
   include Cms::Attributes::SortKey
   include Cms::Attributes::ShowInNavigation

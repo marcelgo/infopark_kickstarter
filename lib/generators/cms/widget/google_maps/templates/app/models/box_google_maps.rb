@@ -1,9 +1,8 @@
 class BoxGoogleMaps < Obj
-  # Includes behavior common to all CMS widgets.
-  include Box
-
   include Cms::Attributes::GoogleMapsMapType
   include Cms::Attributes::GoogleMapsAddress
+
+  include Box
 
   attr_accessor :dom_identifier
 

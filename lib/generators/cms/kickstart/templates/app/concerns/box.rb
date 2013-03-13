@@ -1,5 +1,8 @@
-# This concern provides behavior that all CMS widgets have in common.
+# This concern provides behavior that all CMS boxes have in common. It is
+# similar to +Page+ and +Resource+, as it allows to add behavior by composition
+# instead of inheritance.
 module Box
+  # Determines the page where the box is embedded.
   def page
     if parent
       parent.page

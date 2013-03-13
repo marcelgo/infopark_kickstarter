@@ -43,12 +43,8 @@ module Cms
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Image', "--attributes=#{source_attribute_name}", caption_attribute_name, link_to_attribute_name, sort_key_attribute_name])
 
-            turn_model_into_box('box_image.rb')
+            turn_model_into_box(obj_class_name)
           rescue DuplicateResourceError
-          end
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 
@@ -59,6 +55,12 @@ module Cms
         def add_example
           if example?
             migration_template('example_migration.rb', 'cms/migrate/create_image_widget_example.rb')
+          end
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 

@@ -123,16 +123,20 @@ module Cms
 
       def create_structure_migration_file
         begin
-          validate_obj_class('Image')
+          class_name = 'Image'
+          validate_obj_class(class_name)
 
-          Rails::Generators.invoke('cms:model', ['Image', '--type=generic', '--title=Image'])
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
+          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
         begin
-          validate_obj_class('Video')
+          class_name = 'Video'
+          validate_obj_class(class_name)
 
-          Rails::Generators.invoke('cms:model', ['Video', '--type=generic', '--title=Video'])
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
+          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 

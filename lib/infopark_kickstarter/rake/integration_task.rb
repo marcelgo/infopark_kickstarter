@@ -48,7 +48,6 @@ module InfoparkKickstarter
 
       def call_generators
         Bundler.with_clean_env do
-          sh "cd #{app_path} && bundle exec rails generate cms:model news"
           sh "cd #{app_path} && bundle exec rails generate cms:component:airbrake"
           sh "cd #{app_path} && bundle exec rails generate cms:component:newrelic \"Test Website\""
           sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
