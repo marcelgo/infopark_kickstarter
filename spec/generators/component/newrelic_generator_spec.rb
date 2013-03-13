@@ -31,6 +31,7 @@ describe Cms::Generators::Component::NewrelicGenerator do
         file 'custom_cloud.yml' do
           contains 'newrelic:'
           contains "  api_key: ''"
+          contains "  deploy_key: ''"
         end
       end
     }
