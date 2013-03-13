@@ -1,6 +1,7 @@
 class BoxGoogleMaps < Obj
   include Cms::Attributes::GoogleMapsMapType
   include Cms::Attributes::GoogleMapsAddress
+
   include Box
 
   attr_accessor :dom_identifier

@@ -20,6 +20,8 @@ describe Cms::Generators::ModelGenerator do
         directory 'models' do
           file 'news.rb' do
             contains 'class News < Obj'
+            contains '# include Page'
+            contains '# include Box'
           end
         end
       end
