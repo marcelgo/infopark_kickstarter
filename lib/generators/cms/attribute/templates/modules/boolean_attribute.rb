@@ -4,7 +4,7 @@ module Cms
     # Cms::Attributes::<%= class_name %>+ in all CMS models that use this attribute.
     module <%= class_name %>
       def <%= method_name %>
-        self[:<%= file_name %>].to_s
+        (self[:<%= file_name %>] || '<%= preset_value %>').to_s
       end
 
       def <%= method_name %>?

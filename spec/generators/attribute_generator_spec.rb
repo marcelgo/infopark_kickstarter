@@ -33,7 +33,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module News'
                 contains 'def news'
-                contains "self[:news].to_s"
+                contains "(self[:news] || '').to_s"
               end
             end
           end
@@ -210,7 +210,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module BodyMd'
                 contains 'def body_md'
-                contains "self[:body_md].to_s.html_safe"
+                contains "(self[:body_md] || '').to_s.html_safe"
               end
             end
           end
@@ -271,7 +271,7 @@ describe Cms::Generators::AttributeGenerator do
     run_generator
   end
 
-  it 'generates float attribute migration' do
+  it 'generates integer attribute migration' do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
@@ -311,7 +311,7 @@ describe Cms::Generators::AttributeGenerator do
     run_generator
   end
 
-  it 'generates float attribute migration' do
+  it 'generates attribute migration and sets method name' do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
@@ -330,7 +330,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module Foo'
                 contains 'def bar'
-                contains "self[:foo].to_s"
+                contains "(self[:foo] || '').to_s"
               end
             end
           end
