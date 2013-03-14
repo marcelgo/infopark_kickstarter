@@ -9,6 +9,8 @@ class Box::BoxVideoCell < BoxCell
   end
 
   def video(box)
+    return if box.first_video_link.blank?
+
     @id = "video_#{box.id}"
     view = "video_#{box.video_provider.downcase}"
 
@@ -20,7 +22,7 @@ class Box::BoxVideoCell < BoxCell
 
     if box.video_provider == 'generic'
       locals.merge!({
-        # mime_type: box.video_mime_type,
+        mime_type: box.video_mime_type,
         autoplay: box.video_autoplay?.to_s,
         preview: box.first_video_preview_image,
       })
@@ -36,7 +38,7 @@ class Box::BoxVideoCell < BoxCell
 
     url = case box.video_provider
     when 'YouTube', 'Vimeo'
-      value = video_autoplay? ? '1' : '0'
+      value = box.video_autoplay? ? '1' : '0'
       video.embed_url << "?autoplay=#{value}"
     when 'generic'
       box.video_link.first

@@ -12,9 +12,11 @@ class BoxVideo < Obj
     @video ||= VideoInfo.get(first_video_link.url)
   end
 
-  # def video_mime_type
-  #   first_video_link.destination_object.mime_type
-  # end
+  def video_mime_type
+    if first_video_link.internal?      
+      first_video_link.destination_object.mime_type
+    end
+  end
 
   def video_provider
     if first_video_link.present? && video.present?
@@ -22,5 +24,9 @@ class BoxVideo < Obj
     else
       'generic'
     end
+  end
+
+  def first_video_link
+    video_link.first
   end
 end
