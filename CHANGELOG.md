@@ -1,5 +1,6 @@
 # v1.0.0
-  * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
+    get the latest version.
   * Added video obj class to the kickstart generator. This allows to upload and handle videos in a
     dedicated obj class.
   * Cleaned up and extended the composition pattern used to add common behavior to object classes.
@@ -17,8 +18,11 @@
   * Added attribute generator option to preset the attribute value. The default depends on the type
     of the attribute. For example, to create an integer attribute that has `10` configured as a
     default, you call `rails generate cms:attribute my_attribute --type=integer --preset_value=10`.
-  * Added attribute generator option to set the name of getter method. (Thanks @cocodercoder)
-  * Added support for integer and float attribute types.
+  * Added attribute generator option to set the name of getter method. For Example:
+    `rails generate cms:attribute my_attribute --type=integer --method_name=foo`. (Thanks @cocodercoder)
+  * Added support for integer and float attribute types. For example:
+    `rails generate cms:attribute count --type=integer` or
+    `rails generate cms:attribute latitude --type=float`.
   * Newrelic generator now sets up developer mode. (Thanks @Kieran Hayes)
   * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
     does not depend on the kickstart generator anymore.
@@ -37,7 +41,8 @@
   * Profile Page Component: Added option to skip the import of country translations.
   * Bugfix: ```application``` javascript manifest needs to be loaded before
     ```rails_connector_after_content_tags```. (Thanks @apepper)
-  * Added support for markdown attribute type.
+  * Added support for markdown attribute type. For example:
+    `rails generate cms:attribute body_md --type=markdown`. (Thanks @thomasritz)
 
 # v0.0.5
   * Renamed ```error_404``` to ```error_not_found```.
