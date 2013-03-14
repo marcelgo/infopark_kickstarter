@@ -10,9 +10,13 @@
   * Bugfix: The CMS webservice returns `RestClient::PreconditionFailed` not
     `RestClient::InternalServerError` when asked for the Github users when there
     is no Github repository configured. (Thanks @awendt)
+  * Added model generator option to set mandatory attributes. For example:
+    `rails generate cms:model Foo --attributes=foo bar baz --mandatory_attributes=bar baz`.
+  * Added model generator option to preset attributes. For example:
+    `rails generate cms:model Foo --attributes=foo bar baz --preset_attributes=foo:f bar:b`.
   * Added attribute generator option to preset the attribute value. The default depends on the type
     of the attribute. For example, to create an integer attribute that has `10` configured as a
-    default, you call `rails generate attribute my_attribute --type=integer --preset_value=10`.
+    default, you call `rails generate cms:attribute my_attribute --type=integer --preset_value=10`.
   * Added attribute generator option to set the name of getter method. (Thanks @cocodercoder)
   * Added support for integer and float attribute types.
   * Newrelic generator now sets up developer mode. (Thanks @Kieran Hayes)
