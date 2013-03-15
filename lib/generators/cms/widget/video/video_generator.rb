@@ -98,7 +98,7 @@ module Cms
 
           begin
             validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Video', "--attributes=#{video_link_attribute_name}", video_preview_image_attribute_name, video_width_attribute_name, video_height_attribute_name, video_autoplay_attribute_name, sort_key_attribute_name])
+            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Video', "--attributes=#{video_link_attribute_name}", video_preview_image_attribute_name, video_width_attribute_name, video_height_attribute_name, video_autoplay_attribute_name, sort_key_attribute_name, "--preset_attributes=#{video_autoplay_attribute_name}:No"])
           rescue DuplicateResourceError
           end
         end
