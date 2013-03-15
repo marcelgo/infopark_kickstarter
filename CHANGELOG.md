@@ -34,6 +34,10 @@
   * Airbrake component now includes secure option by default and does not depend on the kickstart
     generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
     error notifications on deployment.
+  * Airbrake component is now available as the default provider for the error tracking component.
+    This allows to support different error tracking solutions in the future. Run
+    `rails generate cms:component:error_tracking --help` to get an overview. You can still call the
+    Airbrake generator directly by running `rails generate cms:component:error_tracking:airbrake`.
   * Updated contribution section in the README, which should make it easier for developers to setup
     and add features to the project.
   * Updated Infopark gems and required ```bundler >= 1.3.1``` to also work with newer

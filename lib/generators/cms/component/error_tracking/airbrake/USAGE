@@ -2,8 +2,8 @@ Description:
     Integrates the error notification service "Airbrake".
 
 Example:
-    `rails generate cms:component:airbrake`
-    `rails generate cms:component:airbrake --skip_deployment_notification`
+    `rails generate cms:component:error_tracking:airbrake`
+    `rails generate cms:component:error_tracking:airbrake --skip_deployment_notification`
 
     Gems: airbrake
     Configuration: extends config/custom_cloud.yml
