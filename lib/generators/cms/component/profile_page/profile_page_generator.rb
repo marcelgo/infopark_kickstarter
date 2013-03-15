@@ -4,6 +4,7 @@ module Cms
       class ProfilePageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
+        include Actions
 
         class_option :homepage_path,
           :type => :string,
@@ -97,6 +98,8 @@ module Cms
             validate_obj_class(class_name)
 
             Rails::Generators.invoke('cms:model', [class_name, "--attributes=#{show_in_navigation_attribute_name}", '--title=Page: Profile'])
+
+            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 

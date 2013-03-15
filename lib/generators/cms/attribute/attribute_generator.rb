@@ -37,6 +37,11 @@ module Cms
         default: nil,
         desc: 'Method name to access the CMS attribute. Defaults to the name of the attribute.'
 
+      class_option :preset_value,
+        type: :string,
+        default: nil,
+        desc: 'Sets the default value for the CMS attribute. The default is type dependent.'
+
       def create_migration_file
         validate_attribute(file_name)
 
@@ -72,6 +77,25 @@ module Cms
 
       def method_name
         options[:method_name] || file_name
+      end
+
+      def preset_value
+        options[:preset_value] || case type
+          when 'string', 'enum', 'html', 'markdown', 'text'
+            ''
+          when 'boolean'
+            'Yes'
+          when 'multienum'
+            '[]'
+          when 'linklist'
+            'RailsConnector::LinkList.new(nil)'
+          when 'integer'
+            '0'
+          when 'float'
+            '0.0'
+          else
+            'nil'
+        end
       end
     end
   end

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/airbrake/airbrake_generator'
+require 'generators/cms/component/error_tracking/airbrake/airbrake_generator'
 
-describe Cms::Generators::Component::AirbrakeGenerator do
+describe Cms::Generators::Component::ErrorTracking::AirbrakeGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)
