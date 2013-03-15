@@ -49,6 +49,7 @@ describe Cms::Generators::Component::NewrelicGenerator do
 
         file 'after_restart.rb' do
           contains "newrelic_app_name = 'Test Website'"
+          contains "newrelic_deploy_key = node['custom_cloud']['newrelic']['deploy_key']"
         end
       end
     }
