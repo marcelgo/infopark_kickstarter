@@ -1,18 +1,8 @@
 class Box::BoxVideoCell < BoxCell
   helper :cms
 
-  cache(:show, if: proc {|cell, page, box| cell.session[:live_environment]}) do |cell, page, box|
-    [
-      RailsConnector::Workspace.current.revision_id,
-      box.id,
-    ]
-  end
-
   def video(box)
     return if box.first_video_link.blank?
-
-    @id = "video_#{box.id}"
-    view = "video_#{box.video_provider.downcase}"
 
     locals = {
       width: box.video_width,
@@ -22,12 +12,14 @@ class Box::BoxVideoCell < BoxCell
 
     if box.video_provider == 'generic'
       locals.merge!({
+        id: box.id,
         mime_type: box.video_mime_type,
         autoplay: box.video_autoplay?.to_s,
         preview: box.first_video_preview_image,
       })
     end
 
+    view = "video_#{box.video_provider.downcase}"
     render(view: view, locals: locals)
   end
 
@@ -36,7 +28,7 @@ class Box::BoxVideoCell < BoxCell
   def video_url(box)
     video = box.video
 
-    url = case box.video_provider
+    case box.video_provider
     when 'YouTube', 'Vimeo'
       value = box.video_autoplay? ? '1' : '0'
       video.embed_url << "?autoplay=#{value}"
