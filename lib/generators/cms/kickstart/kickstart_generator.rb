@@ -5,6 +5,7 @@ module Cms
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
       include BasePaths
+      include Actions
 
       source_root File.expand_path('../templates', __FILE__)
       class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
@@ -122,16 +123,20 @@ module Cms
 
       def create_structure_migration_file
         begin
-          validate_obj_class('Image')
+          class_name = 'Image'
+          validate_obj_class(class_name)
 
-          Rails::Generators.invoke('cms:model', ['Image', '--type=generic', '--title=Image'])
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
+          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
         begin
-          validate_obj_class('Video')
+          class_name = 'Video'
+          validate_obj_class(class_name)
 
-          Rails::Generators.invoke('cms:model', ['Video', '--type=generic', '--title=Video'])
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
+          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -147,16 +152,23 @@ module Cms
         Rails::Generators.invoke('cms:model', ['Container', '--title=Container', '--attributes=show_in_navigation'])
 
         Rails::Generators.invoke('cms:attribute', ['sort_key', '--type=string', '--title=Sort Key'])
+
         Rails::Generators.invoke('cms:scaffold', ['ContentPage', '--title=Page: Content', '--attributes=show_in_navigation', 'sort_key'])
-        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
+        turn_model_into_page('ContentPage')
+
         Rails::Generators.invoke('cms:scaffold', ['SearchPage', '--title=Page: Search', '--attributes=show_in_navigation'])
+        turn_model_into_page('SearchPage')
+
+        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
 
         Rails::Generators.invoke('cms:attribute', ['redirect_after_login_link', '--type=linklist', '--title=Login Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:attribute', ['redirect_after_logout_link', '--type=linklist', '--title=Logout Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:scaffold', ['LoginPage', '--title=Page: Login', '--attributes=show_in_navigation', 'redirect_after_login_link', 'redirect_after_logout_link'])
+        turn_model_into_page('LoginPage')
 
         Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
         Rails::Generators.invoke('cms:model', ['Redirect', '--title=Redirect', '--attributes=sort_key', 'redirect_link', 'show_in_navigation'])
+        turn_model_into_page('Redirect')
 
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
 

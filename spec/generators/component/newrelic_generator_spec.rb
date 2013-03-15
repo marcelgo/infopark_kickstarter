@@ -31,6 +31,7 @@ describe Cms::Generators::Component::NewrelicGenerator do
         file 'custom_cloud.yml' do
           contains 'newrelic:'
           contains "  api_key: ''"
+          contains "  deploy_key: ''"
         end
       end
     }
@@ -48,6 +49,7 @@ describe Cms::Generators::Component::NewrelicGenerator do
 
         file 'after_restart.rb' do
           contains "newrelic_app_name = 'Test Website'"
+          contains "newrelic_deploy_key = node['custom_cloud']['newrelic']['deploy_key']"
         end
       end
     }

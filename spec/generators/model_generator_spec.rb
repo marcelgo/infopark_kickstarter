@@ -7,7 +7,7 @@ describe Cms::Generators::ModelGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp', __FILE__)
-  arguments ['news']
+  arguments ['news', '--title=Test News Title', '--type=generic', '--attributes=foo', 'bar', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
 
   before do
     prepare_destination
@@ -20,6 +20,9 @@ describe Cms::Generators::ModelGenerator do
         directory 'models' do
           file 'news.rb' do
             contains 'class News < Obj'
+            contains '# include Page'
+            contains '# include Box'
+            contains '# include Resource'
           end
         end
       end
@@ -30,7 +33,14 @@ describe Cms::Generators::ModelGenerator do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_news'
+          migration 'create_news' do
+            contains "name: 'News'"
+            contains "title: 'Test News Title'"
+            contains "type: 'generic'"
+            contains 'attributes: ["foo", "bar"]'
+            contains 'mandatory_attributes: ["foo", "bar"]'
+            contains 'preset_attributes: {"foo"=>"f", "bar"=>"b"}'
+          end
         end
       end
     }

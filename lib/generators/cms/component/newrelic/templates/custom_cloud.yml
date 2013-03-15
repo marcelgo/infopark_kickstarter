@@ -1,3 +1,4 @@
 
 newrelic:
   api_key: ''
+  deploy_key: ''
