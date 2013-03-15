@@ -176,7 +176,7 @@ module Cms
       end
 
       def copy_app_directory
-        directory('app')
+        directory('app', force: true)
         directory('lib')
         directory('config')
         directory('spec')
