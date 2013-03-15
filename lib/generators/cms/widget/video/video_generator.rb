@@ -80,13 +80,13 @@ module Cms
 
           begin
             validate_attribute(video_width_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_width_attribute_name, '--type=string', '--title=Width'])
+            Rails::Generators.invoke('cms:attribute', [video_width_attribute_name, '--type=integer', '--title=Width', '--preset_value=660'])
           rescue DuplicateResourceError
           end
 
           begin
             validate_attribute(video_height_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_height_attribute_name, '--type=string', '--title=Height'])
+            Rails::Generators.invoke('cms:attribute', [video_height_attribute_name, '--type=integer', '--title=Height'])
           rescue DuplicateResourceError
           end
 
