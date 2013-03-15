@@ -33,7 +33,8 @@ module Cms
                 blog_enable_disqus_comments_attribute_name,
                 '--type=boolean',
                 '--title=Enable Disqus Comments?',
-                '--method_name=enable_disqus_comments'
+                '--method_name=enable_disqus_comments',
+                '--default=true'
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -178,8 +179,34 @@ module Cms
         end
 
         def update_routes
-          route('resources :blog, only: [:index, :show]')
-          route('resources :blog_entries, only: [:index, :show]')
+          data = []
+          data << 'resources :blog, only: [:index] do'
+          data << '    post :search'
+          data << '  end'
+          data = data.join("\n")
+
+          route(data)
+        end
+
+        def update_gemfile
+          gem('will_paginate')
+
+          Bundler.with_clean_env do
+            run('bundle --quiet')
+          end
+        end
+
+        def update_application_rb
+          file = 'config/application.rb'
+          insert_point = 'require "rails/test_unit/railtie"'
+
+          data = []
+          data << ''
+          data << 'require "will_paginate/array"'
+
+          data = data.join("\n")
+
+          insert_into_file(file, data, after: insert_point)
         end
 
         def update_application_js

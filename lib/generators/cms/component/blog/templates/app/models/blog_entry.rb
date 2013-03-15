@@ -2,8 +2,9 @@ class BlogEntry < Obj
   include Page
   include Cms::Attributes::BlogEntryTags
   include Cms::Attributes::BlogEntryAuthorId
-  include Cms::Attributes::BlogEntryPublicationDate
+  include Cms::Attributes::BlogDisqusShortname
   include Cms::Attributes::BlogEnableTwitterButton
+  include Cms::Attributes::BlogEntryPublicationDate
   include Cms::Attributes::BlogEnableDisqusComments
   include Cms::Attributes::BlogEnableFacebookButton
 

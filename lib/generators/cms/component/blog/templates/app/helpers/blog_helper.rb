@@ -29,6 +29,8 @@ module BlogHelper
   end
 
   def find_blog_obj
+    return @blog if @blog.present?
+
     obj = @obj
     obj = obj.parent while !obj.class.eql?(Blog)
 

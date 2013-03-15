@@ -9,6 +9,14 @@ class BlogCell < Cell::Rails
     render
   end
 
+  def search(blog, entries, search_word)
+    @blog = blog
+    @entries = entries
+    @search_word = search_word
+
+    render
+  end
+
   def sidebar(blog)
     @blog = blog
 

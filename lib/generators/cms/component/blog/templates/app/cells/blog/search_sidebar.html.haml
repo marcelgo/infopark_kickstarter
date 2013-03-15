@@ -4,6 +4,7 @@
       Suche
     %li
       .input-append
-        %input.span2{type: :text}
-        %button.btn{type: :submit}
-          Suche
+        =form_tag blog_search_path(blog_id: @blog) do
+          %input.span2{type: :text, name: 'search_word'}
+          %button.btn{type: :submit}
+            Suche
