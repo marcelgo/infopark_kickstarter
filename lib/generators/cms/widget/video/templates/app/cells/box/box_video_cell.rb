@@ -19,7 +19,7 @@ class Box::BoxVideoCell < BoxCell
       })
     end
 
-    view = "video_#{box.video_provider.downcase}"
+    view = box.video_provider.downcase
     render(view: view, locals: locals)
   end
 

@@ -109,7 +109,7 @@ module Cms
 
         def add_example
           if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_video_widget_example.rb')
+            migration_template('example_migration.rb', 'cms/migrate/create_box_video_example.rb')
           end
         end
 
