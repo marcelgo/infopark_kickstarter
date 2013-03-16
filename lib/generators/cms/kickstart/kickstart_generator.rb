@@ -127,7 +127,6 @@ module Cms
           validate_obj_class(class_name)
 
           Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
-          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -136,7 +135,6 @@ module Cms
           validate_obj_class(class_name)
 
           Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
-          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
