@@ -1,6 +1,8 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
     get the latest version.
+  * Added rake task to check the status of the Infopark Cloud-Express Platform. Run
+    `rake cms:status` to get current status information.
   * A new video box type was added. It allows to play videos from the CMS, vimeo and youtube. See
     more details running `rails generate cms:widget:video --help`.
   * Added video obj class to the kickstart generator. This allows to upload and handle videos in a
