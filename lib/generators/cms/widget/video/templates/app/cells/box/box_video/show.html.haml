@@ -5,4 +5,5 @@
     %h3
       = display_field(@box, :title)
 
-  = render({state: 'video'}, @box)
+  - if @box.video_link.present?
+    = render({state: 'video'}, @box)

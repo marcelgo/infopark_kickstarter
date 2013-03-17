@@ -10,12 +10,6 @@ module Cms
       def <%= method_name %>?
         <%= method_name %>.present?
       end
-
-      <%- if max_size == 1 -%>
-      def first_<%= method_name %>
-        <%= method_name %>.destination_objects.first
-      end
-      <%- end -%>
     end
   end
 end
