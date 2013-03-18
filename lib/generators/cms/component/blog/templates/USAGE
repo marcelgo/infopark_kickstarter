@@ -1,0 +1,18 @@
+Description:
+    Generates a blog
+
+Example:
+    `rails generate cms:component:blog`
+
+    CMS: obj_class Blog
+    CMS: obj_class BlogEntry
+    CMS: attribute title (string)
+    CMS: attribute blog_entry_tags (string)
+    CMS: attribute blog_entry_author_id (string)
+    CMS: attribute blog_disqus_shortname (string)
+    CMS: attribute blog_entry_truncation (integer)
+    CMS: attribute blog_entry_publication_date (string)
+    CMS: attribute blog_enable_twitter_button (boolean)
+    CMS: attribute blog_enable_disqus_comments (boolean)
+    CMS: attribute blog_enable_facebook_button (boolean)
+    Gems: "will_paginate"
