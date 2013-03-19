@@ -9,6 +9,7 @@ class BlogEntryCell < Cell::Rails
 
   def show(entry)
     @entry = entry
+    @blog = entry.blog
 
     render
   end

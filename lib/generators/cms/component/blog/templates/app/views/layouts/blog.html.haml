@@ -21,20 +21,16 @@
     = auto_discovery_link_tag(:atom, atom_feed_path)
     = auto_discovery_link_tag(:rss, rss_feed_path)
 
-  %body{body_attributes}
+  %body.blog{body_attributes}
     #fb-root
     = render_cell(:main_navigation, :show, @obj)
 
     .container
       .content
         .row
-          .span8
+          .span12
             = render_cell(:flash_messages, :show, flash)
-
             = yield
-
-          .span4
-            = render_cell(:blog, :sidebar, @blog)
 
     .container
       = render_cell(:footer, :show)

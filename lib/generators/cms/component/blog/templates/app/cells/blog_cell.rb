@@ -17,8 +17,9 @@ class BlogCell < Cell::Rails
     render
   end
 
-  def sidebar(blog)
+  def sidebar(blog, entry = nil)
     @blog = blog
+    @entry = entry
 
     render
   end
@@ -29,8 +30,10 @@ class BlogCell < Cell::Rails
     render
   end
 
-  def tag_sidebar(blog)
+  def tag_sidebar(blog, active_tags = [])
     @blog = blog
+    @tags = blog.tags
+    @active_tags = active_tags
 
     render
   end

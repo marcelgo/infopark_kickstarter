@@ -1,4 +1,9 @@
-- @entries.each do |entry|
-  = render_cell(:blog_entry, :preview, entry)
+.row-fluid
+  .span8
+    - @entries.each do |entry|
+      = render_cell(:blog_entry, :preview, entry)
 
-= will_paginate @entries, controller: :blog, action: :index
+    = will_paginate @entries, controller: :blog, action: :index
+
+  .span4.sidebar
+    = render_cell(:blog, :sidebar, @blog, @entry)

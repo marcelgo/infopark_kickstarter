@@ -2,6 +2,11 @@
   %ul.nav.nav-list
     %li.nav-header
       Tags
-    %li
-      - @blog.tags.each do |tag|
-        = link_to(tag, tag_path(@blog, tag))
+      %ul.tags
+        - @tags.each do |tag|
+          - if @active_tags.include?(tag)
+            %li.active
+              = link_to(tag, tag_path(@blog, tag))
+          - else
+            %li
+              = link_to(tag, tag_path(@blog, tag))

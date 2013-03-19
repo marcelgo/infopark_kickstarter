@@ -5,6 +5,4 @@
   .span12
     = render_cell(:blog_entry, :facebook, @entry)
     = render_cell(:blog_entry, :twitter, @entry)
-.row-fluid
-  .span12
-    = link_to 'read more >', cms_path(@entry), class: 'pull-right'
+    = link_to 'read more >', cms_path(@entry), class: 'pull-right btn'

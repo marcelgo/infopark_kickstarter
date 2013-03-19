@@ -14,8 +14,64 @@
  *= require_tree .
  */
 
-body {
+.blog {
   padding-top: 60px;
+
+  .text {
+    text-align: justify;
+    margin-top: 10px;
+  }
+
+  .author_image {
+    float: left;
+  }
+
+  .tags {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .meta {
+    float:left;
+
+    .author {
+      float: left;
+      clear: left;
+    }
+
+    .date {
+      float: left;
+    }
+  }
+
+  .twitter-share-button {
+    float: left;
+  }
+
+  .fb-like {
+    float: left;
+    margin-right: 10px;
+  }
+
+  .sidebar {
+    .search {
+      with: 120px !important;
+    }
+
+    ul.tags {
+      list-style: none;
+      padding-left: 0px;
+      margin-left: 0px;
+
+      li {
+        font-size: 13px;
+
+        &.active {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 
   .author_image {
     margin-bottom: 15px;
