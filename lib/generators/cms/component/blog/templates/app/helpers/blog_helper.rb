@@ -4,7 +4,7 @@ module BlogHelper
     "#{cms_path(blog)}?tag=#{tag}"
   end
 
-  def tag_link_list
+  def tag_link_list(entry)
     links = []
     @entry.tags.each do |tag|
       links << link_to(tag, tag_path(@entry.blog, tag))
