@@ -25,13 +25,10 @@ describe Cms::Generators::Widget::ContactGenerator do
   end
 
   def prepare_environments
-    javascripts_path = "#{destination_root}/app/assets/javascripts"
     stylesheets_path = "#{destination_root}/app/assets/stylesheets"
 
-    mkdir_p(javascripts_path)
     mkdir_p(stylesheets_path)
 
-    File.open("#{javascripts_path}/application.js", 'w') { |file| file.write("//= require infopark_rails_connector\n") }
     File.open("#{stylesheets_path}/application.css", 'w') { |file| file.write("*= require infopark_rails_connector\n") }
     File.open("#{destination_root}/Gemfile", 'w')
   end
