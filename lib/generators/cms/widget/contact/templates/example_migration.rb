@@ -1,7 +1,5 @@
 class CreateContactWidgetExample < ::RailsConnector::Migrations::Migration
   def up
-    homepage = Obj.find_by_path('<%= homepage_path %>')
-
     create_obj(
       _path: box_path,
       _obj_class: '<%= obj_class_name %>',

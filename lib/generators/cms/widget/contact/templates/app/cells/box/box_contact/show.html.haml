@@ -1,41 +1,5 @@
-.box.box_contact.well
+.box.box_contact.media.well
   = render(state: :edit_marker)
 
-  %div.row
-    - if @avatar.present?
-      %div.span1
-        = image_tag(@avatar)
-
-    %div.span6
-      - if @full_name.present?
-        %h3
-          = @full_name
-
-        - if @contact.job_title.present?
-          %p
-            = @contact.job_title
-
-        - if @contact.org_name_address.present?
-          %p
-            %strong
-              = @contact.org_name_address
-
-      %div.row
-        %div.span3
-          - if @contact.street_address.present? && @contact.postalcode.present? && @contact.locality.present?  
-            %p
-              = @contact.street_address
-              %br
-
-              = @contact.postalcode + " " + @contact.locality
-
-        %div.span3
-          %p
-            - if @contact.phone.present?
-              %i.icon-user
-              = @contact.phone
-              %br
-
-            - if @contact.email.present?
-              %i.icon-envelope
-              = mail_to(@contact.email)
+  - if @contact.present?
+    = render({state: :contact}, @contact)

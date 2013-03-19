@@ -3,7 +3,6 @@ module Cms
     module Widget
       class ContactGenerator < ::Rails::Generators::Base
         include Migration
-        include BasePaths
 
         class_option :cms_path,
           type: :string,
@@ -31,10 +30,6 @@ module Cms
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Contact', "--attributes=#{contact_id_attribute_name}", sort_key_attribute_name])
           rescue DuplicateResourceError
           end
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
-          end
         end
 
         def copy_app_directory
@@ -43,7 +38,13 @@ module Cms
 
         def add_example
           if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_contact_widget_example.rb')
+            migration_template('example_migration.rb', 'cms/migrate/create_box_contact_example.rb')
+          end
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 

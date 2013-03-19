@@ -25,12 +25,6 @@ describe Cms::Generators::Widget::ContactGenerator do
   end
 
   def prepare_environments
-    stylesheets_path = "#{destination_root}/app/assets/stylesheets"
-
-    mkdir_p(stylesheets_path)
-
-    File.open("#{stylesheets_path}/application.css", 'w') { |file| file.write("*= require infopark_rails_connector\n") }
-    File.open("#{destination_root}/Gemfile", 'w')
   end
 
   it 'creates app files' do
@@ -42,6 +36,7 @@ describe Cms::Generators::Widget::ContactGenerator do
 
             directory 'box_contact' do
               file 'show.html.haml'
+              file 'contact.html.haml'
             end
           end
         end
@@ -61,22 +56,6 @@ describe Cms::Generators::Widget::ContactGenerator do
               file 'contact_id.rb'
             end
           end
-        end
-
-        directory 'assets' do
-          directory 'stylesheets' do
-              file 'box_contact.css.scss'
-          end
-        end
-      end
-    }
-  end
-
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_contact_spec.rb'
         end
       end
     }

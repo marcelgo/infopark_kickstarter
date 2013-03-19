@@ -1,0 +1,34 @@
+- if @avatar.present?
+  = image_tag(@avatar, class: 'media-object pull-left')
+
+%div.media-body
+  - if @full_name.present?
+    %h3.media-heading
+      = @full_name
+
+  - if @contact.job_title.present?
+    %p
+      = @contact.job_title
+
+  %address
+    - if @contact.org_name_address.present?
+      %strong
+        = @contact.org_name_address
+      %br
+
+    - if @contact.street_address.present? && @contact.postalcode.present? && @contact.locality.present?
+      %p
+        = @contact.street_address
+        %br
+
+        = @contact.postalcode + ' ' + @contact.locality
+
+    - if @contact.phone.present?
+      %p
+        %i.icon-bell
+        = @contact.phone
+
+    - if @contact.email.present?
+      %p
+        %i.icon-envelope
+        = mail_to(@contact.email)
