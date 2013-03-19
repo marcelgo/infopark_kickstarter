@@ -23,6 +23,6 @@ class UserImageService
 
   def gravatar_url(email)
     hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}"
+    "http://www.gravatar.com/avatar/#{hash}?d=mm"
   end
 end
