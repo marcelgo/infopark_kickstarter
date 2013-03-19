@@ -183,6 +183,8 @@ module Cms
           data << 'resources :blog, only: [:index] do'
           data << '    post :search'
           data << '  end'
+          data << ''
+          data << "get ':id/blog_entry' , to: 'blog_entry#index', as: 'blog_entry'"
           data = data.join("\n")
 
           route(data)

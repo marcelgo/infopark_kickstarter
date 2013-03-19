@@ -5,7 +5,6 @@ atom_feed :language => 'en-US' do |feed|
   @entries.each do |item|
     feed.entry( item ) do |entry|
       entry.title item.title
-      entry.summary item.boxes.first.body, :type => 'html'
 
       # the strftime is needed to work with Google Reader.
       entry.updated(Time.now.strftime("%Y-%m-%dT%H:%M:%SZ"))
