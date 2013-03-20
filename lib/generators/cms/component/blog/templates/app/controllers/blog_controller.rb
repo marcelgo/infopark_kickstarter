@@ -1,9 +1,18 @@
+require 'will_paginate/array'
+
 class BlogController < CmsController
   layout 'blog'
 
+  before_filter :set_blog_object
+
   def index
-    @blog = blog
-    @entries = entries.paginate(page: params[:page])
+    entries = if params[:tag].present?
+      search_service.search_by_tag(params[:tag])
+    else
+      search_service.search_all
+    end
+
+    @entries = paginate_entries(entries)
 
     respond_to do |format|
       format.html { @entries }
@@ -12,34 +21,29 @@ class BlogController < CmsController
   end
 
   def search
-    @blog = blog
-    @search_word = params[:search_word]
-    search_service = BlogSearchService.new
+    @query = params[:query]
 
-    entries = search_service.search(@blog, params[:search_word])
-    @entries = entries.paginate(page: params[:page])
+    entries = search_service.search(@query)
+    @entries = paginate_entries(entries)
   end
 
   private
 
-  def blog
-    if @obj === Blog
-      blog ||= @obj
+  def set_blog_object
+    @blog = if @obj.is_a?(::Blog)
+      @obj
     else
       blog_id = params[:id] || params[:blog_id]
-      blog ||= Obj.find(blog_id)
-    end
 
-    blog
+      Obj.find(blog_id)
+    end
   end
 
-  def entries
-    if params[:tag].nil?
-      entries ||= blog.entries
-    else
-      entries ||= blog.entries_by_tag(params[:tag])
-    end
+  def paginate_entries(entries)
+    entries.paginate(page: params[:page], per_page: 30)
+  end
 
-    entries
+  def search_service
+    BlogSearchService.new(@blog)
   end
 end

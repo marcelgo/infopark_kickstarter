@@ -1,4 +1,5 @@
 class BlogEntryCell < Cell::Rails
+  helper :cms
   helper :blog
 
   def preview(entry)
@@ -52,23 +53,22 @@ class BlogEntryCell < Cell::Rails
     @box = entry.boxes.first
     @entry = entry
 
-    render view: preview_name_for_box(@box)
-
+    render_preview_box(@box.class.to_s)
   rescue ActionView::MissingTemplate
-    render view: 'box_previews/box_missing_preview'
+    render_preview_box('box_missing')
   end
 
   def comment(entry)
     @entry = entry
 
-    if @entry.enable_disqus_comments?
+    if @entry.enable_disqus_comments? && @entry.disqus_shortname.present?
       render
     end
   end
 
   private
 
-  def preview_name_for_box(box)
-    "box_previews/#{box.class.to_s.underscore}_preview"
+  def render_preview_box(name)
+    render(view: "previews/#{name.underscore}")
   end
 end

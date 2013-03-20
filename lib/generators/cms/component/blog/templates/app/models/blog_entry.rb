@@ -1,8 +1,8 @@
 class BlogEntry < Obj
   include Page
+
   include Cms::Attributes::BlogEntryTags
   include Cms::Attributes::BlogEntryAuthorId
-  include Cms::Attributes::BlogDisqusShortname
   include Cms::Attributes::BlogEnableTwitterButton
   include Cms::Attributes::BlogEntryPublicationDate
   include Cms::Attributes::BlogEnableDisqusComments
@@ -16,29 +16,39 @@ class BlogEntry < Obj
     parent.blog
   end
 
+  def disqus_shortname
+    blog.disqus_shortname
+  end
+
   def author
-    @author ||= Rails.application.config.user_manager.find_user(author_id)
+    @author ||= user_manager.find_user(author_id)
   rescue UserManager::UserNotFound
     nil
   end
 
-  # overriden methode of concerns/cms/attributes/blog_entry_tags.rb
+  # Overriden method from +Cms::Attributes::BlogEntryTags+.
   def tags
     super.split
   end
 
-  # overriden methode of concerns/cms/attributes/blog_enable_twitter_button.rb
+  # Overriden method from +Cms::Attributes::BlogEnableTwitterButton+.
   def enable_twitter_button?
     blog.enable_twitter_button? && super
   end
 
-  # overriden methode of concerns/cms/attributes/blog_enable_facebook_button.rb
+  # Overriden method from +Cms::Attributes::BlogEnableFacebookButton+.
   def enable_facebook_button?
     blog.enable_facebook_button? && super
   end
 
-  # overriden methode of concerns/cms/attributes/blog_enable_disqus_comments.rb
+  # Overriden method from +include Cms::Attributes::BlogEnableDisqusComments+.
   def enable_disqus_comments?
     blog.enable_disqus_comments? && super
+  end
+
+  private
+
+  def user_manager
+    @user_manager ||= Rails.application.config.user_manager
   end
 end

@@ -1,10 +1,12 @@
 .well.sidebar-nav
   %ul.nav.nav-list
     %li.nav-header
-      Suche
+      = t('blog.search.title')
+
     %li
       .input-append
-        =form_tag blog_search_path(blog_id: @blog) do
-          %input.span8{type: :text, name: 'search_word'}
+        = form_tag(blog_search_path(blog_id: @blog)) do
+          %input.span8{type: :text, name: 'query'}
+
           %button.btn{type: :submit}
-            Suche
+            %i.icon-search

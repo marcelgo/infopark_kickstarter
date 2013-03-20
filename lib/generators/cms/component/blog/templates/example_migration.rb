@@ -1,8 +1,4 @@
 class CreateBlogExample < ::RailsConnector::Migration
-  def path
-    '<%= homepage_path %>/blog'
-  end
-
   def up
     create_obj(
       _path: path,
@@ -24,14 +20,15 @@ class CreateBlogExample < ::RailsConnector::Migration
       "<%= blog_enable_twitter_button_attribute_name %>" => 'Yes'
     )
 
+    first_entry_path = "#{path}/entry-1"
+
     create_obj(
-      _path: "#{path}/entry-1/_boxes",
+      _path: "#{first_entry_path}/_boxes",
       _obj_class: 'Container',
     )
 
-
     create_obj(
-      _path: "#{path}/entry-1/_boxes/text-1",
+      _path: "#{first_entry_path}/_boxes/text-1",
       _obj_class: 'BoxText',
       body: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
       urna ut sapien auctor mattis. Donec quis cursus enim. Pellentesque sodales, elit nec
@@ -43,8 +40,10 @@ class CreateBlogExample < ::RailsConnector::Migration
       ut leo. Praesent eget lectus lorem, eu luctus velit. Proin rhoncus consequat consectetur.',
     )
 
+    second_entry_path = "#{path}/entry-2"
+
     create_obj(
-      _path: "#{path}/entry-2",
+      _path: "#{second_entry_path}",
       _obj_class: '<%= blog_entry_class_name %>',
       title: 'Curabitur eget erat vitae risus aliquam ultricies ac',
       "<%= blog_entry_tags_attribute_name %>" => 'General Lorem',
@@ -53,13 +52,12 @@ class CreateBlogExample < ::RailsConnector::Migration
     )
 
     create_obj(
-      _path: "#{path}/entry-2/_boxes",
+      _path: "#{second_entry_path}/_boxes",
       _obj_class: 'Container',
     )
 
-
     create_obj(
-      _path: "#{path}/entry-2/_boxes/text-1",
+      _path: "#{second_entry_path}/_boxes/text-1",
       _obj_class: 'BoxText',
       body: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
       urna ut sapien auctor mattis. Donec quis cursus enim. Pellentesque sodales, elit nec
@@ -73,12 +71,18 @@ class CreateBlogExample < ::RailsConnector::Migration
     )
 
     create_obj(
-      _path: "#{path}/entry-2/_boxes/image-1",
+      _path: "#{second_entry_path}/_boxes/image-1",
       _obj_class: 'BoxImage',
       title: 'BoxImage',
       caption: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
       source: [{ url: 'http://lorempixel.com/660/370/sports' }],
       sort_key: '1'
     )
+  end
+
+  private
+
+  def path
+    '<%= homepage_path %>/blog'
   end
 end

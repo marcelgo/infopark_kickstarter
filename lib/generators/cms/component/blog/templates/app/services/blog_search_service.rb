@@ -1,45 +1,44 @@
 class BlogSearchService
+  attr_reader :blog
 
-  DEFAULT_WORKSPACE = 'published'
+  def initialize(blog)
+    @blog = blog
+  end
 
-  def search(blog, word, workspace = DEFAULT_WORKSPACE)
-    results = []
+  def search_all
+    blog.entries
+  end
 
-    results += search_title(blog, word, workspace)
-    results += search_body(blog, word, workspace)
-
+  def search(query)
+    results = search_field([:title, :body], query)
 
     results.inject([]) do |entries, entry|
       page = entry.page
-      entries << page unless entries.include?(page)
+
+      unless entries.include?(page)
+        entries << page
+      end
 
       entries
     end
   end
 
-  def search_title(blog, word, workspace = DEFAULT_WORKSPACE)
-    results = []
+  def search_by_tag(tag)
+    blog.entries.inject([]) do |entries, entry|
+      if entry.tags.include?(tag)
+        entries << entry
+      end
 
-    RailsConnector::Workspace.find(workspace).as_current do
-      results =
-        Obj.where(:_path, :starts_with, blog.path)
-        .and(:title, :contains, word)
-        .to_a
+      entries
     end
-
-    results
   end
 
-  def search_body(blog, word, workspace = DEFAULT_WORKSPACE)
-    results = []
+  private
 
-    RailsConnector::Workspace.find(workspace).as_current do
-      results =
-        Obj.where(:_path, :starts_with, blog.path)
-        .and(:body, :contains, word)
-        .to_a
+  def search_field(field, query)
+    # TODO: Currently only the published workspace is searchable.
+    RailsConnector::Workspace.find('published').as_current do
+      Obj.where(:_path, :starts_with, blog.path).and(field, :contains, query).to_a
     end
-
-    results
   end
 end

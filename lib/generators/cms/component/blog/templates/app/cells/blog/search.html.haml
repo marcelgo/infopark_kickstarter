@@ -1,2 +1,4 @@
-%h4= "Search for '#{@search_word}'"
+%h4
+  = t('blog.search.query', query: @query)
+
 = render_cell(:blog, :show, @blog, @entries)

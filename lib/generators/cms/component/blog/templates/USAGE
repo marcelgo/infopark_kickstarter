@@ -1,5 +1,6 @@
 Description:
-    Generates a blog
+    Generates a blog that supports twitter and facebook sharing, disqus
+    comments, blog wide search, tags and is build upon the box framework.
 
 Example:
     `rails generate cms:component:blog`
@@ -15,4 +16,6 @@ Example:
     CMS: attribute blog_enable_twitter_button (boolean)
     CMS: attribute blog_enable_disqus_comments (boolean)
     CMS: attribute blog_enable_facebook_button (boolean)
-    Gems: "will_paginate"
+    Gems: will_paginate
+    Misc: updates app/assets/javascripts/application.js
+    Misc: updates config/application.rb

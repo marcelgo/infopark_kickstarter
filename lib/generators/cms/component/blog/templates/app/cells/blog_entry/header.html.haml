@@ -1,10 +1,12 @@
 .row-fluid
   .span2
     .author_image
-      = image_tag author_image_path_for_entry(@entry)
+      = author_image(@entry)
+
   .span8
     .meta
       .date
         = @entry.publish_date
+
       .author
-        = mail_to author_email(@entry), author_name(@entry)
+        = author_email(@entry)

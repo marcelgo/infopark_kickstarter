@@ -8,7 +8,6 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
-
           begin
             validate_attribute(blog_disqus_shortname_attribute_name)
 
@@ -166,12 +165,10 @@ module Cms
             )
           rescue Cms::Generators::DuplicateResourceError
           end
+        end
 
+        def create_example
           migration_template('example_migration.rb', 'cms/migrate/create_blog_example.rb')
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
-          end
         end
 
         def copy_app_directory
@@ -180,11 +177,13 @@ module Cms
 
         def update_routes
           data = []
+
           data << 'resources :blog, only: [:index] do'
           data << '    post :search'
           data << '  end'
           data << ''
           data << "get ':id/blog_entry' , to: 'blog_entry#index', as: 'blog_entry'"
+
           data = data.join("\n")
 
           route(data)
@@ -198,18 +197,18 @@ module Cms
           end
         end
 
-        def update_application_rb
-          file = 'config/application.rb'
-          insert_point = 'require "rails/test_unit/railtie"'
+        # def update_application_rb
+        #   file = 'config/application.rb'
+        #   insert_point = 'require "rails/test_unit/railtie"'
+        #   data = []
 
-          data = []
-          data << ''
-          data << 'require "will_paginate/array"'
+        #   data << ''
+        #   data << 'require "will_paginate/array"'
 
-          data = data.join("\n")
+        #   data = data.join("\n")
 
-          insert_into_file(file, data, after: insert_point)
-        end
+        #   insert_into_file(file, data, after: insert_point)
+        # end
 
         def update_application_js
           file = 'app/assets/javascripts/application.js'
@@ -222,6 +221,12 @@ module Cms
           data = data.join("\n")
 
           insert_into_file(file, data, after: insert_point)
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
+          end
         end
 
         private

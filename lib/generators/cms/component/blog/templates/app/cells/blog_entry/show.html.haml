@@ -1,8 +1,9 @@
 .row-fluid
-  .span8
+  .span9
     .row-fluid
       .span11
-        %h2= @entry.title
+        %h2
+          = display_field(@entry, :title)
 
     = render_cell(:blog_entry, :header, @entry)
 
@@ -15,5 +16,5 @@
       .span12
         = render_cell(:blog_entry, :footer, @entry)
 
-  .span4.sidebar
+  .span3.sidebar
     = render_cell(:blog, :sidebar, @blog, @entry)

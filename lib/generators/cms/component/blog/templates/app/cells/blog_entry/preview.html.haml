@@ -1,7 +1,8 @@
 .row-fluid
   .span11
-    = link_to cms_path(@entry), class: 'pull-right' do
-      %h2= @entry.title
+    = link_to(cms_path(@entry), class: 'pull-right') do
+      %h2
+        = display_field(@entry, :title)
 
 = render_cell(:blog_entry, :header, @entry)
 

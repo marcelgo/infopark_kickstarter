@@ -1,1 +1,1 @@
-= link_to 'Tweet', "https://twitter.com/share", class: 'twitter-share-button', 'data-url' => cms_url(@entry), 'data-text' => @entry.title
+%a.twitter-share-button{href: 'https://twitter.com/share', data: { url: cms_url(@entry), text: @entry.title, lang: I18n.locale }}

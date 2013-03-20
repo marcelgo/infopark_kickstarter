@@ -18,11 +18,12 @@
     = stylesheet_link_tag('blog/base', media: 'all')
 
     %link{href: '/favicon.ico', rel: 'shortcut icon'}
-    = auto_discovery_link_tag(:atom, atom_feed_path)
-    = auto_discovery_link_tag(:rss, rss_feed_path)
+    = auto_discovery_link_tag(:atom, atom_feed_path(@obj))
+    = auto_discovery_link_tag(:rss, rss_feed_path(@obj))
 
   %body.blog{body_attributes}
     #fb-root
+
     = render_cell(:main_navigation, :show, @obj)
 
     .container
@@ -30,6 +31,7 @@
         .row
           .span12
             = render_cell(:flash_messages, :show, flash)
+
             = yield
 
     .container

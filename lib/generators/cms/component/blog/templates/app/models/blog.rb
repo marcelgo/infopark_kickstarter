@@ -1,5 +1,6 @@
 class Blog < Obj
   include Page
+
   include Cms::Attributes::BlogEntryTruncation
   include Cms::Attributes::BlogDisqusShortname
   include Cms::Attributes::BlogEnableDisqusComments
@@ -11,7 +12,7 @@ class Blog < Obj
   end
 
   def tags
-    tags = self.entries.inject([]) do |tags, entry|
+    tags = entries.inject([]) do |tags, entry|
       tags += entry.tags
     end
 
@@ -19,16 +20,8 @@ class Blog < Obj
   end
 
   def entries
-    self.toclist.select {|obj| obj.is_a?(::BlogEntry)}
-  end
-
-  def entries_by_tag(tag)
-    self.entries.inject([]) do |filtered, entry|
-      if entry.tags.include?(tag)
-        filtered << entry
-      end
-
-      filtered
+    @entries ||= toclist.select do |obj|
+      obj.is_a?(::BlogEntry)
     end
   end
 end

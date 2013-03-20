@@ -1,8 +1,15 @@
 .row-fluid
   .span12
-    .tags= tag_link_list(@entry)
+    .tags
+      = tag_link_list(@entry)
+
 .row-fluid
   .span12
     = render_cell(:blog_entry, :facebook, @entry)
+
     = render_cell(:blog_entry, :twitter, @entry)
-    = link_to 'read more >', cms_path(@entry), class: 'pull-right btn'
+
+    = link_to(cms_path(@entry), class: 'pull-right btn') do
+      = t('blog.read_more')
+
+      %i.icon-chevron-right

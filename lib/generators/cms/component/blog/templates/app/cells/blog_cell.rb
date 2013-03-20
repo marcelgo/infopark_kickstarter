@@ -9,10 +9,10 @@ class BlogCell < Cell::Rails
     render
   end
 
-  def search(blog, entries, search_word)
+  def search(blog, entries, query)
     @blog = blog
     @entries = entries
-    @search_word = search_word
+    @query = query
 
     render
   end
@@ -30,18 +30,11 @@ class BlogCell < Cell::Rails
     render
   end
 
-  def tag_sidebar(blog, active_tags = [])
+  def tag_sidebar(blog, entry)
     @blog = blog
     @tags = blog.tags
-    @active_tags = active_tags
+    @active_tags = entry.try(:tags) || []
 
     render
   end
-
-  def disqus_snippet(blog)
-    @disqus_shortname = blog.disqus_shortname
-
-    render
-  end
-
 end
