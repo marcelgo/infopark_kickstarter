@@ -1,1 +1,4 @@
-= render_cell(:blog, :show, @obj, @entries)
+%h2
+  = display_field(@obj, :title)
+
+= render_cell(:blog, :entries, @obj, @entries)

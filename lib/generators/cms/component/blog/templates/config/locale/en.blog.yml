@@ -1,8 +1,2 @@
 blog:
-  missing_preview: "Can't find preview for this type of box."
-  tags: 'Tags'
   read_more: 'Read more'
-
-  search:
-    title: 'Search'
-    query: "Search for '%{query}'"

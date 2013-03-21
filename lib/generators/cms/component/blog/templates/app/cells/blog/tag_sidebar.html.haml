@@ -1,9 +1,0 @@
-.well.sidebar-nav
-  %ul.nav.nav-list
-    %li.nav-header
-      = t('blog.tags')
-
-      %ul.tags
-        - @tags.each do |tag|
-          %li{class: tag_list_item_class(@active_tags, tag)}
-            = link_to(tag, tag_path(@blog, tag))

@@ -3,9 +3,22 @@ module Cms
     module Component
       class BlogGenerator < ::Rails::Generators::Base
         include Migration
-        include BasePaths
 
         source_root File.expand_path('../templates', __FILE__)
+
+        class_option :cms_path,
+          type: :string,
+          default: nil,
+          desc: 'CMS parent path where the example blog should be placed under.',
+          banner: 'LOCATION'
+
+        def add_gems
+          gem('gravatar_image_tag')
+
+          Bundler.with_clean_env do
+            run('bundle --quiet')
+          end
+        end
 
         def create_migration
           begin
@@ -24,106 +37,30 @@ module Cms
           end
 
           begin
-            validate_attribute(blog_enable_disqus_comments_attribute_name)
+            validate_attribute(blog_description_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_enable_disqus_comments_attribute_name,
-                '--type=boolean',
-                '--title=Enable Disqus Comments?',
-                '--method_name=enable_disqus_comments',
-                '--default=true'
+                blog_description_attribute_name,
+                '--type=text',
+                '--title=Description',
+                '--method_name=description',
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
           end
 
           begin
-            validate_attribute(blog_enable_facebook_button_attribute_name)
+            validate_attribute(blog_entry_author_attribute_name)
 
             Rails::Generators.invoke(
               'cms:attribute',
               [
-                blog_enable_facebook_button_attribute_name,
-                '--type=boolean',
-                '--title=Enable Facebook Like Button?',
-                '--method_name=enable_facebook_button'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_enable_twitter_button_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_enable_twitter_button_attribute_name,
-                '--type=boolean',
-                '--title=Enable Twitter Button?',
-                '--method_name=enable_twitter_button'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_truncation_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_truncation_attribute_name,
-                '--type=integer',
-                '--title=Number of characters in preview',
-                '--method_name=entry_truncation'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_tags_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_tags_attribute_name,
+                blog_entry_author_attribute_name,
                 '--type=string',
-                '--title=Tags',
-                '--method_name=tags'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_author_id_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_author_id_attribute_name,
-                '--type=string',
-                '--title=Author ID',
-                '--method_name=author_id'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_publication_date_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_publication_date_attribute_name,
-                '--type=string',
-                '--title=Date',
-                '--method_name=publish_date'
+                '--title=Author',
+                '--method_name=author',
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -136,12 +73,9 @@ module Cms
               'cms:model',
               [
                 blog_class_name,
-                "--attributes=#{blog_entry_truncation_attribute_name}",
-                blog_disqus_shortname_attribute_name,
-                blog_enable_twitter_button_attribute_name,
-                blog_enable_disqus_comments_attribute_name,
-                blog_enable_facebook_button_attribute_name,
-                '--title=Page: Blog'
+                "--attributes=#{blog_disqus_shortname_attribute_name}",
+                blog_description_attribute_name,
+                '--title=Page: Blog',
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
@@ -154,73 +88,37 @@ module Cms
               'cms:model',
               [
                 blog_entry_class_name,
-                "--attributes=#{blog_entry_tags_attribute_name}",
-                blog_entry_author_id_attribute_name,
-                blog_entry_publication_date_attribute_name,
-                blog_enable_twitter_button_attribute_name,
-                blog_enable_facebook_button_attribute_name,
-                blog_enable_disqus_comments_attribute_name,
-                '--title=Blog: Entry'
+                "--attributes=#{blog_entry_author_attribute_name}",
+                '--title=Page: Blog Entry',
               ]
             )
           rescue Cms::Generators::DuplicateResourceError
           end
         end
 
-        def create_example
-          migration_template('example_migration.rb', 'cms/migrate/create_blog_example.rb')
-        end
-
-        def copy_app_directory
-          directory('app', force: true)
-        end
-
-        def update_routes
-          data = []
-
-          data << 'resources :blog, only: [:index] do'
-          data << '    post :search'
-          data << '  end'
-          data << ''
-          data << "get ':id/blog_entry' , to: 'blog_entry#index', as: 'blog_entry'"
-
-          data = data.join("\n")
-
-          route(data)
-        end
-
-        def update_gemfile
-          gem('will_paginate')
-
-          Bundler.with_clean_env do
-            run('bundle --quiet')
-          end
-        end
-
-        # def update_application_rb
-        #   file = 'config/application.rb'
-        #   insert_point = 'require "rails/test_unit/railtie"'
-        #   data = []
-
-        #   data << ''
-        #   data << 'require "will_paginate/array"'
-
-        #   data = data.join("\n")
-
-        #   insert_into_file(file, data, after: insert_point)
-        # end
-
-        def update_application_js
-          file = 'app/assets/javascripts/application.js'
-          insert_point = "//= require infopark_rails_connector"
+        def add_discovery_link
+          file = 'app/views/layouts/application.html.haml'
+          insert_point = "%link{href: '/favicon.ico', rel: 'shortcut icon'}\n"
 
           data = []
+
           data << ''
-          data << '//= require blog'
+          data << '    = render_cell(:blog, :discovery, @obj)'
+          data << ''
 
           data = data.join("\n")
 
           insert_into_file(file, data, after: insert_point)
+        end
+
+        def create_example
+          if example?
+            migration_template('example_migration.rb', 'cms/migrate/create_blog_example.rb')
+          end
+        end
+
+        def copy_app_directory
+          directory('app', force: true)
         end
 
         def notice
@@ -231,36 +129,24 @@ module Cms
 
         private
 
-        def blog_entry_truncation_attribute_name
-          'blog_entry_truncation'
+        def example?
+          cms_path.present?
         end
 
-        def blog_entry_tags_attribute_name
-          'blog_entry_tags'
+        def cms_path
+          options[:cms_path]
         end
 
-        def blog_entry_author_id_attribute_name
-          'blog_entry_author_id'
+        def blog_entry_author_attribute_name
+          'blog_entry_author'
         end
 
         def blog_disqus_shortname_attribute_name
           'blog_disqus_shortname'
         end
 
-        def blog_enable_disqus_comments_attribute_name
-          'blog_enable_disqus_comments'
-        end
-
-        def blog_enable_facebook_button_attribute_name
-          'blog_enable_facebook_button'
-        end
-
-        def blog_enable_twitter_button_attribute_name
-          'blog_enable_twitter_button'
-        end
-
-        def blog_entry_publication_date_attribute_name
-          'blog_entry_publication_date'
+        def blog_description_attribute_name
+          'blog_description'
         end
 
         def blog_class_name

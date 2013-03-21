@@ -1,27 +1,18 @@
 class Blog < Obj
   include Page
 
-  include Cms::Attributes::BlogEntryTruncation
   include Cms::Attributes::BlogDisqusShortname
-  include Cms::Attributes::BlogEnableDisqusComments
-  include Cms::Attributes::BlogEnableFacebookButton
-  include Cms::Attributes::BlogEnableTwitterButton
+  include Cms::Attributes::BlogDescription
 
   def blog
     self
   end
 
-  def tags
-    tags = entries.inject([]) do |tags, entry|
-      tags += entry.tags
-    end
-
-    tags.uniq
-  end
-
-  def entries
-    @entries ||= toclist.select do |obj|
-      obj.is_a?(::BlogEntry)
+  def latest_entries
+    # TODO Currently only the published workspace is searchable.
+    # TODO Limit result size
+    RailsConnector::Workspace.find('published').as_current do
+      BlogEntry.all.and(:_path, :starts_with, path + '/').batch_size(100).order(:_valid_from).reverse_order.to_a
     end
   end
 end

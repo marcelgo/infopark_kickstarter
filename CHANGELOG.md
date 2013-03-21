@@ -1,6 +1,9 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
     get the latest version.
+  * Added blog component to generate a basic blog with RSS and comment functionality based on the
+    box framework. Call `rails generate cms:component:blog --help` to get started.
+  * Added `image_url` application helper to determine the external url of an image.
   * Added video obj class to the kickstart generator. This allows to upload and handle videos in a
     dedicated obj class.
   * Cleaned up and extended the composition pattern used to add common behavior to object classes.

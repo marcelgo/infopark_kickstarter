@@ -1,40 +1,75 @@
 class BlogCell < Cell::Rails
-  include RailsConnector::DefaultCmsRoutingHelper
-  helper :blog
+  helper :cms
 
-  def show(blog, entries)
+  # Cell actions:
+
+  def entries(blog, entries)
     @blog = blog
     @entries = entries
 
     render
   end
 
-  def search(blog, entries, query)
-    @blog = blog
-    @entries = entries
-    @query = query
-
-    render
-  end
-
-  def sidebar(blog, entry = nil)
-    @blog = blog
+  def entry_details(entry)
+    @blog = entry.blog
     @entry = entry
 
     render
   end
 
-  def search_sidebar(blog)
-    @blog = blog
+  def discovery(obj)
+    if obj.respond_to?(:blog)
+      @blog = obj.blog
+
+      render
+    end
+  end
+
+  # Cell states:
+  # The following states assume that @blog is given.
+
+  def entry(entry)
+    @entry = entry
 
     render
   end
 
-  def tag_sidebar(blog, entry)
-    @blog = blog
-    @tags = blog.tags
-    @active_tags = entry.try(:tags) || []
+  # The following states assume that @blog and @entry are given.
+
+  def comment
+    if @entry.enable_comments? && @entry.disqus_shortname.present?
+      render
+    end
+  end
+
+  def gravatar
+    @author = @entry.author
+
+    if @author
+      render
+    end
+  end
+
+  def published_at
+    @date = @entry.valid_from.to_date
 
     render
+  end
+
+  def published_by
+    @author = @entry.author
+
+    if @author
+      render
+    end
+  end
+
+  def snippet
+    boxes = @entry.boxes
+    @box = boxes.detect { |box| BoxText === box }
+
+    if @box
+      render
+    end
   end
 end
