@@ -10,6 +10,9 @@
   * Cleaned up the composition pattern used to add common behavior to object classes. You can
     differentiate between a `Page` and a `Box` by mixing in a module in the model class.
   * Updated links to the Infopark Console to `https://console.infopark.net`.
+  * Bugfix: The markup for box titles is no longer displayed, when no title exists.
+  * Cleaned up and extended the composition pattern used to add common behavior to object classes.
+    You can now differentiate between a `Page`, a `Box` and a `Resource`.
   * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
     This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
     gem. (Thanks @thomasritz)
