@@ -1,6 +1,8 @@
 require 'rake'
 require 'rake/tasklib'
 require 'launchy'
+require 'net/http'
+require 'json'
 
 module InfoparkKickstarter
   module Rake
@@ -9,7 +11,12 @@ module InfoparkKickstarter
         namespace :cms do
           desc 'Open the Infopark console in your web browser'
           task :console do
-            Launchy.open('https://admin.saas.infopark.net/tenant_management')
+            Launchy.open('https://console.infopark.net')
+          end
+
+          desc 'Get status information of all Infopark services'
+          task :status do
+            status
           end
 
           namespace :info do
@@ -62,6 +69,30 @@ module InfoparkKickstarter
 
       def attributes
         Dashboard::Attribute.all
+      end
+
+      def status
+        uri = URI('http://status.infopark.net/services.json')
+        response = Net::HTTP.get(uri)
+        json = JSON.parse(response)
+
+        service_status = {
+          'Elastic Web Platform' => 'up and running',
+          'CMS' => 'up and running',
+          'WebCRM' => 'up and running',
+        }
+
+        now = Time.now.strftime("%Y-%m-%d")
+
+        if json.has_key?(now)
+          json[now].each do |service, info|
+            service_status[service] = info['description']
+          end
+        end
+
+        service_status.each do |service, status|
+          puts "  #{service}: #{status}"
+        end
       end
     end
   end

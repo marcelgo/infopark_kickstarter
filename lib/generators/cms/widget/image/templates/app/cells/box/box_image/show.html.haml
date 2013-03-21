@@ -1,10 +1,12 @@
 .box.box_image.well
   = render(state: :edit_marker)
 
-  = render({state: 'image'}, @box.source, @box.link_to)
+  = render({ state: :image }, @box.source, @box.link_to)
 
-  %h3
-    = display_field(@box, :title)
+  - if @box.title.present?
+    %h3
+      = display_field(@box, :title)
 
-  %p.caption
-    = display_field(@box, :caption)
+  - if @box.caption.present?
+    %p.caption
+      = display_field(@box, :caption)

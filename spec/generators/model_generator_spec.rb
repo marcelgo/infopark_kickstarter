@@ -22,7 +22,6 @@ describe Cms::Generators::ModelGenerator do
             contains 'class News < Obj'
             contains '# include Page'
             contains '# include Box'
-            contains '# include Resource'
           end
         end
       end

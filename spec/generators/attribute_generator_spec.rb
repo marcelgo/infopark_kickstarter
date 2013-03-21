@@ -82,8 +82,6 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'self[:news_link] || RailsConnector::LinkList.new(nil)'
                 contains 'def news_link?'
                 contains 'news_link.present?'
-                contains 'def first_news_link'
-                contains 'news_link.destination_objects.first'
               end
             end
           end
