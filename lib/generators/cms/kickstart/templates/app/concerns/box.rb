@@ -4,8 +4,6 @@
 module Box
   # Determines the page where the box is embedded.
   def page
-    if parent
-      parent.page
-    end
+    parent.page
   end
 end
