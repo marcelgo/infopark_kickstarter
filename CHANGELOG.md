@@ -1,6 +1,9 @@
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
     get the latest version.
+  * Added blog component to generate a basic blog with RSS and comment functionality based on the
+    box framework. Call `rails generate cms:component:blog --help` to get started.
+  * Added `image_url` application helper to determine the external url of an image.
   * Added rake task to check the status of the Infopark Cloud-Express Platform. Run
     `rake cms:status` to get current status information.
   * A new video box type was added. It allows to play videos from the CMS, vimeo and youtube. See
