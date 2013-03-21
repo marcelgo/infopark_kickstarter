@@ -7,7 +7,7 @@ class BlogCell < Cell::Rails
     @blog = blog
     @entries = entries
 
-    render
+    render(format: params[:format]) # html, rss
   end
 
   def entry_details(entry)
