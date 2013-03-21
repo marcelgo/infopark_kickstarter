@@ -9,6 +9,7 @@
     dedicated obj class.
   * Cleaned up the composition pattern used to add common behavior to object classes. You can
     differentiate between a `Page` and a `Box` by mixing in a module in the model class.
+  * Updated links to the Infopark Console to `https://console.infopark.net`.
   * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
     This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
     gem. (Thanks @thomasritz)

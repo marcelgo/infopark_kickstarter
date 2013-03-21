@@ -11,7 +11,7 @@ module InfoparkKickstarter
         namespace :cms do
           desc 'Open the Infopark console in your web browser'
           task :console do
-            Launchy.open('https://admin.saas.infopark.net/tenant_management')
+            Launchy.open('https://console.infopark.net')
           end
 
           desc 'Get status information of all Infopark services'
