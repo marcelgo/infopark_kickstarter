@@ -41,7 +41,7 @@ module Cms
 
           begin
             validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Image', "--attributes=#{source_attribute_name}", caption_attribute_name, link_to_attribute_name, sort_key_attribute_name])
+            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Widget: Image', "--attributes=#{source_attribute_name}", caption_attribute_name, link_to_attribute_name, sort_key_attribute_name])
 
             turn_model_into_box(obj_class_name)
           rescue DuplicateResourceError
@@ -75,7 +75,7 @@ module Cms
         end
 
         def obj_class_name
-          'BoxImage'
+          'ImageWidget'
         end
 
         def sort_key_attribute_name
