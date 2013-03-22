@@ -9,7 +9,7 @@ YARD::Rake::YardocTask.new
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 
-require 'ice_kickstarter/rake/integration_task'
-IceKickstarter::Rake::IntegrationTask.new
+require 'infopark_kickstarter/rake/integration_task'
+InfoparkKickstarter::Rake::IntegrationTask.new
 
 task default: :spec

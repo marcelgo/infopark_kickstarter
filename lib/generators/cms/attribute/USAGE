@@ -1,12 +1,16 @@
 Description:
     Creates a CMS migration for a new CMS attribute. Per default the attribute type is set to
     "string". The "values" option is only available for "enum" or "multi-enum" types. The "max-size"
-    option is only available for "linklist" types.
+    option is only available for "linklist" types. Use "method_name" to set a different name for the
+    getter method, which defaults to the name of the attribute.
 
 Example:
     `rails generate cms:attribute show_in_navigation --type=boolean`
     `rails generate cms:attribute caption --type=string --title=Caption`
     `rails generate cms:attribute content --type=html --title=Content`
     `rails generate cms:attribute page --type=linklist --title=Page --max-size=1`
+    `rails generate cms:attribute body_md --type=markdown`
+    `rails generate cms:attribute count --type=integer`
+    `rails generate cms:attribute latitude --type=float`
 
     Migration: cms/migrate/123456_create_show_in_navigation_attribute.rb

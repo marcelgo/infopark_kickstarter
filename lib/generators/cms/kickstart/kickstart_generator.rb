@@ -5,6 +5,7 @@ module Cms
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
       include BasePaths
+      include Actions
 
       source_root File.expand_path('../templates', __FILE__)
       class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
@@ -98,7 +99,7 @@ module Cms
 
       def install_css_framework
         gem_group(:assets) do
-          gem('less-rails-bootstrap', '2.3.0')
+          gem('less-rails-bootstrap')
         end
       end
 
@@ -121,6 +122,22 @@ module Cms
       end
 
       def create_structure_migration_file
+        begin
+          class_name = 'Image'
+          validate_obj_class(class_name)
+
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
+        begin
+          class_name = 'Video'
+          validate_obj_class(class_name)
+
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
         Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
         Rails::Generators.invoke('cms:attribute', ['error_not_found_page_link', '--title=Error Not Found Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
@@ -133,16 +150,23 @@ module Cms
         Rails::Generators.invoke('cms:model', ['Container', '--title=Container', '--attributes=show_in_navigation'])
 
         Rails::Generators.invoke('cms:attribute', ['sort_key', '--type=string', '--title=Sort Key'])
+
         Rails::Generators.invoke('cms:scaffold', ['ContentPage', '--title=Page: Content', '--attributes=show_in_navigation', 'sort_key'])
-        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
+        turn_model_into_page('ContentPage')
+
         Rails::Generators.invoke('cms:scaffold', ['SearchPage', '--title=Page: Search', '--attributes=show_in_navigation'])
+        turn_model_into_page('SearchPage')
+
+        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
 
         Rails::Generators.invoke('cms:attribute', ['redirect_after_login_link', '--type=linklist', '--title=Login Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:attribute', ['redirect_after_logout_link', '--type=linklist', '--title=Logout Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:scaffold', ['LoginPage', '--title=Page: Login', '--attributes=show_in_navigation', 'redirect_after_login_link', 'redirect_after_logout_link'])
+        turn_model_into_page('LoginPage')
 
         Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
         Rails::Generators.invoke('cms:model', ['Redirect', '--title=Redirect', '--attributes=sort_key', 'redirect_link', 'show_in_navigation'])
+        turn_model_into_page('Redirect')
 
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
 
@@ -150,7 +174,7 @@ module Cms
       end
 
       def copy_app_directory
-        directory('app')
+        directory('app', force: true)
         directory('lib')
         directory('config')
         directory('spec')

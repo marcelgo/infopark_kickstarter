@@ -4,6 +4,7 @@ module Cms
       class ContactPageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
+        include Actions
 
         class_option :homepage_path,
           type: :string,
@@ -92,6 +93,8 @@ module Cms
           begin
             validate_obj_class(class_name)
             Rails::Generators.invoke('cms:model', [class_name, '--title=Page: Contact', "--attributes=#{crm_activity_type_attribute_name}", redirect_after_submit_attribute_name, show_in_navigation_attribute_name])
+
+            turn_model_into_page(class_name)
           rescue DuplicateResourceError
           end
 

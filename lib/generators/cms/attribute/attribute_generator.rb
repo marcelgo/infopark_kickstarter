@@ -9,7 +9,7 @@ module Cms
         type: :string,
         aliases: '-t',
         default: 'string',
-        desc: 'Type of the CMS attribute (string | text | html | enum | boolean | multienum | linklist | date).'
+        desc: 'Type of the CMS attribute (string | text | html | markdown | enum | boolean | multienum | linklist | date | integer | float).'
 
       class_option :values,
         type: :array,
@@ -31,6 +31,16 @@ module Cms
         type: :numeric,
         default: 0,
         desc: 'Maximum number of links in a linklist.'
+
+      class_option :method_name,
+        type: :string,
+        default: nil,
+        desc: 'Method name to access the CMS attribute. Defaults to the name of the attribute.'
+
+      class_option :preset_value,
+        type: :string,
+        default: nil,
+        desc: 'Sets the default value for the CMS attribute. The default is type dependent.'
 
       def create_migration_file
         validate_attribute(file_name)
@@ -63,6 +73,29 @@ module Cms
 
       def values
         options[:values].inspect
+      end
+
+      def method_name
+        options[:method_name] || file_name
+      end
+
+      def preset_value
+        options[:preset_value] || case type
+          when 'string', 'enum', 'html', 'markdown', 'text'
+            ''
+          when 'boolean'
+            'Yes'
+          when 'multienum'
+            '[]'
+          when 'linklist'
+            'RailsConnector::LinkList.new(nil)'
+          when 'integer'
+            '0'
+          when 'float'
+            '0.0'
+          else
+            'nil'
+        end
       end
     end
   end

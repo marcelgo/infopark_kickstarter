@@ -33,7 +33,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module News'
                 contains 'def news'
-                contains "self[:news].to_s"
+                contains "self[:news] || ''"
               end
             end
           end
@@ -82,8 +82,6 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'self[:news_link] || RailsConnector::LinkList.new(nil)'
                 contains 'def news_link?'
                 contains 'news_link.present?'
-                contains 'def first_news_link'
-                contains 'news_link.destination_objects.first'
               end
             end
           end
@@ -173,6 +171,166 @@ describe Cms::Generators::AttributeGenerator do
             contains "type: 'multienum',"
             contains "title: '',"
             contains 'values: ["Yes", "No"]'
+          end
+        end
+      end
+    }
+  end
+end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['body_md', '--type=markdown']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates markdown attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_body_md_attribute' do
+            contains "create_attribute(name: 'body_md', type: 'markdown', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'body_md.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module BodyMd'
+                contains 'def body_md'
+                contains "(self[:body_md] || '').html_safe"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['latitude', '--type=float']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates float attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_latitude_attribute' do
+            contains "create_attribute(name: 'latitude', type: 'string', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'latitude.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module Latitude'
+                contains 'def latitude'
+                contains "(self[:latitude] || 0.0).to_f"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['count', '--type=integer']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates integer attribute migration' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_count_attribute' do
+            contains "create_attribute(name: 'count', type: 'string', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'count.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module Count'
+                contains 'def count'
+                contains "(self[:count] || 0).to_i"
+              end
+            end
+          end
+        end
+      end
+    }
+  end
+end
+
+describe Cms::Generators::AttributeGenerator do
+  include GeneratorSpec::TestCase
+
+  destination File.expand_path('../../../tmp', __FILE__)
+  arguments ['foo', '--type=string', '--method_name=bar']
+
+  before do
+    prepare_destination
+    run_generator
+  end
+
+  it 'generates attribute migration and sets method name' do
+    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_foo_attribute' do
+            contains "create_attribute(name: 'foo', type: 'string', title: '')"
+          end
+        end
+      end
+
+      directory 'app' do
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'foo.rb' do
+                contains 'module Cms'
+                contains 'module Attributes'
+                contains 'module Foo'
+                contains 'def bar'
+                contains "self[:foo] || ''"
+              end
+            end
           end
         end
       end

@@ -4,11 +4,17 @@ module Cms
       class ProfilePageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
+        include Actions
 
         class_option :homepage_path,
           :type => :string,
           :default => nil,
           :desc => 'Path to a CMS homepage, for which to create the contact form.'
+
+        class_option :skip_translation_import,
+          :type => :boolean,
+          :default => false,
+          :desc => 'Skip import of country translation files.'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -22,8 +28,10 @@ module Cms
         end
 
         def import_translations
-          run('rake import:country_select LOCALE=de')
-          run('rake import:country_select LOCALE=en')
+          unless options[:skip_translation_import]
+            run('rake import:country_select LOCALE=en')
+            run('rake import:country_select LOCALE=de')
+          end
         end
 
         def extend_homepage
@@ -90,6 +98,8 @@ module Cms
             validate_obj_class(class_name)
 
             Rails::Generators.invoke('cms:model', [class_name, "--attributes=#{show_in_navigation_attribute_name}", '--title=Page: Profile'])
+
+            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 

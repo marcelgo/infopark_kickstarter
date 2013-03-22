@@ -1,3 +1,5 @@
+# This class represents the base class of all CMS objects and implements behavior that all CMS
+# objects, regardless whether they are pages, boxes or resources have in common.
 class Obj < ::RailsConnector::BasicObj
   include Cms::Attributes::SortKey
   include Cms::Attributes::ShowInNavigation
@@ -57,12 +59,12 @@ class Obj < ::RailsConnector::BasicObj
 
   # Overrides RailsConnector::BasicObj#body_data_url
   #
-  # Removes protocol http: so that the URLs work fine with pages delivered over https.
+  # Changes protocol http: to https: so that the URLs work fine with pages delivered over https.
   def body_data_url
     url = super
 
     if url.to_s =~ /^http:(.*?s3\.amazonaws\.com.*)$/
-      $1
+      "https:#{$1}"
     else
       url
     end

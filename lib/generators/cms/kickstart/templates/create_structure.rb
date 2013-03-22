@@ -14,7 +14,7 @@ class CreateStructure < ::RailsConnector::Migration
 
     try_create_obj(_path: "<%= configuration_path %>", _obj_class: 'Container', title: '_Configuration')
 
-    try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', title: 'Example Page', show_in_navigation: 'Yes')
+    try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', title: 'Content Page Example', show_in_navigation: 'Yes')
 
     try_create_obj(_path: "<%= configuration_path %>/error-not-found", _obj_class: 'ErrorPage', title: 'Page not found', show_in_navigation: 'No')
     try_create_obj(_path: "<%= configuration_path %>/search", _obj_class: 'SearchPage', title: 'Search')
@@ -42,21 +42,21 @@ class CreateStructure < ::RailsConnector::Migration
     update_obj_class(id, attributes)
   rescue RailsConnector::ClientError => error
     puts error.message
-    puts 'Some aspects of the ICE Kickstarter may not work as expected.'
+    puts 'Some aspects of the Infopark Kickstarter may not work as expected.'
   end
 
   def try_create_obj(attributes = {})
     create_obj(attributes)
   rescue RailsConnector::ClientError => error
     puts error.message
-    puts 'Some aspects of the ICE Kickstarter may not work as expected.'
+    puts 'Some aspects of the Infopark Kickstarter may not work as expected.'
   end
 
   def try_update_obj(id, attributes = {})
     update_obj(id, attributes)
   rescue RailsConnector::ClientError => error
     puts error.message
-    puts 'Some aspects of the ICE Kickstarter may not work as expected.'
+    puts 'Some aspects of the Infopark Kickstarter may not work as expected.'
   end
 
   def delete_obj_by_path(path)

@@ -4,7 +4,7 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 
 Bundler.require
-require 'ice_kickstarter'
+require 'infopark_kickstarter'
 
 module Dummy
   class Application < Rails::Application

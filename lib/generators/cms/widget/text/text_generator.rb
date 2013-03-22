@@ -3,6 +3,7 @@ module Cms
     module Widget
       class TextGenerator < ::Rails::Generators::Base
         include Migration
+        include Actions
 
         class_option :cms_path,
           type: :string,
@@ -23,16 +24,8 @@ module Cms
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Text', "--attributes=#{sort_key_attribute_name}"])
 
-            gsub_file(
-              'app/models/box_text.rb',
-              'include Page',
-              'include Box'
-            )
+            turn_model_into_box(obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
-          end
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 
@@ -43,6 +36,12 @@ module Cms
         def add_example
           if example?
             migration_template('example_migration.rb', 'cms/migrate/create_text_widget_example.rb')
+          end
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 

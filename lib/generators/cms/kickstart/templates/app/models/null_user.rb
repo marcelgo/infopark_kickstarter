@@ -1,4 +1,5 @@
 class NullUser
+  attr_reader :id
   attr_reader :email
 
   def logged_in?
