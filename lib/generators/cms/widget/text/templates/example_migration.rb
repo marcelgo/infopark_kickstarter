@@ -35,6 +35,6 @@ class CreateTextWidgetExample < ::RailsConnector::Migration
   end
 
   def homepage
-     Obj.find_by_path("/website/en")
+     homepage = Obj.find_by_path('<%= homepage_path %>')
   end
 end

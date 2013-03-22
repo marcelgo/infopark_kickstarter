@@ -3,6 +3,7 @@ module Cms
     module Widget
       class TextGenerator < ::Rails::Generators::Base
         include Migration
+        include BasePaths
         include Actions
 
         class_option :cms_path,
