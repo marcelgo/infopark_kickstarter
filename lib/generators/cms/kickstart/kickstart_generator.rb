@@ -205,6 +205,12 @@ module Cms
         Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
       end
 
+      def add_inline_editing_gems
+        gem('underscore-rails')
+        gem('less-rails-bootstrap')
+        gem('handlebars_assets', '~> 0.12.0')
+      end
+
       private
 
       def tenant_name

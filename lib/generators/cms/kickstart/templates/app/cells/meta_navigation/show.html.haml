@@ -15,3 +15,9 @@
     %li
       = link_to(cms_path(@search_page)) do
         = display_title(@search_page)
+
+    - if RailsConnector::Workspace.current.id != 'published'
+      %li
+        = link_to "Activate Editing", '#', :onclick => "infopark.editing.activate()"
+      %li
+        = link_to "Deactivate Editing", '#', :onclick => "infopark.editing.deactivate()"
