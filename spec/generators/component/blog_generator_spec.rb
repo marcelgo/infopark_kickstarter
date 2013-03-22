@@ -76,10 +76,13 @@ describe Cms::Generators::Component::BlogGenerator do
 
           directory 'blog' do
             file 'entries.html.haml'
+            file 'entries.rss.builder'
             file 'entry.html.haml'
+            file 'entry.rss.builder'
             file 'discovery.html.haml'
             file 'comment.html.haml'
             file 'snippet.html.haml'
+            file 'snippet.rss.builder'
             file 'published_by.html.haml'
             file 'published_at.html.haml'
             file 'gravatar.html.haml'
