@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    infopark_kickstarter (0.0.5)
+    infopark_kickstarter (1.0.0)
       bundler (>= 1.3.1)
       haml
       infopark_cloud_connector (>= 6.8.2.7.128454143)
