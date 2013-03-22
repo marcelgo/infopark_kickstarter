@@ -1,7 +1,6 @@
 .box.box_text.well
   = render(state: :edit_marker)
 
-  %h3
-    = display_field(@box, :title)
+  = cms_tag(:h3, @box, :title)
 
-  = display_field(@box, :body)
+  = cms_tag(:div, @box, :body)

@@ -15,14 +15,8 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(sort_key_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [sort_key_attribute_name, '--type=string', '--title=Sort Key'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
             validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Text', "--attributes=#{sort_key_attribute_name}"])
+            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Widget: Text'])
 
             turn_model_into_box(obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
@@ -56,7 +50,7 @@ module Cms
         end
 
         def obj_class_name
-          'BoxText'
+          'TextWidget'
         end
 
         def sort_key_attribute_name

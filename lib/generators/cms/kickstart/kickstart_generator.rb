@@ -145,7 +145,8 @@ module Cms
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['search_page_link', '--title=Search Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['locale', '--title=Locale', '--type=string'])
-        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_not_found_page_link', 'login_page_link', 'search_page_link', 'locale', 'show_in_navigation'])
+        Rails::Generators.invoke('cms:attribute', ['main_content', '--type=widget', '--title=Main Content'])
+        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_not_found_page_link', 'login_page_link', 'search_page_link', 'locale', 'show_in_navigation', 'main_content'])
 
         Rails::Generators.invoke('cms:model', ['Root', '--title=Root'])
         Rails::Generators.invoke('cms:model', ['Website', '--title=Website'])
@@ -206,9 +207,11 @@ module Cms
       end
 
       def add_inline_editing_gems
-        gem('underscore-rails')
-        gem('less-rails-bootstrap')
-        gem('handlebars_assets', '~> 0.12.0')
+        gem_group(:assets) do
+          gem('underscore-rails')
+          gem('less-rails-bootstrap')
+          gem('handlebars_assets', '~> 0.12.0')
+        end
       end
 
       private
