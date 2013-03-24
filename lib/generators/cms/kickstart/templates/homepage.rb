@@ -3,6 +3,7 @@ class Homepage < Obj
   include Cms::Attributes::SearchPageLink
   include Cms::Attributes::LoginPageLink
   include Cms::Attributes::Locale
+
   include Page
 
   # TODO edit mapping from hostnames to homepages

@@ -3,7 +3,8 @@ Description:
     that the CMS object class should have.
 
 Example:
-    `rails generate cms:model News show_in_navigation max_results`
+    `rails generate cms:model News --attributes=show_in_navigation max_results`
+    `rails generate cms:model Pdf --type=generic`
 
     Migration: cms/migrate/123456_create_news.rb
     Model: app/models/news.rb

@@ -1,0 +1,16 @@
+.blog-entry
+  .media
+    = render(state: :gravatar)
+
+    .media-body
+      %h2.media-heading
+        = display_field(@entry, :title)
+
+      = render(state: :published_at)
+
+      = render(state: :published_by)
+
+  - @entry.boxes.each do |box|
+    = render_cell(:box, :show, @obj, box)
+
+  = render(state: :comment)

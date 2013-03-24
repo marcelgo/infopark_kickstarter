@@ -5,6 +5,7 @@ module Cms
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
       include BasePaths
+      include Actions
 
       source_root File.expand_path('../templates', __FILE__)
       class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
@@ -36,14 +37,29 @@ module Cms
         end
       end
 
-      def form_tools
+      def install_gems
         gem('active_attr')
         gem('simple_form')
+        gem('haml-rails')
+        gem('cells')
+
+        gem_group(:assets) do
+          gem('less-rails-bootstrap')
+        end
+
+        gem_group(:test, :development) do
+          gem('pry-rails')
+          gem('better_errors')
+          gem('binding_of_caller')
+          gem('rspec-rails')
+        end
 
         Bundler.with_clean_env do
           run('bundle --quiet')
         end
+      end
 
+      def form_tools
         generate('simple_form:install --bootstrap --template-engine=haml')
 
         remove_file('config/locales/simple_form.de.yml')
@@ -52,26 +68,12 @@ module Cms
       end
 
       def include_dev_tools
-        gem_group(:test, :development) do
-          gem('pry-rails')
-          gem('better_errors')
-          gem('binding_of_caller')
-        end
-
         developer_initializer_path = 'config/initializers/developer.rb'
         append_file('.gitignore', developer_initializer_path + "\n")
         template('developer.rb', developer_initializer_path)
       end
 
       def install_test_framework
-        gem_group(:test, :development) do
-          gem('rspec-rails')
-        end
-
-        Bundler.with_clean_env do
-          run('bundle --quiet')
-        end
-
         generate('rspec:install')
       end
 
@@ -81,24 +83,22 @@ module Cms
         create_file('deploy/after_restart.rb')
         create_file('deploy/before_symlink.rb')
 
-        prepend_file('deploy/before_migrate.rb') do
+        destination = 'deploy/before_migrate.rb'
+
+        unless File.exist?(destination)
+          create_file(destination)
+        end
+
+        prepend_file(destination) do
           File.read(find_in_source_paths('deploy/before_migrate.rb'))
         end
       end
 
       def include_and_configure_template_engine
-        gem('haml-rails')
-
         application_erb_file = 'app/views/layouts/application.html.erb'
 
         if File.exist?(application_erb_file)
           remove_file(application_erb_file)
-        end
-      end
-
-      def install_css_framework
-        gem_group(:assets) do
-          gem('less-rails-bootstrap')
         end
       end
 
@@ -122,16 +122,18 @@ module Cms
 
       def create_structure_migration_file
         begin
-          validate_obj_class('Image')
+          class_name = 'Image'
+          validate_obj_class(class_name)
 
-          Rails::Generators.invoke('cms:model', ['Image', '--type=generic', '--title=Image'])
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
         rescue Cms::Generators::DuplicateResourceError
         end
 
         begin
-          validate_obj_class('Video')
+          class_name = 'Video'
+          validate_obj_class(class_name)
 
-          Rails::Generators.invoke('cms:model', ['Video', '--type=generic', '--title=Video'])
+          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -147,16 +149,23 @@ module Cms
         Rails::Generators.invoke('cms:model', ['Container', '--title=Container', '--attributes=show_in_navigation'])
 
         Rails::Generators.invoke('cms:attribute', ['sort_key', '--type=string', '--title=Sort Key'])
+
         Rails::Generators.invoke('cms:scaffold', ['ContentPage', '--title=Page: Content', '--attributes=show_in_navigation', 'sort_key'])
-        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
+        turn_model_into_page('ContentPage')
+
         Rails::Generators.invoke('cms:scaffold', ['SearchPage', '--title=Page: Search', '--attributes=show_in_navigation'])
+        turn_model_into_page('SearchPage')
+
+        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
 
         Rails::Generators.invoke('cms:attribute', ['redirect_after_login_link', '--type=linklist', '--title=Login Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:attribute', ['redirect_after_logout_link', '--type=linklist', '--title=Logout Redirect', '--max-size=1'])
         Rails::Generators.invoke('cms:scaffold', ['LoginPage', '--title=Page: Login', '--attributes=show_in_navigation', 'redirect_after_login_link', 'redirect_after_logout_link'])
+        turn_model_into_page('LoginPage')
 
         Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
         Rails::Generators.invoke('cms:model', ['Redirect', '--title=Redirect', '--attributes=sort_key', 'redirect_link', 'show_in_navigation'])
+        turn_model_into_page('Redirect')
 
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
 
@@ -164,7 +173,7 @@ module Cms
       end
 
       def copy_app_directory
-        directory('app')
+        directory('app', force: true)
         directory('lib')
         directory('config')
         directory('spec')
@@ -177,15 +186,7 @@ module Cms
       end
 
       def create_box_model
-        gem('cells')
-
         template('cells_error_handling.rb', 'config/initializers/cells.rb')
-      end
-
-      def bundle
-        Bundler.with_clean_env do
-          run('bundle --quiet')
-        end
       end
 
       def add_initital_components

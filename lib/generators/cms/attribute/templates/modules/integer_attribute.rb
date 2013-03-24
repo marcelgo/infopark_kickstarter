@@ -1,10 +1,11 @@
 module Cms
   module Attributes
-    # This is an integer attribute concern. It should be included via +include
-    # Cms::Attributes::<%= class_name %>+ in all CMS models that use this attribute.
+    # This is a integer attribute concern. It should be included via
+    # +include Cms::Attributes::<%= class_name %>+
+    # in all CMS models that use this attribute.
     module <%= class_name %>
       def <%= method_name %>
-        (self[:<%= file_name %>] || 0).to_i
+        (self[:<%= file_name %>] || <%= preset_value %>).to_i
       end
     end
   end

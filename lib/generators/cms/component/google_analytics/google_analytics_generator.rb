@@ -49,7 +49,7 @@ module Cms
 
           begin
             validate_attribute(anonymize_ip_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [anonymize_ip_attribute_name, '--type=boolean', '--title=Anonymize IP?'])
+            Rails::Generators.invoke('cms:attribute', [anonymize_ip_attribute_name, '--type=boolean', '--title=Anonymize IP?', "--preset_value=#{anonymize_ip_default}"])
           rescue DuplicateResourceError
           end
 

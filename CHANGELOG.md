@@ -1,24 +1,61 @@
+# v1.1.0
+  * Bugfix: Creates file `before_migrate.rb` if it doesn't exist yet. This fixes an annoyence that
+    was reported several times.
+  * Speed up kickstart time by grouping gem setup at the beginning. (Thanks @sethiele)
+  * A new person box type was added. It allows to display a crm person with some details like her
+    name and email. See `rails generate cms:widget:person --help` for more details.
+
 # v1.0.0
-  * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`.
+  * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
+    get the latest version.
+  * Added blog component to generate a basic blog with RSS and comment functionality based on the
+    box framework. Call `rails generate cms:component:blog --help` to get started.
+  * Added `image_url` application helper to determine the external url of an image.
+  * Added rake task to check the status of the Infopark Cloud-Express Platform. Run
+    `rake cms:status` to get current status information.
+  * A new video box type was added. It allows to play videos from the CMS, vimeo and youtube. See
+    more details running `rails generate cms:widget:video --help`.
   * Added video obj class to the kickstart generator. This allows to upload and handle videos in a
     dedicated obj class.
+  * Cleaned up the composition pattern used to add common behavior to object classes. You can
+    differentiate between a `Page` and a `Box` by mixing in a module in the model class.
+  * Updated links to the Infopark Console to `https://console.infopark.net`.
+  * Bugfix: The markup for box titles is no longer displayed, when no title exists.
+  * Cleaned up and extended the composition pattern used to add common behavior to object classes.
+    You can now differentiate between a `Page`, a `Box` and a `Resource`.
   * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
     This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
     gem. (Thanks @thomasritz)
   * Bugfix: The CMS webservice returns `RestClient::PreconditionFailed` not
     `RestClient::InternalServerError` when asked for the Github users when there
     is no Github repository configured. (Thanks @awendt)
-  * Added attribute generator option to set the name of getter method. (Thanks @cocodercoder)
-  * Added support for integer and float attribute types.
+  * Added model generator option to set mandatory attributes. For example:
+    `rails generate cms:model Foo --attributes=foo bar baz --mandatory_attributes=bar baz`.
+  * Added model generator option to preset attributes. For example:
+    `rails generate cms:model Foo --attributes=foo bar baz --preset_attributes=foo:f bar:b`.
+  * Added attribute generator option to preset the attribute value. The default depends on the type
+    of the attribute. For example, to create an integer attribute that has `10` configured as a
+    default, you call `rails generate cms:attribute my_attribute --type=integer --preset_value=10`.
+  * Added attribute generator option to set the name of getter method. For Example:
+    `rails generate cms:attribute my_attribute --type=integer --method_name=foo`. (Thanks @cocodercoder)
+  * Added support for integer and float attribute types. For example:
+    `rails generate cms:attribute count --type=integer` or
+    `rails generate cms:attribute latitude --type=float`.
   * Newrelic generator now sets up developer mode. (Thanks @Kieran Hayes)
   * Bugfix: Newrelic generator did not insert the correct website name in the deploy files. It also
     does not depend on the kickstart generator anymore.
+  * Bugfix: Newrelic generator did not differentiate between the deploy and the api key for
+    deployment notifications.
   * Bugfix: The dashboard does no longer depend on the flash messages of the
     host application.
   * Bugfix: The contact form raised an error when there was no user logged in.
   * Airbrake component now includes secure option by default and does not depend on the kickstart
     generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
     error notifications on deployment.
+  * Airbrake component is now available as the default provider for the error tracking component.
+    This allows to support different error tracking solutions in the future. Run
+    `rails generate cms:component:error_tracking --help` to get an overview. You can still call the
+    Airbrake generator directly by running `rails generate cms:component:error_tracking:airbrake`.
   * Updated contribution section in the README, which should make it easier for developers to setup
     and add features to the project.
   * Updated Infopark gems and required ```bundler >= 1.3.1``` to also work with newer
@@ -26,7 +63,8 @@
   * Profile Page Component: Added option to skip the import of country translations.
   * Bugfix: ```application``` javascript manifest needs to be loaded before
     ```rails_connector_after_content_tags```. (Thanks @apepper)
-  * Added support for markdown attribute type.
+  * Added support for markdown attribute type. For example:
+    `rails generate cms:attribute body_md --type=markdown`. (Thanks @thomasritz)
 
 # v0.0.5
   * Renamed ```error_404``` to ```error_not_found```.

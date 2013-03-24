@@ -70,7 +70,6 @@ module Cms
 
         def update_application_js
           file = 'app/assets/javascripts/application.js'
-          insert_point = "//= require infopark_rails_connector"
 
           data = []
 
@@ -82,7 +81,9 @@ module Cms
 
           data = data.join("\n")
 
-          insert_into_file(file, data, after: insert_point)
+          append_file(file) do
+            data
+          end
         end
 
         def add_example

@@ -48,14 +48,16 @@ module InfoparkKickstarter
 
       def call_generators
         Bundler.with_clean_env do
-          sh "cd #{app_path} && bundle exec rails generate cms:model news"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:airbrake"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:newrelic \"Test Website\""
-          sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:profile_page"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --cms_path=/website/en/_boxes"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:error_tracking --provider=airbrake"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:newrelic \"Test Website\""
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:profile_page"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:blog --cms_path=/website/en"
+          # sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --cms_path=/website/en/_boxes"
+          # sh "cd #{app_path} && bundle exec rails generate cms:widget:video --cms_path=/website/en/_boxes"
+          sh "cd #{app_path} && bundle exec rails generate cms:widget:person --cms_path=/website/en/_boxes"
 
           sh "cd #{app_path} && bundle exec rake cms:migrate"
         end

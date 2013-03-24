@@ -19,7 +19,19 @@ module Cms
         type: :array,
         aliases: '-a',
         default: [],
-        desc: 'List of CMS attributes of the CMS object class.'
+        desc: 'List of CMS attributes of the new CMS object class.'
+
+      class_option :preset_attributes,
+        type: :hash,
+        aliases: '-p',
+        default: {},
+        desc: 'Hash of CMS attributes and their presets for the new object class.'
+
+      class_option :mandatory_attributes,
+        type: :array,
+        aliases: '-m',
+        default: [],
+        desc: 'List of CMS mandatory attributes of the new object class.'
 
       def create_model_file
         template('model.rb', File.join('app/models', "#{file_name}.rb"))
@@ -48,6 +60,14 @@ module Cms
 
       def type
         options[:type]
+      end
+
+      def preset_attributes
+        options[:preset_attributes]
+      end
+
+      def mandatory_attributes
+        options[:mandatory_attributes]
       end
     end
   end

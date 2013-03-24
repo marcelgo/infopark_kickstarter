@@ -25,19 +25,22 @@ describe Cms::Generators::Component::NewrelicGenerator do
     File.open("#{config_path}/custom_cloud.yml", 'w')
   end
 
-  it 'appends custom cloud file' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'config' do
         file 'custom_cloud.yml' do
           contains 'newrelic:'
           contains "  api_key: ''"
+          contains "  deploy_key: ''"
+        end
+
+        file 'newrelic.yml' do
+          contains "license_key: ''"
+          contains 'app_name: "Test Website"'
+          contains 'app_name: "Test Website (Staging)"'
         end
       end
-    }
-  end
 
-  it 'creates deploy files' do
-    destination_root.should have_structure {
       directory 'deploy' do
         directory 'templates' do
           file 'newrelic.yml.erb' do
@@ -48,25 +51,10 @@ describe Cms::Generators::Component::NewrelicGenerator do
 
         file 'after_restart.rb' do
           contains "newrelic_app_name = 'Test Website'"
+          contains "newrelic_deploy_key = node['custom_cloud']['newrelic']['deploy_key']"
         end
       end
-    }
-  end
 
-  it 'creates developer mode configuration' do
-    destination_root.should have_structure {
-      directory 'config' do
-        file 'newrelic.yml' do
-          contains "license_key: ''"
-          contains 'app_name: "Test Website"'
-          contains 'app_name: "Test Website (Staging)"'
-        end
-      end
-    }
-  end
-
-  it 'adds gem' do
-    destination_root.should have_structure {
       file 'Gemfile' do
         contains 'gem "newrelic_rpm"'
       end
