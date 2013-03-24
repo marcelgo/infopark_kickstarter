@@ -30,9 +30,13 @@ describe Cms::Generators::Component::GoogleAnalyticsGenerator do
     File.open("#{environments_path}application.html.haml", 'w') { |f| f.write("= javascript_include_tag 'application'") }
   end
 
-  it 'creates view' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
+        directory 'models' do
+          file 'google_analytics.rb'
+        end
+
         directory 'cells' do
           file 'google_analytics_cell.rb'
 
@@ -41,31 +45,7 @@ describe Cms::Generators::Component::GoogleAnalyticsGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates model file' do
-    destination_root.should have_structure {
-      directory 'app' do
-        directory 'models' do
-          file 'google_analytics.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates test file' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'google_analytics_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration file' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_google_analytics'
@@ -74,6 +54,12 @@ describe Cms::Generators::Component::GoogleAnalyticsGenerator do
             contains "'google_analytics_tracking_id' => '1234'"
             contains "'google_analytics_anonymize_ip' => 'Yes'"
           end
+        end
+      end
+
+      directory 'spec' do
+        directory 'models' do
+          file 'google_analytics_spec.rb'
         end
       end
     }

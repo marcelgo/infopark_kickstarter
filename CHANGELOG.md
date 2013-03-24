@@ -2,6 +2,8 @@
   * Bugfix: Creates file `before_migrate.rb` if it doesn't exist yet. This fixes an annoyence that
     was reported several times.
   * Speed up kickstart time by grouping gem setup at the beginning. (Thanks @sethiele)
+  * A new person box type was added. It allows to display a crm person with some details like her
+    name and email. See `rails generate cms:widget:person --help` for more details.
 
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to

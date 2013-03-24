@@ -36,7 +36,7 @@ describe Cms::Generators::Widget::VideoGenerator do
     File.open("#{destination_root}/Gemfile", 'w')
   end
 
-  it 'creates app files' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
@@ -91,32 +91,20 @@ describe Cms::Generators::Widget::VideoGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_video_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_box_video'
           migration 'create_box_video_example'
         end
       end
-    }
-  end
 
-  it 'extends Gemfile' do
-    destination_root.should have_structure {
+      directory 'spec' do
+        directory 'models' do
+          file 'box_video_spec.rb'
+        end
+      end
+
       file 'Gemfile' do
         contains 'gem "video_info"'
         contains 'gem "projekktor-rails"'

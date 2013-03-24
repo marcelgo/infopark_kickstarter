@@ -32,12 +32,12 @@ describe Cms::Generators::Component::BlogGenerator do
     end
 
     File.open("#{destination_root}/Gemfile", 'w')
-    File.open("#{paths[:layout_path]}/application.html.haml", 'w') { |f| f.write("%link{href: '/favicon.ico', rel: 'shortcut icon'}") }
+    File.open("#{paths[:layout_path]}/application.html.haml", 'w') { |f| f.write("%link{href: '/favicon.ico', rel: 'shortcut icon'}\n") }
     File.open("#{paths[:config_path]}/custom_cloud.yml", 'w')
   end
 
-  it 'create app files' do
-    destination_root.should have_structure do
+  it 'create files' do
+    destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
           file 'blog.rb'
@@ -95,14 +95,10 @@ describe Cms::Generators::Component::BlogGenerator do
           file 'blog_entry_controller.rb'
         end
       end
-    end
-  end
 
-  it 'update gemfile' do
-    destination_root.should have_structure do
       file 'Gemfile' do
         contains 'gem "gravatar_image_tag"'
       end
-    end
+    }
   end
 end

@@ -23,7 +23,7 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
     File.open("#{layouts_path}/application.html.haml", 'w') { |f| f.write("            = render_cell(:meta_navigation, :show, @obj, current_user)\n") }
   end
 
-  it 'creates views' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do

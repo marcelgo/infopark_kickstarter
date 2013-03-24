@@ -24,20 +24,14 @@ describe Cms::Generators::Component::ErrorTracking::AirbrakeGenerator do
     File.open("#{config_path}/custom_cloud.yml", 'w')
   end
 
-  it 'appends custom cloud file' do
+  it 'creates initializer file' do
     destination_root.should have_structure {
       directory 'config' do
         file 'custom_cloud.yml' do
           contains 'airbrake:'
           contains "  api_key: ''"
         end
-      end
-    }
-  end
 
-  it 'creates initializer file' do
-    destination_root.should have_structure {
-      directory 'config' do
         directory 'initializers' do
           file 'airbrake.rb' do
             contains "configuration = YAML.load_file(Rails.root + 'config/custom_cloud.yml')"
@@ -46,21 +40,13 @@ describe Cms::Generators::Component::ErrorTracking::AirbrakeGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'appends deploy file' do
-    destination_root.should have_structure {
       directory 'deploy' do
         file 'after_restart.rb' do
           contains 'run "bundle exec rake environment airbrake:deploy TO=#{new_resource.environment[\'RAILS_ENV\']}"'
         end
       end
-    }
-  end
 
-  it 'adds gem' do
-    destination_root.should have_structure {
       file 'Gemfile' do
         contains 'gem "airbrake"'
       end

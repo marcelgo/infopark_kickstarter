@@ -14,7 +14,7 @@ describe Cms::Generators::AttributeGenerator do
     run_generator
   end
 
-  it 'generates string attribute migration' do
+  it 'generates attribute files' do
     destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do

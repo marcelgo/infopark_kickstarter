@@ -38,9 +38,30 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
     File.open("#{config_environments_path}/routes.rb", 'w')
   end
 
-  it 'creates app files' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
+        directory 'assets' do
+          directory 'javascripts' do
+            file 'application.js' do
+              contains "new GoogleMap.App('.google_maps .map');"
+            end
+
+            directory 'google_maps' do
+              file 'app.js.coffee'
+
+              directory 'model' do
+                file 'map.js.coffee'
+                file 'pin.js.coffee'
+              end
+            end
+          end
+
+          directory 'stylesheets' do
+            file 'google_maps.css.scss'
+          end
+        end
+
         directory 'cells' do
           directory 'box' do
             file 'box_google_maps_cell.rb'
@@ -69,60 +90,21 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_google_maps_spec.rb'
-          file 'google_maps_pin_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_box_google_maps'
           migration 'create_box_google_maps_example'
         end
       end
-    }
-  end
 
-  it 'creates asset files' do
-    destination_root.should have_structure {
-      directory 'app' do
-        directory 'assets' do
-          directory 'javascripts' do
-            file 'application.js' do
-              contains "new GoogleMap.App('.google_maps .map');"
-            end
-
-            directory 'google_maps' do
-              file 'app.js.coffee'
-
-              directory 'model' do
-                file 'map.js.coffee'
-                file 'pin.js.coffee'
-              end
-            end
-          end
-
-          directory 'stylesheets' do
-            file 'google_maps.css.scss'
-          end
+      directory 'spec' do
+        directory 'models' do
+          file 'box_google_maps_spec.rb'
+          file 'google_maps_pin_spec.rb'
         end
       end
-    }
-  end
 
-  it 'extends Gemfile' do
-    destination_root.should have_structure {
       file 'Gemfile' do
         contains 'gem "geocoder"'
       end
