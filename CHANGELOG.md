@@ -1,4 +1,6 @@
 # v1.1.0
+  * A new slider box type was added. It slides selected images and displays there title in an
+    overlay. See `rails generate cms:widget:slider --help` for more details.
   * Bugfix: Creates file `before_migrate.rb` if it doesn't exist yet. This fixes an annoyence that
     was reported several times.
   * Speed up kickstart time by grouping gem setup at the beginning. (Thanks @sethiele)

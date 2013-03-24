@@ -1,0 +1,8 @@
+%div.carousel.slide{id: @id}
+  = render(state: :indicators)
+
+  = render(state: :images)
+
+  = render({ state: :control }, :prev)
+
+  = render({ state: :control }, :next)
