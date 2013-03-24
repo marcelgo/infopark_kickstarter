@@ -14,7 +14,7 @@ describe Cms::Generators::ControllerGenerator do
     run_generator
   end
 
-  it 'generates news controller' do
+  it 'generates controller files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'controllers' do

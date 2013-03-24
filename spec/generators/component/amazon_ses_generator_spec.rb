@@ -23,33 +23,23 @@ describe Cms::Generators::Component::AmazonSesGenerator do
     File.open("#{environments_path}/test.rb", 'a') { |f| f.write('Test::Application.configure do') }
   end
 
-  it 'creates initializer file' do
-    destination_root.should have_structure {
-      directory 'config' do
-        directory 'initializers' do
-          file 'amazon_ses.rb'
-        end
-      end
-    }
-
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'config' do
         directory 'environments' do
           file 'production.rb' do
             contains 'config.action_mailer.raise_delivery_errors = true'
           end
-        end
-      end
-    }
 
-    destination_root.should have_structure {
-      directory 'config' do
-        directory 'environments' do
           file 'test.rb' do
             contains 'config.action_mailer.default_url_options = {'
             contains "host: 'localhost',"
             contains 'port: 3000,'
           end
+        end
+
+        directory 'initializers' do
+          file 'amazon_ses.rb'
         end
       end
     }

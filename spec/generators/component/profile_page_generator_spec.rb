@@ -39,16 +39,7 @@ describe Cms::Generators::Component::ProfilePageGenerator do
     File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write('= display_title(@search_page)') }
   end
 
-  it 'adds gems' do
-    destination_root.should have_structure {
-      file 'Gemfile' do
-        contains 'valid_email'
-        contains 'localized_country_select'
-      end
-    }
-  end
-
-  it 'creates app file' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
@@ -87,37 +78,30 @@ describe Cms::Generators::Component::ProfilePageGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates locales file' do
-    destination_root.should have_structure {
       directory 'config' do
         directory 'locales' do
           file 'de.profile_page.yml'
           file 'en.profile_page.yml'
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'profile_page_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_profile_page'
           migration 'create_profile_page_example'
         end
+      end
+
+      directory 'spec' do
+        directory 'models' do
+          file 'profile_page_spec.rb'
+        end
+      end
+
+      file 'Gemfile' do
+        contains 'valid_email'
+        contains 'localized_country_select'
       end
     }
   end

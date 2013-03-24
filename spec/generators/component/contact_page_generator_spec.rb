@@ -38,15 +38,7 @@ describe Cms::Generators::Component::ContactPageGenerator do
     File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write('= display_title(@search_page)') }
   end
 
-  it 'adds email validation gem' do
-    destination_root.should have_structure {
-      file 'Gemfile' do
-        contains 'valid_email'
-      end
-    }
-  end
-
-  it 'creates app file' do
+  it 'creates file' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
@@ -75,21 +67,20 @@ describe Cms::Generators::Component::ContactPageGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates locales file' do
-    destination_root.should have_structure {
       directory 'config' do
         directory 'locales' do
           file 'de.contact_page.yml'
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_contact_page'
+          migration 'create_contact_page_example'
+        end
+      end
+
       directory 'spec' do
         directory 'models' do
           file 'contact_page_spec.rb'
@@ -103,16 +94,9 @@ describe Cms::Generators::Component::ContactPageGenerator do
           file 'contact_page_presenter_spec.rb'
         end
       end
-    }
-  end
 
-  it 'creates migration files' do
-    destination_root.should have_structure {
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_contact_page'
-          migration 'create_contact_page_example'
-        end
+      file 'Gemfile' do
+        contains 'valid_email'
       end
     }
   end

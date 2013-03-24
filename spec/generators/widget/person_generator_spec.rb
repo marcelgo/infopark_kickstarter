@@ -2,11 +2,11 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
-require 'generators/cms/widget/image/image_generator.rb'
+require 'generators/cms/widget/person/person_generator.rb'
 require 'generators/cms/attribute/attribute_generator'
 require 'generators/cms/model/model_generator'
 
-describe Cms::Generators::Widget::ImageGenerator do
+describe Cms::Generators::Widget::PersonGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)
@@ -32,23 +32,21 @@ describe Cms::Generators::Widget::ImageGenerator do
       directory 'app' do
         directory 'cells' do
           directory 'box' do
-            file 'box_image_cell.rb'
+            file 'box_person_cell.rb'
 
-            directory 'box_image' do
+            directory 'box_person' do
               file 'show.html.haml'
-              file 'image_with_link.html.haml'
-              file 'image_without_link.html.haml'
+              file 'name.html.haml'
+              file 'email.html.haml'
             end
           end
         end
 
         directory 'models' do
-          file 'box_image.rb' do
-            contains 'include Cms::Attributes::SortKey'
-            contains 'include Cms::Attributes::Caption'
-            contains 'include Cms::Attributes::Source'
-            contains 'include Cms::Attributes::LinkTo'
+          file 'box_person.rb' do
             contains 'include Box'
+            contains 'include Cms::Attributes::Person'
+            contains 'include Cms::Attributes::SortKey'
           end
         end
 
@@ -56,9 +54,7 @@ describe Cms::Generators::Widget::ImageGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'sort_key.rb'
-              file 'caption.rb'
-              file 'source.rb'
-              file 'link_to.rb'
+              file 'person.rb'
             end
           end
         end
@@ -66,14 +62,8 @@ describe Cms::Generators::Widget::ImageGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_image'
-          migration 'create_image_widget_example'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'box_image_spec.rb'
+          migration 'create_box_person'
+          migration 'create_box_person_example'
         end
       end
     }
