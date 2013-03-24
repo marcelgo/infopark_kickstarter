@@ -1,7 +1,8 @@
 .box.box_text.well
   = render(state: :edit_marker)
 
-  %h3
-    = display_field(@box, :title)
+  - if @box.title.present?
+    %h3
+      = display_field(@box, :title)
 
   = display_field(@box, :body)

@@ -1,0 +1,1 @@
+xml.description render_cell(:box, :show, @entry, @box)

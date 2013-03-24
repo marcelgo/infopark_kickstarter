@@ -1,0 +1,1 @@
+xml << render_cell(:box, :entries, @obj, @entries)

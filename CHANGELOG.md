@@ -1,6 +1,14 @@
+# v1.1.0
+  * Bugfix: Creates file `before_migrate.rb` if it doesn't exist yet. This fixes an annoyence that
+    was reported several times.
+  * Speed up kickstart time by grouping gem setup at the beginning. (Thanks @sethiele)
+
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
     get the latest version.
+  * Added blog component to generate a basic blog with RSS and comment functionality based on the
+    box framework. Call `rails generate cms:component:blog --help` to get started.
+  * Added `image_url` application helper to determine the external url of an image.
   * Added rake task to check the status of the Infopark Cloud-Express Platform. Run
     `rake cms:status` to get current status information.
   * A new video box type was added. It allows to play videos from the CMS, vimeo and youtube. See
@@ -9,6 +17,10 @@
     dedicated obj class.
   * Cleaned up the composition pattern used to add common behavior to object classes. You can
     differentiate between a `Page` and a `Box` by mixing in a module in the model class.
+  * Updated links to the Infopark Console to `https://console.infopark.net`.
+  * Bugfix: The markup for box titles is no longer displayed, when no title exists.
+  * Cleaned up and extended the composition pattern used to add common behavior to object classes.
+    You can now differentiate between a `Page`, a `Box` and a `Resource`.
   * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
     This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
     gem. (Thanks @thomasritz)

@@ -33,7 +33,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module News'
                 contains 'def news'
-                contains "(self[:news] || '').to_s"
+                contains "self[:news] || ''"
               end
             end
           end
@@ -208,7 +208,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module BodyMd'
                 contains 'def body_md'
-                contains "(self[:body_md] || '').to_s.html_safe"
+                contains "(self[:body_md] || '').html_safe"
               end
             end
           end
@@ -328,7 +328,7 @@ describe Cms::Generators::AttributeGenerator do
                 contains 'module Attributes'
                 contains 'module Foo'
                 contains 'def bar'
-                contains "(self[:foo] || '').to_s"
+                contains "self[:foo] || ''"
               end
             end
           end
