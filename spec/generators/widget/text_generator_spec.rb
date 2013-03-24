@@ -27,7 +27,7 @@ describe Cms::Generators::Widget::TextGenerator do
   def prepare_environments
   end
 
-  it 'creates app files' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
@@ -55,25 +55,17 @@ describe Cms::Generators::Widget::TextGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_text_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_box_text'
           migration 'create_text_widget_example'
+        end
+      end
+
+      directory 'spec' do
+        directory 'models' do
+          file 'box_text_spec.rb'
         end
       end
     }

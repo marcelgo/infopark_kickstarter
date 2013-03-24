@@ -14,7 +14,7 @@ describe Cms::Generators::ModelGenerator do
     run_generator
   end
 
-  it 'generates news model' do
+  it 'generates model files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
@@ -22,15 +22,10 @@ describe Cms::Generators::ModelGenerator do
             contains 'class News < Obj'
             contains '# include Page'
             contains '# include Box'
-            contains '# include Resource'
           end
         end
       end
-    }
-  end
 
-  it 'creates migration file' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_news' do

@@ -1,0 +1,12 @@
+Description:
+    Generates a person widget to display details of a CRM person. The widget only requires an
+    identifier like login or email and will then display some details about this person if
+    available.
+
+Example:
+    CMS: obj_class BoxPerson
+    CMS: attribute sort_key (string)
+    CMS: attribute person (string)
+
+    `rails generate cms:widget:person`
+    `rails generate cms:widget:person --cms_path=/website/en/_boxes`

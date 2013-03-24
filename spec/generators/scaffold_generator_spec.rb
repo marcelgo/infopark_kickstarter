@@ -14,7 +14,7 @@ describe Cms::Generators::ScaffoldGenerator do
     run_generator
   end
 
-  it 'generates news model' do
+  it 'generates scaffold files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
@@ -22,13 +22,7 @@ describe Cms::Generators::ScaffoldGenerator do
             contains 'class News < Obj'
           end
         end
-      end
-    }
-  end
 
-  it 'generates news controller' do
-    destination_root.should have_structure {
-      directory 'app' do
         directory 'controllers' do
           file 'news_controller.rb' do
             contains 'class NewsController < CmsController'

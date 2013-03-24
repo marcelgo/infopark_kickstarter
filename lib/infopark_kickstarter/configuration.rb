@@ -25,7 +25,7 @@ module InfoparkKickstarter
     end
 
     def konsole_url
-      'https://admin.saas.infopark.net/tenant_management/tenants'
+      'https://console.infopark.net'
     end
 
     def knowledge_base_url

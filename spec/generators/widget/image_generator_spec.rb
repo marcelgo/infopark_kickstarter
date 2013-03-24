@@ -27,7 +27,7 @@ describe Cms::Generators::Widget::ImageGenerator do
   def prepare_environments
   end
 
-  it 'creates app files' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
@@ -63,25 +63,17 @@ describe Cms::Generators::Widget::ImageGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_image_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
           migration 'create_box_image'
           migration 'create_image_widget_example'
+        end
+      end
+
+      directory 'spec' do
+        directory 'models' do
+          file 'box_image_spec.rb'
         end
       end
     }

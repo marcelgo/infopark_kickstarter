@@ -37,14 +37,29 @@ module Cms
         end
       end
 
-      def form_tools
+      def install_gems
         gem('active_attr')
         gem('simple_form')
+        gem('haml-rails')
+        gem('cells')
+
+        gem_group(:assets) do
+          gem('less-rails-bootstrap')
+        end
+
+        gem_group(:test, :development) do
+          gem('pry-rails')
+          gem('better_errors')
+          gem('binding_of_caller')
+          gem('rspec-rails')
+        end
 
         Bundler.with_clean_env do
           run('bundle --quiet')
         end
+      end
 
+      def form_tools
         generate('simple_form:install --bootstrap --template-engine=haml')
 
         remove_file('config/locales/simple_form.de.yml')
@@ -53,26 +68,12 @@ module Cms
       end
 
       def include_dev_tools
-        gem_group(:test, :development) do
-          gem('pry-rails')
-          gem('better_errors')
-          gem('binding_of_caller')
-        end
-
         developer_initializer_path = 'config/initializers/developer.rb'
         append_file('.gitignore', developer_initializer_path + "\n")
         template('developer.rb', developer_initializer_path)
       end
 
       def install_test_framework
-        gem_group(:test, :development) do
-          gem('rspec-rails')
-        end
-
-        Bundler.with_clean_env do
-          run('bundle --quiet')
-        end
-
         generate('rspec:install')
       end
 
@@ -82,24 +83,22 @@ module Cms
         create_file('deploy/after_restart.rb')
         create_file('deploy/before_symlink.rb')
 
-        prepend_file('deploy/before_migrate.rb') do
+        destination = 'deploy/before_migrate.rb'
+
+        unless File.exist?(destination)
+          create_file(destination)
+        end
+
+        prepend_file(destination) do
           File.read(find_in_source_paths('deploy/before_migrate.rb'))
         end
       end
 
       def include_and_configure_template_engine
-        gem('haml-rails')
-
         application_erb_file = 'app/views/layouts/application.html.erb'
 
         if File.exist?(application_erb_file)
           remove_file(application_erb_file)
-        end
-      end
-
-      def install_css_framework
-        gem_group(:assets) do
-          gem('less-rails-bootstrap')
         end
       end
 
@@ -127,7 +126,6 @@ module Cms
           validate_obj_class(class_name)
 
           Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
-          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -136,7 +134,6 @@ module Cms
           validate_obj_class(class_name)
 
           Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
-          turn_model_into_resource(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -190,15 +187,7 @@ module Cms
       end
 
       def create_box_model
-        gem('cells')
-
         template('cells_error_handling.rb', 'config/initializers/cells.rb')
-      end
-
-      def bundle
-        Bundler.with_clean_env do
-          run('bundle --quiet')
-        end
       end
 
       def add_initital_components
