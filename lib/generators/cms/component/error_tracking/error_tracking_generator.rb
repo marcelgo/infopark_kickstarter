@@ -30,7 +30,7 @@ module Cms
         def run_generator_for_selectd_provider
           Rails::Generators.invoke(
             "cms:component:error_tracking:#{options[:provider]}",
-            ["--skip_deployment_notification=#{options[:skip_deployment_notification]}"],
+            ["--skip-deployment-notification=#{options[:skip_deployment_notification]}"],
             behavior: behavior
           )
         end

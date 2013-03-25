@@ -3,7 +3,7 @@ Description:
 
 Example:
     `rails generate cms:component:error_tracking:honeybadger`
-    `rails generate cms:component:error_tracking:honeybadger --skip_deployment_notification`
+    `rails generate cms:component:error_tracking:honeybadger --skip-deployment-notification`
 
     Gems: honeybadger
     Configuration: extends config/custom_cloud.yml

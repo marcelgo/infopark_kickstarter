@@ -55,7 +55,7 @@
     host application.
   * Bugfix: The contact form raised an error when there was no user logged in.
   * Airbrake component now includes secure option by default and does not depend on the kickstart
-    generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
+    generator anymore. Also added option "--skip-deployment-notification" if you don't resolve all
     error notifications on deployment.
   * Airbrake component is now available as the default provider for the error tracking component.
     This allows to support different error tracking solutions in the future. Run
