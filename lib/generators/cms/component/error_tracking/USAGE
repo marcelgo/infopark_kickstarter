@@ -1,9 +1,10 @@
 Description:
-    Integrates the an error tracking provider. By default, "Airbrake" is used as a provider.
+    Integrates an error tracking provider. By default, "Honeybadger" is used as a provider.
 
 Example:
     `rails generate cms:component:error_tracking`
-    `rails generate cms:component:error_tracking --provider=airbrake`
+    `rails generate cms:component:error_tracking --provider=honeybadger`
 
     Misc: Executes provider dependent generator:
+          `rails generate cms:component:error_tracking:honeybadger`
           `rails generate cms:component:error_tracking:airbrake`

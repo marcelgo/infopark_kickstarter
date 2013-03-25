@@ -1,0 +1,11 @@
+Description:
+    Integrates the error notification service "Honeybadger".
+
+Example:
+    `rails generate cms:component:error_tracking:honeybadger`
+    `rails generate cms:component:error_tracking:honeybadger --skip_deployment_notification`
+
+    Gems: honeybadger
+    Configuration: extends config/custom_cloud.yml
+    Initializer: config/initializers/honeybadger.rb
+    Deployment: extends deploy/after_restart.rb
