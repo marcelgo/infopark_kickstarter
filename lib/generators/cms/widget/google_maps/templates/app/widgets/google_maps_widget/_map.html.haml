@@ -1,0 +1,4 @@
+- url = URI.escape("http://maps.google.de/maps?f=q&source=s_q&hl=de&geocode=&q=#{location}&ie=UTF8&t=m&z=14&output=embed").html_safe
+
+.map
+  %iframe.framed(scrolling="no" frameborder="0" marginwidth="0" marginheight="0" src=url)

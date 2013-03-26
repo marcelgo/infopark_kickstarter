@@ -1,0 +1,8 @@
+.box.google_maps_widget.well
+  - if @widget.title.present?
+    = cms_tag(:h3, @widget, :title)
+
+  - if @widget.body.present?
+    = cms_tag(:div, @widget, :body)
+
+  = render partial: 'google_maps_widget/map', locals: { location: @widget.address }

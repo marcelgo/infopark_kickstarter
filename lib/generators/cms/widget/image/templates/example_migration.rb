@@ -34,6 +34,6 @@ class CreateImageWidgetExample < ::RailsConnector::Migrations::Migration
   end
 
   def homepage
-     homepage = Obj.find_by_path('<%= homepage_path %>')
+     Obj.find_by_path('<%= homepage_path %>')
   end
 end

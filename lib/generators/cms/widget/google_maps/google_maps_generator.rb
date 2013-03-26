@@ -4,11 +4,11 @@ module Cms
       class GoogleMapsGenerator < ::Rails::Generators::Base
         include Migration
 
-        class_option :cms_path,
-          type: :string,
-          default: nil,
-          desc: 'CMS parent path where the example box should be placed under.',
-          banner: 'LOCATION'
+        class_option :example,
+          type: :boolean,
+          default: false,
+          desc: 'Create an example migration',
+          banner: 'EXAMPLE'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -16,28 +16,49 @@ module Cms
           begin
             validate_attribute(map_type_attribute_name)
 
-            Rails::Generators.invoke('cms:attribute', [map_type_attribute_name, '--type=enum', '--title=Map Type', '--values=ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'])
+            Rails::Generators.invoke(
+              'cms:attribute',
+              [
+                map_type_attribute_name,
+                '--type=enum',
+                '--title=Map Type',
+                '--values=ROADMAP',
+                'SATELLITE',
+                'HYBRID',
+                'TERRAIN',
+                '--method_name=map_type'
+              ]
+            )
           rescue Cms::Generators::DuplicateResourceError
           end
 
           begin
             validate_attribute(address_attribute_name)
 
-            Rails::Generators.invoke('cms:attribute', [address_attribute_name, '--type=string', '--title=Address'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(pin_class_name)
-
-            Rails::Generators.invoke('cms:model', [pin_class_name, "--attributes=#{address_attribute_name}", '--title=GoogleMaps: Pin'])
+            Rails::Generators.invoke(
+              'cms:attribute',
+              [
+                address_attribute_name,
+                '--type=string',
+                '--title=Address',
+                '--method_name=address'
+              ]
+            )
           rescue Cms::Generators::DuplicateResourceError
           end
 
           begin
             validate_obj_class(map_class_name)
 
-            Rails::Generators.invoke('cms:model', [map_class_name, "--attributes=#{map_type_attribute_name}", address_attribute_name, '--title=Box: GoogleMaps'])
+            Rails::Generators.invoke(
+              'cms:model',
+              [
+                map_class_name,
+                "--attributes=#{map_type_attribute_name}",
+                address_attribute_name,
+                '--title=Widget: GoogleMaps'
+              ]
+            )
           rescue Cms::Generators::DuplicateResourceError
           end
 
@@ -51,71 +72,20 @@ module Cms
           directory('spec', force: true)
         end
 
-        def update_routes
-          route('resources :google_maps, only: [:show]')
-        end
-
-        def update_application_layout
-          file = 'app/views/layouts/application.html.haml'
-          insert_point = "= javascript_include_tag('application')\n"
-
-          data = []
-
-          data << "    = javascript_include_tag('http://maps.google.com/maps/api/js?sensor=false')"
-
-          data = data.join("\n")
-
-          insert_into_file(file, data, after: insert_point)
-        end
-
-        def update_application_js
-          file = 'app/assets/javascripts/application.js'
-
-          data = []
-
-          data << ''
-          data << ''
-          data << '$(document).ready(function() {'
-          data << "  new GoogleMap.App('.google_maps .map');"
-          data << '});'
-
-          data = data.join("\n")
-
-          append_file(file) do
-            data
-          end
-        end
-
         def add_example
           if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_box_google_maps_example.rb')
-          end
-        end
-
-        def add_geocoder_gem
-          gem('geocoder')
-
-          Bundler.with_clean_env do
-            run('bundle --quiet')
+            migration_template('example_migration.rb', 'cms/migrate/create_google_maps_widget_example.rb')
           end
         end
 
         private
 
         def example?
-          cms_path.present?
-        end
-
-        def cms_path
-          options[:cms_path]
+          options[:example]
         end
 
         def map_class_name
-          'BoxGoogleMaps'
-        end
-
-        def pin_class_name
-          'GoogleMapsPin'
+          'GoogleMapsWidget'
         end
 
         def address_attribute_name
