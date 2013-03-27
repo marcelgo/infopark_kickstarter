@@ -1,6 +1,3 @@
-%form
-  %input{name: 'q', type: 'text', value: @query, placeholder: t('search.placeholder')}
-
 - if @query.present? && @hits.length > 0
   %h2
     = t('hits_found', query: h(@query))
@@ -11,7 +8,9 @@
         = hit.title
 
         = link_to(cms_path(hit)) do
-          = hit.path
+          %br
+          %small
+            = cms_path(hit)
 
 - elsif @query.present?
   %h2

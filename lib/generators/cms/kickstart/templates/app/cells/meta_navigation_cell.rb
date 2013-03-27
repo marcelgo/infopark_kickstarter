@@ -14,7 +14,6 @@ class MetaNavigationCell < Cell::Rails
     @current_user = current_user
 
     @login_page = page.homepage.login_page
-    @search_page = page.homepage.search_page
 
     render
   end

@@ -1,0 +1,10 @@
+en:
+  search:
+    title: 'Search'
+    specify_query: 'Please enter a search term.'
+    search_disabled: 'The search is currently unavailable due to maintenance.'
+    placeholder: 'Search'
+    hits_found: "Your search query '%{query}' has the following results:"
+    no_hits: "Your search query '%{query}' did not have any results."
+    no_index: 'The current workspace does not have a search index.'
+    search: 'Go!'    

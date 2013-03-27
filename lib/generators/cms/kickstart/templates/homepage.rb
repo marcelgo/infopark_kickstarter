@@ -1,6 +1,5 @@
 class Homepage < Obj
   include Cms::Attributes::ErrorNotFoundPageLink
-  include Cms::Attributes::SearchPageLink
   include Cms::Attributes::LoginPageLink
   include Cms::Attributes::Locale
 

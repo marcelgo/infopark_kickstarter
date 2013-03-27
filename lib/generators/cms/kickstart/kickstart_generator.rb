@@ -140,9 +140,8 @@ module Cms
         Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
         Rails::Generators.invoke('cms:attribute', ['error_not_found_page_link', '--title=Error Not Found Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
-        Rails::Generators.invoke('cms:attribute', ['search_page_link', '--title=Search Page', '--type=linklist'])
         Rails::Generators.invoke('cms:attribute', ['locale', '--title=Locale', '--type=string'])
-        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_not_found_page_link', 'login_page_link', 'search_page_link', 'locale', 'show_in_navigation'])
+        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_not_found_page_link', 'login_page_link', 'locale', 'show_in_navigation'])
 
         Rails::Generators.invoke('cms:model', ['Root', '--title=Root'])
         Rails::Generators.invoke('cms:model', ['Website', '--title=Website'])
@@ -152,9 +151,6 @@ module Cms
 
         Rails::Generators.invoke('cms:scaffold', ['ContentPage', '--title=Page: Content', '--attributes=show_in_navigation', 'sort_key'])
         turn_model_into_page('ContentPage')
-
-        Rails::Generators.invoke('cms:scaffold', ['SearchPage', '--title=Page: Search', '--attributes=show_in_navigation'])
-        turn_model_into_page('SearchPage')
 
         Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
 

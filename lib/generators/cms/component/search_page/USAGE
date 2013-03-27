@@ -1,0 +1,15 @@
+Description:
+    Installs the search component including a search page example connected to a homepage. The
+    homepage can be configured with the ```---homepage_path``` parameter.
+
+Example:
+    `rails generate cms:component:search`
+    `rails generate cms:component:search --homepage_path=/website/en`
+
+    CMS: obj_class SearchPage
+    CMS: attribute show_in_navigation (enum)
+    CMS: attribute search_page_link (linklist)
+    Misc: extends app/models/homepage.rb
+    Misc: extends app/views/layouts/application.html.haml
+    Misc: adds app/cells/search_cell.rb
+    Misc: adds app/cells/search/show.html.haml

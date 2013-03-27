@@ -1,7 +1,7 @@
 module Cms
   module Generators
     module Component
-      class ProfilePageGenerator < ::Rails::Generators::Base
+      class SearchPageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
         include Actions
@@ -11,28 +11,7 @@ module Cms
           :default => nil,
           :desc => 'Path to a CMS homepage, for which to create the contact form.'
 
-        class_option :skip_translation_import,
-          :type => :boolean,
-          :default => false,
-          :desc => 'Skip import of country translation files.'
-
         source_root File.expand_path('../templates', __FILE__)
-
-        def add_gems
-          gem('valid_email', '0.0.4')
-          gem('localized_country_select', '>= 0.9.2')
-
-          Bundler.with_clean_env do
-            run('bundle --quiet')
-          end
-        end
-
-        def import_translations
-          unless options[:skip_translation_import]
-            run('rake import:country_select LOCALE=en')
-            run('rake import:country_select LOCALE=de')
-          end
-        end
 
         def extend_homepage
           file = 'app/models/homepage.rb'
@@ -40,21 +19,7 @@ module Cms
 
           data = []
 
-          data << '  include Cms::Attributes::ProfilePageLink'
-          data << ''
-
-          data = data.join("\n")
-
-          insert_into_file(file, data, :after => insert_point)
-        end
-
-        def extend_cell
-          file = 'app/cells/meta_navigation_cell.rb'
-          insert_point = "@login_page = page.homepage.login_page\n"
-
-          data = []
-
-          data << '    @profile_page = page.homepage.profile_page'
+          data << '  include Cms::Attributes::SearchPageLink'
           data << ''
 
           data = data.join("\n")
@@ -63,16 +28,17 @@ module Cms
         end
 
         def extend_view
-          file = 'app/cells/meta_navigation/show.html.haml'
-          insert_point = "      = t('.meta')"
+          file = 'app/views/layouts/application.html.haml'
+          insert_point = '            = render_cell(:meta_navigation, :show, @obj, current_user)'
 
           data = []
 
           data << "\n"
-          data << '    - if @current_user.logged_in?'
-          data << '      %li'
-          data << '        = link_to(cms_path(@profile_page)) do'
-          data << '          = display_title(@profile_page)'
+          data << '            .well'
+          data << '              %h3'
+          data << "                = t('search.title')"
+          data << ''
+          data << '              = render_cell(:search, :show, @obj)'
 
           data = data.join("\n")
 
@@ -81,9 +47,9 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(profile_page_attribute_name)
+            validate_attribute(search_page_attribute_name)
 
-            Rails::Generators.invoke('cms:attribute', [profile_page_attribute_name, '--type=linklist', '--title=Profile Page', '--max-size=1'])
+            Rails::Generators.invoke('cms:attribute', [search_page_attribute_name, '--type=linklist', '--title=Search Page', '--max-size=1'])
           rescue Cms::Generators::DuplicateResourceError
           end
 
@@ -97,13 +63,13 @@ module Cms
           begin
             validate_obj_class(class_name)
 
-            Rails::Generators.invoke('cms:model', [class_name, "--attributes=#{show_in_navigation_attribute_name}", '--title=Page: Profile'])
+            Rails::Generators.invoke('cms:scaffold', [class_name, '--title=Page: Search', '--attributes=show_in_navigation'])
 
             turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 
-          migration_template('example_migration.rb', 'cms/migrate/create_profile_page_example.rb')
+          migration_template('example_migration.rb', 'cms/migrate/create_search_page_example.rb')
         end
 
         def copy_app_directory
@@ -129,12 +95,12 @@ module Cms
           'show_in_navigation'
         end
 
-        def profile_page_attribute_name
-          'profile_page_link'
+        def search_page_attribute_name
+          'search_page_link'
         end
 
         def class_name
-          'ProfilePage'
+          'SearchPage'
         end
       end
     end

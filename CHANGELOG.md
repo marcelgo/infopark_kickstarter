@@ -1,4 +1,6 @@
 # v1.1.0
+  * The search has been moved into a new search_page component. It adds a new page type SearchPage as well as a separate cell for the search box. 
+    See `rails generate cms:component:search_page --help` for more details.
   * Added `honeybadger` as an error tracking provider. This will also be the default from now on
     instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
     to install.

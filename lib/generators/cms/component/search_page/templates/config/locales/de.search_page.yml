@@ -1,0 +1,10 @@
+de:
+  search:
+    title: 'Suche'
+    specify_query: 'Bitte geben Sie einen Suchbegriff ein.'
+    search_disabled: 'Wegen Wartungsarbeiten steht die Suche derzeit nicht zur Verfügung. Bitte entschuldigen Sie die Störung.'
+    placeholder: 'Suchen'
+    hits_found: "Ihre Suchanfrage nach '%{query}' lieferte folgende Treffer:"
+    no_hits: "Ihre Suchanfrage nach '%{@query}' lieferte keine Treffer."
+    no_index: 'Der aktuelle Workspace besitzt keinen Suchindex.'
+    search: 'Go!'
