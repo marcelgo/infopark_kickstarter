@@ -1,6 +1,4 @@
 .box.box_image.well
-  = render(state: :edit_marker)
-
   = render({ state: :image }, @box.source, @box.link_to)
 
   - if @box.title.present?

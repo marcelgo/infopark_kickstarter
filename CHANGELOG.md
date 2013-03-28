@@ -1,4 +1,6 @@
 # v1.1.0
+  * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
+    of Infopark RailsConnector. (Thanks @tritz)
   * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
     of accept headers. (Thanks @awendt)
   * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
