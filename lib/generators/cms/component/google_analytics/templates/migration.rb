@@ -1,6 +1,5 @@
 class IntegrateGoogleAnalytics < ::RailsConnector::Migrations::Migration
   def up
-    preset_attributes
     create_configuration_obj
     deactivate_obj_class
     add_hompage_attribute
@@ -11,16 +10,6 @@ class IntegrateGoogleAnalytics < ::RailsConnector::Migrations::Migration
 
   def path
     '<%= configuration_path %>/google_analytics'
-  end
-
-  def preset_attributes
-    update_obj_class(
-      '<%= class_name %>',
-      preset_attributes: {
-        '<%= tracking_id_attribute_name %>' => '<%= tracking_id_default %>',
-        '<%= anonymize_ip_attribute_name %>' => '<%= anonymize_ip_default %>',
-      }
-    )
   end
 
   def create_configuration_obj
@@ -40,7 +29,19 @@ class IntegrateGoogleAnalytics < ::RailsConnector::Migrations::Migration
 
   def add_hompage_attribute
     attributes = get_obj_class('Homepage')['attributes']
-    attributes << '<%= homepage_configuration_attribute_name %>'
+    attributes.map do |definition|
+      definition.delete('id')
+
+      definition.delete_if do |_, value|
+        value.nil?
+      end
+    end
+    attributes << {
+      name: '<%= homepage_configuration_attribute_name %>',
+      type: 'linklist',
+      title: 'Google Analytics',
+      max_size: 1,
+    }
 
     update_obj_class('Homepage', attributes: attributes)
   end

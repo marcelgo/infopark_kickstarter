@@ -1,4 +1,5 @@
 # v1.1.0
+  * Bugfix: Added "sort_key" to GoogleMaps Box. (Thanks @franziska-luecke)
   * Added `honeybadger` as an error tracking provider. This will also be the default from now on
     instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
     to install.

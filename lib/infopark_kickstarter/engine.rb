@@ -1,5 +1,5 @@
 module InfoparkKickstarter
-  class Engine < Rails::Engine
+  class Engine < ::Rails::Engine
     isolate_namespace InfoparkKickstarter
 
     config.generators do |generator|

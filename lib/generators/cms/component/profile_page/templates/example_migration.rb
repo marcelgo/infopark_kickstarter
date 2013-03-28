@@ -15,7 +15,21 @@ class CreateProfilePageExample < ::RailsConnector::Migration
       '<%= show_in_navigation_attribute_name %>' => 'Yes'
     )
 
-    attributes = get_obj_class('Homepage')['attributes'] << '<%= profile_page_attribute_name %>'
+    attributes = get_obj_class('Homepage')['attributes']
+    attributes.map do |definition|
+      definition.delete('id')
+
+      definition.delete_if do |_, value|
+        value.nil?
+      end
+    end
+    attributes << {
+      name: '<%= profile_page_attribute_name %>',
+      type: 'linklist',
+      title:  'Profile Page',
+      max_size:  1,
+    }
+
     update_obj_class('Homepage', :attributes => attributes)
 
     homepage = Obj.find_by_path('<%= homepage_path %>')

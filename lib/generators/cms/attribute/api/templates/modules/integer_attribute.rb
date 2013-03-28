@@ -4,8 +4,8 @@ module Cms
     # +include Cms::Attributes::<%= class_name %>+
     # in all CMS models that use this attribute.
     module <%= class_name %>
-      def <%= method_name %>
-        (self[:<%= file_name %>] || <%= preset_value %>).to_i
+      def <%= file_name %>
+        (self[:<%= file_name %>] || <%= default %>).to_i
       end
     end
   end

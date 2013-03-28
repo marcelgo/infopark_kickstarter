@@ -81,23 +81,17 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(profile_page_attribute_name)
-
-            Rails::Generators.invoke('cms:attribute', [profile_page_attribute_name, '--type=linklist', '--title=Profile Page', '--max-size=1'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(show_in_navigation_attribute_name)
-
-            Rails::Generators.invoke('cms:attribute', [show_in_navigation_attribute_name, '--type=boolean', '--title=Show in Navigation'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(class_name)
-
-            Rails::Generators.invoke('cms:model', [class_name, "--attributes=#{show_in_navigation_attribute_name}", '--title=Page: Profile'])
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = class_name
+              model.title = 'Page: Profile'
+              model.attributes = [
+                {
+                  name: show_in_navigation_attribute_name,
+                  type: :boolean,
+                  title: 'Show in navigation',
+                },
+              ]
+            end
 
             turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
