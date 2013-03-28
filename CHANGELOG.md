@@ -1,4 +1,5 @@
 # v1.1.0
+  * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
   * Added `honeybadger` as an error tracking provider. This will also be the default from now on
     instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
     to install.
