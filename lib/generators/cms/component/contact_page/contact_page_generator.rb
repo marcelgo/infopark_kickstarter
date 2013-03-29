@@ -37,10 +37,11 @@ module Cms
 
         def extend_cell
           file = 'app/cells/meta_navigation_cell.rb'
-          insert_point = "@search_page = page.homepage.search_page\n"
+          insert_point = "@current_user = current_user\n"
 
           data = []
 
+          data << ''
           data << '    @contact_page = page.homepage.contact_page'
           data << ''
 
@@ -51,14 +52,14 @@ module Cms
 
         def extend_view
           file = 'app/cells/meta_navigation/show.html.haml'
-          insert_point = '= display_title(@search_page)'
+          insert_point = "      = t('.meta')\n"
 
           data = []
 
-          data << "\n"
           data << '    %li'
           data << '      = link_to(cms_path(@contact_page)) do'
           data << '        = display_title(@contact_page)'
+          data << ''
 
           data = data.join("\n")
 

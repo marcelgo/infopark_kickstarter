@@ -1,4 +1,6 @@
 # v1.1.0
+  * Search support moved into its own generator and got cleaned up and simplified. See
+    `rails generate cms:component:search --help` for more details.
   * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
     of Infopark RailsConnector. (Thanks @tritz)
   * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
