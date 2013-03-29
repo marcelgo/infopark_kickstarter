@@ -116,10 +116,6 @@ module Cms
         template('date_attribute.rb', 'config/initializers/date_attribute.rb')
       end
 
-      def configure_editmarker
-        template('preview.js.coffee', 'app/assets/javascripts/preview.js.coffee')
-      end
-
       def create_structure_migration_file
         begin
           class_name = 'Image'

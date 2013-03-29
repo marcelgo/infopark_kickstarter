@@ -1,6 +1,11 @@
 # v1.1.0
-  * The search has been moved into a new search_page component. It adds a new page type SearchPage as well as a separate cell for the search box. 
+  * The search has been moved into a new search_page component. It adds a new page type SearchPage as well as a separate cell for the search box.
     See `rails generate cms:component:search_page --help` for more details.
+  * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
+    of Infopark RailsConnector. (Thanks @tritz)
+  * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
+    of accept headers. (Thanks @awendt)
+  * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
   * Added `honeybadger` as an error tracking provider. This will also be the default from now on
     instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
     to install.
