@@ -34,8 +34,8 @@ describe Cms::Generators::Component::ContactPageGenerator do
 
     File.open("#{destination_root}/Gemfile", 'w')
     File.open("#{paths[:models]}/homepage.rb", 'w') { |f| f.write("class Homepage < Obj\n") }
-    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("@search_page = page.homepage.search_page\n") }
-    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write('= display_title(@search_page)') }
+    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("    @current_user = current_user\n") }
+    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write("      = t('.meta')\n") }
   end
 
   it 'creates file' do
@@ -63,6 +63,18 @@ describe Cms::Generators::Component::ContactPageGenerator do
               file 'contact_page_link.rb'
               file 'crm_activity_type.rb'
               file 'redirect_after_submit_link.rb'
+            end
+          end
+        end
+
+        directory 'cells' do
+          file 'meta_navigation_cell.rb' do
+            contains '@contact_page = page.homepage.contact_page'
+          end
+
+          directory 'meta_navigation' do
+            file 'show.html.haml' do
+              contains '= display_title(@contact_page)'
             end
           end
         end

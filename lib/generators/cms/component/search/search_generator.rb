@@ -1,7 +1,7 @@
 module Cms
   module Generators
     module Component
-      class SearchPageGenerator < ::Rails::Generators::Base
+      class SearchGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
         include Actions
@@ -9,36 +9,22 @@ module Cms
         class_option :homepage_path,
           :type => :string,
           :default => nil,
-          :desc => 'Path to a CMS homepage, for which to create the contact form.'
+          :desc => 'Path to a CMS homepage, for which to enable search.'
 
         source_root File.expand_path('../templates', __FILE__)
 
         def extend_homepage
-          file = 'app/models/homepage.rb'
-          insert_point = "class Homepage < Obj\n"
-
-          data = []
-
-          data << '  include Cms::Attributes::SearchPageLink'
-          data << ''
-
-          data = data.join("\n")
-
-          insert_into_file(file, data, :after => insert_point)
+          add_model_attribute('Homepage', search_page_attribute_name)
         end
 
         def extend_view
           file = 'app/views/layouts/application.html.haml'
-          insert_point = '            = render_cell(:meta_navigation, :show, @obj, current_user)'
+          insert_point = "          .span3\n"
 
           data = []
 
-          data << "\n"
-          data << '            .well'
-          data << '              %h3'
-          data << "                = t('search.title')"
+          data << "            = render_cell(:search, :form, @obj, @query)\n"
           data << ''
-          data << '              = render_cell(:search, :show, @obj)'
 
           data = data.join("\n")
 
@@ -63,7 +49,7 @@ module Cms
           begin
             validate_obj_class(class_name)
 
-            Rails::Generators.invoke('cms:scaffold', [class_name, '--title=Page: Search', '--attributes=show_in_navigation'])
+            Rails::Generators.invoke('cms:scaffold', [class_name, '--title=Page: Search', "--attributes=#{show_in_navigation_attribute_name}"])
 
             turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError

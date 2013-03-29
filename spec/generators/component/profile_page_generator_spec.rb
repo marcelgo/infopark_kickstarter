@@ -35,8 +35,8 @@ describe Cms::Generators::Component::ProfilePageGenerator do
 
     File.open("#{destination_root}/Gemfile", 'w')
     File.open("#{paths[:models]}/homepage.rb", 'w') { |f| f.write("class Homepage < Obj\n") }
-    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("@search_page = page.homepage.search_page\n") }
-    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write('= display_title(@search_page)') }
+    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("    @current_user = current_user\n") }
+    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write("      = t('.meta')\n") }
   end
 
   it 'creates files' do

@@ -50,10 +50,11 @@ module Cms
 
         def extend_cell
           file = 'app/cells/meta_navigation_cell.rb'
-          insert_point = "@login_page = page.homepage.login_page\n"
+          insert_point = "@current_user = current_user\n"
 
           data = []
 
+          data << ''
           data << '    @profile_page = page.homepage.profile_page'
           data << ''
 
@@ -64,15 +65,15 @@ module Cms
 
         def extend_view
           file = 'app/cells/meta_navigation/show.html.haml'
-          insert_point = "      = t('.meta')"
+          insert_point = "      = t('.meta')\n"
 
           data = []
 
-          data << "\n"
           data << '    - if @current_user.logged_in?'
           data << '      %li'
           data << '        = link_to(cms_path(@profile_page)) do'
           data << '          = display_title(@profile_page)'
+          data << ''
 
           data = data.join("\n")
 

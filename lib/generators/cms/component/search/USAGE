@@ -1,6 +1,6 @@
 Description:
     Installs the search component including a search page example connected to a homepage. The
-    homepage can be configured with the ```---homepage_path``` parameter.
+    homepage can be configured with the "---homepage_path" parameter.
 
 Example:
     `rails generate cms:component:search`
@@ -12,4 +12,3 @@ Example:
     Misc: extends app/models/homepage.rb
     Misc: extends app/views/layouts/application.html.haml
     Misc: adds app/cells/search_cell.rb
-    Misc: adds app/cells/search/show.html.haml

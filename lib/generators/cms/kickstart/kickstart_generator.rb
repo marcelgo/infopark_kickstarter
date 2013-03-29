@@ -182,6 +182,7 @@ module Cms
       end
 
       def add_initital_components
+        Rails::Generators.invoke('cms:component:search')
         Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
         Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
       end
