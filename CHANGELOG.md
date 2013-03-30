@@ -1,5 +1,12 @@
 # v1.1.0
   * Bugfix: Added "sort_key" to GoogleMaps Box. (Thanks @franziska-luecke)
+  * Search support moved into its own generator and got cleaned up and simplified. See
+    `rails generate cms:component:search --help` for more details.
+  * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
+    of Infopark RailsConnector. (Thanks @tritz)
+  * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
+    of accept headers. (Thanks @awendt)
+  * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
   * Added `honeybadger` as an error tracking provider. This will also be the default from now on
     instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
     to install.

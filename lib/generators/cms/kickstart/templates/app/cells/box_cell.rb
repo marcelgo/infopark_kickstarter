@@ -11,16 +11,4 @@ class BoxCell < Cell::Rails
 
     render
   end
-
-  def edit_marker
-    if edit_marker?
-      render
-    end
-  end
-
-  private
-
-  def edit_marker?
-    Filters::EnvironmentDetection.preview_environment?
-  end
 end

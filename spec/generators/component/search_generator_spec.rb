@@ -1,15 +1,14 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/profile_page/profile_page_generator.rb'
+require 'generators/cms/component/search/search_generator.rb'
 require 'generators/cms/attribute/attribute_generator'
 require 'generators/cms/model/model_generator'
 
-describe Cms::Generators::Component::ProfilePageGenerator do
+describe Cms::Generators::Component::SearchGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)
-  arguments ['--skip_translation_import']
 
   before(:all) do
     Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
@@ -25,83 +24,91 @@ describe Cms::Generators::Component::ProfilePageGenerator do
   def prepare_environments
     paths = {
       models: "#{destination_root}/app/models",
-      cells: "#{destination_root}/app/cells",
-      meta_navigation: "#{destination_root}/app/cells/meta_navigation",
+      layouts: "#{destination_root}/app/views/layouts",
     }
 
     paths.each do |_, path|
       mkdir_p(path)
     end
 
-    File.open("#{destination_root}/Gemfile", 'w')
     File.open("#{paths[:models]}/homepage.rb", 'w') { |f| f.write("class Homepage < Obj\n") }
-    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("    @current_user = current_user\n") }
-    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write("      = t('.meta')\n") }
+    File.open("#{paths[:layouts]}/application.html.haml", 'w') { |f| f.write("          .span3\n") }
   end
 
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
-          file 'profile_page.rb'
+          file 'search_page.rb' do
+            contains 'include Cms::Attributes::ShowInNavigation'
+            contains '  include Page'
+          end
 
           file 'homepage.rb' do
-            contains 'include Cms::Attributes::ProfilePageLink'
+            contains 'include Cms::Attributes::SearchPageLink'
           end
         end
 
-        directory 'presenters' do
-          file 'profile_page_presenter.rb'
+        directory 'views' do
+          directory 'search_page' do
+            file 'index.html.haml' do
+              contains 'render_cell(:search, :results, @query, @hits)'
+            end
+          end
+
+          directory 'layouts' do
+            file 'application.html.haml' do
+              contains 'render_cell(:search, :form, @obj, @query)'
+            end
+          end
         end
 
         directory 'controllers' do
-          file 'profile_page_controller.rb'
+          file 'search_page_controller.rb'
         end
 
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'profile_page_link.rb'
+              file 'search_page_link.rb'
+              file 'show_in_navigation.rb'
             end
           end
         end
 
         directory 'cells' do
-          file 'meta_navigation_cell.rb' do
-            contains '@profile_page = page.homepage.profile_page'
-          end
+          file 'search_cell.rb'
 
-          directory 'meta_navigation' do
-            file 'show.html.haml' do
-              contains '= display_title(@profile_page)'
-            end
+          directory 'search' do
+            file 'form.html.haml'
+            file 'hit.html.haml'
+            file 'hits.html.haml'
+            file 'no_hits.html.haml'
           end
         end
       end
 
       directory 'config' do
         directory 'locales' do
-          file 'de.profile_page.yml'
-          file 'en.profile_page.yml'
+          file 'en.search.yml'
         end
       end
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_profile_page'
-          migration 'create_profile_page_example'
+          migration 'create_search_page'
+          migration 'create_search_page_example'
         end
       end
 
       directory 'spec' do
         directory 'models' do
-          file 'profile_page_spec.rb'
+          file 'search_page_spec.rb'
         end
-      end
 
-      file 'Gemfile' do
-        contains 'valid_email'
-        contains 'localized_country_select'
+        directory 'controllers' do
+          file 'search_page_controller_spec.rb'
+        end
       end
     }
   end

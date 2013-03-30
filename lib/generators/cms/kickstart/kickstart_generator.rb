@@ -116,10 +116,6 @@ module Cms
         template('date_attribute.rb', 'config/initializers/date_attribute.rb')
       end
 
-      def configure_editmarker
-        template('preview.js.coffee', 'app/assets/javascripts/preview.js.coffee')
-      end
-
       def create_structure_migration_file
         begin
           Model::ApiGenerator.new(behavior: behavior) do |model|
@@ -224,23 +220,6 @@ module Cms
         end
 
         begin
-          class_name = 'SearchPage'
-
-          Model::ApiGenerator.new(behavior: behavior) do |model|
-            model.name = class_name
-            model.title = 'Page: Search'
-            model.attributes = [
-              show_in_navigation_attribute,
-            ]
-          end
-
-          Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
-        rescue Cms::Generators::DuplicateResourceError
-        end
-
-        begin
           class_name = 'ErrorPage'
 
           Model::ApiGenerator.new(behavior: behavior) do |model|
@@ -331,6 +310,7 @@ module Cms
       end
 
       def add_initital_components
+        Rails::Generators.invoke('cms:component:search')
         Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
         Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
       end

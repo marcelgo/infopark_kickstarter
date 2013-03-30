@@ -17,14 +17,12 @@ class CreateStructure < ::RailsConnector::Migration
     try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', title: 'Content Page Example', show_in_navigation: 'Yes')
 
     try_create_obj(_path: "<%= configuration_path %>/error-not-found", _obj_class: 'ErrorPage', title: 'Page not found', show_in_navigation: 'No')
-    try_create_obj(_path: "<%= configuration_path %>/search", _obj_class: 'SearchPage', title: 'Search')
     try_create_obj(_path: "<%= configuration_path %>/login", _obj_class: 'LoginPage', title: 'Login', redirect_after_login_link: [{ url: "<%= homepage_path %>" }], redirect_after_logout_link: [{ url: "<%= homepage_path %>" }])
 
     try_update_obj(
       Obj.find_by_path("<%= homepage_path %>").id,
       error_not_found_page_link: [{ url: "<%= configuration_path %>/error-not-found" }],
       login_page_link: [{ url: "<%= configuration_path %>/login" }],
-      search_page_link: [{ url: "<%= configuration_path %>/search" }]
     )
 
     try_create_obj(_path: "<%= resources_path %>", _obj_class: 'Container', title: 'Resources')
