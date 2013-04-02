@@ -11,7 +11,7 @@ describe Cms::Generators::Widget::PersonGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--cms_path=testdirectory']
+  arguments ['--example']
 
   before(:all) do
     Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
@@ -30,20 +30,15 @@ describe Cms::Generators::Widget::PersonGenerator do
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          directory 'box' do
-            file 'box_person_cell.rb'
-
-            directory 'box_person' do
-              file 'show.html.haml'
-              file 'name.html.haml'
-              file 'email.html.haml'
-            end
+        directory 'widgets' do
+          directory 'person_widget' do
+            file 'show.html.haml'
+            file 'thumbnail.html.haml'
           end
         end
 
         directory 'models' do
-          file 'box_person.rb' do
+          file 'person_widget.rb' do
             contains 'include Box'
             contains 'include Cms::Attributes::Person'
             contains 'include Cms::Attributes::SortKey'
@@ -62,8 +57,8 @@ describe Cms::Generators::Widget::PersonGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_person'
-          migration 'create_box_person_example'
+          migration 'create_person_widget'
+          migration 'create_person_widget_example'
         end
       end
     }
