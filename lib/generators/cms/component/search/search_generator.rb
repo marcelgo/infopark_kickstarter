@@ -39,7 +39,11 @@ module Cms
               model.name = class_name
               model.title = 'Page: Search'
               model.attributes = [
-                show_in_navigation_attribute,
+                {
+                  name: show_in_navigation_attribute_name,
+                  type: :boolean,
+                  title: 'Show in navigation',
+                },
               ]
             end
 
