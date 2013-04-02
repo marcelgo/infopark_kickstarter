@@ -9,4 +9,4 @@ Example:
     CMS: attribute person (string)
 
     `rails generate cms:widget:person`
-    `rails generate cms:widget:person --cms_path=/website/en/_boxes`
+    `rails generate cms:widget:person --example`
