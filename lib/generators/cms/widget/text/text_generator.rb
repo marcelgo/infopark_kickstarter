@@ -6,11 +6,11 @@ module Cms
         include BasePaths
         include Actions
 
-        class_option :cms_path,
-          type: :string,
-          default: nil,
-          desc: 'CMS parent path where the example widget should be placed.',
-          banner: 'LOCATION'
+        class_option :example,
+          type: :boolean,
+          default: false,
+          desc: 'Generate an example migration?',
+          banner: 'EXAMPLE?'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -43,11 +43,7 @@ module Cms
         private
 
         def example?
-          cms_path.present?
-        end
-
-        def cms_path
-          options[:cms_path]
+          options[:example]
         end
 
         def obj_class_name

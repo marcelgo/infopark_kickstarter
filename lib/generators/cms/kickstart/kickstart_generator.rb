@@ -191,8 +191,8 @@ module Cms
       end
 
       def add_initital_components
-        Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
-        Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
+        Rails::Generators.invoke('cms:widget:text', ["--example"])
+        Rails::Generators.invoke('cms:widget:image', ["--example"])
       end
 
       def add_inline_editing_gems
