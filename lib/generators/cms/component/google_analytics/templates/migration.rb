@@ -46,12 +46,9 @@ class IntegrateGoogleAnalytics < ::RailsConnector::Migrations::Migration
   end
 
   def add_homepage_configuration
-    homepage = Obj.find_by_path('<%= homepage_path %>')
-    obj = Obj.find_by_path(path)
-
     update_obj(
-      homepage.id,
-      '<%= homepage_configuration_attribute_name %>' => [{ obj_id: obj.id }]
+      Obj.find_by_path('<%= homepage_path %>').id,
+      '<%= homepage_configuration_attribute_name %>' => [{ url: path }]
     )
   end
 end
