@@ -1,4 +1,6 @@
 # v1.1.0
+  * Added rake task to retrieve a list of all permalinks and their paths. See
+    `rake cms:info:permalinks` for more details.
   * Search support moved into its own generator and got cleaned up and simplified. See
     `rails generate cms:component:search --help` for more details.
   * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of

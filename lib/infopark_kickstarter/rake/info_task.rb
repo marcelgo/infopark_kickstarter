@@ -33,6 +33,13 @@ module InfoparkKickstarter
 
               puts attribute_information(args[:workspace]).to_yaml
             end
+
+            desc 'Get information about all permalinks in the given workspace (default "published")'
+            task :permalinks, [:workspace] => :environment do |_, args|
+              args.with_defaults(workspace: 'published')
+
+              puts permalinks(args[:workspace]).to_yaml
+            end
           end
         end
       end
@@ -69,6 +76,21 @@ module InfoparkKickstarter
 
       def attributes
         Dashboard::Attribute.all
+      end
+
+      def permalinks(workspace)
+        RailsConnector::Workspace.find(workspace).as_current do
+          objs = Obj.
+            where(:_permalink, :contains_prefix, ('a'..'z')).
+            order(:_permalink).
+            to_a
+
+          objs.inject({}) do |permalinks, obj|
+            permalinks[obj[:_permalink]] = obj[:_path]
+
+            permalinks
+          end
+        end
       end
 
       def status
