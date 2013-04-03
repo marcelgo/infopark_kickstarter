@@ -81,7 +81,7 @@ module InfoparkKickstarter
       def permalinks(workspace)
         RailsConnector::Workspace.find(workspace).as_current do
           objs = Obj.
-            where(:_permalink, :contains_prefix, ('a'..'z')).
+            where(:_permalink, :is_greater_than, ' ').
             order(:_permalink).
             to_a
 
