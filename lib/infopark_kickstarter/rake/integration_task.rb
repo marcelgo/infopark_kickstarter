@@ -50,7 +50,7 @@ module InfoparkKickstarter
             generators = [
               'cms:component:error_tracking --provider=airbrake',
               'cms:component:error_tracking --provider=honeybadger',
-              'cms:component:newrelic "Test Website"',
+              'cms:component:monitoring "Test Website" --provider=newrelic',
               'cms:component:google_analytics',
               'cms:component:contact_page',
               'cms:component:language_switch',

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/newrelic/newrelic_generator'
+require 'generators/cms/component/monitoring/newrelic/newrelic_generator'
 
-describe Cms::Generators::Component::NewrelicGenerator do
+describe Cms::Generators::Component::Monitoring::NewrelicGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../../tmp', __FILE__)
   arguments ['Test Website']
 
   before do

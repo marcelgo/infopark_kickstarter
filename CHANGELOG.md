@@ -1,5 +1,7 @@
 # v1.1.0
-  * Renamed `flash_message` to just `flash`, simplified and streamlined use of cells.
+  * Added monitoring rake task for future extension to other monitoring provider. See
+    `rake cms:component:monitoring` for further details.
+  * Renamed `flash_message` to `flash`, simplified and streamlined use of cells.
   * Added rake task to retrieve a list of all permalinks and their paths. See
     `rake cms:info:permalinks` for more details.
   * Search support moved into its own generator and got cleaned up and simplified. See
