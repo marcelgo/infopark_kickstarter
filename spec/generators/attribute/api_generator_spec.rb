@@ -18,7 +18,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'string attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news'
         attribute.type = :string
       end
     end
@@ -46,7 +47,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'text attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news_text') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news_text'
         attribute.type = :text
       end
     end
@@ -74,7 +76,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'enum attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news_enum') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news_enum'
         attribute.type = :enum
       end
     end
@@ -102,7 +105,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'multienum attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news_multienum') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news_multienum'
         attribute.type = :multienum
       end
     end
@@ -130,7 +134,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'html attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news_html') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news_html'
         attribute.type = :html
       end
     end
@@ -158,7 +163,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'linklist attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news_linklist') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news_linklist'
         attribute.type = :linklist
       end
     end
@@ -188,7 +194,8 @@ describe Cms::Generators::Attribute::ApiGenerator do
 
   context 'markdown attribute' do
     before do
-      Cms::Generators::Attribute::ApiGenerator.new('news_md') do |attribute|
+      Cms::Generators::Attribute::ApiGenerator.new do |attribute|
+        attribute.name = 'news_markdown'
         attribute.type = :markdown
       end
     end
@@ -199,12 +206,12 @@ describe Cms::Generators::Attribute::ApiGenerator do
           directory 'concerns' do
             directory 'cms' do
               directory 'attributes' do
-                file 'news_md.rb' do
+                file 'news_markdown.rb' do
                   contains 'module Cms'
                   contains 'module Attributes'
-                  contains 'module NewsMd'
-                  contains 'def news_md'
-                  contains "(self[:news_md] || '').html_safe"
+                  contains 'module NewsMarkdown'
+                  contains 'def news_markdown'
+                  contains "(self[:news_markdown] || '').html_safe"
                 end
               end
             end

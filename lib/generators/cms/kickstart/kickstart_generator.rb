@@ -157,12 +157,6 @@ module Cms
                 max_size: 1,
               },
               {
-                name: 'search_page_link',
-                type: :linklist,
-                title: 'Search Page',
-                max_size: 1,
-              },
-              {
                 name: 'locale',
                 type: :string,
                 title: 'Locale',

@@ -22,22 +22,31 @@ module Cms
           self.invoke_all
         end
 
-        def process_types
+        def handle_attributes
           attributes.each do |definition|
-            case definition[:type].to_s
+            name = definition[:name]
+            type = definition[:type]
+            default = definition.delete(:default)
+
+            if default.present?
+              preset_attributes[name] = default
+            end
+
+            Attribute::ApiGenerator.new(behavior: behavior) do |attribute|
+              attribute.name = name
+              attribute.type = type
+
+              if preset_attributes[name].present?
+                attribute.default = preset_attributes[name]
+              end
+            end
+
+            case type.to_s
               when 'boolean'
                 definition[:type] = :enum
                 definition[:values] = ['Yes', 'No']
               when 'integer', 'float'
                 definition[:type] = :string
-            end
-          end
-        end
-
-        def process_defaults
-          preset_attributes.each do |name, default|
-            if default.present?
-
             end
           end
         end
@@ -60,42 +69,26 @@ module Cms
           template('spec.rb', File.join('spec/models', "#{file_name}_spec.rb"))
         end
 
-        def create_attribute_concerns
-          attributes.each do |definition|
-            name = definition[:name]
-            type = definition[:type]
-
-            Attribute::ApiGenerator.new(behavior: behavior) do |attribute|
-              attribute.name = name
-              attribute.type = type
-
-              if preset_attributes[name].present?
-                attribute.default = preset_attributes[name]
-              end
-            end
-          end
-        end
-
         private
 
         def type
-          @type || :publication
+          @type ||= :publication
         end
 
         def title
-          @title || human_name
+          @title ||= human_name
         end
 
         def attributes
-          @attributes || []
+          @attributes ||= []
         end
 
         def preset_attributes
-          @preset_attributes || {}
+          @preset_attributes ||= {}
         end
 
         def mandatory_attributes
-          @mandatory_attributes || []
+          @mandatory_attributes ||= []
         end
       end
     end

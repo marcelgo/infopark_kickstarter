@@ -84,7 +84,7 @@ module Cms
                 },
                 {
                   name: video_width_attribute_name,
-                  type: :string,
+                  type: :integer,
                   title: 'Width',
                   default: 660,
                 },
@@ -97,11 +97,9 @@ module Cms
                   name: video_autoplay_attribute_name,
                   type: :boolean,
                   title: 'Autoplay this video?',
+                  default: 'No',
                 },
               ]
-              model.preset_attributes = {
-                video_autoplay_attribute_name => 'No',
-              }
             end
           rescue Cms::Generators::DuplicateResourceError
           end

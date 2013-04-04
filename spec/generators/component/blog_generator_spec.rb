@@ -2,8 +2,8 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/blog/blog_generator'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Component::BlogGenerator do
   include GeneratorSpec::TestCase
@@ -11,8 +11,8 @@ describe Cms::Generators::Component::BlogGenerator do
   destination File.expand_path('../../../../tmp', __FILE__)
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -64,9 +64,9 @@ describe Cms::Generators::Component::BlogGenerator do
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'blog_disqus_shortname.rb'
-              file 'blog_description.rb'
-              file 'blog_entry_author.rb'
+              file 'disqus_shortname.rb'
+              file 'description.rb'
+              file 'author.rb'
             end
           end
         end

@@ -48,17 +48,15 @@ module Cms
                   name: tracking_id_attribute_name,
                   type: :string,
                   title: 'Tracking ID',
+                  default: tracking_id_default,
                 },
                 {
                   name: anonymize_ip_attribute_name,
                   type: :boolean,
                   title: 'Anonymize IP?',
+                  default: anonymize_ip_default,
                 },
               ]
-              model.preset_attributes = {
-                tracking_id_attribute_name => tracking_id_default,
-                anonymize_ip_attribute_name => anonymize_ip_default,
-              }
             end
           rescue Cms::Generators::DuplicateResourceError
           end

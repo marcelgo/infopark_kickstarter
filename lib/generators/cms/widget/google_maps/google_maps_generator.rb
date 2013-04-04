@@ -34,6 +34,11 @@ module Cms
               model.title = 'Box: GoogleMaps'
               model.attributes = [
                 {
+                  name: address_attribute_name,
+                  type: :string,
+                  title: 'Address',
+                },
+                {
                   name: map_type_attribute_name,
                   type: :enum,
                   title: 'Map Type',
