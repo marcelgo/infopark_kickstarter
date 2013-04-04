@@ -4,7 +4,7 @@ Description:
     the website as it should appear in your New Relic account.
 
 Example:
-    `rails generate cms:component:newrelic "Test Website"`
+    `rails generate cms:component:monitoring:newrelic "Test Website"`
 
     Gems: newrelic_rpm
     Deploy: deploy/after_restart.rb

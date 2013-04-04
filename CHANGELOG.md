@@ -1,5 +1,10 @@
 # v1.1.0
   * Bugfix: Added "sort_key" to GoogleMaps Box. (Thanks @franziska-luecke)
+  * Added monitoring rake task for future extension to other monitoring provider. See
+    `rake cms:component:monitoring` for further details.
+  * Renamed `flash_message` to `flash`, simplified and streamlined use of cells.
+  * Added rake task to retrieve a list of all permalinks and their paths. See
+    `rake cms:info:permalinks` for more details.
   * Search support moved into its own generator and got cleaned up and simplified. See
     `rails generate cms:component:search --help` for more details.
   * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
