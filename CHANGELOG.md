@@ -1,4 +1,8 @@
 # v1.1.0
+  * Kickstarter now uses local attributes only, because global attributes are deprecated and their
+    usage is discouraged. See
+    [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)
+    for further details.
   * Bugfix: Added "sort_key" to GoogleMaps Box. (Thanks @franziska-luecke)
   * Added monitoring rake task for future extension to other monitoring provider. See
     `rake cms:component:monitoring` for further details.
