@@ -11,7 +11,7 @@ describe Cms::Generators::Widget::VideoGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--cms_path=testdirectory']
+  arguments ['--example']
 
   before(:all) do
     Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
@@ -40,10 +40,10 @@ describe Cms::Generators::Widget::VideoGenerator do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
-          directory 'box' do
-            file 'box_video_cell.rb'
+          directory 'widget' do
+            file 'video_widget_cell.rb'
 
-            directory 'box_video' do
+            directory 'video_widget' do
               file 'show.html.haml'
               file 'generic.html.haml'
               file 'youtube.html.haml'
@@ -53,7 +53,7 @@ describe Cms::Generators::Widget::VideoGenerator do
         end
 
         directory 'models' do
-          file 'box_video.rb' do
+          file 'video_widget.rb' do
             contains 'include Widget'
             contains 'include Cms::Attributes::VideoLink'
             contains 'include Cms::Attributes::VideoWidth'
@@ -94,14 +94,8 @@ describe Cms::Generators::Widget::VideoGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_video'
-          migration 'create_box_video_example'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'box_video_spec.rb'
+          migration 'create_video_widget'
+          migration 'create_video_widget_example'
         end
       end
 

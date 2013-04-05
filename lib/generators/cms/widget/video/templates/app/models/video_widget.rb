@@ -1,4 +1,4 @@
-class BoxVideo < Obj
+class VideoWidget < Obj
   include Widget
 
   include Cms::Attributes::VideoLink
