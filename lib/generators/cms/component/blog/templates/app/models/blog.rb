@@ -1,8 +1,8 @@
 class Blog < Obj
   include Page
 
-  include Cms::Attributes::BlogDisqusShortname
-  include Cms::Attributes::BlogDescription
+  include Cms::Attributes::DisqusShortname
+  include Cms::Attributes::Description
 
   def blog
     self

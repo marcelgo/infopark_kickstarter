@@ -3,18 +3,18 @@ module InfoparkKickstarter
     class Resource
       class << self
         def find(id)
-          attributes = Rails.cache.fetch(cache_key(id)) do
+          resources = Rails.cache.fetch(cache_key(id)) do
             endpoint(id)
           end
 
-          new(attributes)
+          new(resources)
         end
 
         def all
-          attributes = endpoint['results']
+          resources = endpoint['results']
 
-          attributes.map do |attributes|
-            new(attributes)
+          resources.map do |resources|
+            new(resources)
           end
         end
 

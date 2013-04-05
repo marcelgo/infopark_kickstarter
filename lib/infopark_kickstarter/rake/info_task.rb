@@ -27,13 +27,6 @@ module InfoparkKickstarter
               puts obj_class_information(args[:workspace]).to_yaml
             end
 
-            desc 'Get information about all attributes in the given workspace (default "published")'
-            task :attributes, [:workspace] => :environment do |_, args|
-              args.with_defaults(workspace: 'published')
-
-              puts attribute_information(args[:workspace]).to_yaml
-            end
-
             desc 'Get information about all permalinks in the given workspace (default "published")'
             task :permalinks, [:workspace] => :environment do |_, args|
               args.with_defaults(workspace: 'published')
@@ -62,20 +55,6 @@ module InfoparkKickstarter
 
       def obj_classes
         Dashboard::ObjClass.all
-      end
-
-      def attribute_information(workspace)
-        RailsConnector::Workspace.find(workspace).as_current do
-          attributes.inject({}) do |attributes, attribute|
-            attributes[attribute.name] = attribute.type
-
-            attributes
-          end
-        end
-      end
-
-      def attributes
-        Dashboard::Attribute.all
       end
 
       def permalinks(workspace)

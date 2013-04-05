@@ -33,23 +33,21 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(search_page_attribute_name)
+            class_name = 'SearchPage'
 
-            Rails::Generators.invoke('cms:attribute', [search_page_attribute_name, '--type=linklist', '--title=Search Page', '--max-size=1'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = class_name
+              model.title = 'Page: Search'
+              model.attributes = [
+                {
+                  name: show_in_navigation_attribute_name,
+                  type: :boolean,
+                  title: 'Show in navigation',
+                },
+              ]
+            end
 
-          begin
-            validate_attribute(show_in_navigation_attribute_name)
-
-            Rails::Generators.invoke('cms:attribute', [show_in_navigation_attribute_name, '--type=boolean', '--title=Show in Navigation'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(class_name)
-
-            Rails::Generators.invoke('cms:scaffold', [class_name, '--title=Page: Search', "--attributes=#{show_in_navigation_attribute_name}"])
+            Rails::Generators.invoke('cms:controller', [class_name])
 
             turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError

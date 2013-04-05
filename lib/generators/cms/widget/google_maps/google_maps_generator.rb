@@ -14,35 +14,44 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(map_type_attribute_name)
-
-            Rails::Generators.invoke('cms:attribute', [map_type_attribute_name, '--type=enum', '--title=Map Type', '--values=ROADMAP', 'SATELLITE', 'HYBRID', 'TERRAIN'])
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = pin_class_name
+              model.title = 'GoogleMaps: Pin'
+              model.attributes = [
+                {
+                  name: address_attribute_name,
+                  type: :string,
+                  title: 'Address',
+                }
+              ]
+            end
           rescue Cms::Generators::DuplicateResourceError
           end
 
           begin
-            validate_attribute(address_attribute_name)
-
-            Rails::Generators.invoke('cms:attribute', [address_attribute_name, '--type=string', '--title=Address'])
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = map_class_name
+              model.title = 'Box: GoogleMaps'
+              model.attributes = [
+                {
+                  name: address_attribute_name,
+                  type: :string,
+                  title: 'Address',
+                },
+                {
+                  name: map_type_attribute_name,
+                  type: :enum,
+                  title: 'Map Type',
+                  values: %w(ROADMAP SATELLITE HYBRID TERRAIN),
+                },
+                {
+                  name: sort_key_attribute_name,
+                  type: :string,
+                  title: 'Sort key',
+                }
+              ]
+            end
           rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(pin_class_name)
-
-            Rails::Generators.invoke('cms:model', [pin_class_name, "--attributes=#{address_attribute_name}", '--title=GoogleMaps: Pin'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(map_class_name)
-
-            Rails::Generators.invoke('cms:model', [map_class_name, "--attributes=#{map_type_attribute_name}", address_attribute_name, '--title=Box: GoogleMaps'])
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
         end
 
@@ -100,6 +109,12 @@ module Cms
           end
         end
 
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
+          end
+        end
+
         private
 
         def example?
@@ -124,6 +139,10 @@ module Cms
 
         def map_type_attribute_name
           'google_maps_map_type'
+        end
+
+        def sort_key_attribute_name
+          'sort_key'
         end
       end
     end

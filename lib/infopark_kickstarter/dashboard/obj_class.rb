@@ -23,8 +23,8 @@ module InfoparkKickstarter
       end
 
       def attributes
-        @attributes.map do |attribute|
-          Attribute.find(attribute)
+        @attributes.map do |definition|
+          Attribute.new(definition)
         end
       end
 

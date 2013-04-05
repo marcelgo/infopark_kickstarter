@@ -39,42 +39,40 @@ module Cms
         end
 
         def create_migration
-          validate_obj_class(class_name)
-
           begin
-            validate_attribute(tracking_id_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [tracking_id_attribute_name, '--type=string', '--title=Tracking ID'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(anonymize_ip_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [anonymize_ip_attribute_name, '--type=boolean', '--title=Anonymize IP?', "--preset_value=#{anonymize_ip_default}"])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(homepage_configuration_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [homepage_configuration_attribute_name, '--type=linklist', '--title=Google Analytics', '--max-size=1'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(class_name)
-            Rails::Generators.invoke('cms:model', [class_name, '--title=Google Analytics', "--attributes=#{tracking_id_attribute_name}", anonymize_ip_attribute_name])
-          rescue DuplicateResourceError
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = class_name
+              model.title = 'Google Analytics'
+              model.attributes = [
+                {
+                  name: tracking_id_attribute_name,
+                  type: :string,
+                  title: 'Tracking ID',
+                  default: tracking_id_default,
+                },
+                {
+                  name: anonymize_ip_attribute_name,
+                  type: :boolean,
+                  title: 'Anonymize IP?',
+                  default: anonymize_ip_default,
+                },
+              ]
+            end
+          rescue Cms::Generators::DuplicateResourceError
           end
 
           migration_template('migration.rb', 'cms/migrate/integrate_google_analytics.rb')
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes and set a Tracking ID.')
-          end
         end
 
         def copy_app_directory
           directory('app', force: true)
           directory('spec', force: true)
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes and set a Tracking ID.')
+          end
         end
 
         private

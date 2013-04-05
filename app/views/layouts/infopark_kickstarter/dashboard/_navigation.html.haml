@@ -12,7 +12,7 @@
       .nav-collapse.collapse
         %ul.nav.pull-right
           %li
-            = link_to('https://kb.infopark.de/support', target: :_blank) do
+            = link_to(Rails.configuration.infopark_kickstarter.support_url, target: :_blank) do
               %i.icon-envelope
 
               Feedback &amp; Support

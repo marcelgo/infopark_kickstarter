@@ -10,13 +10,24 @@ class CreateSearchPageExample < ::RailsConnector::Migration
     )
 
     attributes = get_obj_class('Homepage')['attributes']
-    attributes << '<%= search_page_attribute_name %>'
+    attributes.map do |definition|
+      definition.delete('id')
+
+      definition.delete_if do |_, value|
+        value.nil?
+      end
+    end
+    attributes << {
+      name: '<%= search_page_attribute_name %>',
+      type: :linklist,
+      title: 'Search Page',
+      max_size: 1,
+    }
+
     update_obj_class('Homepage', attributes: attributes)
 
-    homepage = Obj.find_by_path('<%= homepage_path %>')
-
     update_obj(
-      homepage.id,
+      Obj.find_by_path('<%= homepage_path %>').id,
       '<%= search_page_attribute_name %>' => [{ url: path }]
     )
   end

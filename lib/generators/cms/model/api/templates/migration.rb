@@ -4,7 +4,11 @@ class Create<%= class_name %> < ::RailsConnector::Migration
       name: '<%= class_name %>',
       type: '<%= type %>',
       title: '<%= title %>',
-      attributes: <%= attributes.inspect %>,
+      attributes: [
+        <%- attributes.each do |definition| -%>
+        <%= definition.inspect %>,
+        <%- end -%>
+      ],
       preset_attributes: <%= preset_attributes.inspect %>,
       mandatory_attributes: <%= mandatory_attributes.inspect %>
     )
