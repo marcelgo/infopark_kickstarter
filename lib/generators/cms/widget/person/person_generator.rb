@@ -9,8 +9,7 @@ module Cms
         class_option :example,
           type: :boolean,
           default: false,
-          desc: 'Generate an example migration?',
-          banner: 'EXAMPLE?'
+          desc: 'Generate an example migration?'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -30,13 +29,15 @@ module Cms
           begin
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Widget: Person', "--attributes=#{person_attribute_name}", sort_key_attribute_name])
-            turn_model_into_box(obj_class_name)
+            turn_model_into_widget(obj_class_name)
           rescue DuplicateResourceError
           end
         end
 
         def copy_app_directory
           directory('app', force: true)
+
+          template('thumbnail.html.haml', 'app/widgets/person_widget/thumbnail.html.haml')
         end
 
         def add_example
@@ -55,6 +56,10 @@ module Cms
 
         def example?
           options[:example]
+        end
+
+        def human_name
+          'Person Widget'
         end
 
         def obj_class_name

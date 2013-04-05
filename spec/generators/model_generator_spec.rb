@@ -21,7 +21,7 @@ describe Cms::Generators::ModelGenerator do
           file 'news.rb' do
             contains 'class News < Obj'
             contains '# include Page'
-            contains '# include Box'
+            contains '# include Widget'
           end
         end
       end

@@ -1,4 +1,4 @@
-class CreateBoxSliderExample < ::RailsConnector::Migrations::Migration
+class CreateBoxSliderExample < ::RailsConnector::Migration
   def up
     path = '<%= cms_path %>/box-slider-example'
 

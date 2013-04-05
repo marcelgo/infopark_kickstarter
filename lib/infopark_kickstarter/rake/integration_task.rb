@@ -54,11 +54,11 @@ module InfoparkKickstarter
           sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
           sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
           sh "cd #{app_path} && bundle exec rails generate cms:component:profile_page"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:blog --cms_path=/website/en"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --cms_path=/website/en/_boxes"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:video --cms_path=/website/en/_boxes"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:person --cms_path=/website/en/_boxes"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:slider --cms_path=/website/en/_boxes"
+          # sh "cd #{app_path} && bundle exec rails generate cms:component:blog --cms_path=/website/en"
+          sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --example"
+          # sh "cd #{app_path} && bundle exec rails generate cms:widget:video --cms_path=/website/en/_boxes"
+          sh "cd #{app_path} && bundle exec rails generate cms:widget:person --example"
+          # sh "cd #{app_path} && bundle exec rails generate cms:widget:slider --cms_path=/website/en/_boxes"
 
           sh "cd #{app_path} && bundle exec rake cms:migrate"
         end

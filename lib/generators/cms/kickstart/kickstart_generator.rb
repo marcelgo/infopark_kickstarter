@@ -191,10 +191,11 @@ module Cms
       end
 
       def add_initital_components
-        Rails::Generators.invoke('cms:widget:text', ["--example"])
-        Rails::Generators.invoke('cms:widget:image', ["--example"])
+        Rails::Generators.invoke('cms:widget:text', ['--example'])
+        Rails::Generators.invoke('cms:widget:image', ['--example'])
       end
 
+      # TODO: remove when infopark gems are released
       def add_inline_editing_gems
         gem_group(:assets) do
           gem('underscore-rails')

@@ -1,5 +1,5 @@
 class BoxVideo < Obj
-  include Box
+  include Widget
 
   include Cms::Attributes::VideoLink
   include Cms::Attributes::VideoWidth

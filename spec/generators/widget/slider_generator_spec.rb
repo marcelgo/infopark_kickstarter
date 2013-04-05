@@ -48,7 +48,7 @@ describe Cms::Generators::Widget::SliderGenerator do
 
         directory 'models' do
           file 'box_slider.rb' do
-            contains 'include Box'
+            contains 'include Widget'
             contains 'include Cms::Attributes::SortKey'
             contains 'include Cms::Attributes::SliderImages'
           end

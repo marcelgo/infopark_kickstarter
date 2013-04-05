@@ -1,0 +1,7 @@
+- if widget.source.present?
+  - if widget.link_to.present?
+    = link_to(cms_path(widget.link_to)) do
+      = cms_image_tag(widget.source)
+
+  - else
+    = cms_image_tag(widget.source)

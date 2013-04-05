@@ -43,7 +43,7 @@ describe Cms::Generators::Widget::ImageGenerator do
             contains 'include Cms::Attributes::Caption'
             contains 'include Cms::Attributes::Source'
             contains 'include Cms::Attributes::LinkTo'
-            contains 'include Box'
+            contains 'include Widget'
           end
         end
 

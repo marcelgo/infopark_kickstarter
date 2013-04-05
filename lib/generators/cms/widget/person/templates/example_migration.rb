@@ -1,37 +1,32 @@
-class CreatePersonWidgetExample < ::RailsConnector::Migrations::Migration
+class CreatePersonWidgetExample < ::RailsConnector::Migration
   def up
-    person_widget = create_obj(
+    homepage = Obj.find_by_path('<%= homepage_path %>')
+
+    widget = create_obj(
       _path: "_widgets/#{homepage.id}/#{SecureRandom.hex(8)}",
       _obj_class: '<%= obj_class_name %>',
-      title: 'PersonWidget',
+      title: '<%= obj_class_name %>',
       person: 'root'
     )
 
-    puts "Created <%= obj_class_name %>' object"
+    puts "Created <%= obj_class_name %>'..."
 
-    widgets = main_content.inject([]) do |values, widget|
-      values << {widget: widget['id']}
-    end
-
-    widgets << {widget: person_widget['id']}
-
-    update_obj(homepage.id, main_content: {
-      layout: widgets
-    })
+    add_widget(homepage, :main_content, widget)
   end
 
   private
 
-  def main_content
-    # workaround for a not yet fixed bug in the cloud_connector gem
-    begin
-      homepage.widgets(:main_content)
-    rescue NoMethodError
-      []
-    end
-  end
+  def add_widget(obj, attribute, widget)
+    widgets = obj.widgets(attribute)
 
-  def homepage
-     homepage = Obj.find_by_path('<%= homepage_path %>')
+    list = widgets.inject([]) do |values, widget|
+      values << {widget: widget['id']}
+    end
+
+    list << {widget: widget['id']}
+
+    update_obj(obj.id, attribute => {
+      layout: list,
+    })
   end
 end

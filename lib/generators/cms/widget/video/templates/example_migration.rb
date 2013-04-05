@@ -1,4 +1,4 @@
-class CreateBoxVideoExample < ::RailsConnector::Migrations::Migration
+class CreateBoxVideoExample < ::RailsConnector::Migration
   def up
     homepage = Obj.find_by_path('<%= homepage_path %>')
 

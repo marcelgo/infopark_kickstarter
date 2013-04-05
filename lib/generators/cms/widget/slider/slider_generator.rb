@@ -30,7 +30,7 @@ module Cms
           begin
             validate_obj_class(obj_class_name)
             Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Box: Slider', "--attributes=#{slider_images_attribute_name}", sort_key_attribute_name])
-            turn_model_into_box(obj_class_name)
+            turn_model_into_widget(obj_class_name)
           rescue DuplicateResourceError
           end
         end

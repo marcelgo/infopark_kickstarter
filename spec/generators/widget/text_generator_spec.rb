@@ -40,7 +40,7 @@ describe Cms::Generators::Widget::TextGenerator do
         directory 'models' do
           file 'text_widget.rb' do
             contains 'include Cms::Attributes::SortKey'
-            contains 'include Box'
+            contains 'include Widget'
           end
         end
 

@@ -3,12 +3,12 @@ module Cms
     module Widget
       class GoogleMapsGenerator < ::Rails::Generators::Base
         include Migration
+        include BasePaths
 
         class_option :example,
           type: :boolean,
           default: false,
-          desc: 'Create an example migration',
-          banner: 'EXAMPLE'
+          desc: 'Create an example migration'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -61,15 +61,13 @@ module Cms
             )
           rescue Cms::Generators::DuplicateResourceError
           end
-
-          if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
-          end
         end
 
         def copy_app_directory
           directory('app', force: true)
           directory('spec', force: true)
+
+          template('thumbnail.html.haml', 'app/widgets/google_maps_widget/thumbnail.html.haml')
         end
 
         def add_example
@@ -78,10 +76,20 @@ module Cms
           end
         end
 
+        def notice
+          if behavior == :invoke
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
+          end
+        end
+
         private
 
         def example?
           options[:example]
+        end
+
+        def human_name
+          'Google Maps Widget'
         end
 
         def map_class_name

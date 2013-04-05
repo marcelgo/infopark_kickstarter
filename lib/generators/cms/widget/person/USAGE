@@ -4,7 +4,7 @@ Description:
     available.
 
 Example:
-    CMS: obj_class BoxPerson
+    CMS: obj_class WidgetPerson
     CMS: attribute sort_key (string)
     CMS: attribute person (string)
 

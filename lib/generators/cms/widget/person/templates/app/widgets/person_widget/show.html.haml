@@ -1,10 +1,11 @@
-.box.box_person.media.well
+.widget.widget_person.media.well
   %div.media-body
     %h3.media-heading
       = @widget.person.first_name
       = @widget.person.last_name
 
-    %p
-      %i.icon-envelope
+    - if @widget.person.email.present?
+      %p
+        %i.icon-envelope
 
-      = mail_to(@widget.person.email)
+        = mail_to(@widget.person.email)

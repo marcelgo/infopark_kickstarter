@@ -39,7 +39,7 @@ describe Cms::Generators::Widget::PersonGenerator do
 
         directory 'models' do
           file 'person_widget.rb' do
-            contains 'include Box'
+            contains 'include Widget'
             contains 'include Cms::Attributes::Person'
             contains 'include Cms::Attributes::SortKey'
           end

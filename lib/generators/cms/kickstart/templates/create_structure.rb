@@ -32,8 +32,6 @@ class CreateStructure < ::RailsConnector::Migration
     try_create_obj(_path: "<%= resources_path %>/audio", _obj_class: 'Container', title: 'Audio')
     try_create_obj(_path: "<%= resources_path %>/videos", _obj_class: 'Container', title: 'Videos')
     try_create_obj(_path: "<%= resources_path %>/pdfs", _obj_class: 'Container', title: 'Pdfs')
-
-    try_create_obj(_path: "<%= widgets_path %>", _obj_class: 'Container', title: '_Boxes')
   end
 
   private

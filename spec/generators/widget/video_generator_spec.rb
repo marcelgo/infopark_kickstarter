@@ -54,7 +54,7 @@ describe Cms::Generators::Widget::VideoGenerator do
 
         directory 'models' do
           file 'box_video.rb' do
-            contains 'include Box'
+            contains 'include Widget'
             contains 'include Cms::Attributes::VideoLink'
             contains 'include Cms::Attributes::VideoWidth'
             contains 'include Cms::Attributes::VideoHeight'

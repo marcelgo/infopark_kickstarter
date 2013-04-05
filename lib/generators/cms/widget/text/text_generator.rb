@@ -9,8 +9,7 @@ module Cms
         class_option :example,
           type: :boolean,
           default: false,
-          desc: 'Generate an example migration?',
-          banner: 'EXAMPLE?'
+          desc: 'Generate an example migration?'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -28,8 +27,10 @@ module Cms
           end
         end
 
-        def copy_app_directory
+        def create_widget
           directory('app')
+
+          template('thumbnail.html.haml', 'app/widgets/text_widget/thumbnail.html.haml')
         end
 
         def add_example
@@ -48,6 +49,10 @@ module Cms
 
         def example?
           options[:example]
+        end
+
+        def human_name
+          'Text Widget'
         end
 
         def obj_class_name
