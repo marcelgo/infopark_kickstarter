@@ -11,7 +11,7 @@ describe Cms::Generators::Widget::SliderGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--cms_path=testdirectory']
+  arguments ['--example']
 
   before(:all) do
     Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
@@ -31,10 +31,10 @@ describe Cms::Generators::Widget::SliderGenerator do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
-          directory 'box' do
-            file 'box_slider_cell.rb'
+          directory 'widget' do
+            file 'slider_widget_cell.rb'
 
-            directory 'box_slider' do
+            directory 'slider_widget' do
               file 'show.html.haml'
               file 'image.html.haml'
               file 'images.html.haml'
@@ -47,7 +47,7 @@ describe Cms::Generators::Widget::SliderGenerator do
         end
 
         directory 'models' do
-          file 'box_slider.rb' do
+          file 'slider_widget.rb' do
             contains 'include Widget'
             contains 'include Cms::Attributes::SortKey'
             contains 'include Cms::Attributes::SliderImages'
@@ -66,14 +66,14 @@ describe Cms::Generators::Widget::SliderGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_slider'
-          migration 'create_box_slider_example'
+          migration 'create_slider_widget'
+          migration 'create_slider_widget_example'
         end
       end
 
       directory 'spec' do
         directory 'models' do
-          file 'box_slider_spec.rb'
+          file 'slider_widget_spec.rb'
         end
       end
     }

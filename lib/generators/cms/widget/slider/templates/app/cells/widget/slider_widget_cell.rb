@@ -1,12 +1,12 @@
-class Box::BoxSliderCell < BoxCell
+class Widget::SliderWidgetCell < WidgetCell
   # Cell actions:
 
-  def show(page, box)
-    @id = box.id
-    @images = box.slider_images
+  def show(page, widget)
+    @id = widget.id
+    @images = widget.slider_images
 
     if @images.present?
-      super(page, box)
+      super(page, widget)
     end
   end
 

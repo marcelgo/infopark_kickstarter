@@ -58,7 +58,7 @@ module InfoparkKickstarter
           sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --example"
           # sh "cd #{app_path} && bundle exec rails generate cms:widget:video --cms_path=/website/en/_boxes"
           sh "cd #{app_path} && bundle exec rails generate cms:widget:person --example"
-          # sh "cd #{app_path} && bundle exec rails generate cms:widget:slider --cms_path=/website/en/_boxes"
+          sh "cd #{app_path} && bundle exec rails generate cms:widget:slider --cms_path=/website/en/_boxes"
 
           sh "cd #{app_path} && bundle exec rake cms:migrate"
         end

@@ -1,9 +1,9 @@
-class CreateBoxSliderExample < ::RailsConnector::Migration
+class CreateSliderWidgetExample < ::RailsConnector::Migration
   def up
-    path = '<%= cms_path %>/box-slider-example'
+    homepage = Obj.find_by_path('<%= homepage_path %>')
 
-    create_obj(
-      _path: path,
+    widget = create_obj(
+      _path: "_widgets/#{homepage.id}/#{SecureRandom.hex(8)}",
       _obj_class: '<%= obj_class_name %>',
       title: 'BoxSlider',
       '<%= slider_images_attribute_name %>' => [
@@ -12,6 +12,24 @@ class CreateBoxSliderExample < ::RailsConnector::Migration
       ]
     )
 
-    puts "Created '<%= obj_class_name %>' object at '#{path}'..."
+    puts "Created '<%= obj_class_name %>'..."
+
+    add_widget(homepage, :main_content, widget)
+  end
+
+  private
+
+  def add_widget(obj, attribute, widget)
+    widgets = obj.widgets(attribute)
+
+    list = widgets.inject([]) do |values, widget|
+      values << {widget: widget['id']}
+    end
+
+    list << {widget: widget['id']}
+
+    update_obj(obj.id, attribute => {
+      layout: list,
+    })
   end
 end
