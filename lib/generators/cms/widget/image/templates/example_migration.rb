@@ -2,23 +2,22 @@ class CreateImageWidgetExample < ::RailsConnector::Migration
   def up
     homepage = Obj.find_by_path('<%= homepage_path %>')
 
-    widget = create_obj(
-      _path: "_widgets/#{homepage.id}/#{SecureRandom.hex(8)}",
+    add_widget(homepage, :main_content, {
       _obj_class: '<%= obj_class_name %>',
       title: '<%= obj_class_name %>',
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-      link_to: [{ obj_id: homepage.id }],
-      source: [{ url: 'http://lorempixel.com/660/370/sports' }]
-    )
-
-    puts "Created '<%= obj_class_name %>' object"
-
-    add_widget(homepage, :main_content, widget)
+      '<%= caption_attribute_name %>' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+      '<%= link_to_attribute_name %>' => [{ obj_id: homepage.id }],
+      '<%= source_attribute_name %>' => [{ url: 'http://lorempixel.com/660/370/sports' }],
+    })
   end
 
   private
 
   def add_widget(obj, attribute, widget)
+    widget.reverse_merge!({
+      path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+    })
+
     widgets = obj.widgets(attribute)
 
     list = widgets.inject([]) do |values, widget|
@@ -30,5 +29,7 @@ class CreateImageWidgetExample < ::RailsConnector::Migration
     update_obj(obj.id, attribute => {
       layout: list,
     })
+
+    puts "Created '<%= obj_class_name %>'..."
   end
 end

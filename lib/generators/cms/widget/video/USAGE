@@ -1,5 +1,5 @@
 Description:
-    Generates a video widget that displays a youtube or vimeo video.
+    Generates a video widget that displays a youtube, vimeo or generic video.
 
 Example:
     CMS: obj_class TextWidget

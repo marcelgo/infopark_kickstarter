@@ -2,24 +2,23 @@ class CreateSliderWidgetExample < ::RailsConnector::Migration
   def up
     homepage = Obj.find_by_path('<%= homepage_path %>')
 
-    widget = create_obj(
-      _path: "_widgets/#{homepage.id}/#{SecureRandom.hex(8)}",
+    add_widget(homepage, :main_content, {
       _obj_class: '<%= obj_class_name %>',
       title: 'BoxSlider',
       '<%= slider_images_attribute_name %>' => [
         { url: 'http://lorempixel.com/700/350/sports', title: 'Lorem Ipsum 1' },
         { url: 'http://lorempixel.com/700/350/sports', title: 'Lorem Ipsum 2' },
-      ]
-    )
-
-    puts "Created '<%= obj_class_name %>'..."
-
-    add_widget(homepage, :main_content, widget)
+      ],
+    })
   end
 
   private
 
   def add_widget(obj, attribute, widget)
+    widget.reverse_merge!({
+      path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+    })
+
     widgets = obj.widgets(attribute)
 
     list = widgets.inject([]) do |values, widget|
@@ -31,5 +30,7 @@ class CreateSliderWidgetExample < ::RailsConnector::Migration
     update_obj(obj.id, attribute => {
       layout: list,
     })
+
+    puts "Created '<%= obj_class_name %>'..."
   end
 end

@@ -2,8 +2,7 @@ class CreateGoogleMapsWidgetExample < ::RailsConnector::Migration
   def up
     homepage = Obj.find_by_path('<%= homepage_path %>')
 
-    widget = create_obj(
-      _path: "_widgets/#{homepage.id}/#{SecureRandom.hex(8)}",
+    add_widget(homepage, :main_content, {
       _obj_class: '<%= map_class_name %>',
       title: '<%= map_class_name %>',
       body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -13,17 +12,17 @@ class CreateGoogleMapsWidgetExample < ::RailsConnector::Migration
         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       '<%= address_attribute_name %>' => 'Kitzingstrasse 12, 12277, Berlin, Germany',
-      '<%= map_type_attribute_name %>' => 'ROADMAP'
-    )
-
-    puts "Created '<%= map_class_name %>'..."
-
-    add_widget(homepage, :main_content, widget)
+      '<%= map_type_attribute_name %>' => 'ROADMAP',
+    })
   end
 
   private
 
   def add_widget(obj, attribute, widget)
+    widget.reverse_merge!({
+      path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+    })
+
     widgets = obj.widgets(attribute)
 
     list = widgets.inject([]) do |values, widget|
@@ -35,5 +34,7 @@ class CreateGoogleMapsWidgetExample < ::RailsConnector::Migration
     update_obj(obj.id, attribute => {
       layout: list,
     })
+
+    puts "Created '<%= obj_class_name %>'..."
   end
 end

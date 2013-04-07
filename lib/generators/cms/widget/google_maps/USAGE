@@ -7,6 +7,8 @@ Example:
     CMS: obj_class GoogleMapsWidget
     CMS: attribute google_maps_address (string)
     CMS: attribute google_maps_map_type (enum)
+    CMS: attribute body (html)
+    CMS: attribute title (string)
 
     `rails generate cms:widget:google_maps`
     `rails generate cms:widget:google_maps --example`

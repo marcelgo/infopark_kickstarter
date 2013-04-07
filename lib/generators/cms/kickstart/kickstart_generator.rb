@@ -186,7 +186,7 @@ module Cms
         append_file('.gitignore', "config/deploy.yml\n")
       end
 
-      def create_box_model
+      def create_widget_model
         template('cells_error_handling.rb', 'config/initializers/cells.rb')
       end
 
