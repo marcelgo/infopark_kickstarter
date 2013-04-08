@@ -24,7 +24,6 @@ describe Cms::Generators::Component::ShareGenerator do
             file 'linkedin.html.haml'
             file 'show.html.haml'
             file 'twitter.html.haml'
-            file 'xing.html.haml'
           end
         end
       end
