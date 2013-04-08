@@ -25,10 +25,6 @@ class ShareCell < BoxCell
     render
   end
 
-  def xing
-    render
-  end
-
   def linkedin
     render
   end
@@ -36,6 +32,6 @@ class ShareCell < BoxCell
   private
 
   def available_provider
-    @valid_provider ||= [:facebook, :google, :twitter, :xing, :linkedin]
+    @valid_provider ||= [:facebook, :google, :twitter, :linkedin]
   end
 end
