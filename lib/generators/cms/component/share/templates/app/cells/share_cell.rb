@@ -1,12 +1,8 @@
 class ShareCell < BoxCell
   # Cell actions:
 
-  def show(url = '', provider = [])
-    if url.present?
-      @url = url
-    else
-      @url = request.url
-    end
+  def show(url, provider = [])
+    @url = url
 
     if provider.present?
       @provider = provider.find_all{|item| available_provider.include?(item); }

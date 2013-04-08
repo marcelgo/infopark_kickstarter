@@ -17,7 +17,7 @@ module Cms
           data = []
 
           data << "\n"
-          data << "            = render_cell(:share, :show)"
+          data << "            = render_cell(:share, :show, cms_url(@obj))"
 
           data = data.join("\n")
 
