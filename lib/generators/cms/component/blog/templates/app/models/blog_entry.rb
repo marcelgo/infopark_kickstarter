@@ -1,7 +1,7 @@
 class BlogEntry < Obj
   include Page
 
-  include Cms::Attributes::BlogEntryAuthor
+  include Cms::Attributes::Author
 
   def blog
     parent.blog

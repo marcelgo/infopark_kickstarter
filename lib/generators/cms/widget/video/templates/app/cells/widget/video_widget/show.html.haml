@@ -1,8 +1,4 @@
 .widget.widget_video.well
-  = render(state: :edit_marker)
+  = cms_tag(:h3, @widget, :title)
 
-  - if @widget.title.present?
-    = cms_tag(:h3, @widget, :title)
-
-  - if @widget.video_link.present?
-    = render({ state: 'video' }, @widget)
+  = render({ state: 'video' }, @widget)

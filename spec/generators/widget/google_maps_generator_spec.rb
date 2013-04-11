@@ -2,8 +2,8 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/widget/google_maps/google_maps_generator.rb'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::GoogleMapsGenerator do
   include GeneratorSpec::TestCase
@@ -13,8 +13,8 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
   arguments ['--example']
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -34,8 +34,12 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
 
         directory 'widgets' do
           directory 'google_maps_widget' do
+            directory 'locales' do
+              file 'de.google_maps_widget.yml'
+              file 'en.google_maps_widget.yml'
+            end
+
             file 'show.html.haml'
-            file '_map.html.haml'
             file 'thumbnail.html.haml'
           end
         end
@@ -47,8 +51,8 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'google_maps_map_type.rb'
-              file 'google_maps_address.rb'
+              file 'address.rb'
+              file 'sort_key.rb'
             end
           end
         end
@@ -66,7 +70,6 @@ describe Cms::Generators::Widget::GoogleMapsGenerator do
           file 'google_maps_widget_spec.rb'
         end
       end
-
     }
   end
 end

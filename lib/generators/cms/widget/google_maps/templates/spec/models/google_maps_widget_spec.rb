@@ -10,16 +10,9 @@ describe GoogleMapsWidget do
 
     describe 'address' do
       it 'returns address' do
-        subject.stub(:[]).with(:google_maps_address).and_return(address)
+        subject.stub(:[]).with(:address).and_return(address)
         subject.address.should eq(address)
       end
-    end
-  end
-
-  describe 'google_maps_map_type' do
-    it 'returns ROADMAP on ROADMAP' do
-      subject.stub(:[]).with(:google_maps_map_type).and_return('ROADMAP')
-      subject.map_type.should eq('ROADMAP')
     end
   end
 end

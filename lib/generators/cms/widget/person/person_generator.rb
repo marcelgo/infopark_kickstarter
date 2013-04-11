@@ -15,22 +15,25 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(sort_key_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [sort_key_attribute_name, '--type=string', '--title=Sort Key'])
-          rescue DuplicateResourceError
-          end
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = obj_class_name
+              model.title = 'Box: Person'
+              model.attributes = [
+                {
+                  name: sort_key_attribute_name,
+                  type: :string,
+                  title: 'Sort key',
+                },
+                {
+                  name: person_attribute_name,
+                  type: :string,
+                  title: 'Person identifier',
+                },
+              ]
+            end
 
-          begin
-            validate_attribute(person_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [person_attribute_name, '--type=string', '--title=Person Identifier'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Widget: Person', "--attributes=#{person_attribute_name}", sort_key_attribute_name])
             turn_model_into_widget(obj_class_name)
-          rescue DuplicateResourceError
+          rescue Cms::Generators::DuplicateResourceError
           end
         end
 
@@ -56,10 +59,6 @@ module Cms
 
         def example?
           options[:example]
-        end
-
-        def human_name
-          'Person Widget'
         end
 
         def obj_class_name

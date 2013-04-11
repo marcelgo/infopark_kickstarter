@@ -16,21 +16,20 @@ class CreateBlogExample < ::RailsConnector::Migration
 
     entry_path = "#{blog_path}/entry-1"
 
-    create_obj(
+    entry = create_obj(
       _path: entry_path,
       _obj_class: '<%= blog_entry_class_name %>',
       title: 'Nulla viverra metus vitae nunc iaculis dignissim',
-      "<%= blog_entry_author_attribute_name %>" => ''
+      '<%= blog_entry_author_attribute_name %>' => '',
+      '<%= blog_entry_abstract_attribute_name %>' => '<p>Quisque eget sem sit amet risus gravida
+        commodo et sed neque. Morbi pellentesque urna ut sapien auctor mattis. Donec quis cursus
+        enim. Pellentesque sodales, elit nec accumsan congue, orci velit commodo orci, vel luctus
+        nisi mi vitae erat. Cras lacus urna, sagittis tristique placerat vel, consectetur id leo.
+        </p>'
     )
 
-    create_obj(
-      _path: "#{entry_path}/_boxes",
-      _obj_class: 'Container',
-    )
-
-    create_obj(
-      _path: "#{entry_path}/_boxes/text-1",
-      _obj_class: 'BoxText',
+    add_widget(Obj.find(entry['id']), '<%= widget_attribute_name %>',
+      _obj_class: 'TextWidget',
       body: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
         urna ut sapien auctor mattis. Donec quis cursus enim. Pellentesque sodales, elit nec
         accumsan congue, orci velit commodo orci, vel luctus nisi mi vitae erat. Cras lacus urna,
@@ -40,5 +39,27 @@ class CreateBlogExample < ::RailsConnector::Migration
         Morbi interdum aliquet sollicitudin. Curabitur eget erat vitae risus aliquam ultricies ac
         ut leo. Praesent eget lectus lorem, eu luctus velit. Proin rhoncus consequat consectetur.',
     )
+  end
+
+  private
+
+  def add_widget(obj, attribute, widget)
+    widget.reverse_merge!({
+      _path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+    })
+
+    widget = create_obj(widget)
+
+    widgets = obj.widgets(attribute)
+
+    list = widgets.inject([]) do |values, widget|
+      values << { widget: widget['id'] }
+    end
+
+    list << { widget: widget['id'] }
+
+    update_obj(obj.id, attribute => { layout: list })
+
+    puts "Created '#{widget['_obj_class']}'..."
   end
 end

@@ -22,76 +22,47 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(blog_disqus_shortname_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_disqus_shortname_attribute_name,
-                '--type=string',
-                '--title=Disqus Shortname',
-                '--method_name=disqus_shortname'
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = blog_class_name
+              model.title = 'Page: Blog'
+              model.attributes = [
+                {
+                  name: blog_disqus_shortname_attribute_name,
+                  type: :string,
+                  title: 'Disqus Shortname',
+                },
+                {
+                  name: blog_description_attribute_name,
+                  type: :text,
+                  title: 'Description',
+                },
               ]
-            )
+            end
           rescue Cms::Generators::DuplicateResourceError
           end
 
           begin
-            validate_attribute(blog_description_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_description_attribute_name,
-                '--type=text',
-                '--title=Description',
-                '--method_name=description',
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = blog_entry_class_name
+              model.title = 'Page: Blog Entry'
+              model.attributes = [
+                {
+                  name: blog_entry_author_attribute_name,
+                  type: :string,
+                  title: 'Author',
+                },
+                {
+                  name: widget_attribute_name,
+                  type: :widget,
+                  title: 'Main content',
+                },
+                {
+                  name: blog_entry_abstract_attribute_name,
+                  type: :html,
+                  title: 'Abstract',
+                },
               ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(blog_entry_author_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                blog_entry_author_attribute_name,
-                '--type=string',
-                '--title=Author',
-                '--method_name=author',
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(blog_class_name)
-
-            Rails::Generators.invoke(
-              'cms:model',
-              [
-                blog_class_name,
-                "--attributes=#{blog_disqus_shortname_attribute_name}",
-                blog_description_attribute_name,
-                '--title=Page: Blog',
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(blog_entry_class_name)
-
-            Rails::Generators.invoke(
-              'cms:model',
-              [
-                blog_entry_class_name,
-                "--attributes=#{blog_entry_author_attribute_name}",
-                '--title=Page: Blog Entry',
-              ]
-            )
+            end
           rescue Cms::Generators::DuplicateResourceError
           end
         end
@@ -137,16 +108,24 @@ module Cms
           options[:cms_path]
         end
 
+        def widget_attribute_name
+          'main_content'
+        end
+
+        def blog_entry_abstract_attribute_name
+          'abstract'
+        end
+
         def blog_entry_author_attribute_name
-          'blog_entry_author'
+          'author'
         end
 
         def blog_disqus_shortname_attribute_name
-          'blog_disqus_shortname'
+          'disqus_shortname'
         end
 
         def blog_description_attribute_name
-          'blog_description'
+          'description'
         end
 
         def blog_class_name

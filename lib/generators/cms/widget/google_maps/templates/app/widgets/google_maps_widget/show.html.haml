@@ -1,8 +1,7 @@
 .widget.google_maps_widget.well
-  - if @widget.title.present?
-    = cms_tag(:h3, @widget, :title)
+  = cms_tag(:h3, @widget, :title)
 
-  - if @widget.body.present?
-    = cms_tag(:div, @widget, :body)
+  = cms_tag(:div, @widget, :body)
 
-  = render('google_maps_widget/map', location: @widget.address)
+  .map
+    %iframe.framed{scrolling: 'no', frameborder: '0', marginwidth: '0', marginheight: '0',  src: @widget.embed_url}

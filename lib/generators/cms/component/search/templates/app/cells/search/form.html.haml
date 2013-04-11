@@ -1,0 +1,5 @@
+.well
+  = form_tag(cms_path(@search_page), method: :get, class: 'form-inline') do
+    = text_field_tag(:q, @query, class: 'input-small')
+
+    = submit_tag(t('search.button'), class: 'btn')

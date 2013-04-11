@@ -60,45 +60,47 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(sort_key_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [sort_key_attribute_name, '--type=string', '--title=Sort Key'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(video_link_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_link_attribute_name, '--type=linklist', '--title=Video: Url', '--max-size=1'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(video_preview_image_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_preview_image_attribute_name, '--type=linklist', '--title=Banner Image', '--max-size=1'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(video_width_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_width_attribute_name, '--type=integer', '--title=Width', '--preset_value=660'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(video_height_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_height_attribute_name, '--type=integer', '--title=Height'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(video_autoplay_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [video_autoplay_attribute_name, '--type=boolean', '--title=Autoplay this video?'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Widget: Video', "--attributes=#{video_link_attribute_name}", video_preview_image_attribute_name, video_width_attribute_name, video_height_attribute_name, video_autoplay_attribute_name, sort_key_attribute_name, "--preset_attributes=#{video_autoplay_attribute_name}:No"])
-          rescue DuplicateResourceError
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = obj_class_name
+              model.title = 'Widget: Video'
+              model.attributes = [
+                {
+                  name: sort_key_attribute_name,
+                  type: :string,
+                  title: 'Sort key',
+                },
+                {
+                  name: video_link_attribute_name,
+                  type: :linklist,
+                  title: 'Video',
+                  max_size: 1,
+                },
+                {
+                  name: video_preview_image_attribute_name,
+                  type: :linklist,
+                  title: 'Banner image',
+                  max_size: 1,
+                },
+                {
+                  name: video_width_attribute_name,
+                  type: :integer,
+                  title: 'Width',
+                  default: 660,
+                },
+                {
+                  name: video_height_attribute_name,
+                  type: :string,
+                  title: 'Height',
+                },
+                {
+                  name: video_autoplay_attribute_name,
+                  type: :boolean,
+                  title: 'Autoplay this video?',
+                  default: 'No',
+                },
+              ]
+            end
+          rescue Cms::Generators::DuplicateResourceError
           end
         end
 
@@ -124,10 +126,6 @@ module Cms
 
         def example?
           options[:example]
-        end
-
-        def human_name
-          'Video Widget'
         end
 
         def obj_class_name

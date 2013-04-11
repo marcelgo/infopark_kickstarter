@@ -1,6 +1,5 @@
-# TODO: remove path when infopark gems are released
-gem('infopark_rails_connector', path: '../../../forks/rails_connector/rails_connector')
-gem('infopark_cloud_connector', path: '../../../forks/rails_connector/cloud_connector')
+gem('infopark_rails_connector')
+gem('infopark_cloud_connector')
 
 gem_group(:assets) do
   gem('therubyracer', require: 'v8')

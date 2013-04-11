@@ -18,21 +18,21 @@ class CreateTextWidgetExample < ::RailsConnector::Migration
 
   def add_widget(obj, attribute, widget)
     widget.reverse_merge!({
-      path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+      _path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
     })
+
+    widget = create_obj(widget)
 
     widgets = obj.widgets(attribute)
 
     list = widgets.inject([]) do |values, widget|
-      values << {widget: widget['id']}
+      values << { widget: widget['id'] }
     end
 
-    list << {widget: widget['id']}
+    list << { widget: widget['id'] }
 
-    update_obj(obj.id, attribute => {
-      layout: list,
-    })
+    update_obj(obj.id, attribute => { layout: list })
 
-    puts "Created '<%= obj_class_name %>'..."
+    puts "Created '#{widget[:_obj_class]}'..."
   end
 end

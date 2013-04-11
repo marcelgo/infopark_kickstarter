@@ -1,11 +1,2 @@
-%ul.unstyled
-  %li
-    %strong
-      Attributes:
-
-    %ul
-      - attributes.each do |attribute|
-        %li
-          = link_to("#{attribute.id}:", "##{attribute.id}")
-
-          = attribute.type
+- attributes.each do |attribute|
+  = render('infopark_kickstarter/dashboards/show/attribute', attribute: attribute)

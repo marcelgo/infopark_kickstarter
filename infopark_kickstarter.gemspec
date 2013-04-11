@@ -22,7 +22,15 @@ Gem::Specification.new do |gem|
   gem.bindir      = 'bin'
   gem.executables = []
   gem.test_files  = Dir['spec/**/*']
-  gem.files       = Dir['lib/**/*', 'LICENSE', 'Rakefile', 'README.md', 'CHANGELOG.md']
+  gem.files       = Dir[
+    'app/**/*',
+    'lib/**/*',
+    'config/routes.rb',
+    'LICENSE',
+    'Rakefile',
+    'README.md',
+    'CHANGELOG.md'
+  ]
 
   gem.add_dependency 'bundler', '>= 1.3.1'
   gem.add_dependency 'rails', '~> 3.2.13'

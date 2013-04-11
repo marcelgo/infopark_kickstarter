@@ -2,8 +2,8 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/profile_page/profile_page_generator.rb'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Component::ProfilePageGenerator do
   include GeneratorSpec::TestCase
@@ -12,8 +12,8 @@ describe Cms::Generators::Component::ProfilePageGenerator do
   arguments ['--skip_translation_import']
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -35,8 +35,8 @@ describe Cms::Generators::Component::ProfilePageGenerator do
 
     File.open("#{destination_root}/Gemfile", 'w')
     File.open("#{paths[:models]}/homepage.rb", 'w') { |f| f.write("class Homepage < Obj\n") }
-    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("@search_page = page.homepage.search_page\n") }
-    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write('= display_title(@search_page)') }
+    File.open("#{paths[:cells]}/meta_navigation_cell.rb", 'w') { |f| f.write("    @current_user = current_user\n") }
+    File.open("#{paths[:meta_navigation]}/show.html.haml", 'w') { |f| f.write("      = t('.meta')\n") }
   end
 
   it 'creates files' do

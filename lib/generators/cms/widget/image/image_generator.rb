@@ -15,35 +15,37 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(sort_key_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [sort_key_attribute_name, '--type=string', '--title=Sort Key'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(caption_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [caption_attribute_name, '--type=string', '--title=Caption'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(link_to_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [link_to_attribute_name, '--type=linklist', '--title=Link'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(source_attribute_name)
-            Rails::Generators.invoke('cms:attribute', [source_attribute_name, '--type=linklist', '--title=Source'])
-          rescue DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(obj_class_name)
-            Rails::Generators.invoke('cms:model', [obj_class_name, '--title=Widget: Image', "--attributes=#{source_attribute_name}", caption_attribute_name, link_to_attribute_name, sort_key_attribute_name])
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = obj_class_name
+              model.title = 'Widget: Image'
+              model.attributes = [
+                {
+                  name: sort_key_attribute_name,
+                  type: :string,
+                  title: 'Sort key',
+                },
+                {
+                  name: caption_attribute_name,
+                  type: :string,
+                  title: 'Caption',
+                },
+                {
+                  name: link_to_attribute_name,
+                  type: :linklist,
+                  title: 'Link',
+                  max_size: 1,
+                },
+                {
+                  name: source_attribute_name,
+                  type: :linklist,
+                  title: 'Source',
+                  max_size: 1,
+                },
+              ]
+            end
 
             turn_model_into_widget(obj_class_name)
-          rescue DuplicateResourceError
+          rescue Cms::Generators::DuplicateResourceError
           end
         end
 
@@ -69,10 +71,6 @@ module Cms
 
         def example?
           options[:example]
-        end
-
-        def human_name
-          'Image Widget'
         end
 
         def obj_class_name

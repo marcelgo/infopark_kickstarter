@@ -1,4 +1,26 @@
 # v1.1.0
+  * Supports widgets to put their locale files into the widget directory.
+  * Switched to inplace editing and the Infopark widget framework.
+  * Kickstarter now uses local attributes only, because global attributes are deprecated and their
+    usage is discouraged. See
+    [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)
+    for further details.
+  * Bugfix: Added "sort_key" to GoogleMaps Box. (Thanks @franziska-luecke)
+  * Added monitoring rake task for future extension to other monitoring provider. See
+    `rake cms:component:monitoring` for further details.
+  * Renamed `flash_message` to `flash`, simplified and streamlined use of cells.
+  * Added rake task to retrieve a list of all permalinks and their paths. See
+    `rake cms:info:permalinks` for more details.
+  * Search support moved into its own generator and got cleaned up and simplified. See
+    `rails generate cms:component:search --help` for more details.
+  * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
+    of Infopark RailsConnector. (Thanks @tritz)
+  * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
+    of accept headers. (Thanks @awendt)
+  * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
+  * Added `honeybadger` as an error tracking provider. This will also be the default from now on
+    instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
+    to install.
   * A new slider box type was added. It slides selected images and displays there title in an
     overlay. See `rails generate cms:widget:slider --help` for more details.
   * Bugfix: Creates file `before_migrate.rb` if it doesn't exist yet. This fixes an annoyence that
@@ -52,7 +74,7 @@
     host application.
   * Bugfix: The contact form raised an error when there was no user logged in.
   * Airbrake component now includes secure option by default and does not depend on the kickstart
-    generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
+    generator anymore. Also added option "--skip-deployment-notification" if you don't resolve all
     error notifications on deployment.
   * Airbrake component is now available as the default provider for the error tracking component.
     This allows to support different error tracking solutions in the future. Run

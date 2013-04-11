@@ -14,51 +14,22 @@ module Cms
 
         def create_migration
           begin
-            validate_attribute(map_type_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                map_type_attribute_name,
-                '--type=enum',
-                '--title=Map Type',
-                '--values=ROADMAP',
-                'SATELLITE',
-                'HYBRID',
-                'TERRAIN',
-                '--method_name=map_type'
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = obj_class_name
+              model.title = 'Widget: GoogleMaps'
+              model.attributes = [
+                {
+                  name: address_attribute_name,
+                  type: :string,
+                  title: 'Address',
+                },
+                {
+                  name: sort_key_attribute_name,
+                  type: :string,
+                  title: 'Sort key',
+                }
               ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_attribute(address_attribute_name)
-
-            Rails::Generators.invoke(
-              'cms:attribute',
-              [
-                address_attribute_name,
-                '--type=string',
-                '--title=Address',
-                '--method_name=address'
-              ]
-            )
-          rescue Cms::Generators::DuplicateResourceError
-          end
-
-          begin
-            validate_obj_class(map_class_name)
-
-            Rails::Generators.invoke(
-              'cms:model',
-              [
-                map_class_name,
-                "--attributes=#{map_type_attribute_name}",
-                address_attribute_name,
-                '--title=Widget: GoogleMaps'
-              ]
-            )
+            end
           rescue Cms::Generators::DuplicateResourceError
           end
         end
@@ -88,20 +59,16 @@ module Cms
           options[:example]
         end
 
-        def human_name
-          'Google Maps Widget'
-        end
-
-        def map_class_name
+        def obj_class_name
           'GoogleMapsWidget'
         end
 
         def address_attribute_name
-          'google_maps_address'
+          'address'
         end
 
-        def map_type_attribute_name
-          'google_maps_map_type'
+        def sort_key_attribute_name
+          'sort_key'
         end
       end
     end

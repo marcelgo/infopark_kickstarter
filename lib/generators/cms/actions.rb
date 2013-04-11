@@ -20,6 +20,20 @@ module Cms
           'include Widget'
         )
       end
+
+      def add_model_attribute(model, attribute)
+        file = "app/models/#{model.underscore}.rb"
+        insert_point = "class #{model} < Obj\n"
+
+        data = []
+
+        data << "  include Cms::Attributes::#{attribute.camelize}"
+        data << ''
+
+        data = data.join("\n")
+
+        insert_into_file(file, data, :after => insert_point)
+      end
     end
   end
 end

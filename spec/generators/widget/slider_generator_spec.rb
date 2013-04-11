@@ -3,8 +3,8 @@ require 'spec_helper'
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
 require 'generators/cms/widget/slider/slider_generator.rb'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::SliderGenerator do
   include GeneratorSpec::TestCase
@@ -14,8 +14,8 @@ describe Cms::Generators::Widget::SliderGenerator do
   arguments ['--example']
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -48,9 +48,9 @@ describe Cms::Generators::Widget::SliderGenerator do
 
         directory 'models' do
           file 'slider_widget.rb' do
-            contains 'include Widget'
             contains 'include Cms::Attributes::SortKey'
             contains 'include Cms::Attributes::SliderImages'
+            contains 'include Widget'
           end
         end
 
@@ -59,6 +59,18 @@ describe Cms::Generators::Widget::SliderGenerator do
             directory 'attributes' do
               file 'sort_key.rb'
               file 'slider_images.rb'
+            end
+          end
+        end
+
+        directory 'widgets' do
+          directory 'slider_widget' do
+            file 'show.html.haml'
+            file 'thumbnail.html.haml'
+
+            directory 'locales' do
+              file 'de.slider_widget.yml'
+              file 'en.slider_widget.yml'
             end
           end
         end

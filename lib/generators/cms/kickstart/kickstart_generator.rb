@@ -102,7 +102,7 @@ module Cms
         end
       end
 
-      def set_timezone
+      def update_rails_configuration
         gsub_file(
           'config/application.rb',
           "# config.time_zone = 'Central Time (US & Canada)'",
@@ -110,63 +110,186 @@ module Cms
         )
 
         log(:info, "set timezone to 'Berlin'")
+
+        gsub_file(
+          'config/application.rb',
+          "# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]",
+          "config.i18n.load_path += Dir[Rails.root + 'app/widgets/**/locales/*']"
+        )
+
+        log(:info, 'enable widget locales')
       end
 
       def rails_connector_monkey_patch
         template('date_attribute.rb', 'config/initializers/date_attribute.rb')
       end
 
-      def configure_editmarker
-        template('preview.js.coffee', 'app/assets/javascripts/preview.js.coffee')
-      end
-
       def create_structure_migration_file
         begin
-          class_name = 'Image'
-          validate_obj_class(class_name)
-
-          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Image'])
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = 'Image'
+            model.type = :generic
+            model.title = 'Resource: Image'
+          end
         rescue Cms::Generators::DuplicateResourceError
         end
 
         begin
-          class_name = 'Video'
-          validate_obj_class(class_name)
-
-          Rails::Generators.invoke('cms:model', [class_name, '--type=generic', '--title=Resource: Video'])
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = 'Video'
+            model.type = :generic
+            model.title = 'Resource: Video'
+          end
         rescue Cms::Generators::DuplicateResourceError
         end
 
-        Rails::Generators.invoke('cms:attribute', ['show_in_navigation', '--title=Show in Navigation', '--type=boolean'])
-        Rails::Generators.invoke('cms:attribute', ['error_not_found_page_link', '--title=Error Not Found Page', '--type=linklist'])
-        Rails::Generators.invoke('cms:attribute', ['login_page_link', '--title=Login Page', '--type=linklist'])
-        Rails::Generators.invoke('cms:attribute', ['search_page_link', '--title=Search Page', '--type=linklist'])
-        Rails::Generators.invoke('cms:attribute', ['locale', '--title=Locale', '--type=string'])
-        Rails::Generators.invoke('cms:attribute', ['main_content', '--type=widget', '--title=Main Content'])
-        Rails::Generators.invoke('cms:scaffold', ['Homepage', '--title=Page: Homepage', '--attributes=error_not_found_page_link', 'login_page_link', 'search_page_link', 'locale', 'show_in_navigation', 'main_content'])
+        begin
+          class_name = 'Homepage'
 
-        Rails::Generators.invoke('cms:model', ['Root', '--title=Root'])
-        Rails::Generators.invoke('cms:model', ['Website', '--title=Website'])
-        Rails::Generators.invoke('cms:model', ['Container', '--title=Container', '--attributes=show_in_navigation'])
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = class_name
+            model.title = 'Page: Homepage'
+            model.attributes = [
+              show_in_navigation_attribute,
+              sort_key_attribute,
+              {
+                name: 'error_not_found_page_link',
+                type: :linklist,
+                title: 'Error Not Found Page',
+                max_size: 1,
+              },
+              {
+                name: 'login_page_link',
+                type: :linklist,
+                title: 'Login Page',
+                max_size: 1,
+              },
+              {
+                name: 'locale',
+                type: :string,
+                title: 'Locale',
+              },
+              main_content_attribute,
+            ]
+          end
 
-        Rails::Generators.invoke('cms:attribute', ['sort_key', '--type=string', '--title=Sort Key'])
+          Rails::Generators.invoke('cms:controller', [class_name])
+        rescue Cms::Generators::DuplicateResourceError
+        end
 
-        Rails::Generators.invoke('cms:scaffold', ['ContentPage', '--title=Page: Content', '--attributes=show_in_navigation', 'sort_key'])
-        turn_model_into_page('ContentPage')
+        begin
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = 'Root'
+            model.title = 'Root'
+          end
+        rescue Cms::Generators::DuplicateResourceError
+        end
 
-        Rails::Generators.invoke('cms:scaffold', ['SearchPage', '--title=Page: Search', '--attributes=show_in_navigation'])
-        turn_model_into_page('SearchPage')
+        begin
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = 'Website'
+            model.title = 'Website'
+          end
+        rescue Cms::Generators::DuplicateResourceError
+        end
 
-        Rails::Generators.invoke('cms:scaffold', ['ErrorPage', '--title=Page: Error', '--attributes=show_in_navigation'])
+        begin
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = 'Container'
+            model.title = 'Container'
+            model.attributes = [
+              show_in_navigation_attribute,
+            ]
+          end
+        rescue Cms::Generators::DuplicateResourceError
+        end
 
-        Rails::Generators.invoke('cms:attribute', ['redirect_after_login_link', '--type=linklist', '--title=Login Redirect', '--max-size=1'])
-        Rails::Generators.invoke('cms:attribute', ['redirect_after_logout_link', '--type=linklist', '--title=Logout Redirect', '--max-size=1'])
-        Rails::Generators.invoke('cms:scaffold', ['LoginPage', '--title=Page: Login', '--attributes=show_in_navigation', 'redirect_after_login_link', 'redirect_after_logout_link'])
-        turn_model_into_page('LoginPage')
+        begin
+          class_name = 'ContentPage'
 
-        Rails::Generators.invoke('cms:attribute', ['redirect_link', '--type=linklist', '--title=Redirect Link', '--max-size=1'])
-        Rails::Generators.invoke('cms:model', ['Redirect', '--title=Redirect', '--attributes=sort_key', 'redirect_link', 'show_in_navigation'])
-        turn_model_into_page('Redirect')
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = class_name
+            model.title = 'Page: Content'
+            model.attributes = [
+              show_in_navigation_attribute,
+              sort_key_attribute,
+              main_content_attribute,
+            ]
+          end
+
+          Rails::Generators.invoke('cms:controller', [class_name])
+
+          turn_model_into_page(class_name)
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
+        begin
+          class_name = 'ErrorPage'
+
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = class_name
+            model.title = 'Page: Error'
+            model.attributes = [
+              show_in_navigation_attribute,
+            ]
+          end
+
+          Rails::Generators.invoke('cms:controller', [class_name])
+
+          turn_model_into_page(class_name)
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
+        begin
+          class_name = 'LoginPage'
+
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = class_name
+            model.title = 'Page: Login'
+            model.attributes = [
+              show_in_navigation_attribute,
+              {
+                name: 'redirect_after_login_link',
+                type: :linklist,
+                title: 'Login redirect',
+                max_size: 1,
+              },
+              {
+                name: 'redirect_after_logout_link',
+                type: :linklist,
+                title: 'Logout redirect',
+                max_size: 1,
+              }
+            ]
+          end
+
+          Rails::Generators.invoke('cms:controller', [class_name])
+
+          turn_model_into_page(class_name)
+        rescue Cms::Generators::DuplicateResourceError
+        end
+
+        begin
+          class_name = 'Redirect'
+
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = class_name
+            model.title = 'Redirect'
+            model.attributes = [
+              show_in_navigation_attribute,
+              sort_key_attribute,
+              {
+                name: 'redirect_link',
+                type: :linklist,
+                title: 'Redirect link',
+                max_size: 1,
+              },
+            ]
+          end
+
+          turn_model_into_page(class_name)
+        rescue Cms::Generators::DuplicateResourceError
+        end
 
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
 
@@ -190,21 +313,37 @@ module Cms
         template('cells_error_handling.rb', 'config/initializers/cells.rb')
       end
 
-      def add_initital_components
+      def add_initial_content
+        Rails::Generators.invoke('cms:component:search')
         Rails::Generators.invoke('cms:widget:text', ['--example'])
         Rails::Generators.invoke('cms:widget:image', ['--example'])
       end
 
-      # TODO: remove when infopark gems are released
-      def add_inline_editing_gems
-        gem_group(:assets) do
-          gem('underscore-rails')
-          gem('less-rails-bootstrap')
-          gem('handlebars_assets', '~> 0.12.0')
-        end
+      private
+
+      def show_in_navigation_attribute
+        {
+          name: 'show_in_navigation',
+          type: :boolean,
+          title: 'Show in Navigation',
+        }
       end
 
-      private
+      def sort_key_attribute
+        {
+          name: 'sort_key',
+          type: :string,
+          title: 'Sort key',
+        }
+      end
+
+      def main_content_attribute
+        {
+          name: 'main_content',
+          type: 'widget',
+          title: 'Main content',
+        }
+      end
 
       def tenant_name
         content = File.read("#{Rails.root}/config/rails_connector.yml")

@@ -1,7 +1,6 @@
 class GoogleAnalyticsCell < Cell::Rails
-  cache :show, expires_in: 5.minutes do |cell, page|
+  cache :show, if: :really_cache? do |cell, page|
     [
-      Filters::EnvironmentDetection.preview_environment?,
       RailsConnector::Workspace.current.revision_id,
       page && page.homepage.id
     ]
@@ -16,5 +15,11 @@ class GoogleAnalyticsCell < Cell::Rails
     if @tracking_id.present?
       render
     end
+  end
+
+  private
+
+  def really_cache?(*args)
+    RailsConnector::Workspace.current.published?
   end
 end

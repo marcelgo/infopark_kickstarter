@@ -28,32 +28,12 @@
       .content
         .row
           .span9
-            = render_cell(:flash_messages, :show, flash)
+            = render_cell(:flash, :messages, flash)
 
             = yield
 
           .span3
             = render_cell(:meta_navigation, :show, @obj, current_user)
-
-            .well.sidebar-nav
-              %h3
-                Sidebar
-
-              %ul.nav.nav-list
-                %li.nav-header
-                  Sidebar
-
-                %li
-                  = link_to('/path1') do
-                    Link 1
-
-                %li
-                  = link_to('/path2') do
-                    Link 2
-
-                %li
-                  = link_to('/path3') do
-                    Link 3
 
     .container
       = render_cell(:footer, :show)

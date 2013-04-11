@@ -1,0 +1,10 @@
+Description:
+    Integrates a monitoring provider. By default, "newrelic" is used as a provider. You need to
+    provide the name of the project.
+
+Example:
+    `rails generate cms:component:monitoring "Test Website"`
+    `rails generate cms:component:monitoring "Test Website" --provider=newrelic`
+
+    Misc: Executes provider dependent generator:
+          `rails generate cms:component:monitoring:newrelic "Test Website"`

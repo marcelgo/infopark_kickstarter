@@ -18,9 +18,17 @@ unless Rails.env.development?
         if defined?(Airbrake)
           parent.send(:notify_airbrake, exception)
         end
+
+        if defined?(Honeybadger)
+          parent.send(:notify_honeybadger, exception)
+        end
       else
         if defined?(Airbrake)
           Airbrake.notify(exception)
+        end
+
+        if defined?(Honeybadger)
+          Honeybadger.notify(exception)
         end
       end
 

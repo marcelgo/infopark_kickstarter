@@ -16,8 +16,10 @@ class CreateSliderWidgetExample < ::RailsConnector::Migration
 
   def add_widget(obj, attribute, widget)
     widget.reverse_merge!({
-      path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+      _path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
     })
+
+    widget = create_obj(widget)
 
     widgets = obj.widgets(attribute)
 
@@ -31,6 +33,6 @@ class CreateSliderWidgetExample < ::RailsConnector::Migration
       layout: list,
     })
 
-    puts "Created '<%= obj_class_name %>'..."
+    puts "Created '#{widget[:_obj_class]}'..."
   end
 end

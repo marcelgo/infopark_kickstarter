@@ -2,6 +2,8 @@ class Widget::VideoWidgetCell < WidgetCell
   helper :cms
 
   def video(widget)
+    return unless widget.video_link.present?
+
     locals = {
       width: widget.video_width,
       height: widget.video_height,
