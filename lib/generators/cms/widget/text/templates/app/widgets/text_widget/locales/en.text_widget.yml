@@ -1,0 +1,5 @@
+en:
+  widgets:
+    text_widget:
+      title: 'Text Widget'
+      description: 'Creates a section with title and text.'

@@ -24,7 +24,7 @@ class LoginPageController < CmsController
   end
 
   def logout
-    discard_user
+    reset_session
 
     target = cms_path(@obj.redirect_after_logout)
 

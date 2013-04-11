@@ -5,7 +5,7 @@ module InfoparkKickstarter
       attr_reader :websites
       attr_reader :homepages
       attr_reader :resources
-      attr_reader :boxes
+      attr_reader :widgets
       attr_reader :recently_published
 
       def initialize
@@ -14,7 +14,7 @@ module InfoparkKickstarter
           @websites = Obj.where(:_obj_class, :equals, 'Website').size
           @homepages = Obj.where(:_obj_class, :equals, 'Homepage').size
           @resources = Obj.where(:_path, :starts_with, '/resources').and_not(:_obj_class, :equals, 'Container').size
-          @boxes = Obj.where(:_obj_class, :starts_with, 'Box').size
+          @widgets = Obj.where(:_obj_class, :contains_prefix, 'Widget').size
           @recently_published = Obj.all.order(:_last_changed).reverse_order.take(20)
         end
       end

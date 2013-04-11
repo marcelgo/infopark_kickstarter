@@ -3,13 +3,13 @@ module Cms
     module Widget
       class TextGenerator < ::Rails::Generators::Base
         include Migration
+        include BasePaths
         include Actions
 
-        class_option :cms_path,
-          type: :string,
-          default: nil,
-          desc: 'CMS parent path where the example widget should be placed.',
-          banner: 'LOCATION'
+        class_option :example,
+          type: :boolean,
+          default: false,
+          desc: 'Generate an example migration?'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -17,7 +17,7 @@ module Cms
           begin
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = obj_class_name
-              model.title = 'Box: Text'
+              model.title = 'Widget: Text'
               model.attributes = [
                 {
                   name: sort_key_attribute_name,
@@ -27,13 +27,15 @@ module Cms
               ]
             end
 
-            turn_model_into_box(obj_class_name)
+            turn_model_into_widget(obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end
 
-        def copy_app_directory
+        def create_widget
           directory('app')
+
+          template('thumbnail.html.haml', 'app/widgets/text_widget/thumbnail.html.haml')
         end
 
         def add_example
@@ -51,15 +53,11 @@ module Cms
         private
 
         def example?
-          cms_path.present?
-        end
-
-        def cms_path
-          options[:cms_path]
+          options[:example]
         end
 
         def obj_class_name
-          'BoxText'
+          'TextWidget'
         end
 
         def sort_key_attribute_name

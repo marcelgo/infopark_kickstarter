@@ -102,7 +102,7 @@ module Cms
         end
       end
 
-      def set_timezone
+      def update_rails_configuration
         gsub_file(
           'config/application.rb',
           "# config.time_zone = 'Central Time (US & Canada)'",
@@ -110,6 +110,14 @@ module Cms
         )
 
         log(:info, "set timezone to 'Berlin'")
+
+        gsub_file(
+          'config/application.rb',
+          "# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]",
+          "config.i18n.load_path += Dir[Rails.root + 'app/widgets/**/locales/*']"
+        )
+
+        log(:info, 'enable widget locales')
       end
 
       def rails_connector_monkey_patch
@@ -161,6 +169,7 @@ module Cms
                 type: :string,
                 title: 'Locale',
               },
+              main_content_attribute,
             ]
           end
 
@@ -204,6 +213,7 @@ module Cms
             model.attributes = [
               show_in_navigation_attribute,
               sort_key_attribute,
+              main_content_attribute,
             ]
           end
 
@@ -299,14 +309,14 @@ module Cms
         append_file('.gitignore', "config/deploy.yml\n")
       end
 
-      def create_box_model
+      def create_widget_model
         template('cells_error_handling.rb', 'config/initializers/cells.rb')
       end
 
-      def add_initital_components
+      def add_initial_content
         Rails::Generators.invoke('cms:component:search')
-        Rails::Generators.invoke('cms:widget:text', ["--cms_path=#{widgets_path}"])
-        Rails::Generators.invoke('cms:widget:image', ["--cms_path=#{widgets_path}"])
+        Rails::Generators.invoke('cms:widget:text', ['--example'])
+        Rails::Generators.invoke('cms:widget:image', ['--example'])
       end
 
       private
@@ -324,6 +334,14 @@ module Cms
           name: 'sort_key',
           type: :string,
           title: 'Sort key',
+        }
+      end
+
+      def main_content_attribute
+        {
+          name: 'main_content',
+          type: 'widget',
+          title: 'Main content',
         }
       end
 

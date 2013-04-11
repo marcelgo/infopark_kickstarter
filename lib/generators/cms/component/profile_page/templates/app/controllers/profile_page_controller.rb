@@ -1,7 +1,7 @@
 class ProfilePageController < CmsController
   include RailsConnector::Crm::Localizable
 
-  before_filter Filters::Authorization
+  include Authorization
 
   def index
     @presenter = ProfilePagePresenter.new(current_user, params[:profile_page_presenter])

@@ -1,0 +1,5 @@
+de:
+  widgets:
+    google_maps_widget:
+      title: 'Karten Widget'
+      description: 'Bindet eine Karte ein, die einen Pin an der ausgewählten Adresse anzeigt.'

@@ -3,14 +3,12 @@
     = render(state: :gravatar)
 
     .media-body
-      %h2.media-heading
-        = display_field(@entry, :title)
+      = cms_tag(:h2, @entry, :title, class: 'media-heading')
 
       = render(state: :published_at)
 
       = render(state: :published_by)
 
-  - @entry.boxes.each do |box|
-    = render_cell(:box, :show, @obj, box)
+  = cms_tag(:div, @entry, :main_content)
 
   = render(state: :comment)

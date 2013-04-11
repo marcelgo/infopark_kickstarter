@@ -1,4 +1,4 @@
-class IntegrateGoogleAnalytics < ::RailsConnector::Migrations::Migration
+class IntegrateGoogleAnalytics < ::RailsConnector::Migration
   def up
     create_configuration_obj
     deactivate_obj_class

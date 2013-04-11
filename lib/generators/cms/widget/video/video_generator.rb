@@ -5,11 +5,10 @@ module Cms
         include Migration
         include BasePaths
 
-        class_option :cms_path,
-          type: :string,
-          default: nil,
-          desc: 'CMS parent path where the example widget should be placed.',
-          banner: 'LOCATION'
+        class_option :example,
+          type: :boolean,
+          default: false,
+          desc: 'Generate an example migration?'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -63,7 +62,7 @@ module Cms
           begin
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = obj_class_name
-              model.title = 'Box: Video'
+              model.title = 'Widget: Video'
               model.attributes = [
                 {
                   name: sort_key_attribute_name,
@@ -107,11 +106,13 @@ module Cms
 
         def copy_app_directory
           directory('app', force: true)
+
+          template('thumbnail.html.haml', 'app/widgets/video_widget/thumbnail.html.haml')
         end
 
         def add_example
           if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_box_video_example.rb')
+            migration_template('example_migration.rb', 'cms/migrate/create_video_widget_example.rb')
           end
         end
 
@@ -124,15 +125,11 @@ module Cms
         private
 
         def example?
-          cms_path.present?
-        end
-
-        def cms_path
-          options[:cms_path]
+          options[:example]
         end
 
         def obj_class_name
-          'BoxVideo'
+          'VideoWidget'
         end
 
         def sort_key_attribute_name

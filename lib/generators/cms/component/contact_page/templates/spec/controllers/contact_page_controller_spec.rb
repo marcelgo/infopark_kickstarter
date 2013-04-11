@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ContactPageController do
   let(:homepage) { mock_model(Homepage, permalink: 'homepage') }
-  let(:contact_page) { mock(ContactPage, locale: 'en', activity_type: 'contact-test', redirect_after_submit: homepage) }
+  let(:contact_page) { mock(ContactPage, locale: 'en', activity_type: 'contact-test', redirect_after_submit: homepage, homepage: nil) }
 
   before do
     request.for_cms_object(contact_page)

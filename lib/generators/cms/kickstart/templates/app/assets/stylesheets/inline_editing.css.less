@@ -1,0 +1,27 @@
+body.ip_editing_active a#edit-toggle {
+  border: 1px solid black;
+}
+
+.ip_field_editable:empty,
+.ip_field_editable:empty {
+  font-family: 'infopark_iconsregular',Arial,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  vertical-align: middle;
+  color: #ccc;
+  display: block;
+  font-size: 13px;
+  padding: 0;
+
+  &:before {
+    content: '\F058';
+  }
+}
+
+.ip_field_editable[data-ip-field-type=html]:empty:before {
+  content: '\F04F';
+}
+
+.ip_field_editable[data-ip-field-type=string]:empty:before {
+  content: '\F058';
+}

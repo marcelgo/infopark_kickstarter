@@ -51,6 +51,16 @@ module Cms
                   type: :string,
                   title: 'Author',
                 },
+                {
+                  name: widget_attribute_name,
+                  type: :widget,
+                  title: 'Main content',
+                },
+                {
+                  name: blog_entry_abstract_attribute_name,
+                  type: :html,
+                  title: 'Abstract',
+                },
               ]
             end
           rescue Cms::Generators::DuplicateResourceError
@@ -96,6 +106,14 @@ module Cms
 
         def cms_path
           options[:cms_path]
+        end
+
+        def widget_attribute_name
+          'main_content'
+        end
+
+        def blog_entry_abstract_attribute_name
+          'abstract'
         end
 
         def blog_entry_author_attribute_name

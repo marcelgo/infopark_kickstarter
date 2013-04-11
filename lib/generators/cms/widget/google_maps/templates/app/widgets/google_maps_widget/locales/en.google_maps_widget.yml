@@ -1,0 +1,5 @@
+en:
+  widgets:
+    google_maps_widget:
+      title: 'Google Maps Widget'
+      description: 'Integrates a map that displays a pin for a given address.'

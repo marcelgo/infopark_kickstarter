@@ -1,4 +1,6 @@
 # v1.1.0
+  * Supports widgets to put their locale files into the widget directory.
+  * Switched to inplace editing and the Infopark widget framework.
   * Kickstarter now uses local attributes only, because global attributes are deprecated and their
     usage is discouraged. See
     [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)

@@ -1,14 +1,35 @@
-class CreateBoxPersonExample < ::RailsConnector::Migrations::Migration
+class CreatePersonWidgetExample < ::RailsConnector::Migration
   def up
-    path = '<%= cms_path %>/box-person-example'
+    homepage = Obj.find_by_path('<%= homepage_path %>')
 
-    create_obj(
-      _path: path,
+    add_widget(homepage, :main_content, {
       _obj_class: '<%= obj_class_name %>',
-      title: 'BoxPerson',
-      person: 'root'
-    )
+      title: '<%= obj_class_name %>',
+      person: 'root',
+    })
+  end
 
-    puts "Created '<%= obj_class_name %>' object at '#{path}'..."
+  private
+
+  def add_widget(obj, attribute, widget)
+    widget.reverse_merge!({
+      _path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
+    })
+
+    widget = create_obj(widget)
+
+    widgets = obj.widgets(attribute)
+
+    list = widgets.inject([]) do |values, widget|
+      values << {widget: widget['id']}
+    end
+
+    list << {widget: widget['id']}
+
+    update_obj(obj.id, attribute => {
+      layout: list,
+    })
+
+    puts "Created '#{widget[:_obj_class]}'..."
   end
 end

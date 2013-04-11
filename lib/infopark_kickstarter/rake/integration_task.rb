@@ -56,10 +56,10 @@ module InfoparkKickstarter
               'cms:component:language_switch',
               'cms:component:profile_page',
               'cms:component:blog --cms_path=/website/en',
-              'cms:widget:google_maps --cms_path=/website/en/_boxes',
-              'cms:widget:video --cms_path=/website/en/_boxes',
-              'cms:widget:person --cms_path=/website/en/_boxes',
-              'cms:widget:slider --cms_path=/website/en/_boxes',
+              'cms:widget:google_maps --example',
+              'cms:widget:video --example',
+              'cms:widget:person --example',
+              'cms:widget:slider --example',
             ]
 
             generators.each do |generator|

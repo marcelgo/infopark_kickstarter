@@ -1,0 +1,5 @@
+en:
+  widgets:
+    image_widget:
+      title: 'Image Widget'
+      description: 'Creates an image with a caption. The image can be linked.'

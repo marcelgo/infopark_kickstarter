@@ -11,7 +11,7 @@ describe Cms::Generators::Widget::ImageGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--cms_path=testdirectory']
+  arguments ['--example']
 
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
@@ -30,25 +30,25 @@ describe Cms::Generators::Widget::ImageGenerator do
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          directory 'box' do
-            file 'box_image_cell.rb'
+        directory 'widgets' do
+          directory 'image_widget' do
+            file 'show.html.haml'
+            file 'thumbnail.html.haml'
 
-            directory 'box_image' do
-              file 'show.html.haml'
-              file 'image_with_link.html.haml'
-              file 'image_without_link.html.haml'
+            directory 'locales' do
+              file 'de.image_widget.yml'
+              file 'en.image_widget.yml'
             end
           end
         end
 
         directory 'models' do
-          file 'box_image.rb' do
+          file 'image_widget.rb' do
             contains 'include Cms::Attributes::SortKey'
             contains 'include Cms::Attributes::Caption'
             contains 'include Cms::Attributes::Source'
             contains 'include Cms::Attributes::LinkTo'
-            contains 'include Box'
+            contains 'include Widget'
           end
         end
 
@@ -66,14 +66,8 @@ describe Cms::Generators::Widget::ImageGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_image'
+          migration 'create_image_widget'
           migration 'create_image_widget_example'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'box_image_spec.rb'
         end
       end
     }
