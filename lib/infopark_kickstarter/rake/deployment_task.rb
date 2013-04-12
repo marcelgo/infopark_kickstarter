@@ -39,7 +39,7 @@ module InfoparkKickstarter
         sh 'git fetch', verbose: true
 
         if %x(git rev-parse origin/master).strip == %x(git rev-parse origin/deploy).strip
-          puts RestClient.post("#{url}/deployments", params: { token: api_key })
+          puts RestClient.post("#{url}/deployments", token: api_key )
 
           puts
         else

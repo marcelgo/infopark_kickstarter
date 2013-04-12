@@ -1,4 +1,6 @@
 # v1.1.0
+  * Bugfix: Deployment task returned an 406 error, because the url params were not formated
+    correctly.
   * Supports widgets to put their locale files into the widget directory.
   * Switched to inplace editing and the Infopark widget framework.
   * Kickstarter now uses local attributes only, because global attributes are deprecated and their
