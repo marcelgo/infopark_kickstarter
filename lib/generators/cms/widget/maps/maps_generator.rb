@@ -9,7 +9,7 @@ module Cms
         class_option :provider,
           :type => :string,
           :default => 'google_maps',
-          :desc => "Select what monitoring provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
+          :desc => "Select what maps provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
 
         def validate_provider
           unless SUPPORTED_PROVIDER.include?(options[:provider])

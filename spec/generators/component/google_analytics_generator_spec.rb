@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/google_analytics/google_analytics_generator.rb'
+require 'generators/cms/component/tracking/google_analytics/google_analytics_generator.rb'
 require 'generators/cms/attribute/api/api_generator'
 require 'generators/cms/model/api/api_generator'
 
-describe Cms::Generators::Component::GoogleAnalyticsGenerator do
+describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp', __FILE__)
@@ -48,11 +48,7 @@ describe Cms::Generators::Component::GoogleAnalyticsGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_google_analytics' do
-            contains '"google_analytics_tracking_id"=>"1234"'
-            contains '"google_analytics_anonymize_ip"=>"Yes"'
-          end
-
+          migration 'create_google_analytics'
           migration 'integrate_google_analytics'
         end
       end

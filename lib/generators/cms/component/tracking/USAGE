@@ -1,0 +1,11 @@
+Description:
+    Enables the Rails application to use tracking. By default, the
+    tracking provider is google analytics.
+
+Example:
+    `rails generate cms:component:tracking`
+    `rails generate cms:component:tracking --provider=google_analytics`
+    `rails generate cms:component:tracking --provider=google_analytics --anonymize=YES --tracking_id=1234 --homepage_path=/website/en`
+
+    Misc: Executes provider dependent generator:
+          `rails generate cms:component:tracking:google_analytics`
