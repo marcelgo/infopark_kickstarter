@@ -7,13 +7,13 @@ Available share options
     - Google Plus:  :google
     - Twitter:      :twitter
     - linkedin      :linkedin
-    
+
 Example:
     Render default: Current page url and all share options:
-      = render_cell(:share, :show, '')
+      = render_cell(:social_sharing, :show)
 
     Render current page url and specific share options:
-      = render_cell(:share, :show, '', [:google, :twitter, :linkedin]
+      = render_cell(:social_sharing, :show, nil, [:google, :twitter, :linkedin])
 
     Render specific url and specific share options:
-      = render_cell(:share, :show, '', [:facebook, :google, :twitter]
+      = render_cell(:social_sharing, :show, 'path_to_specific_site', [:facebook, :google, :twitter])

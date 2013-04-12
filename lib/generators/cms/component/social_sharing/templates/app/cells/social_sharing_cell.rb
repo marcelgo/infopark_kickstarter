@@ -1,17 +1,19 @@
-class ShareCell < BoxCell
+class SocialSharingCell < BoxCell
   # Cell actions:
 
-  def show(url, provider = [])
+  def show(url = nil, provider = [])
     @url = url
 
     if provider.present?
-      @provider = provider.find_all{|item| available_provider.include?(item); }
+      @provider = provider.find_all{|item| available_provider.include?(item) }
     else
       @provider = available_provider
     end
 
     render
   end
+
+  #Cell states:
 
   def facebook
     render

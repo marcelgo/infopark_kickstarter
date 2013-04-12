@@ -1,7 +1,7 @@
 module Cms
   module Generators
     module Component
-      class ShareGenerator < ::Rails::Generators::Base
+      class SocialSharingGenerator < ::Rails::Generators::Base
         include Actions
 
         source_root File.expand_path('../templates', __FILE__)
@@ -17,7 +17,7 @@ module Cms
           data = []
 
           data << "\n"
-          data << "            = render_cell(:share, :show, cms_url(@obj))"
+          data << "            = render_cell(:social_sharing, :show, cms_url(@obj))"
 
           data = data.join("\n")
 
