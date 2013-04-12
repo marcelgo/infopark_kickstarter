@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.has_rdoc    = 'yard'
 
   gem.required_ruby_version     = Gem::Requirement.new('>= 1.9.3')
-  gem.required_rubygems_version = Gem::Requirement.new('>= 1.8.25')
+  gem.required_rubygems_version = Gem::Requirement.new('>= 1.8')
 
   gem.license = 'LGPLv3'
 
@@ -32,14 +32,14 @@ Gem::Specification.new do |gem|
     'CHANGELOG.md'
   ]
 
-  gem.add_dependency 'bundler', '>= 1.3.1'
-  gem.add_dependency 'rails', '~> 3.2.13'
+  gem.add_dependency 'bundler'
+  gem.add_dependency 'rails', '>= 3.2'
   gem.add_dependency 'jquery-rails'
   gem.add_dependency 'haml'
   gem.add_dependency 'launchy'
   gem.add_dependency 'less-rails-bootstrap'
-  gem.add_dependency 'infopark_rails_connector', '>= 6.8.2.7.128454143'
-  gem.add_dependency 'infopark_cloud_connector', '>= 6.8.2.7.128454143'
+  gem.add_dependency 'infopark_rails_connector', '>= 6.9.0.3.197272233'
+  gem.add_dependency 'infopark_cloud_connector', '>= 6.9.0.3.197272233'
 
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'pry'
