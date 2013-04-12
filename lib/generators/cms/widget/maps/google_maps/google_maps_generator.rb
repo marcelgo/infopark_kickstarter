@@ -3,8 +3,7 @@ module Cms
     module Widget
       module Maps
         class GoogleMapsGenerator < ::Rails::Generators::Base
-          include Migration
-          include BasePaths
+          Rails::Generators.hide_namespace(self.namespace)
 
           source_root File.expand_path('../templates', __FILE__)
 
