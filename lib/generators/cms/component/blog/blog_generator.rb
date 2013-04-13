@@ -3,6 +3,7 @@ module Cms
     module Component
       class BlogGenerator < ::Rails::Generators::Base
         include Migration
+        include Actions
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -38,6 +39,8 @@ module Cms
                 },
               ]
             end
+
+            turn_model_into_page(blog_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 
@@ -63,6 +66,8 @@ module Cms
                 },
               ]
             end
+
+            turn_model_into_page(blog_entry_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

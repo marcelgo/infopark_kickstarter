@@ -9,8 +9,8 @@ class GoogleAnalyticsCell < Cell::Rails
   def show(homepage)
     obj = homepage.google_analytics.destination_objects.first
 
-    @tracking_id = obj.google_analytics_tracking_id
-    @anonymize_ip = obj.google_analytics_anonymize_ip?
+    @tracking_id = obj.tracking_id
+    @anonymize_ip = obj.anonymize_ip?
 
     if @tracking_id.present?
       render

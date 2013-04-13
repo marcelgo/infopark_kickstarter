@@ -14,8 +14,3 @@ de:
     submit:
       contact_page_presenter:
         create: 'Abschicken'
-
-  activemodel:
-    errors:
-      messages:
-        invalid_email: 'Eine gültige E-Mail-Adresse ist erforderlich.'

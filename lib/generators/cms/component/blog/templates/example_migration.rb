@@ -5,7 +5,7 @@ class CreateBlogExample < ::RailsConnector::Migration
     create_obj(
       _path: blog_path,
       _obj_class: '<%= blog_class_name %>',
-      title: 'Blog Page Example',
+      title: 'Blog',
       '<%= blog_description_attribute_name %>' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

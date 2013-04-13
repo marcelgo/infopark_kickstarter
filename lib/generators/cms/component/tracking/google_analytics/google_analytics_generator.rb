@@ -88,11 +88,11 @@ module Cms
           end
 
           def tracking_id_attribute_name
-            'google_analytics_tracking_id'
+            'tracking_id'
           end
 
           def anonymize_ip_attribute_name
-            'google_analytics_anonymize_ip'
+            'anonymize_ip'
           end
 
           def homepage_configuration_attribute_name
@@ -100,11 +100,11 @@ module Cms
           end
 
           def anonymize_ip_default
-            options[:anonymize_ip_default]
+            options[:anonymize]
           end
 
           def tracking_id_default
-            options[:tracking_id_default]
+            options[:tracking_id]
           end
         end
       end

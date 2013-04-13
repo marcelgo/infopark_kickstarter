@@ -1,6 +1,6 @@
 Description:
-    Enables the Rails application to use tracking. By default, the
-    tracking provider is google analytics.
+    Enables the Rails application to use tracking. By default, the tracking provider is google
+    analytics.
 
 Example:
     `rails generate cms:component:tracking`
