@@ -24,9 +24,8 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
     destination_root.should have_structure {
       directory 'app' do
         directory 'assets' do
-
           directory 'stylesheets' do
-            file 'google_maps.css.scss'
+            file 'google_maps_widget.css.less'
           end
         end
 
@@ -59,12 +58,6 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
       directory 'cms' do
         directory 'migrate' do
           migration 'create_google_maps_widget'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'google_maps_widget_spec.rb'
         end
       end
     }

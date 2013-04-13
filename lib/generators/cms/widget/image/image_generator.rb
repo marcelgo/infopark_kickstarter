@@ -2,14 +2,7 @@ module Cms
   module Generators
     module Widget
       class ImageGenerator < ::Rails::Generators::Base
-        include Migration
-        include BasePaths
         include Actions
-
-        class_option :example,
-          type: :boolean,
-          default: false,
-          desc: 'Generate an example migration?'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -55,12 +48,6 @@ module Cms
           template('thumbnail.html.haml', 'app/widgets/image_widget/thumbnail.html.haml')
         end
 
-        def add_example
-          if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_image_widget_example.rb')
-          end
-        end
-
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
@@ -68,10 +55,6 @@ module Cms
         end
 
         private
-
-        def example?
-          options[:example]
-        end
 
         def obj_class_name
           'ImageWidget'

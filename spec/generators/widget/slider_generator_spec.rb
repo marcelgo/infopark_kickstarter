@@ -11,8 +11,6 @@ describe Cms::Generators::Widget::SliderGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--example']
-
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
@@ -49,7 +47,7 @@ describe Cms::Generators::Widget::SliderGenerator do
         directory 'models' do
           file 'slider_widget.rb' do
             contains 'include Cms::Attributes::SortKey'
-            contains 'include Cms::Attributes::SliderImages'
+            contains 'include Cms::Attributes::Images'
             contains 'include Widget'
           end
         end
@@ -58,7 +56,7 @@ describe Cms::Generators::Widget::SliderGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'sort_key.rb'
-              file 'slider_images.rb'
+              file 'images.rb'
             end
           end
         end
@@ -79,13 +77,6 @@ describe Cms::Generators::Widget::SliderGenerator do
       directory 'cms' do
         directory 'migrate' do
           migration 'create_slider_widget'
-          migration 'create_slider_widget_example'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'slider_widget_spec.rb'
         end
       end
     }

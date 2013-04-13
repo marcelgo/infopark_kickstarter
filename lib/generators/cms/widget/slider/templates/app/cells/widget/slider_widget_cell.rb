@@ -3,7 +3,7 @@ class Widget::SliderWidgetCell < WidgetCell
 
   def show(page, widget)
     @id = widget.id
-    @images = widget.slider_images
+    @images = widget.images
 
     if @images.present?
       super(page, widget)

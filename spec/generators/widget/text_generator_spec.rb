@@ -11,8 +11,6 @@ describe Cms::Generators::Widget::TextGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--example']
-
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
@@ -61,7 +59,6 @@ describe Cms::Generators::Widget::TextGenerator do
       directory 'cms' do
         directory 'migrate' do
           migration 'create_text_widget'
-          migration 'create_text_widget_example'
         end
       end
     }

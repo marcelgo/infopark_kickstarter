@@ -2,14 +2,6 @@ module Cms
   module Generators
     module Widget
       class VideoGenerator < ::Rails::Generators::Base
-        include Migration
-        include BasePaths
-
-        class_option :example,
-          type: :boolean,
-          default: false,
-          desc: 'Generate an example migration?'
-
         source_root File.expand_path('../templates', __FILE__)
 
         def video_tools
@@ -110,12 +102,6 @@ module Cms
           template('thumbnail.html.haml', 'app/widgets/video_widget/thumbnail.html.haml')
         end
 
-        def add_example
-          if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_video_widget_example.rb')
-          end
-        end
-
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
@@ -123,10 +109,6 @@ module Cms
         end
 
         private
-
-        def example?
-          options[:example]
-        end
 
         def obj_class_name
           'VideoWidget'

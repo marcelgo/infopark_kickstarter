@@ -3,7 +3,7 @@ Description:
 
 Example:
     CMS: obj_class TextWidget
-    CMS: attribute title (string)
+    CMS: attribute title (html)
     CMS: attribute body (html)
     CMS: attribute sort_key (string)
 

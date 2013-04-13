@@ -4,7 +4,7 @@ Description:
 
 Example:
     CMS: obj_class ImageWidget
-    CMS: attribute title (string)
+    CMS: attribute title (html)
     CMS: attribute sort_key (string)
     CMS: attribute source (linklist)
     CMS: attribute caption (string)

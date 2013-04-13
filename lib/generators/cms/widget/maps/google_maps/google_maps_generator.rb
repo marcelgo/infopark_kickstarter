@@ -5,6 +5,8 @@ module Cms
         class GoogleMapsGenerator < ::Rails::Generators::Base
           Rails::Generators.hide_namespace(self.namespace)
 
+          include Actions
+
           source_root File.expand_path('../templates', __FILE__)
 
           def create_migration
@@ -25,13 +27,14 @@ module Cms
                   }
                 ]
               end
+
+              turn_model_into_widget(obj_class_name)
             rescue Cms::Generators::DuplicateResourceError
             end
           end
 
           def copy_app_directory
             directory('app', force: true)
-            directory('spec', force: true)
 
             template('thumbnail.html.haml', 'app/widgets/google_maps_widget/thumbnail.html.haml')
           end
