@@ -13,6 +13,7 @@ module Cms
         attr_accessor :attributes
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
+        attr_accessor :migration_path
 
         def initialize(config = {})
           yield self if block_given?
@@ -61,12 +62,8 @@ module Cms
 
         def create_migration_file
           validate_obj_class(class_name)
-          migration_template('migration.rb', "cms/migrate/create_#{file_name}.rb")
+          migration_template('migration.rb', "#{migration_path}/create_#{file_name}.rb")
         rescue DuplicateResourceError
-        end
-
-        def create_spec_file
-          template('spec.rb', File.join('spec/models', "#{file_name}_spec.rb"))
         end
 
         private
@@ -89,6 +86,10 @@ module Cms
 
         def mandatory_attributes
           @mandatory_attributes ||= []
+        end
+
+        def migration_path
+          @migration_path ||= 'cms/migrate'
         end
       end
     end
