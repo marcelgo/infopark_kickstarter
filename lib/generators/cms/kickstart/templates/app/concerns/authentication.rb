@@ -27,4 +27,8 @@ module Authentication
     @current_user = user
     session[:user] = user.cache_attributes
   end
+
+  def discard_user
+    session.delete(:user)
+  end
 end

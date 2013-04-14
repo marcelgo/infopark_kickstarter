@@ -1,6 +1,4 @@
 class ProfilePageController < CmsController
-  include RailsConnector::Crm::Localizable
-
   include Authorization
 
   def index

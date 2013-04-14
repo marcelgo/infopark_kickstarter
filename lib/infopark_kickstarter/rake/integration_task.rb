@@ -53,7 +53,7 @@ module InfoparkKickstarter
               'cms:component:monitoring "Test Website" --provider=newrelic',
               'cms:component:tracking --provider=google_analytics --homepage_path=/website/en',
               'cms:component:language_switch',
-              'cms:component:profile_page',
+              'cms:component:profile_page --cms_path=/website/en',
               'cms:component:contact_page --cms_path=/website/en',
               'cms:component:blog --cms_path=/website/en',
               'cms:component:social_sharing',

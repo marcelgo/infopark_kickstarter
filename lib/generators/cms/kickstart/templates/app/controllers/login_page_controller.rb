@@ -1,6 +1,4 @@
 class LoginPageController < CmsController
-  include RailsConnector::Crm::Localizable
-
   def index
     @presenter = LoginPresenter.new(params[:login_presenter])
 
@@ -24,7 +22,7 @@ class LoginPageController < CmsController
   end
 
   def logout
-    reset_session
+    discard_user
 
     target = cms_path(@obj.redirect_after_logout)
 

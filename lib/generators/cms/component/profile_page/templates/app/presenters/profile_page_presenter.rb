@@ -3,55 +3,28 @@ class ProfilePagePresenter
 
   attr_reader :user
 
-  attribute :user_id
-  attribute :country
-  attribute :email
-  attribute :first_name
+  attribute :id
   attribute :gender
-  attribute :job_title
-  attribute :language
+  attribute :first_name
   attribute :last_name
-  attribute :city
-  attribute :mobile_phone
-  attribute :company
-  attribute :phone
-  attribute :postalcode
-  attribute :street_address
+  attribute :email
+  attribute :language
   attribute :want_email
 
+  validates :id, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
-  validates :email, email: { message: I18n.t('activemodel.errors.messages.invalid_email') }
 
-  def initialize(user, attributes = {})
+  def initialize(user, attributes)
     @user = user
-    attributes ||= {}
-
-    prefill!(user, attributes)
+    attributes ||= user.fetch.attributes
 
     super(attributes)
   end
 
   def save
     if valid?
-      save_contact
+      user.fetch.update_attributes(attributes)
     end
-  end
-
-private
-
-  def save_contact
-    attributes.each do |key, value|
-      if user.attributes.include?(key)
-        user[key] = value
-      end
-    end
-
-    user.save
-  end
-
-  def prefill!(user, attributes)
-    attributes['user_id'] = user.id
-    attributes.reverse_merge!(user.attributes)
   end
 end

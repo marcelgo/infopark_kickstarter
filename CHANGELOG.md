@@ -1,6 +1,9 @@
 # v2.0.0
+  * Removed the user manager as it was way too complicated and didn't fit the more general use case.
+    This lead to some refactorings of the profile, login and contact page, which should be much
+    clearer now.
   * Added social sharing component, that lets you easily integrate social sharing provider to share
-    the current url.
+    the current url. (Thanks @jan-hendrik)
   * Bugfix: The workspace toggle did not always display the correct workspace title.
   * Simplified the contact page component to a more general and understandable use case. Removed
     "valid_email" dependency and user attributes prefill. The contact page is no longer placed under
@@ -11,7 +14,7 @@
   * Supports widgets to put their locale files into the widget directory.
   * Switched to inplace editing and the Infopark widget framework. This also removes the need for
     concrete widget examples, as they can easily be inserted on each page via the widget browser. A
-    toggle is placed in the main navigation bar to switch to edit mode.
+    toggle is placed in the main navigation bar to switch to edit mode. (Thanks @cocodercoder)
   * Kickstarter now uses local attributes only, because global attributes are deprecated and their
     usage is discouraged. See
     [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)

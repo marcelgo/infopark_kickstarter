@@ -9,37 +9,19 @@
     %legend
       = t('.user_legend')
 
-    = form.input(:gender, as: :radio, collection: [:M, :F])
+    = form.input :id, as: :hidden, input_html: { value: form.object.id }
+
+    = form.input(:gender, as: :radio, collection: [:F, :M])
 
     = form.input(:first_name)
 
     = form.input(:last_name)
 
-    = form.input(:language, as: :select, collection: [:de, :en])
+    = form.input(:language, as: :select, collection: [:en, :de])
 
     = form.input(:email)
 
-    = form.input(:postalcode)
-
-    = form.input(:city)
-
-    = form.input(:street_address)
-
-    = form.input(:phone)
-
-    = form.input(:mobile_phone)
-
-    = form.input(:country, alias_method: :localized_country_select)
-
     = form.input(:want_email, as: :boolean, inline_label: true, label: false)
-
-  %fieldset
-    %legend
-      = t('.company_legend')
-
-    = form.input(:company)
-
-    = form.input(:job_title)
 
   .control-group
     .controls
