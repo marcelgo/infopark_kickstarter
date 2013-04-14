@@ -1,0 +1,17 @@
+Description:
+    Creates a new widget that can be selected from within the widget browser. A widget consists of
+    view files, locales and migrations to. You can define a title and a description that are
+    displayed in the widget browser. As for normal object classes, you can define attribute,
+    mandatory attributes and give default values to them.
+
+Example:
+    `rails generate cms:widget NewsWidget --title="News Widget" --attributes=sort_key:string length:integer`
+
+    Migration: app/widgets/news_widget/migrate/123456_create_news.rb
+    Views: app/widgets/news_widget/show.html.haml
+           app/widgets/news_widget/thumbnail.html.haml
+    Locales: app/widgets/news_widget/locales/en.news_widget.yml
+             app/widgets/news_widget/locales/de.news_widget.yml
+    Model: app/models/news_widget.rb
+    Concerns: app/concerns/sort_key.rb
+              app/concerns/length.rb
