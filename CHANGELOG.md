@@ -1,4 +1,6 @@
 # v2.0.0
+  * Added social sharing component, that lets you easily integrate social sharing provider to share
+    the current url.
   * Bugfix: The workspace toggle did not always display the correct workspace title.
   * Simplified the contact page component to a more general and understandable use case. Removed
     "valid_email" dependency and user attributes prefill. The contact page is no longer placed under

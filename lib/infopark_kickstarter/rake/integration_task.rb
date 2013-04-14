@@ -56,6 +56,7 @@ module InfoparkKickstarter
               'cms:component:profile_page',
               'cms:component:contact_page --cms_path=/website/en',
               'cms:component:blog --cms_path=/website/en',
+              'cms:component:social_sharing',
               'cms:widget:maps --provider=google_maps',
               'cms:widget:video',
               'cms:widget:person',
