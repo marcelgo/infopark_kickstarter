@@ -13,6 +13,6 @@
               = link_to(cms_path(obj)) do
                 = display_title(obj)
 
-          = render(state: :edit_toggle)
-
         = render_cell(:workspace_toggle, :show)
+
+        = render_cell(:edit_toggle, :show)

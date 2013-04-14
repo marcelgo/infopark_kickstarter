@@ -8,7 +8,8 @@
     correctly.
   * Supports widgets to put their locale files into the widget directory.
   * Switched to inplace editing and the Infopark widget framework. This also removes the need for
-    concrete widget examples, as they can easily be inserted on each page.
+    concrete widget examples, as they can easily be inserted on each page via the widget browser. A
+    toggle is placed in the main navigation bar to switch to edit mode.
   * Kickstarter now uses local attributes only, because global attributes are deprecated and their
     usage is discouraged. See
     [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)
