@@ -6,10 +6,10 @@ Example:
     CMS: attribute title (html)
     CMS: attribute body (html)
     CMS: attribute sort_key (string)
-    CMS: attribute video_link (linklist)
-    CMS: attribute video_width (integer)
-    CMS: attribute video_height (integer)
-    CMS: attribute video_autoplay (boolean)
-    CMS: attribute video_preview_image (linklist)
+    CMS: attribute source (linklist)
+    CMS: attribute width (integer)
+    CMS: attribute height (integer)
+    CMS: attribute autoplay (boolean)
+    CMS: attribute poster (linklist)
 
     `rails generate cms:widget:video`

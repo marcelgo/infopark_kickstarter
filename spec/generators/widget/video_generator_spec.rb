@@ -43,7 +43,7 @@ describe Cms::Generators::Widget::VideoGenerator do
 
             directory 'video_widget' do
               file 'show.html.haml'
-              file 'generic.html.haml'
+              file 'projekktor.html.haml'
               file 'youtube.html.haml'
               file 'vimeo.html.haml'
             end
@@ -53,11 +53,11 @@ describe Cms::Generators::Widget::VideoGenerator do
         directory 'models' do
           file 'video_widget.rb' do
             contains 'include Widget'
-            contains 'include Cms::Attributes::VideoLink'
-            contains 'include Cms::Attributes::VideoWidth'
-            contains 'include Cms::Attributes::VideoHeight'
-            contains 'include Cms::Attributes::VideoAutoplay'
-            contains 'include Cms::Attributes::VideoPreviewImage'
+            contains 'include Cms::Attributes::Source'
+            contains 'include Cms::Attributes::Width'
+            contains 'include Cms::Attributes::Height'
+            contains 'include Cms::Attributes::Autoplay'
+            contains 'include Cms::Attributes::Poster'
             contains 'include Cms::Attributes::SortKey'
           end
         end
@@ -66,11 +66,11 @@ describe Cms::Generators::Widget::VideoGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'sort_key.rb'
-              file 'video_link.rb'
-              file 'video_width.rb'
-              file 'video_height.rb'
-              file 'video_autoplay.rb'
-              file 'video_preview_image.rb'
+              file 'source.rb'
+              file 'width.rb'
+              file 'height.rb'
+              file 'autoplay.rb'
+              file 'poster.rb'
             end
           end
         end
@@ -79,7 +79,10 @@ describe Cms::Generators::Widget::VideoGenerator do
           directory 'javascripts' do
             file 'application.js' do
               contains '//= require projekktor'
+              contains '//= require projekktor.config'
             end
+
+            file 'projekktor.config.js.coffee'
           end
 
           directory 'stylesheets' do

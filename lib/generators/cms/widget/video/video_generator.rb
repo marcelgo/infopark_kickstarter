@@ -21,16 +21,7 @@ module Cms
 
           data << ''
           data << '//= require projekktor'
-          data << ''
-          data << '$(document).ready(function() {'
-          data << "  $('.projekktor').each(function(event) {"
-          data << "    projekktor('#' + $(this).attr('id'), {"
-          data << "      playerFlashMP4: '/assets/jarisplayer.swf',"
-          data << "      playerFlashMP3: '/assets/jarisplayer.swf',"
-          data << "      autoplay: $(this).data('autoplay')"
-          data << '    });'
-          data << '  });'
-          data << '});'
+          data << '//= require projekktor.config'
 
           data = data.join("\n")
 
@@ -64,13 +55,13 @@ module Cms
                 {
                   name: video_link_attribute_name,
                   type: :linklist,
-                  title: 'Video',
+                  title: 'Source',
                   max_size: 1,
                 },
                 {
-                  name: video_preview_image_attribute_name,
+                  name: video_poster_attribute_name,
                   type: :linklist,
-                  title: 'Banner image',
+                  title: 'Poster',
                   max_size: 1,
                 },
                 {
@@ -83,6 +74,7 @@ module Cms
                   name: video_height_attribute_name,
                   type: :string,
                   title: 'Height',
+                  default: 430,
                 },
                 {
                   name: video_autoplay_attribute_name,
@@ -119,23 +111,23 @@ module Cms
         end
 
         def video_link_attribute_name
-          'video_link'
+          'source'
         end
 
-        def video_preview_image_attribute_name
-          'video_preview_image'
+        def video_poster_attribute_name
+          'poster'
         end
 
         def video_width_attribute_name
-          'video_width'
+          'width'
         end
 
         def video_height_attribute_name
-          'video_height'
+          'height'
         end
 
         def video_autoplay_attribute_name
-          'video_autoplay'
+          'autoplay'
         end
       end
     end

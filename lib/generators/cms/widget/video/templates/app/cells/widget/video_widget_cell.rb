@@ -1,25 +1,35 @@
 class Widget::VideoWidgetCell < WidgetCell
   helper :cms
 
-  def video(widget)
-    return unless widget.video_link.present?
+  # Cell states:
+  # The following states assume @widget to be given.
 
-    locals = {
-      width: widget.video_width,
-      height: widget.video_height,
-      src: widget.video_url,
-    }
+  def video
+    return unless @widget.source.present?
 
-    if widget.video_provider == 'generic'
-      locals.merge!({
-        id: widget.id,
-        mime_type: widget.video_mime_type,
-        autoplay: widget.video_autoplay?.to_s,
-        preview: widget.video_preview_image.first,
-      })
-    end
+    @width = @widget.width
+    @height = @widget.height
+    @src = @widget.embed_url
 
-    view = widget.video_provider.downcase
-    render(view: view, locals: locals)
+    render(state: @widget.provider.downcase)
+  end
+
+  # The following states assume @widget, @width, @height and @src to be given.
+
+  def projekktor
+    @id = @widget.id
+    @mime_type = @widget.mime_type
+    @autoplay = @widget.autoplay?
+    @poster = @widget.poster
+
+    render
+  end
+
+  def vimeo
+    render
+  end
+
+  def youtube
+    render
   end
 end
