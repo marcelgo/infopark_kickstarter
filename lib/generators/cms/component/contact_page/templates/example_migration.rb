@@ -1,13 +1,13 @@
 class CreateContactPageExample < ::RailsConnector::Migration
   def path
-    '<%= configuration_path %>/contact'
+    '<%= cms_path %>/contact'
   end
 
   def up
     create_obj(
       _path: path,
       _obj_class: '<%= class_name %>',
-      title: 'Contact Page Example',
+      title: 'Contact',
       body: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -15,30 +15,7 @@ class CreateContactPageExample < ::RailsConnector::Migration
         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
       '<%= crm_activity_type_attribute_name %>' => '<%= activity_type %>',
-      '<%= show_in_navigation_attribute_name %>' => 'Yes',
-      '<%= redirect_after_submit_attribute_name %>' => [{ url: '<%= homepage_path %>' }]
-    )
-
-    attributes = get_obj_class('Homepage')['attributes']
-    attributes.map do |definition|
-      definition.delete('id')
-
-      definition.delete_if do |_, value|
-        value.nil?
-      end
-    end
-    attributes << {
-      name: '<%= contact_page_attribute_name %>',
-      type: 'linklist',
-      title: 'Contact Page',
-      max_size: 1,
-    }
-
-    update_obj_class('Homepage', attributes: attributes)
-
-    update_obj(
-      Obj.find_by_path('<%= homepage_path %>').id,
-      '<%= contact_page_attribute_name %>' => [{ url: path }]
+      '<%= show_in_navigation_attribute_name %>' => 'Yes'
     )
 
     setup_crm

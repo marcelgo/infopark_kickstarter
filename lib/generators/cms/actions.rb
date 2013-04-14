@@ -11,13 +11,13 @@ module Cms
         )
       end
 
-      def turn_model_into_box(class_name)
+      def turn_model_into_widget(class_name)
         file_name = "#{class_name.underscore}.rb"
 
         gsub_file(
           "app/models/#{file_name}",
-          '# include Box',
-          'include Box'
+          '# include Widget',
+          'include Widget'
         )
       end
 

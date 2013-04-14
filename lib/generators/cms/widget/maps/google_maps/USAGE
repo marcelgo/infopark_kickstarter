@@ -1,0 +1,12 @@
+Description:
+    Generates a sortable google maps widget that displays an address as a pin on an interactive
+    street map.
+
+Example:
+    CMS: obj_class GoogleMapsWidget
+    CMS: attribute title (html)
+    CMS: attribute body (html)
+    CMS: attribute address (string)
+    CMS: attribute sort_key (string)
+
+    `rails generate cms:widget:maps:google_maps`

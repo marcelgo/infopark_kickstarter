@@ -51,15 +51,15 @@ module InfoparkKickstarter
               'cms:component:error_tracking --provider=airbrake',
               'cms:component:error_tracking --provider=honeybadger',
               'cms:component:monitoring "Test Website" --provider=newrelic',
-              'cms:component:google_analytics',
-              'cms:component:contact_page',
+              'cms:component:tracking --provider=google_analytics --homepage_path=/website/en',
               'cms:component:language_switch',
               'cms:component:profile_page',
+              'cms:component:contact_page --cms_path=/website/en',
               'cms:component:blog --cms_path=/website/en',
-              'cms:widget:google_maps --cms_path=/website/en/_boxes',
-              'cms:widget:video --cms_path=/website/en/_boxes',
-              'cms:widget:person --cms_path=/website/en/_boxes',
-              'cms:widget:slider --cms_path=/website/en/_boxes',
+              'cms:widget:maps --provider=google_maps',
+              'cms:widget:video',
+              'cms:widget:person',
+              'cms:widget:slider',
             ]
 
             generators.each do |generator|

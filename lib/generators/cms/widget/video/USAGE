@@ -1,0 +1,15 @@
+Description:
+    Generates a video widget that displays a youtube, vimeo or generic video.
+
+Example:
+    CMS: obj_class VideoWidget
+    CMS: attribute title (html)
+    CMS: attribute body (html)
+    CMS: attribute sort_key (string)
+    CMS: attribute video_link (linklist)
+    CMS: attribute video_width (integer)
+    CMS: attribute video_height (integer)
+    CMS: attribute video_autoplay (boolean)
+    CMS: attribute video_preview_image (linklist)
+
+    `rails generate cms:widget:video`

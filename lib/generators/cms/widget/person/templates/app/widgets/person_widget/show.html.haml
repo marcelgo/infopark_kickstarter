@@ -1,0 +1,12 @@
+.widget.widget_person.media.well
+  %div.media-body
+    - if @widget.person.present?
+      %h3.media-heading
+        = @widget.person.first_name
+        = @widget.person.last_name
+
+      - if @widget.person.email.present?
+        %p
+          %i.icon-envelope
+
+          = mail_to(@widget.person.email)

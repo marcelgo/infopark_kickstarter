@@ -2,15 +2,6 @@ module Cms
   module Generators
     module Widget
       class VideoGenerator < ::Rails::Generators::Base
-        include Migration
-        include BasePaths
-
-        class_option :cms_path,
-          type: :string,
-          default: nil,
-          desc: 'CMS parent path where the example widget should be placed.',
-          banner: 'LOCATION'
-
         source_root File.expand_path('../templates', __FILE__)
 
         def video_tools
@@ -63,7 +54,7 @@ module Cms
           begin
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = obj_class_name
-              model.title = 'Box: Video'
+              model.title = 'Widget: Video'
               model.attributes = [
                 {
                   name: sort_key_attribute_name,
@@ -107,12 +98,8 @@ module Cms
 
         def copy_app_directory
           directory('app', force: true)
-        end
 
-        def add_example
-          if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_box_video_example.rb')
-          end
+          template('thumbnail.html.haml', 'app/widgets/video_widget/thumbnail.html.haml')
         end
 
         def notice
@@ -123,16 +110,8 @@ module Cms
 
         private
 
-        def example?
-          cms_path.present?
-        end
-
-        def cms_path
-          options[:cms_path]
-        end
-
         def obj_class_name
-          'BoxVideo'
+          'VideoWidget'
         end
 
         def sort_key_attribute_name

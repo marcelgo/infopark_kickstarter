@@ -11,8 +11,6 @@ describe Cms::Generators::Widget::TextGenerator do
 
   destination File.expand_path('../../../../tmp', __FILE__)
 
-  arguments ['--cms_path=testdirectory']
-
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
@@ -30,20 +28,22 @@ describe Cms::Generators::Widget::TextGenerator do
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          directory 'box' do
-            file 'box_text_cell.rb'
+        directory 'widgets' do
+          directory 'text_widget' do
+            file 'show.html.haml'
+            file 'thumbnail.html.haml'
 
-            directory 'box_text' do
-              file 'show.html.haml'
+            directory 'locales' do
+              file 'de.text_widget.yml'
+              file 'en.text_widget.yml'
             end
           end
         end
 
         directory 'models' do
-          file 'box_text.rb' do
+          file 'text_widget.rb' do
             contains 'include Cms::Attributes::SortKey'
-            contains 'include Box'
+            contains 'include Widget'
           end
         end
 
@@ -58,14 +58,7 @@ describe Cms::Generators::Widget::TextGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_text'
-          migration 'create_text_widget_example'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'box_text_spec.rb'
+          migration 'create_text_widget'
         end
       end
     }

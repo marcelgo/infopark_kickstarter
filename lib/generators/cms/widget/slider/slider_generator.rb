@@ -2,15 +2,7 @@ module Cms
   module Generators
     module Widget
       class SliderGenerator < ::Rails::Generators::Base
-        include Migration
-        include BasePaths
         include Actions
-
-        class_option :cms_path,
-          type: :string,
-          default: nil,
-          desc: 'CMS parent path where the example widget should be placed.',
-          banner: 'LOCATION'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -18,7 +10,7 @@ module Cms
           begin
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = obj_class_name
-              model.title = 'Box: Slider'
+              model.title = 'Widget: Slider'
               model.attributes = [
                 {
                   name: sort_key_attribute_name,
@@ -26,26 +18,22 @@ module Cms
                   title: 'Sort key',
                 },
                 {
-                  name: slider_images_attribute_name,
+                  name: images_attribute_name,
                   type: :linklist,
                   title: 'Images',
                 },
               ]
             end
 
-            turn_model_into_box(obj_class_name)
+            turn_model_into_widget(obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end
 
         def copy_app_directory
           directory('app', force: true)
-        end
 
-        def add_example
-          if example?
-            migration_template('example_migration.rb', 'cms/migrate/create_box_slider_example.rb')
-          end
+          template('thumbnail.html.haml', 'app/widgets/slider_widget/thumbnail.html.haml')
         end
 
         def notice
@@ -57,23 +45,19 @@ module Cms
         private
 
         def example?
-          cms_path.present?
-        end
-
-        def cms_path
-          options[:cms_path]
+          options[:example]
         end
 
         def obj_class_name
-          'BoxSlider'
+          'SliderWidget'
         end
 
         def sort_key_attribute_name
           'sort_key'
         end
 
-        def slider_images_attribute_name
-          'slider_images'
+        def images_attribute_name
+          'images'
         end
       end
     end

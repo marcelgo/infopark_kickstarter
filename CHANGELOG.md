@@ -1,4 +1,15 @@
-# v1.1.0
+# v2.0.0
+  * Bugfix: The workspace toggle did not always display the correct workspace title.
+  * Simplified the contact page component to a more general and understandable use case. Removed
+    "valid_email" dependency and user attributes prefill. The contact page is no longer placed under
+    "_configuration" and linked on the homepage, but can be placed like a normal page anywhere in
+    the hierarchy.
+  * Bugfix: Deployment task returned an 406 error, because the url params were not formatted
+    correctly.
+  * Supports widgets to put their locale files into the widget directory.
+  * Switched to inplace editing and the Infopark widget framework. This also removes the need for
+    concrete widget examples, as they can easily be inserted on each page via the widget browser. A
+    toggle is placed in the main navigation bar to switch to edit mode.
   * Kickstarter now uses local attributes only, because global attributes are deprecated and their
     usage is discouraged. See
     [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)

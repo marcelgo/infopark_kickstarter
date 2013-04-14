@@ -1,33 +1,31 @@
 class WorkspaceToggleCell < Cell::Rails
+  # Cell actions:
+
   def show
     @workspaces = RailsConnector::CmsRestApi.get('workspaces')['results']
 
-    render
+    if EditModeDetection.editing_allowed?(session)
+      render
+    end
   end
 
   def content
-    @current_workspace = get_current_workspace(@workspaces)
+    @current_workspace = @workspaces.detect do |workspace|
+      workspace['id'] == RailsConnector::Workspace.current.id
+    end
 
     if @workspaces.size > 1
-      set_titles!(@workspaces)
-
       render(view: 'workspaces')
     else
       render(view: 'workspace')
     end
   end
 
-  private
+  # Cell states:
 
-  def get_current_workspace(workspaces)
-    workspaces.detect do |workspace|
-      workspace['id'] == RailsConnector::Workspace.current.id
-    end
-  end
+  def title(workspace)
+    @workspace = workspace
 
-  def set_titles!(workspaces)
-    workspaces.each do |workspace|
-      workspace['title'] ||= 'Published'
-    end
+    render
   end
 end

@@ -11,4 +11,8 @@ class BoxCell < Cell::Rails
 
     render
   end
+
+  def really_cache?(*args)
+    RailsConnector::Workspace.current.published?
+  end
 end

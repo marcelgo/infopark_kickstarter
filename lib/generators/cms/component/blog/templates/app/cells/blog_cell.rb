@@ -65,11 +65,6 @@ class BlogCell < Cell::Rails
   end
 
   def snippet
-    boxes = @entry.boxes
-    @box = boxes.detect { |box| BoxText === box }
-
-    if @box
-      render
-    end
+    render
   end
 end

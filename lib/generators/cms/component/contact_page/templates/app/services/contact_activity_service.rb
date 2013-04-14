@@ -1,12 +1,10 @@
 class ContactActivityService
   attr_reader :attributes
   attr_reader :kind
-  attr_reader :current_user
 
-  def initialize(attributes, kind, current_user)
+  def initialize(attributes, kind)
     @attributes = attributes.symbolize_keys
     @kind = kind
-    @current_user = current_user
   end
 
   def submit
@@ -28,7 +26,6 @@ class ContactActivityService
       subject: :title,
       kind: :kind,
       state: :state,
-      contact_id: :contact_id,
       name: :custom_name,
       email: :custom_email,
       message: :custom_message,
@@ -53,9 +50,5 @@ class ContactActivityService
 
   def state
     'open'
-  end
-
-  def contact_id
-    current_user.try(:id)
   end
 end

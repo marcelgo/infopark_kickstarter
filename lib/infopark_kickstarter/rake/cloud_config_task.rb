@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/tasklib'
+require 'rest_client'
 
 require 'infopark_kickstarter/rake/credential_helper'
 
