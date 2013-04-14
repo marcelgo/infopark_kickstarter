@@ -164,7 +164,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
     will_paginate (3.0.4)
-    yard (0.8.5.2)
+    yard (0.8.6)
 
 PLATFORMS
   ruby
@@ -172,9 +172,9 @@ PLATFORMS
 DEPENDENCIES
   generator_spec
   haml
-  infopark_cloud_connector (>= 6.8.2.7.128454143)
+  infopark_cloud_connector (>= 6.9.0.3.197272233)
   infopark_kickstarter!
-  infopark_rails_connector (>= 6.8.2.7.128454143)
+  infopark_rails_connector (>= 6.9.0.3.197272233)
   pry
   redcarpet
   rspec-rails
