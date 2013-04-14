@@ -3,19 +3,17 @@ require 'spec_helper'
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
 require 'generators/cms/widget/text/text_generator.rb'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::TextGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
-
-  arguments ['--cms_path=testdirectory']
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -27,23 +25,25 @@ describe Cms::Generators::Widget::TextGenerator do
   def prepare_environments
   end
 
-  it 'creates app files' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          directory 'box' do
-            file 'box_text_cell.rb'
+        directory 'widgets' do
+          directory 'text_widget' do
+            file 'show.html.haml'
+            file 'thumbnail.html.haml'
 
-            directory 'box_text' do
-              file 'show.html.haml'
+            directory 'locales' do
+              file 'de.text_widget.yml'
+              file 'en.text_widget.yml'
             end
           end
         end
 
         directory 'models' do
-          file 'box_text.rb' do
+          file 'text_widget.rb' do
             contains 'include Cms::Attributes::SortKey'
-            contains 'include Box'
+            contains 'include Widget'
           end
         end
 
@@ -55,25 +55,10 @@ describe Cms::Generators::Widget::TextGenerator do
           end
         end
       end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_text_spec.rb'
-        end
-      end
-    }
-  end
-
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_text'
-          migration 'create_text_widget_example'
+          migration 'create_text_widget'
         end
       end
     }

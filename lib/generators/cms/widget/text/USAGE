@@ -1,9 +1,9 @@
 Description:
-    Generates a text widget that displays a title and main body and is sortable.
+    Generates a text widget that displays a title, body and is sortable.
 
 Example:
-    CMS: obj_class BoxText
-    CMS: attribute title (string)
+    CMS: obj_class TextWidget
+    CMS: attribute title (html)
     CMS: attribute body (html)
     CMS: attribute sort_key (string)
 

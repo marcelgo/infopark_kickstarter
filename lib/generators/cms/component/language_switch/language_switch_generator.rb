@@ -16,7 +16,7 @@ module Cms
           data = []
 
           data << ''
-          data << '            = render_cell(:language_switch, :show, @obj.website.homepages, @obj.homepage)'
+          data << '            = render_cell(:language_switch, :show, @obj.homepages, @obj.homepage)'
           data << ''
 
           data = data.join("\n")

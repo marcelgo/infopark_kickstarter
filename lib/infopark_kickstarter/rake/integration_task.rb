@@ -24,46 +24,63 @@ module InfoparkKickstarter
       def prepare_directory
         rm_rf(app_path)
         mkdir_p(config_path)
-
-        puts 'prepared directory...'
       end
 
       def create_configuration_files
         ConfigurationHelper.new(local_configuration_file, :cms, "#{config_path}/rails_connector.yml").write
         ConfigurationHelper.new(local_configuration_file, :crm, "#{config_path}/custom_cloud.yml").write
         ConfigurationHelper.new(local_configuration_file, :deploy, "#{config_path}/deploy.yml").write
-
-        puts 'created configuration files...'
       end
 
       def create_application
         Bundler.with_clean_env do
-          sh "rails new #{app_path} --skip-test-unit --skip-active-record --skip-bundle --template template.rb"
+          sh("rails new #{app_path} --skip-test-unit --skip-active-record --skip-bundle --template template.rb")
 
-          sh 'bundle --quiet'
+          cd(app_path) do
+            sh('bundle --quiet')
 
-          sh "cd #{app_path} && bundle exec rake cms:migrate"
+            migrate!
+          end
         end
       end
 
       def call_generators
         Bundler.with_clean_env do
-          sh "cd #{app_path} && bundle exec rails generate cms:component:error_tracking --provider=airbrake"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:newrelic \"Test Website\""
-          sh "cd #{app_path} && bundle exec rails generate cms:component:google_analytics"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:contact_page"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:language_switch"
-          sh "cd #{app_path} && bundle exec rails generate cms:component:profile_page"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:google_maps --cms_path=/website/en/_boxes"
-          sh "cd #{app_path} && bundle exec rails generate cms:widget:video --cms_path=/website/en/_boxes"
+          cd(app_path) do
+            generators = [
+              'cms:component:error_tracking --provider=airbrake',
+              'cms:component:error_tracking --provider=honeybadger',
+              'cms:component:monitoring "Test Website" --provider=newrelic',
+              'cms:component:tracking --provider=google_analytics --homepage_path=/website/en',
+              'cms:component:language_switch',
+              'cms:component:profile_page --cms_path=/website/en',
+              'cms:component:contact_page --cms_path=/website/en',
+              'cms:component:blog --cms_path=/website/en',
+              'cms:component:social_sharing',
+              'cms:widget:maps --provider=google_maps',
+              'cms:widget:video',
+              'cms:widget:person',
+              'cms:widget:slider',
+            ]
 
-          sh "cd #{app_path} && bundle exec rake cms:migrate"
+            generators.each do |generator|
+              sh("bundle exec rails generate #{generator}")
+            end
+
+            migrate!
+          end
         end
+      end
+
+      def migrate!
+        sh('bundle exec rake cms:migrate')
       end
 
       def run_tests
         Bundler.with_clean_env do
-          sh "cd #{app_path} && bundle exec rake spec"
+          cd(app_path) do
+            sh('bundle exec rake spec')
+          end
         end
       end
 

@@ -11,7 +11,7 @@ module InfoparkKickstarter
         namespace :cms do
           desc 'Open the Infopark console in your web browser'
           task :console do
-            Launchy.open('https://admin.saas.infopark.net/tenant_management')
+            Launchy.open('https://console.infopark.net')
           end
 
           desc 'Get status information of all Infopark services'
@@ -27,11 +27,11 @@ module InfoparkKickstarter
               puts obj_class_information(args[:workspace]).to_yaml
             end
 
-            desc 'Get information about all attributes in the given workspace (default "published")'
-            task :attributes, [:workspace] => :environment do |_, args|
+            desc 'Get information about all permalinks in the given workspace (default "published")'
+            task :permalinks, [:workspace] => :environment do |_, args|
               args.with_defaults(workspace: 'published')
 
-              puts attribute_information(args[:workspace]).to_yaml
+              puts permalinks(args[:workspace]).to_yaml
             end
           end
         end
@@ -57,18 +57,19 @@ module InfoparkKickstarter
         Dashboard::ObjClass.all
       end
 
-      def attribute_information(workspace)
+      def permalinks(workspace)
         RailsConnector::Workspace.find(workspace).as_current do
-          attributes.inject({}) do |attributes, attribute|
-            attributes[attribute.name] = attribute.type
+          objs = Obj.
+            where(:_permalink, :is_greater_than, ' ').
+            order(:_permalink).
+            to_a
 
-            attributes
+          objs.inject({}) do |permalinks, obj|
+            permalinks[obj[:_permalink]] = obj[:_path]
+
+            permalinks
           end
         end
-      end
-
-      def attributes
-        Dashboard::Attribute.all
       end
 
       def status

@@ -1,9 +1,10 @@
 class MainNavigationCell < Cell::Rails
   helper :cms
 
-  cache(:show, expires_in: 5.minutes) do |cell, page|
+  # Cell actions:
+
+  cache(:show, if: :really_cache?) do |cell, page|
     [
-      Filters::EnvironmentDetection.preview_environment?,
       RailsConnector::Workspace.current.revision_id,
       page && page.homepage.id,
     ]
@@ -11,14 +12,18 @@ class MainNavigationCell < Cell::Rails
 
   def show(page)
     homepage = page.homepage
-    @level1 = [homepage] + homepage.sorted_toclist.select { |obj| Page === obj }
+
+    @level1 = if homepage
+      [homepage] + homepage.sorted_toclist.select { |obj| Page === obj }
+    else
+      []
+    end
 
     render
   end
 
-  cache(:highlight, expires_in: 1.hour) do |cell, page|
+  cache(:highlight, if: :really_cache?) do |cell, page|
     [
-      Filters::EnvironmentDetection.preview_environment?,
       RailsConnector::Workspace.current.revision_id,
       page && page.id,
     ]
@@ -28,5 +33,19 @@ class MainNavigationCell < Cell::Rails
     @active = page.main_nav_item
 
     render
+  end
+
+  # Cell states:
+
+  def edit_toggle
+    if EditModeDetection.editing_allowed?(session)
+      render
+    end
+  end
+
+  private
+
+  def really_cache?(*args)
+    RailsConnector::Workspace.current.published?
   end
 end

@@ -2,10 +2,12 @@ class LanguageSwitchCell < Cell::Rails
   helper :cms
 
   def show(homepages, current_homepage)
-    @homepages = homepages
-    @current_homepage = current_homepage
+    if homepages.present?
+      @homepages = homepages
+      @current_homepage = current_homepage
 
-    render
+      render
+    end
   end
 
   def entry(homepage)

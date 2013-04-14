@@ -20,6 +20,10 @@ class Obj < ::RailsConnector::BasicObj
     @homepage ||= parent.homepage
   end
 
+  def homepages
+    website.homepages
+  end
+
   def website
     @website ||= homepage.website
   end
@@ -45,7 +49,7 @@ class Obj < ::RailsConnector::BasicObj
   # Return a page object or nil.
   #
   # Normally, objects are either pages, boxes, or media files/resources.
-  # Pages are pages in itself, Boxes are treated differently. Media files
+  # Pages are pages in itself, Widgets are treated differently. Media files
   # and resources are filtered out.
   #
   # This method can be overridden by subclasses to implement this behaviour.
@@ -54,7 +58,7 @@ class Obj < ::RailsConnector::BasicObj
   end
 
   def locale
-    homepage.locale
+    (homepage && homepage.locale) || I18n.default_locale
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url

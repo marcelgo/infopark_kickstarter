@@ -3,7 +3,7 @@ Description:
 
 Example:
     `rails generate cms:component:error_tracking:airbrake`
-    `rails generate cms:component:error_tracking:airbrake --skip_deployment_notification`
+    `rails generate cms:component:error_tracking:airbrake --skip-deployment-notification`
 
     Gems: airbrake
     Configuration: extends config/custom_cloud.yml

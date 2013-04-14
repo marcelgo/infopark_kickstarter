@@ -7,59 +7,57 @@ module Cms
 
       class_option :title,
         type: :string,
-        desc: 'Title of the CMS object class.'
+        desc: 'Model title'
 
       class_option :type,
         type: :string,
         aliases: '-t',
         default: 'publication',
-        desc: 'Type of the CMS object class.'
+        desc: 'Type (publication | generic | document)'
 
       class_option :attributes,
-        type: :array,
+        type: :hash,
         aliases: '-a',
-        default: [],
-        desc: 'List of CMS attributes of the new CMS object class.'
+        default: {},
+        desc: 'Attributes and their types'
 
       class_option :preset_attributes,
         type: :hash,
         aliases: '-p',
         default: {},
-        desc: 'Hash of CMS attributes and their presets for the new object class.'
+        desc: 'Attributes and their defaults'
 
       class_option :mandatory_attributes,
         type: :array,
         aliases: '-m',
         default: [],
-        desc: 'List of CMS mandatory attributes of the new object class.'
+        desc: 'List of mandatory attributes'
 
-      def create_model_file
-        template('model.rb', File.join('app/models', "#{file_name}.rb"))
-      end
-
-      def create_migration_file
-        validate_obj_class(class_name)
-
-        migration_template('migration.rb', "cms/migrate/create_#{file_name}.rb")
-      rescue DuplicateResourceError
-      end
-
-      def create_spec_files
-        template('spec.rb', File.join('spec/models', "#{file_name}_spec.rb"))
+      def create
+        Model::ApiGenerator.new(behavior: behavior) do |model|
+          model.name = name
+          model.title = title
+          model.type = type
+          model.attributes = attributes
+          model.preset_attributes = preset_attributes
+          model.mandatory_attributes = mandatory_attributes
+        end
       end
 
       private
 
-      def attributes
-        options[:attributes]
+      def type
+        options[:type]
       end
 
       def title
         options[:title] || human_name
       end
 
-      def type
-        options[:type]
+      def attributes
+        options[:attributes].inject([]) do |list, (name, type)|
+          list << {name: name, type: type}
+        end
       end
 
       def preset_attributes

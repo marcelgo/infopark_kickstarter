@@ -1,0 +1,1 @@
+xml.description cms_tag(:div, @entry, :abstract)

@@ -25,23 +25,19 @@ module InfoparkKickstarter
     end
 
     def konsole_url
-      'https://admin.saas.infopark.net/tenant_management/tenants'
+      'https://console.infopark.net'
     end
 
     def knowledge_base_url
-      'https://kb.infopark.de/kb'
+      'https://dev.infopark.net'
     end
 
     def support_url
-      'https://kb.infopark.de/support'
+      'https://dev.infopark.net/support'
     end
 
-    def cms_blog_url
-      'https://kb.infopark.de/cms-news'
-    end
-
-    def crm_blog_url
-      'https://kb.infopark.de/webcrm-news'
+    def blog_url
+      'https://dev.infopark.net/blog'
     end
 
     def github_repository_url

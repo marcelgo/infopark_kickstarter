@@ -15,7 +15,7 @@ module ExceptionHandling
 
     respond_to do |type|
       type.html do
-        @obj = Homepage.for_hostname(request.host).error_not_found_page
+        @obj = homepage.error_not_found_page
 
         if @obj.present?
           options[:template] = "#{@obj.class.to_s.underscore}/index"
@@ -31,6 +31,16 @@ module ExceptionHandling
 
         render(options)
       end
+    end
+  end
+
+  private
+
+  def homepage
+    if @obj.respond_to?(:homepage)
+      @obj.homepage
+    else
+      Homepage.for_hostname(request.host)
     end
   end
 end

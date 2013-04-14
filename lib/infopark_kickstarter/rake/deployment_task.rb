@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/tasklib'
+require 'rest_client'
 
 require 'infopark_kickstarter/rake/credential_helper'
 
@@ -29,7 +30,7 @@ module InfoparkKickstarter
       private
 
       def status(id)
-        sh "curl -X GET #{url}/deployments/#{id}?token=#{api_key}", verbose: true
+        puts RestClient.get("#{url}/deployments/#{id}", params: { token: api_key })
 
         puts
       end
@@ -38,7 +39,7 @@ module InfoparkKickstarter
         sh 'git fetch', verbose: true
 
         if %x(git rev-parse origin/master).strip == %x(git rev-parse origin/deploy).strip
-          sh "curl -X POST #{url}/deployments?token=#{api_key}", verbose: true
+          puts RestClient.post("#{url}/deployments", token: api_key )
 
           puts
         else

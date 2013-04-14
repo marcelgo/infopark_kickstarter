@@ -6,7 +6,7 @@ require 'generators/cms/component/language_switch/language_switch_generator.rb'
 describe Cms::Generators::Component::LanguageSwitchGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
   arguments []
 
   before do
@@ -23,7 +23,7 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
     File.open("#{layouts_path}/application.html.haml", 'w') { |f| f.write("            = render_cell(:meta_navigation, :show, @obj, current_user)\n") }
   end
 
-  it 'creates views' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do

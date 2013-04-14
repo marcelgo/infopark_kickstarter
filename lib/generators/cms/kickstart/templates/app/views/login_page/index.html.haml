@@ -1,7 +1,6 @@
-%h1
-  = display_field(@obj, :title)
+= cms_tag(:h1, @obj, :title)
 
-= display_field(@obj, :body)
+= cms_tag(:div, @obj, :body)
 
 = simple_form_for(@presenter, url: cms_path(@obj)) do |form|
   = hidden_field_tag(:return_to, params[:return_to])

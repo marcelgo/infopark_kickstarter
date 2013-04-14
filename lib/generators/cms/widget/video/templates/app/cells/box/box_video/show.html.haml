@@ -1,9 +1,0 @@
-.box.box_video.well
-  = render(state: :edit_marker)
-
-  - if @box.title.present?
-    %h3
-      = display_field(@box, :title)
-
-  - if @box.video_link.present?
-    = render({state: 'video'}, @box)

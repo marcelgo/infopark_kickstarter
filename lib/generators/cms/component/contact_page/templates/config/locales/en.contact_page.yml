@@ -14,8 +14,3 @@ en:
     submit:
       contact_page_presenter:
         create: 'Submit'
-
-  activemodel:
-    errors:
-      messages:
-        invalid_email: 'A valid email address is required.'

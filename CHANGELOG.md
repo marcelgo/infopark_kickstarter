@@ -1,6 +1,55 @@
+# v2.0.0
+  * Presents a nicer error page, when the choose homepage callback does not return a homepage.
+  * Removed the user manager as it was way too complicated and didn't fit the more general use case.
+    This lead to some refactorings of the profile, login and contact page, which should be much
+    clearer now.
+  * Added social sharing component, that lets you easily integrate social sharing provider to share
+    the current url. (Thanks @jan-hendrik)
+  * Bugfix: The workspace toggle did not always display the correct workspace title.
+  * Simplified the contact page component to a more general and understandable use case. Removed
+    "valid_email" dependency and user attributes prefill. The contact page is no longer placed under
+    "_configuration" and linked on the homepage, but can be placed like a normal page anywhere in
+    the hierarchy.
+  * Bugfix: Deployment task returned an 406 error, because the url params were not formatted
+    correctly.
+  * Supports widgets to put their locale files into the widget directory.
+  * Switched to inplace editing and the Infopark widget framework. This also removes the need for
+    concrete widget examples, as they can easily be inserted on each page via the widget browser. A
+    toggle is placed in the main navigation bar to switch to edit mode. (Thanks @cocodercoder)
+  * Kickstarter now uses local attributes only, because global attributes are deprecated and their
+    usage is discouraged. See
+    [News](https://dev.infopark.net/d72e25d5cd446190/cms-attributes-are-now-local-to-object-classes)
+    for further details.
+  * Bugfix: Added "sort_key" to GoogleMaps Box. (Thanks @franziska-luecke)
+  * Added monitoring rake task for future extension to other monitoring provider. See
+    `rake cms:component:monitoring` for further details.
+  * Renamed `flash_message` to `flash`, simplified and streamlined use of cells.
+  * Added rake task to retrieve a list of all permalinks and their paths. See
+    `rake cms:info:permalinks` for more details.
+  * Search support moved into its own generator and got cleaned up and simplified. See
+    `rails generate cms:component:search --help` for more details.
+  * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
+    of Infopark RailsConnector. (Thanks @tritz)
+  * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
+    of accept headers. (Thanks @awendt)
+  * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
+  * Added `honeybadger` as an error tracking provider. This will also be the default from now on
+    instead of `airbrake`. Run `rails generate cms:component:error_tracking --provider=honeybadger`
+    to install.
+  * A new slider box type was added. It slides selected images and displays there title in an
+    overlay. See `rails generate cms:widget:slider --help` for more details.
+  * Bugfix: Creates file `before_migrate.rb` if it doesn't exist yet. This fixes an annoyence that
+    was reported several times.
+  * Speed up kickstart time by grouping gem setup at the beginning. (Thanks @sethiele)
+  * A new person box type was added. It allows to display a crm person with some details like her
+    name and email. See `rails generate cms:widget:person --help` for more details.
+
 # v1.0.0
   * Renamed gem from `ice_kickstarter` to `infopark_kickstarter`. Please update your `Gemfile` to
     get the latest version.
+  * Added blog component to generate a basic blog with RSS and comment functionality based on the
+    box framework. Call `rails generate cms:component:blog --help` to get started.
+  * Added `image_url` application helper to determine the external url of an image.
   * Added rake task to check the status of the Infopark Cloud-Express Platform. Run
     `rake cms:status` to get current status information.
   * A new video box type was added. It allows to play videos from the CMS, vimeo and youtube. See
@@ -9,6 +58,10 @@
     dedicated obj class.
   * Cleaned up the composition pattern used to add common behavior to object classes. You can
     differentiate between a `Page` and a `Box` by mixing in a module in the model class.
+  * Updated links to the Infopark Console to `https://console.infopark.net`.
+  * Bugfix: The markup for box titles is no longer displayed, when no title exists.
+  * Cleaned up and extended the composition pattern used to add common behavior to object classes.
+    You can now differentiate between a `Page`, a `Box` and a `Resource`.
   * Added rake task `rake cms:console` to open the Infopark console directly from the command line.
     This introduces a new dependency on the [launchy](https://github.com/copiousfreetime/launchy)
     gem. (Thanks @thomasritz)
@@ -36,7 +89,7 @@
     host application.
   * Bugfix: The contact form raised an error when there was no user logged in.
   * Airbrake component now includes secure option by default and does not depend on the kickstart
-    generator anymore. Also added option "--skip_deployment_notification" if you don't resolve all
+    generator anymore. Also added option "--skip-deployment-notification" if you don't resolve all
     error notifications on deployment.
   * Airbrake component is now available as the default provider for the error tracking component.
     This allows to support different error tracking solutions in the future. Run

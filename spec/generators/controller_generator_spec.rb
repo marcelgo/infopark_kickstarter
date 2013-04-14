@@ -6,7 +6,7 @@ require 'generators/cms/controller/controller_generator'
 describe Cms::Generators::ControllerGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../tmp', __FILE__)
+  destination File.expand_path('../../../tmp/generators', __FILE__)
   arguments ['news']
 
   before do
@@ -14,7 +14,7 @@ describe Cms::Generators::ControllerGenerator do
     run_generator
   end
 
-  it 'generates news controller' do
+  it 'generates controller files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'controllers' do

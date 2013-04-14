@@ -3,19 +3,17 @@ require 'spec_helper'
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
 require 'generators/cms/widget/video/video_generator.rb'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::VideoGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
-
-  arguments ['--cms_path=testdirectory']
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -36,16 +34,16 @@ describe Cms::Generators::Widget::VideoGenerator do
     File.open("#{destination_root}/Gemfile", 'w')
   end
 
-  it 'creates app files' do
+  it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
-          directory 'box' do
-            file 'box_video_cell.rb'
+          directory 'widget' do
+            file 'video_widget_cell.rb'
 
-            directory 'box_video' do
+            directory 'video_widget' do
               file 'show.html.haml'
-              file 'generic.html.haml'
+              file 'projekktor.html.haml'
               file 'youtube.html.haml'
               file 'vimeo.html.haml'
             end
@@ -53,13 +51,13 @@ describe Cms::Generators::Widget::VideoGenerator do
         end
 
         directory 'models' do
-          file 'box_video.rb' do
-            contains 'include Box'
-            contains 'include Cms::Attributes::VideoLink'
-            contains 'include Cms::Attributes::VideoWidth'
-            contains 'include Cms::Attributes::VideoHeight'
-            contains 'include Cms::Attributes::VideoAutoplay'
-            contains 'include Cms::Attributes::VideoPreviewImage'
+          file 'video_widget.rb' do
+            contains 'include Widget'
+            contains 'include Cms::Attributes::Source'
+            contains 'include Cms::Attributes::Width'
+            contains 'include Cms::Attributes::Height'
+            contains 'include Cms::Attributes::Autoplay'
+            contains 'include Cms::Attributes::Poster'
             contains 'include Cms::Attributes::SortKey'
           end
         end
@@ -68,11 +66,11 @@ describe Cms::Generators::Widget::VideoGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'sort_key.rb'
-              file 'video_link.rb'
-              file 'video_width.rb'
-              file 'video_height.rb'
-              file 'video_autoplay.rb'
-              file 'video_preview_image.rb'
+              file 'source.rb'
+              file 'width.rb'
+              file 'height.rb'
+              file 'autoplay.rb'
+              file 'poster.rb'
             end
           end
         end
@@ -81,7 +79,10 @@ describe Cms::Generators::Widget::VideoGenerator do
           directory 'javascripts' do
             file 'application.js' do
               contains '//= require projekktor'
+              contains '//= require projekktor.config'
             end
+
+            file 'projekktor.config.js.coffee'
           end
 
           directory 'stylesheets' do
@@ -90,33 +91,26 @@ describe Cms::Generators::Widget::VideoGenerator do
             end
           end
         end
-      end
-    }
-  end
 
-  it 'creates test files' do
-    destination_root.should have_structure {
-      directory 'spec' do
-        directory 'models' do
-          file 'box_video_spec.rb'
+        directory 'widgets' do
+          directory 'video_widget' do
+            file 'show.html.haml'
+            file 'thumbnail.html.haml'
+
+            directory 'locales' do
+              file 'de.video_widget.yml'
+              file 'en.video_widget.yml'
+            end
+          end
         end
       end
-    }
-  end
 
-  it 'creates migration files' do
-    destination_root.should have_structure {
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_video'
-          migration 'create_box_video_example'
+          migration 'create_video_widget'
         end
       end
-    }
-  end
 
-  it 'extends Gemfile' do
-    destination_root.should have_structure {
       file 'Gemfile' do
         contains 'gem "video_info"'
         contains 'gem "projekktor-rails"'
