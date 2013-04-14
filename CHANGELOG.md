@@ -1,4 +1,5 @@
 # v2.0.0
+  * Bugfix: The workspace toggle did not always display the correct workspace title.
   * Simplified the contact page component to a more general and understandable use case. Removed
     "valid_email" dependency and user attributes prefill. The contact page is no longer placed under
     "_configuration" and linked on the homepage, but can be placed like a normal page anywhere in

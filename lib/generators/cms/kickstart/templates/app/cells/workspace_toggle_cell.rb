@@ -1,4 +1,6 @@
 class WorkspaceToggleCell < Cell::Rails
+  # Cell actions:
+
   def show
     @workspaces = RailsConnector::CmsRestApi.get('workspaces')['results']
 
@@ -8,7 +10,9 @@ class WorkspaceToggleCell < Cell::Rails
   end
 
   def content
-    @current_workspace = get_current_workspace(@workspaces)
+    @current_workspace = @workspaces.detect do |workspace|
+      workspace['id'] == RailsConnector::Workspace.current.id
+    end
 
     if @workspaces.size > 1
       render(view: 'workspaces')
@@ -17,11 +21,11 @@ class WorkspaceToggleCell < Cell::Rails
     end
   end
 
-  private
+  # Cell states:
 
-  def get_current_workspace(workspaces)
-    workspaces.detect do |workspace|
-      workspace['id'] == RailsConnector::Workspace.current.id
-    end
+  def title(workspace)
+    @workspace = workspace
+
+    render
   end
 end

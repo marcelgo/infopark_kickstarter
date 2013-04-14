@@ -1,7 +1,7 @@
 %a.dropdown-toggle{:'data-toggle' => 'dropdown', href: '#'}
   %i.icon-th-large
 
-  = @current_workspace['title']
+  = render({ state: :title }, @current_workspace)
 
   %b.caret
 
@@ -11,4 +11,4 @@
 
     %li
       = link_to("#{request.path}?_rc-ws=#{workspace['id']}") do
-        = workspace['title']
+        = render({ state: :title }, workspace)

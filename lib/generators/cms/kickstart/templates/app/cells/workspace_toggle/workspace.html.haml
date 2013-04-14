@@ -1,4 +1,4 @@
 %a
   %i.icon-th-large
 
-  = @current_workspace['title'] || @current_workspace['id']
+  = render({ state: :title }, @current_workspace)
