@@ -67,12 +67,6 @@ module Cms
         remove_dir('lib/templates')
       end
 
-      def include_dev_tools
-        developer_initializer_path = 'config/initializers/developer.rb'
-        append_file('.gitignore', developer_initializer_path + "\n")
-        template('developer.rb', developer_initializer_path)
-      end
-
       def install_test_framework
         generate('rspec:install')
       end
@@ -94,7 +88,7 @@ module Cms
         end
       end
 
-      def include_and_configure_template_engine
+      def remove_erb_layout
         application_erb_file = 'app/views/layouts/application.html.erb'
 
         if File.exist?(application_erb_file)
@@ -248,18 +242,7 @@ module Cms
             model.title = 'Page: Login'
             model.attributes = [
               show_in_navigation_attribute,
-              {
-                name: 'redirect_after_login_link',
-                type: :linklist,
-                title: 'Login redirect',
-                max_size: 1,
-              },
-              {
-                name: 'redirect_after_logout_link',
-                type: :linklist,
-                title: 'Logout redirect',
-                max_size: 1,
-              }
+              sort_key_attribute,
             ]
           end
 
@@ -292,8 +275,6 @@ module Cms
         end
 
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
-
-        route("match ':id/login' => 'login_page#index', as: 'login_page'")
       end
 
       def copy_app_directory
