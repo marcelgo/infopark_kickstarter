@@ -1,1 +1,1 @@
-xml.description render_cell(:box, :show, @entry, @box)
+xml.description cms_tag(:div, @entry, :abstract)

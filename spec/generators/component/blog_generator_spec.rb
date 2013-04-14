@@ -2,17 +2,17 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/blog/blog_generator'
-require 'generators/cms/attribute/attribute_generator'
-require 'generators/cms/model/model_generator'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Component::BlogGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before(:all) do
-    Cms::Generators::AttributeGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ModelGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -32,12 +32,12 @@ describe Cms::Generators::Component::BlogGenerator do
     end
 
     File.open("#{destination_root}/Gemfile", 'w')
-    File.open("#{paths[:layout_path]}/application.html.haml", 'w') { |f| f.write("%link{href: '/favicon.ico', rel: 'shortcut icon'}") }
+    File.open("#{paths[:layout_path]}/application.html.haml", 'w') { |f| f.write("%link{href: '/favicon.ico', rel: 'shortcut icon'}\n") }
     File.open("#{paths[:config_path]}/custom_cloud.yml", 'w')
   end
 
-  it 'create app files' do
-    destination_root.should have_structure do
+  it 'create files' do
+    destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
           file 'blog.rb'
@@ -64,9 +64,9 @@ describe Cms::Generators::Component::BlogGenerator do
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'blog_disqus_shortname.rb'
-              file 'blog_description.rb'
-              file 'blog_entry_author.rb'
+              file 'disqus_shortname.rb'
+              file 'description.rb'
+              file 'author.rb'
             end
           end
         end
@@ -95,14 +95,10 @@ describe Cms::Generators::Component::BlogGenerator do
           file 'blog_entry_controller.rb'
         end
       end
-    end
-  end
 
-  it 'update gemfile' do
-    destination_root.should have_structure do
       file 'Gemfile' do
         contains 'gem "gravatar_image_tag"'
       end
-    end
+    }
   end
 end

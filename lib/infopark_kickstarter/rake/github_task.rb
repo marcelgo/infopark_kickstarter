@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/tasklib'
+require 'rest_client'
 
 require 'infopark_kickstarter/rake/credential_helper'
 
@@ -13,11 +14,8 @@ module InfoparkKickstarter
           namespace :github do
             desc 'List github users allowed to access the project repository'
             task :list do
-              params = [
-                "token=#{api_key}",
-              ].join('&')
+              puts RestClient.get("#{url}/developers", params: { token: api_key })
 
-              sh("curl -X GET #{url}/developers -d \"#{params}\"", verbose: false)
               puts
             end
 
@@ -25,11 +23,8 @@ module InfoparkKickstarter
             task :show, [:username] do |_, args|
               validate_username(args)
 
-              params = [
-                "token=#{api_key}",
-              ].join('&')
+              puts RestClient.get("#{url}/developers/#{args[:username]}", params: { token: api_key })
 
-              sh("curl -X GET #{url}/developers/#{args[:username]} -d \"#{params}\"", verbose: false)
               puts
             end
 
@@ -44,7 +39,8 @@ module InfoparkKickstarter
                 "developer[perm]=#{args[:permission]}",
               ].join('&')
 
-              sh("curl -X POST #{url}/developers -d \"#{params}\"", verbose: false)
+              puts RestClient.post("#{url}/developers?#{params}", {})
+
               puts
             end
 
@@ -58,7 +54,8 @@ module InfoparkKickstarter
                 "developer[perm]=#{args[:permission]}",
               ].join('&')
 
-              sh("curl -X PUT #{url}/developers/#{args[:username]} -d \"#{params}\"", verbose: false)
+              puts RestClient.put("#{url}/developers/#{args[:username]}?#{params}", {})
+
               puts
             end
 
@@ -66,11 +63,8 @@ module InfoparkKickstarter
             task :remove, [:username] do |_, args|
               validate_username(args)
 
-              params = [
-                "token=#{api_key}",
-              ].join('&')
+              puts RestClient.delete("#{url}/developers/#{args[:username]}", params: { token: api_key })
 
-              sh("curl -X DELETE #{url}/developers/#{args[:username]} -d \"#{params}\"", verbose: false)
               puts
             end
           end

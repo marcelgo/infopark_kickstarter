@@ -1,0 +1,3 @@
+%ol.carousel-indicators
+  - @images.each_with_index do |_, index|
+    %li{data: { target: render(state: :javascript_id), slide: { to: index }}}

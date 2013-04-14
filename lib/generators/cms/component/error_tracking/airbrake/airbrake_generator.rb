@@ -32,11 +32,13 @@ module Cms
 
           def add_deployment_notification
             unless options[:skip_deployment_notification]
-              unless File.exist?('deploy/after_restart.rb')
-                create_file('deploy/after_restart.rb')
+              destination = 'deploy/after_restart.rb'
+
+              unless File.exist?(destination)
+                create_file(destination)
               end
 
-              append_file('deploy/after_restart.rb') do
+              append_file(destination) do
                 File.read(find_in_source_paths('after_restart.rb'))
               end
             end

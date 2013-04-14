@@ -1,0 +1,9 @@
+Description:
+    Generates a widget to show a map on the website. By default "google_maps" is used as a provider.
+
+Example:
+    `rails generate cms:widget:maps`
+    `rails generate cms:widget:maps --provider=google_maps`
+
+    Misc: Executes provider dependent generator:
+          `rails generate cms:widget:maps:google_maps`

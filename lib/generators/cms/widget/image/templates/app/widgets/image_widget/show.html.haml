@@ -1,0 +1,6 @@
+.widget.widget_image.well
+  = render('image_widget/image', widget: @widget)
+
+  = cms_tag(:h3, @widget, :title)
+
+  = cms_tag(:p, @widget, :caption, class: 'caption')

@@ -1,0 +1,7 @@
+.widget.google_maps_widget.well
+  = cms_tag(:h3, @widget, :title)
+
+  = cms_tag(:div, @widget, :body)
+
+  .map
+    %iframe.framed{scrolling: 'no', frameborder: '0', marginwidth: '0', marginheight: '0',  src: @widget.embed_url}

@@ -1,0 +1,6 @@
+en:
+  search:
+    no_hits_html: 'No results found for <strong>%{query}</strong>.'
+    hits_found_html: '%{count} results found for <strong>%{query}</strong>.'
+    no_index: "Your current workspace is not searchable."
+    button: 'Search'

@@ -1,0 +1,5 @@
+de:
+  widgets:
+    slider_widget:
+      title: 'Slider Widget'
+      description: 'Erzeugt eine rotierende Bildergallerie aus einer Liste von Bildern.'

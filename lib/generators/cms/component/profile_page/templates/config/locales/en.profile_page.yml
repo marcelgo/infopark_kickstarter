@@ -6,35 +6,20 @@ en:
   profile_page:
     index:
       user_legend: 'User Details'
-      company_legend: 'Company and Job Details'
 
   helpers:
     submit:
       profile_page_presenter:
         create: 'Save profile'
-        reset: 'test'
-
-  activemodel:
-    errors:
-      messages:
-        invalid_email: 'A valid email address is required.'
 
   simple_form:
     labels:
       profile_page_presenter:
-        country: 'Country'
-        email: 'Email'
-        first_name: 'Firstname'
         gender: 'Gender'
-        job_title: 'Position'
-        language: 'Language'
+        first_name: 'Firstname'
         last_name: 'Last name'
-        locality: 'City'
-        mobile_phone: 'Cell phone'
-        org_name_address: 'Company'
-        phone: 'Phone'
-        postalcode: 'Zip code'
-        street_address: 'Street'
+        email: 'Email'
+        language: 'Language'
         want_email: 'Yes, I would like to be contacted by email.'
 
     hints:
@@ -44,15 +29,13 @@ en:
     placeholders:
       profile_page_presenter:
         email: 'firstname@lastname.com'
-        postalcode: '12345'
-        mobile_phone: '001 123 1234567'
 
     options:
       profile_page_presenter:
         language:
-          de: 'German'
           en: 'English'
+          de: 'German'
 
         gender:
-          M: 'Male'
           F: 'Female'
+          M: 'Male'

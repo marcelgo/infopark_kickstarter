@@ -3,8 +3,8 @@ Description:
     an optional link can be set that is visited when the image is clicked.
 
 Example:
-    CMS: obj_class BoxImage
-    CMS: attribute title (string)
+    CMS: obj_class ImageWidget
+    CMS: attribute title (html)
     CMS: attribute sort_key (string)
     CMS: attribute source (linklist)
     CMS: attribute caption (string)

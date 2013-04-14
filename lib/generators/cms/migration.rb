@@ -11,21 +11,27 @@ module Cms
 
       module ClassMethods
         def next_migration_number(dirname)
-          current_migration_number(dirname) + 1
+          migration_paths = Dir.glob([
+            Rails.root + 'cms/migrate',
+            Rails.root + 'app/widgets/**/migrate/',
+          ])
+
+          ids = migration_paths.inject([]) do |ids, dirname|
+            ids << current_migration_number(dirname)
+          end
+
+          timestamp = [Time.now.utc.strftime("%Y%m%d%H%M%S"), "%.14d"].max.to_i
+          max = ids.max.to_i
+
+          while max >= timestamp do
+            timestamp += 1
+          end
+
+          timestamp
         end
       end
 
       private
-
-      def validate_attribute(name)
-        if attribute_exists?(name)
-          error = DuplicateResourceError.new("CMS attribute '#{name}' already exists.")
-
-          say_status(:exist, error.message, :blue)
-
-          raise error
-        end
-      end
 
       def validate_obj_class(name)
         if obj_class_exists?(name)
@@ -37,21 +43,10 @@ module Cms
         end
       end
 
-      def attribute_exists?(name)
-        revision_id = workspace.revision_id
-        endpoint = "revisions/#{revision_id}/attributes/#{name}"
-
-        resource_exists?(endpoint)
-      end
-
       def obj_class_exists?(name)
         revision_id = workspace.revision_id
         endpoint = "revisions/#{revision_id}/obj_classes/#{name}"
 
-        resource_exists?(endpoint)
-      end
-
-      def resource_exists?(endpoint)
         ::RailsConnector::CmsRestApi.get(endpoint).present?
       rescue RailsConnector::ClientError
         false

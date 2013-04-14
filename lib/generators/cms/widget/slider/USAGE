@@ -1,0 +1,11 @@
+Description:
+    Generates a slider widget that displays selected images and a title in an overlay for each
+    image.
+
+Example:
+    CMS: obj_class SliderWidget
+    CMS: attribute title (html)
+    CMS: attribute sort_key (string)
+    CMS: attribute images (linklist)
+
+    `rails generate cms:widget:slider`
