@@ -6,7 +6,7 @@ require 'generators/cms/component/monitoring/monitoring_generator'
 describe Cms::Generators::Component::MonitoringGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
   arguments ['Test',  '--provider=newrelic']
 
   before do

@@ -6,7 +6,7 @@ require 'generators/cms/component/error_tracking/honeybadger/honeybadger_generat
 describe Cms::Generators::Component::ErrorTracking::HoneybadgerGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../../tmp/generators', __FILE__)
 
   before do
     prepare_destination

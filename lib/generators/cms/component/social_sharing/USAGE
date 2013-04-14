@@ -1,0 +1,19 @@
+Description:
+    Generates a social sharing component to display various social media share buttons. It can be
+    used for either a page or a specific component.
+
+Available sharing provider
+    - Facebook:     :facebook
+    - Google Plus:  :google
+    - Twitter:      :twitter
+    - linkedin      :linkedin
+
+Example:
+    Default: Current page url and all sharing provider:
+      = render_cell(:social_sharing, :show)
+
+    Share current page url and specific sharing provider:
+      = render_cell(:social_sharing, :show, nil, [:google, :twitter, :linkedin])
+
+    Share specific url and specific sharing provider:
+      = render_cell(:social_sharing, :show, 'path_to_specific_site', [:facebook, :google, :twitter])

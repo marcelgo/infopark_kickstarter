@@ -8,7 +8,7 @@ require 'generators/cms/attribute/api/api_generator'
 describe Cms::Generators::ModelGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../tmp', __FILE__)
+  destination File.expand_path('../../../tmp/generators', __FILE__)
   arguments ['news', '--title=Test News Title', '--type=generic', '--attributes=foo:html', 'bar:enum', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
 
   before(:all) do

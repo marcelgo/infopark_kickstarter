@@ -6,7 +6,7 @@ require 'generators/cms/component/language_switch/language_switch_generator.rb'
 describe Cms::Generators::Component::LanguageSwitchGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
   arguments []
 
   before do
