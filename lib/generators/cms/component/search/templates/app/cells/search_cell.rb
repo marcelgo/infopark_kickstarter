@@ -5,9 +5,13 @@ class SearchCell < Cell::Rails
 
   def form(page, query)
     @query = query
-    @search_page = page.homepage.search_page
+    homepage = page.homepage
 
-    render
+    if homepage
+      @search_page = homepage.search_page
+
+      render
+    end
   end
 
   def results(query, hits)

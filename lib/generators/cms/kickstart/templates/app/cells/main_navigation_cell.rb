@@ -12,7 +12,12 @@ class MainNavigationCell < Cell::Rails
 
   def show(page)
     homepage = page.homepage
-    @level1 = [homepage] + homepage.sorted_toclist.select { |obj| Page === obj }
+
+    @level1 = if homepage
+      [homepage] + homepage.sorted_toclist.select { |obj| Page === obj }
+    else
+      []
+    end
 
     render
   end

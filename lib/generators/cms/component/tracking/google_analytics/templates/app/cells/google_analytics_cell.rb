@@ -7,6 +7,8 @@ class GoogleAnalyticsCell < Cell::Rails
   end
 
   def show(homepage)
+    return unless homepage
+
     obj = homepage.google_analytics.destination_objects.first
 
     @tracking_id = obj.tracking_id

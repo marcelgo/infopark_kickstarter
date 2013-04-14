@@ -11,10 +11,13 @@ class MetaNavigationCell < Cell::Rails
 
   def show(page, current_user)
     @current_user = current_user
+    homepage = page.homepage
 
-    @login_page = page.homepage.login_page
+    if homepage
+      @login_page = homepage.login_page
 
-    render
+      render
+    end
   end
 
   private

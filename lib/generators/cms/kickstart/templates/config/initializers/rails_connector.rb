@@ -1,5 +1,5 @@
 RailsConnector::Configuration.choose_homepage do |env|
-  Homepage.for_hostname(Rack::Request.new(env).host)
+  Homepage.for_hostname(Rack::Request.new(env).host) || NullHomepage.new
 end
 
 # This callback is important for security.

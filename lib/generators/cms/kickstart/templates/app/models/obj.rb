@@ -20,6 +20,10 @@ class Obj < ::RailsConnector::BasicObj
     @homepage ||= parent.homepage
   end
 
+  def homepages
+    website.homepages
+  end
+
   def website
     @website ||= homepage.website
   end
@@ -54,7 +58,7 @@ class Obj < ::RailsConnector::BasicObj
   end
 
   def locale
-    homepage.locale
+    (homepage && homepage.locale) || I18n.default_locale
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url

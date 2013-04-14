@@ -1,4 +1,5 @@
 # v2.0.0
+  * Presents a nicer error page, when the choose homepage callback does not return a homepage.
   * Removed the user manager as it was way too complicated and didn't fit the more general use case.
     This lead to some refactorings of the profile, login and contact page, which should be much
     clearer now.
