@@ -8,7 +8,7 @@ require 'generators/cms/model/api/api_generator'
 describe Cms::Generators::Component::ContactPageGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   arguments ['--cms_path=/website/en']
 

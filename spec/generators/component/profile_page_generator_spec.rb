@@ -8,7 +8,7 @@ require 'generators/cms/model/api/api_generator'
 describe Cms::Generators::Component::ProfilePageGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
   arguments ['--skip_translation_import']
 
   before(:all) do

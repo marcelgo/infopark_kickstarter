@@ -6,7 +6,7 @@ require 'generators/cms/attribute/api/api_generator'
 describe Cms::Generators::Attribute::ApiGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)

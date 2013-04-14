@@ -8,7 +8,7 @@ require 'generators/cms/model/api/api_generator'
 describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)

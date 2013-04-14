@@ -10,6 +10,6 @@ module TestDestinationRoot
   def initialize(*args)
     super(*args)
 
-    self.destination_root = File.expand_path('../../../tmp', __FILE__)
+    self.destination_root = File.expand_path('../../../tmp/generators', __FILE__)
   end
 end

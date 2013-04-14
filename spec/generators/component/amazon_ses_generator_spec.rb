@@ -6,7 +6,7 @@ require 'generators/cms/component/amazon_ses/amazon_ses_generator'
 describe Cms::Generators::Component::AmazonSesGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before do
     prepare_destination

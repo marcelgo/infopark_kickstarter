@@ -8,7 +8,7 @@ require 'generators/cms/model/api/api_generator'
 describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
   arguments ['--anonymize_ip_default=Yes', '--tracking_id_default=1234']
 
   before(:all) do
@@ -23,11 +23,11 @@ describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
   end
 
   def prepare_environments
-    environments_path = "#{destination_root}/app/views/layouts/"
+    environments_path = "#{destination_root}/app/views/layouts"
 
     mkdir_p(environments_path)
 
-    File.open("#{environments_path}application.html.haml", 'w') { |f| f.write("= javascript_include_tag 'application'") }
+    File.open("#{environments_path}/application.html.haml", 'w') { |file| file.write("= javascript_include_tag 'application'") }
   end
 
   it 'creates files' do
