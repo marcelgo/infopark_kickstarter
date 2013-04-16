@@ -1,3 +1,7 @@
+# v2.0.1
+  * Bugfix: The page method of the widget concern did not return the correct page, where the widget
+    was placed in.
+
 # v2.0.0
   * Added a widget generator to create and integrate widgets of any kind. See
     `rails generate cms:widget` for more details.
