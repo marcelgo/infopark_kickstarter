@@ -38,7 +38,7 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
         directory 'views' do
           directory 'layouts' do
             file 'application.html.haml' do
-              contains '= render_cell(:language_switch, :show, @obj.website.homepages, @obj.homepage)'
+              contains '= render_cell(:language_switch, :show, @obj.homepages, @obj.homepage)'
             end
           end
         end

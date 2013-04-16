@@ -1,4 +1,5 @@
 # v2.0.1
+  * Bugfix: The WebCRM was not initialized correctly after running `rake cms:kickstart`.
   * Bugfix: The page method of the widget concern did not return the correct page, where the widget
     was placed in.
 
