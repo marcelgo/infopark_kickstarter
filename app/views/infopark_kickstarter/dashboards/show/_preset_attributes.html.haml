@@ -1,11 +1,12 @@
-%dl.dl-horizontal
-  %dt
-    Preset-Attributes:
+%ul.unstyled
+  %li
+    %strong
+      Preset-Attributes:
 
-  %dd
-    - attributes.each do |attribute, preset|
-      %div
-        = attribute
+    %ul
+      - attributes.each do |attribute, preset|
+        %li
+          = attribute
 
-        %small
-          \= #{preset}
+          %small
+            \= #{preset}
