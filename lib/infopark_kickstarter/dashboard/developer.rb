@@ -14,7 +14,7 @@ module InfoparkKickstarter
 
         def fetch(endpoint)
           JSON.parse(RestClient.get(endpoint))
-        rescue RestClient::PreconditionFailed
+        rescue RestClient::PreconditionFailed, RestClient::ResourceNotFound
           []
         end
 

@@ -17,11 +17,11 @@ module InfoparkKickstarter
         @obj_classes ||= ObjClass.all
       end
 
-      def attributes_count
-        attributes.size
+      def global_attributes_count
+        global_attributes.size
       end
 
-      def attributes
+      def global_attributes
         @attributes ||= Attribute.all
       end
 
