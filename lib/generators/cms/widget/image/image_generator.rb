@@ -11,12 +11,9 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = obj_class_name
               model.title = 'Widget: Image'
+              model.migration_path = "#{widget_path}/migrate"
+              model.model_path = model_path
               model.attributes = [
-                {
-                  name: sort_key_attribute_name,
-                  type: :string,
-                  title: 'Sort key',
-                },
                 {
                   name: caption_attribute_name,
                   type: :string,
@@ -37,7 +34,7 @@ module Cms
               ]
             end
 
-            turn_model_into_widget(obj_class_name)
+            turn_model_into_widget(obj_class_name, model_path)
           rescue Cms::Generators::DuplicateResourceError
           end
         end
@@ -45,7 +42,7 @@ module Cms
         def create_widget
           directory('app')
 
-          template('thumbnail.html.haml', 'app/widgets/image_widget/thumbnail.html.haml')
+          template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
         end
 
         def notice
@@ -56,12 +53,16 @@ module Cms
 
         private
 
-        def obj_class_name
-          'ImageWidget'
+        def widget_path
+          'app/widgets/image_widget'
         end
 
-        def sort_key_attribute_name
-          'sort_key'
+        def model_path
+          'app/models'
+        end
+
+        def obj_class_name
+          'ImageWidget'
         end
 
         def source_attribute_name

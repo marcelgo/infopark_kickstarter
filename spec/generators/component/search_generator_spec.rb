@@ -4,6 +4,7 @@ require 'generator_spec/test_case'
 require 'generators/cms/component/search/search_generator.rb'
 require 'generators/cms/attribute/api/api_generator'
 require 'generators/cms/model/api/api_generator'
+require 'generators/cms/controller/controller_generator'
 
 describe Cms::Generators::Component::SearchGenerator do
   include GeneratorSpec::TestCase
@@ -13,6 +14,7 @@ describe Cms::Generators::Component::SearchGenerator do
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::ControllerGenerator.send(:include, TestDestinationRoot)
   end
 
   before do

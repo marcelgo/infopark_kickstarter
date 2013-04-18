@@ -37,6 +37,10 @@ describe Cms::Generators::Widget::PersonGenerator do
               file 'de.person_widget.yml'
               file 'en.person_widget.yml'
             end
+
+            directory 'migrate' do
+              migration 'create_person_widget'
+            end
           end
         end
 
@@ -44,23 +48,15 @@ describe Cms::Generators::Widget::PersonGenerator do
           file 'person_widget.rb' do
             contains 'include Widget'
             contains 'include Cms::Attributes::Person'
-            contains 'include Cms::Attributes::SortKey'
           end
         end
 
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'sort_key.rb'
               file 'person.rb'
             end
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_person_widget'
         end
       end
     }

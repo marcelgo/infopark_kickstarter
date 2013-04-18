@@ -7,6 +7,5 @@ Example:
     CMS: attribute title (html)
     CMS: attribute body (html)
     CMS: attribute address (string)
-    CMS: attribute sort_key (string)
 
     `rails generate cms:widget:maps:google_maps`

@@ -44,18 +44,9 @@ describe Cms::Generators::Widget::SliderGenerator do
           end
         end
 
-        directory 'models' do
-          file 'slider_widget.rb' do
-            contains 'include Cms::Attributes::SortKey'
-            contains 'include Cms::Attributes::Images'
-            contains 'include Widget'
-          end
-        end
-
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'sort_key.rb'
               file 'images.rb'
             end
           end
@@ -70,13 +61,18 @@ describe Cms::Generators::Widget::SliderGenerator do
               file 'de.slider_widget.yml'
               file 'en.slider_widget.yml'
             end
+
+            directory 'migrate' do
+              migration 'create_slider_widget'
+            end
           end
         end
-      end
 
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_slider_widget'
+        directory 'models' do
+          file 'slider_widget.rb' do
+            contains 'include Cms::Attributes::Images'
+            contains 'include Widget'
+          end
         end
       end
     }

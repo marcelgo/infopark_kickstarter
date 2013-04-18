@@ -1,4 +1,7 @@
 # v2.0.1
+  * Bugfix: Some widgets still had a sort key attribute, which is not longer needed due to the built
+    in sort feature of widgets.
+  * Bugfix: Widgets did not place their migrations in the widget folder.
   * Bugfix: The Dashboard crashed when global attributes were used and did not display the list of
     global attributes. (Thanks @TWT)
   * Bugfix: The Dashboard people page did not work, if no `config/deploy.yml` file was given.

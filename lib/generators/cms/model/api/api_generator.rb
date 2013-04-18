@@ -14,6 +14,7 @@ module Cms
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
         attr_accessor :migration_path
+        attr_accessor :model_path
 
         def initialize(config = {})
           yield self if block_given?
@@ -57,7 +58,7 @@ module Cms
         end
 
         def create_model_file
-          template('model.rb', File.join('app/models', "#{file_name}.rb"))
+          template('model.rb', File.join(model_path, "#{file_name}.rb"))
         end
 
         def create_migration_file
@@ -90,6 +91,10 @@ module Cms
 
         def migration_path
           @migration_path ||= 'cms/migrate'
+        end
+
+        def model_path
+          @model_path ||= 'app/models'
         end
       end
     end

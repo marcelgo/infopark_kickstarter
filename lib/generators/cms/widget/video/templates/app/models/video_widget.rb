@@ -6,7 +6,6 @@ class VideoWidget < Obj
   include Cms::Attributes::Height
   include Cms::Attributes::Autoplay
   include Cms::Attributes::Poster
-  include Cms::Attributes::SortKey
 
   # Determines the mime type of the video if it is stored in the CMS.
   def mime_type

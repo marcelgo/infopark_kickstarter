@@ -1,28 +1,28 @@
 module Cms
   module Generators
     module Actions
-      def turn_model_into_page(class_name)
+      def turn_model_into_page(class_name, model_path = 'app/models')
         file_name = "#{class_name.underscore}.rb"
 
         gsub_file(
-          "app/models/#{file_name}",
+          "#{model_path}/#{file_name}",
           '# include Page',
           'include Page'
         )
       end
 
-      def turn_model_into_widget(class_name)
+      def turn_model_into_widget(class_name, model_path = 'app/models')
         file_name = "#{class_name.underscore}.rb"
 
         gsub_file(
-          "app/models/#{file_name}",
+          "#{model_path}/#{file_name}",
           '# include Widget',
           'include Widget'
         )
       end
 
-      def add_model_attribute(model, attribute)
-        file = "app/models/#{model.underscore}.rb"
+      def add_model_attribute(model, attribute, model_path = 'app/models')
+        file = "#{model_path}/#{model.underscore}.rb"
         insert_point = "class #{model} < Obj\n"
 
         data = []
