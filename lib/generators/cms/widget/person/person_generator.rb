@@ -35,7 +35,7 @@ module Cms
 
         def notice
           if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes.')
           end
         end
 

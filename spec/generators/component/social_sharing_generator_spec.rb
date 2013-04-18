@@ -7,6 +7,7 @@ describe Cms::Generators::Component::SocialSharingGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
