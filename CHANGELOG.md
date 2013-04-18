@@ -1,3 +1,14 @@
+# v2.0.1
+  * Bugfix: Some widgets still had a sort key attribute, which is not longer needed due to the built
+    in sort feature of widgets.
+  * Bugfix: Widgets did not place their migrations in the widget folder.
+  * Bugfix: The Dashboard crashed when global attributes were used and did not display the list of
+    global attributes. (Thanks @TWT)
+  * Bugfix: The Dashboard people page did not work, if no `config/deploy.yml` file was given.
+  * Bugfix: The WebCRM was not initialized correctly after running `rake cms:kickstart`.
+  * Bugfix: The page method of the widget concern did not return the correct page, where the widget
+    was placed in.
+
 # v2.0.0
   * Added a widget generator to create and integrate widgets of any kind. See
     `rails generate cms:widget` for more details.

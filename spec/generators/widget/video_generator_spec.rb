@@ -50,22 +50,9 @@ describe Cms::Generators::Widget::VideoGenerator do
           end
         end
 
-        directory 'models' do
-          file 'video_widget.rb' do
-            contains 'include Widget'
-            contains 'include Cms::Attributes::Source'
-            contains 'include Cms::Attributes::Width'
-            contains 'include Cms::Attributes::Height'
-            contains 'include Cms::Attributes::Autoplay'
-            contains 'include Cms::Attributes::Poster'
-            contains 'include Cms::Attributes::SortKey'
-          end
-        end
-
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'sort_key.rb'
               file 'source.rb'
               file 'width.rb'
               file 'height.rb'
@@ -101,13 +88,22 @@ describe Cms::Generators::Widget::VideoGenerator do
               file 'de.video_widget.yml'
               file 'en.video_widget.yml'
             end
+
+            directory 'migrate' do
+              migration 'create_video_widget'
+            end
           end
         end
-      end
 
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_video_widget'
+        directory 'models' do
+          file 'video_widget.rb' do
+            contains 'include Widget'
+            contains 'include Cms::Attributes::Source'
+            contains 'include Cms::Attributes::Width'
+            contains 'include Cms::Attributes::Height'
+            contains 'include Cms::Attributes::Autoplay'
+            contains 'include Cms::Attributes::Poster'
+          end
         end
       end
 

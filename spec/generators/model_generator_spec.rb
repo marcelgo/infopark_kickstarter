@@ -60,12 +60,6 @@ describe Cms::Generators::ModelGenerator do
           end
         end
       end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'news_spec.rb'
-        end
-      end
     }
   end
 end

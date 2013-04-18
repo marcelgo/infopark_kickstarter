@@ -19,11 +19,11 @@
 
     = obj_class.type
 
-- if obj_class.attributes?
-  = render('infopark_kickstarter/dashboards/show/attributes', attributes: obj_class.attributes)
-
 - if obj_class.mandatory_attributes?
   = render('infopark_kickstarter/dashboards/show/mandatory_attributes', attributes: obj_class.mandatory_attributes)
 
 - if obj_class.preset_attributes?
   = render('infopark_kickstarter/dashboards/show/preset_attributes', attributes: obj_class.preset_attributes)
+
+- if obj_class.attributes?
+  = render('infopark_kickstarter/dashboards/show/attributes', attributes: obj_class.attributes)

@@ -71,20 +71,11 @@ module Cms
         generate('rspec:install')
       end
 
-      def create_deploy_hooks
-        empty_directory('deploy/templates')
+      def crm_initializer
+        path = Rails.root + 'config/initializers/crm_connector.rb'
 
-        create_file('deploy/after_restart.rb')
-        create_file('deploy/before_symlink.rb')
-
-        destination = 'deploy/before_migrate.rb'
-
-        unless File.exist?(destination)
-          create_file(destination)
-        end
-
-        prepend_file(destination) do
-          File.read(find_in_source_paths('deploy/before_migrate.rb'))
+        if File.exist?(path)
+          remove_file(path)
         end
       end
 
@@ -112,10 +103,6 @@ module Cms
         )
 
         log(:info, 'enable widget locales')
-      end
-
-      def rails_connector_monkey_patch
-        template('date_attribute.rb', 'config/initializers/date_attribute.rb')
       end
 
       def create_structure_migration_file
@@ -281,17 +268,14 @@ module Cms
         directory('app', force: true)
         directory('lib')
         directory('config')
+        directory('deploy')
         directory('spec')
-
-        template('homepage.rb', 'app/models/homepage.rb')
       end
 
       def extend_gitignore
         append_file('.gitignore', "config/deploy.yml\n")
-      end
-
-      def create_widget_model
-        template('cells_error_handling.rb', 'config/initializers/cells.rb')
+        append_file('.gitignore', "config/rails_connector.yml\n")
+        append_file('.gitignore', "config/custom_cloud.yml\n")
       end
 
       def add_initial_content

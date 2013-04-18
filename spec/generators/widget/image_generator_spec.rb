@@ -37,12 +37,15 @@ describe Cms::Generators::Widget::ImageGenerator do
               file 'de.image_widget.yml'
               file 'en.image_widget.yml'
             end
+
+            directory 'migrate' do
+              migration 'create_image_widget'
+            end
           end
         end
 
         directory 'models' do
           file 'image_widget.rb' do
-            contains 'include Cms::Attributes::SortKey'
             contains 'include Cms::Attributes::Caption'
             contains 'include Cms::Attributes::Source'
             contains 'include Cms::Attributes::LinkTo'
@@ -53,18 +56,11 @@ describe Cms::Generators::Widget::ImageGenerator do
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'sort_key.rb'
               file 'caption.rb'
               file 'source.rb'
               file 'link_to.rb'
             end
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_image_widget'
         end
       end
     }

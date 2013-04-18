@@ -4,6 +4,8 @@
 module Widget
   # Determines the page where the widget is embedded.
   def page
-    parent.page
+    id = self.path.split('/')[2]
+
+    Obj.find(id)
   end
 end

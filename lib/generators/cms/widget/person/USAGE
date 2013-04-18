@@ -5,8 +5,6 @@ Description:
 
 Example:
     CMS: obj_class WidgetPerson
-    CMS: attribute sort_key (string)
     CMS: attribute person (string)
 
     `rails generate cms:widget:person`
-    `rails generate cms:widget:person --example`

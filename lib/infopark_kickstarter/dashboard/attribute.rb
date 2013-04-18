@@ -13,6 +13,14 @@ module InfoparkKickstarter
       attr_accessor :min_size
       attr_accessor :max_size
 
+      def initialize(attributes = {})
+        if attributes.is_a?(String)
+          attributes = self.class.fetch(attributes)
+        end
+
+        super(attributes)
+      end
+
       def title?
         title.present?
       end

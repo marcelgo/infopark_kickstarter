@@ -36,6 +36,10 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
               file 'en.google_maps_widget.yml'
             end
 
+            directory 'migrate' do
+              migration 'create_google_maps_widget'
+            end
+
             file 'show.html.haml'
             file 'thumbnail.html.haml'
           end
@@ -49,15 +53,8 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'address.rb'
-              file 'sort_key.rb'
             end
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_google_maps_widget'
         end
       end
     }

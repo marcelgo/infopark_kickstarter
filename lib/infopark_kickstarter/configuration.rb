@@ -24,20 +24,20 @@ module InfoparkKickstarter
       "#{crm_url}/contacts/#{id}"
     end
 
-    def konsole_url
+    def console_url
       'https://console.infopark.net'
     end
 
-    def knowledge_base_url
+    def dev_center_url
       'https://dev.infopark.net'
     end
 
     def support_url
-      'https://dev.infopark.net/support'
+      "#{dev_center_url}/support"
     end
 
     def blog_url
-      'https://dev.infopark.net/blog'
+      "#{dev_center_url}/blog"
     end
 
     def github_repository_url
@@ -57,17 +57,23 @@ module InfoparkKickstarter
     end
 
     def tenant_api_url
-      deploy['url']
+      deploy['url'] || console_url
     end
 
     def tenant_api_key
-      deploy['api_key']
+      deploy['api_key'] || ''
     end
 
     private
 
     def load_configuration_file(config)
-      YAML.load_file(File.join(Rails.root, "config/#{config}.yml"))
+      path = File.join(Rails.root, "config/#{config}.yml")
+
+      if File.exists?(path)
+        YAML.load_file(path)
+      else
+        {}
+      end
     end
   end
 end

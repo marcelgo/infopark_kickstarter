@@ -5,7 +5,6 @@ Example:
     CMS: obj_class VideoWidget
     CMS: attribute title (html)
     CMS: attribute body (html)
-    CMS: attribute sort_key (string)
     CMS: attribute source (linklist)
     CMS: attribute width (integer)
     CMS: attribute height (integer)

@@ -24,19 +24,19 @@ describe Cms::Generators::WidgetGenerator do
   it 'generates model files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'models' do
-          file 'news_widget.rb' do
-            contains 'class NewsWidget < Obj'
-            contains 'include Widget'
-          end
-        end
-
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
               file 'foo.rb'
               file 'bar.rb'
             end
+          end
+        end
+
+        directory 'models' do
+          file 'news_widget.rb' do
+            contains 'class NewsWidget < Obj'
+            contains 'include Widget'
           end
         end
 

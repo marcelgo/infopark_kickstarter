@@ -37,28 +37,17 @@ describe Cms::Generators::Widget::TextGenerator do
               file 'de.text_widget.yml'
               file 'en.text_widget.yml'
             end
+
+            directory 'migrate' do
+              migration 'create_text_widget'
+            end
           end
         end
 
         directory 'models' do
           file 'text_widget.rb' do
-            contains 'include Cms::Attributes::SortKey'
             contains 'include Widget'
           end
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'sort_key.rb'
-            end
-          end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_text_widget'
         end
       end
     }

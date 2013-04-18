@@ -62,9 +62,10 @@ module Cms
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
             model.migration_path = "#{widget_path}/migrate"
+            model.model_path = model_path
           end
 
-          turn_model_into_widget(class_name)
+          turn_model_into_widget(class_name, model_path)
         rescue Cms::Generators::DuplicateResourceError
         end
       end
@@ -96,6 +97,10 @@ module Cms
 
       def widget_path
         "app/widgets/#{file_name}"
+      end
+
+      def model_path
+        'app/models'
       end
     end
   end

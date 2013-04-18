@@ -5,7 +5,6 @@ Description:
 Example:
     CMS: obj_class SliderWidget
     CMS: attribute title (html)
-    CMS: attribute sort_key (string)
     CMS: attribute images (linklist)
 
     `rails generate cms:widget:slider`

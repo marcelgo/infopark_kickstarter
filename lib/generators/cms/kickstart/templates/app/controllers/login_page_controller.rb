@@ -3,28 +3,28 @@ class LoginPageController < CmsController
     @presenter = LoginPresenter.new(params[:login_presenter])
 
     if request.post? && @presenter.valid?
-      login
+      login(@presenter, @obj)
     elsif request.delete?
-      logout
+      logout(@obj)
     end
   end
 
   private
 
-  def login
-    self.current_user = @presenter.authenticate
+  def login(presenter, obj)
+    self.current_user = presenter.authenticate
 
     if current_user.logged_in?
-      target = params[:return_to] || cms_path(@obj.homepage)
+      target = params[:return_to] || cms_path(obj.homepage)
 
       redirect_to(target, notice: t(:'flash.login.success'))
     end
   end
 
-  def logout
+  def logout(obj)
     discard_user
 
-    target = cms_path(@obj.homepage)
+    target = cms_path(obj.homepage)
 
     redirect_to(target, notice: t(:'flash.logout.success'))
   end
