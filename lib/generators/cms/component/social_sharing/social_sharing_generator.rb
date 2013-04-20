@@ -18,20 +18,17 @@ module Cms
         def insert_share_code
           return unless example?
 
-          file = Rails.root + 'app/views/layouts/application.html.haml'
+          file = 'app/views/layouts/application.html.haml'
+          insert_point = "            = yield"
 
-          if File.exists?(file)
-            insert_point = "            = yield"
+          data = []
 
-            data = []
+          data << "\n"
+          data << "            = render_cell(:social_sharing, :show, cms_url(@obj))"
 
-            data << "\n"
-            data << "            = render_cell(:social_sharing, :show, cms_url(@obj))"
+          data = data.join("\n")
 
-            data = data.join("\n")
-
-            insert_into_file(file, data, after: insert_point)
-          end
+          insert_into_file(file, data, after: insert_point)
         end
 
         private
