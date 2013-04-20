@@ -26,7 +26,7 @@ module InfoparkKickstarter
       def cms_configuration
         {
           'cms_api' => {
-            'url' => "https://#{tenant_name}.saas.infopark.net/cms",
+            'url' => "https://#{tenant_name}.cms.infopark.net",
             'login' => 'root',
             'api_key' => choose_correct_value(local_configuration['integration_test_cms_api_key']),
             'http_host' => tenant_name,
