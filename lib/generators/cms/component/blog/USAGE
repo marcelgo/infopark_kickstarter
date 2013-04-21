@@ -1,6 +1,6 @@
 Description:
     Generates a blog based on the Infopark Kickstarter widget framework. The
-    blog supports disqus comments that can be enabled by entering the
+    blog also supports disqus comments that can be enabled by entering the
     disqus shortname on the blog object. You can also set an optional author
     which is either the WebCRM login or email. The author is displayed with its
     gravatar image, if available. A RSS discovery link is placed in the layout

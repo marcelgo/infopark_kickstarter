@@ -1,5 +1,6 @@
 Description:
-    Integrates the error notification service "Airbrake".
+    Integrates the error notification service "Airbrake". You can disable deployment notifications
+    by using the parameter "--skip-deployment-notifications".
 
 Example:
     `rails generate cms:component:error_tracking:airbrake`

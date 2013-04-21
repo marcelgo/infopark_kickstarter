@@ -1,6 +1,6 @@
 Description:
-    Generates a social sharing component to display various social media share buttons. It can be
-    used for either a page or a specific component.
+    Generates a social sharing component to display various social media share buttons. To create an
+    example use the "--example" parameter.
 
 Available sharing provider
     - Facebook:     :facebook
@@ -9,6 +9,9 @@ Available sharing provider
     - linkedin      :linkedin
 
 Example:
+    `rails generate cms:component:social_sharing`
+    `rails generate cms:component:social_sharing --example`
+
     Default: Current page url and all sharing provider:
       = render_cell(:social_sharing, :show)
 
