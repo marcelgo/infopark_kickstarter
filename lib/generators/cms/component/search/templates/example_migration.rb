@@ -11,8 +11,6 @@ class CreateSearchPageExample < ::RailsConnector::Migration
 
     attributes = get_obj_class('Homepage')['attributes']
     attributes.map do |definition|
-      definition.delete('id')
-
       definition.delete_if do |_, value|
         value.nil?
       end
