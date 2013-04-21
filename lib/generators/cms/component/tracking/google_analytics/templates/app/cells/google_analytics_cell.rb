@@ -9,7 +9,7 @@ class GoogleAnalyticsCell < Cell::Rails
   def show(homepage)
     return unless homepage
 
-    obj = homepage.google_analytics.destination_objects.first
+    obj = homepage.google_analytics_link.destination_objects.first
 
     @tracking_id = obj.tracking_id
     @anonymize_ip = obj.anonymize_ip?

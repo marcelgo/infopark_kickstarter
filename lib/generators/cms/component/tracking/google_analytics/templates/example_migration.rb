@@ -1,4 +1,4 @@
-class IntegrateGoogleAnalytics < ::RailsConnector::Migration
+class CreateGoogleAnalyticsExample < ::RailsConnector::Migration
   def up
     create_configuration_obj
     deactivate_obj_class
@@ -30,8 +30,6 @@ class IntegrateGoogleAnalytics < ::RailsConnector::Migration
   def add_hompage_attribute
     attributes = get_obj_class('Homepage')['attributes']
     attributes.map do |definition|
-      definition.delete('id')
-
       definition.delete_if do |_, value|
         value.nil?
       end

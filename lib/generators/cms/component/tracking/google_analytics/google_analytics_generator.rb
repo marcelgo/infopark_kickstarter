@@ -5,6 +5,7 @@ module Cms
         class GoogleAnalyticsGenerator < ::Rails::Generators::Base
           include Migration
           include BasePaths
+          include Actions
 
           source_root File.expand_path('../templates', __FILE__)
 
@@ -24,6 +25,10 @@ module Cms
             type: :string,
             default: nil,
             desc: 'Path to a CMS homepage, for which to create the google analytics configuration.'
+
+          def extend_homepage
+            add_model_attribute('Homepage', homepage_configuration_attribute_name)
+          end
 
           def insert_google_analytics
             file = 'app/views/layouts/application.html.haml'
@@ -62,12 +67,11 @@ module Cms
             rescue Cms::Generators::DuplicateResourceError
             end
 
-            migration_template('migration.rb', 'cms/migrate/integrate_google_analytics.rb')
+            migration_template('example_migration.rb', 'cms/migrate/create_google_analytics_example.rb')
           end
 
           def copy_app_directory
             directory('app', force: true)
-            directory('spec', force: true)
           end
 
           def notice
@@ -96,7 +100,7 @@ module Cms
           end
 
           def homepage_configuration_attribute_name
-            'google_analytics'
+            'google_analytics_link'
           end
 
           def anonymize_ip_default

@@ -8,7 +8,7 @@ require 'generators/cms/model/api/api_generator'
 describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp/generators', __FILE__)
+  destination File.expand_path('../../../../../tmp/generators', __FILE__)
   arguments ['--anonymize_ip_default=Yes', '--tracking_id_default=1234']
 
   before(:all) do
@@ -23,11 +23,14 @@ describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
   end
 
   def prepare_environments
-    environments_path = "#{destination_root}/app/views/layouts"
+    layouts_path = "#{destination_root}/app/views/layouts"
+    models_path = "#{destination_root}/app/models"
 
-    mkdir_p(environments_path)
+    mkdir_p(layouts_path)
+    mkdir_p(models_path)
 
-    File.open("#{environments_path}/application.html.haml", 'w') { |file| file.write("= javascript_include_tag 'application'") }
+    File.open("#{layouts_path}/application.html.haml", 'w') { |file| file.write("= javascript_include_tag 'application'") }
+    File.open("#{models_path}/homepage.rb", 'w') { |file| file.write("class Homepage < Obj\n") }
   end
 
   it 'creates files' do
@@ -35,6 +38,9 @@ describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
       directory 'app' do
         directory 'models' do
           file 'google_analytics.rb'
+          file 'homepage.rb' do
+            contains 'include Cms::Attributes::GoogleAnalyticsLink'
+          end
         end
 
         directory 'cells' do
@@ -49,13 +55,7 @@ describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
       directory 'cms' do
         directory 'migrate' do
           migration 'create_google_analytics'
-          migration 'integrate_google_analytics'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'google_analytics_spec.rb'
+          migration 'create_google_analytics_example'
         end
       end
     }
