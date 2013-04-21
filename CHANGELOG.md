@@ -1,3 +1,9 @@
+# v2.1.0
+  * The language switch is now generated without an example. Use
+    `rails generate cms:component:language_switch --example` for the old behavior.
+  * Useless, empty controller `index` actions got removed.
+  * Useless spec files got removed.
+
 # v2.0.1
   * Bugfix: Some widgets still had a sort key attribute, which is not longer needed due to the built
     in sort feature of widgets.
