@@ -269,7 +269,6 @@ module Cms
         directory('lib')
         directory('config')
         directory('deploy')
-        directory('spec')
       end
 
       def extend_gitignore
@@ -305,15 +304,9 @@ module Cms
       def main_content_attribute
         {
           name: 'main_content',
-          type: 'widget',
+          type: :widget,
           title: 'Main content',
         }
-      end
-
-      def tenant_name
-        content = File.read("#{Rails.root}/config/rails_connector.yml")
-
-        YAML.load(content)['cms_api']['http_host']
       end
     end
   end
