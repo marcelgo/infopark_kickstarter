@@ -3,112 +3,24 @@ module Cms
     module Component
       module Tracking
         class GoogleAnalyticsGenerator < ::Rails::Generators::Base
-          include Migration
-          include BasePaths
-          include Actions
-
           source_root File.expand_path('../templates', __FILE__)
-
-          class_option :anonymize,
-            type: :string,
-            default: 'No',
-            desc: 'Default anonymize ip setting. (Yes | No)',
-            banner: 'VALUE'
-
-          class_option :tracking_id,
-            type: :string,
-            default: '',
-            desc: 'Default tracking id setting.',
-            banner: 'ID'
-
-          class_option :homepage_path,
-            type: :string,
-            default: nil,
-            desc: 'Path to a CMS homepage, for which to create the google analytics configuration.'
-
-          def extend_homepage
-            add_model_attribute('Homepage', homepage_configuration_attribute_name)
-          end
-
-          def insert_google_analytics
-            file = 'app/views/layouts/application.html.haml'
-            insert_point = "= javascript_include_tag('application')"
-
-            data = []
-
-            data << "\n"
-            data << '    = render_cell(:google_analytics, :show, @obj.homepage)'
-
-            data = data.join("\n")
-
-            insert_into_file(file, data, after: insert_point)
-          end
-
-          def create_migration
-            begin
-              Model::ApiGenerator.new(behavior: behavior) do |model|
-                model.name = class_name
-                model.title = 'Google Analytics'
-                model.attributes = [
-                  {
-                    name: tracking_id_attribute_name,
-                    type: :string,
-                    title: 'Tracking ID',
-                    default: tracking_id_default,
-                  },
-                  {
-                    name: anonymize_ip_attribute_name,
-                    type: :boolean,
-                    title: 'Anonymize IP?',
-                    default: anonymize_ip_default,
-                  },
-                ]
-              end
-            rescue Cms::Generators::DuplicateResourceError
-            end
-
-            migration_template('example_migration.rb', 'cms/migrate/create_google_analytics_example.rb')
-          end
 
           def copy_app_directory
             directory('app', force: true)
           end
 
-          def notice
-            if behavior == :invoke
-              log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes and set a Tracking ID.')
-            end
-          end
+          def insert_google_analytics
+            file = 'app/views/layouts/application.html.haml'
+            insert_point = "    = javascript_include_tag('application')"
 
-          private
+            data = []
 
-          alias_method :original_homepage_path, :homepage_path
-          def homepage_path
-            options[:homepage_path] || original_homepage_path
-          end
+            data << "\n"
+            data << "    = render_cell(:google_analytics, :javascript, 'UA-xxxxxx-x', true)"
 
-          def class_name
-            'GoogleAnalytics'
-          end
+            data = data.join("\n")
 
-          def tracking_id_attribute_name
-            'tracking_id'
-          end
-
-          def anonymize_ip_attribute_name
-            'anonymize_ip'
-          end
-
-          def homepage_configuration_attribute_name
-            'google_analytics_link'
-          end
-
-          def anonymize_ip_default
-            options[:anonymize]
-          end
-
-          def tracking_id_default
-            options[:tracking_id]
+            insert_into_file(file, data, after: insert_point)
           end
         end
       end

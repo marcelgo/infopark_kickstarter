@@ -2,12 +2,7 @@ Description:
     Integrates Google Analytics into your application.
 
 Example:
-    `rails generate cms:component:tracking:google_analytics --anonymize=YES --tracking_id=1234 --homepage_path=/website/en`
+    `rails generate cms:component:tracking:google_analytics`
 
-    CMS: obj_class GoogleAnalytics
-    CMS: attribute tracking_id (string)
-    CMS: attribute anonymize_ip (enum)
-    CMS: attribute google_analytics_link (linklist)
-    Misc: extends app/models/homepage.rb
     Misc: extends app/views/layouts/application.html.haml
     Misc: adds app/cells/google_analytics_cell.rb

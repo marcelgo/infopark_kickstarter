@@ -2,8 +2,6 @@ module Cms
   module Generators
     module Component
       class SocialSharingGenerator < ::Rails::Generators::Base
-        include Actions
-
         source_root File.expand_path('../templates', __FILE__)
 
         class_option :example,
