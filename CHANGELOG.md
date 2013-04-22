@@ -1,4 +1,6 @@
 # v2.1.0
+  * Extracted the redirect functionality into its own generator. It is still included as part of the
+    kickstart.
   * The language switch is now generated without an example. Use
     `rails generate cms:component:language_switch --example` for the old behavior.
   * Useless, empty controller `index` actions got removed.
