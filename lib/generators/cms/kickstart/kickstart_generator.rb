@@ -239,28 +239,6 @@ module Cms
         rescue Cms::Generators::DuplicateResourceError
         end
 
-        begin
-          class_name = 'Redirect'
-
-          Model::ApiGenerator.new(behavior: behavior) do |model|
-            model.name = class_name
-            model.title = 'Redirect'
-            model.attributes = [
-              show_in_navigation_attribute,
-              sort_key_attribute,
-              {
-                name: 'redirect_link',
-                type: :linklist,
-                title: 'Redirect link',
-                max_size: 1,
-              },
-            ]
-          end
-
-          turn_model_into_page(class_name)
-        rescue Cms::Generators::DuplicateResourceError
-        end
-
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
       end
 
@@ -279,6 +257,7 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
+        Rails::Generators.invoke('cms:component:redirect')
         Rails::Generators.invoke('cms:widget:text', ['--example'])
         Rails::Generators.invoke('cms:widget:image', ['--example'])
       end

@@ -11,7 +11,3 @@ en:
       meta: 'Meta'
       login: 'Login'
       logout: 'Logout'
-
-  redirect:
-    index:
-      link_undefined: 'Please configure a redirect target.'
