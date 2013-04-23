@@ -49,6 +49,8 @@ module InfoparkKickstarter
         Bundler.with_clean_env do
           cd(app_path) do
             generators = [
+              'cms:component:developer_tools',
+              'cms:component:redirect',
               'cms:component:error_tracking --provider=airbrake',
               'cms:component:error_tracking --provider=honeybadger',
               'cms:component:monitoring "Test Website" --provider=newrelic',

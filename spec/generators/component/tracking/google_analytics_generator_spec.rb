@@ -31,8 +31,8 @@ describe Cms::Generators::Component::Tracking::GoogleAnalyticsGenerator do
 
           directory 'google_analytics' do
             file 'javascript.html.haml'
-            file 'anonymize.html.haml'
-            file 'tracking_id.html.haml'
+            file 'anonymize.js.haml'
+            file 'tracking_id.js.haml'
           end
         end
 
