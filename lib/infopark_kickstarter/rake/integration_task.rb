@@ -50,6 +50,7 @@ module InfoparkKickstarter
           cd(app_path) do
             generators = [
               'cms:component:developer_tools',
+              'cms:component:testing',
               'cms:component:redirect',
               'cms:component:error_tracking --provider=airbrake',
               'cms:component:error_tracking --provider=honeybadger',

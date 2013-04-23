@@ -50,10 +50,6 @@ module Cms
         gem_group(:assets) do
           gem('less-rails-bootstrap')
         end
-
-        gem_group(:test, :development) do
-          gem('rspec-rails')
-        end
       end
 
       def form_tools
@@ -62,10 +58,6 @@ module Cms
         remove_file('config/locales/simple_form.de.yml')
         remove_file('config/locales/simple_form.en.yml')
         remove_dir('lib/templates')
-      end
-
-      def install_test_framework
-        generate('rspec:install')
       end
 
       def crm_initializer

@@ -1,0 +1,7 @@
+Description:
+    Integrates a test framework for automated tests.
+
+Example:
+    `rails generate cms:component:testing`
+
+    Gem: rspec-rails
