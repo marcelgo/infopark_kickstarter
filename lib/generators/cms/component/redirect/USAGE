@@ -1,0 +1,17 @@
+Description:
+    Generates a possibility to redirect to a certain URL but with also having a
+    page object in the tree hierarchy of the CMS. For example, if you want to
+    add a menu item at the top level but actually want to display a page that is
+    placed somewhere else, you could use the redirect object to create the menu
+    item and link to the actual page.
+
+    This also, to some extend, allows to set more than one permalink for one
+    object.
+
+Example:
+    `rails generate cms:component:redirect`
+
+    CMS: object class "Redirect"
+    CMS: attribute redirect_link (linklist)
+    CMS: attribute show_in_navigation (enum)
+    CMS: attribute sort_key (string)

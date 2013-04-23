@@ -1,0 +1,10 @@
+Description:
+    Adds helpful developer gems that increase productivity and development speed.
+
+Example:
+    `rails generate cms:component:developer_tools`
+
+    Gem: thin
+    Gem: better_errors
+    Gem: binding_of_caller
+    Gem: pry-rails

@@ -1,11 +1,15 @@
 # v2.1.0
-  * Extracted out developer tools into its own generator that is no longer part of the kickstart in
+  * Extracted out testing setup into its own generator which is no longer part of the kickstart in
+    order to decrease starting complexity. Please run `rails generate cms:component:testing` to add
+    get it back. We also did this step in order to further improve and extend the functionality in
+    the future, like adding integration testing or supporting different provider.
+  * Extracted out developer tools into its own generator which is no longer part of the kickstart in
     order to decrease dependencies. Just call `rails generate cms:component:developer_tools` if you
     want them back. `thin` gem was added to replace the default Rails webserver WEBrick.
   * Improved introduction page, when the current working copy does not have a homepage, by switching
     to a more positive message, giving clear directions and smoothing the transition to more help
     through links in the footer.
-  * Extracted the redirect functionality into its own generator that is no longer part of the
+  * Extracted the redirect functionality into its own generator which is no longer part of the
     kickstart in order to decrease complexity. Please run `rails generate cms:component:redirect` to
     get it back.
   * The language switch is now generated without an example. Use
