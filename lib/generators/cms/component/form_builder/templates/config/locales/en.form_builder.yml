@@ -1,0 +1,4 @@
+en:
+  flash:
+    form_builder:
+      success: 'The form was sent successfully.'
