@@ -7,8 +7,12 @@ module Cms
       include BasePaths
       include Actions
 
+      class_option :configuration_path,
+        type: :string,
+        default: nil,
+        desc: 'Path to a JSON configuration file.'
+
       source_root File.expand_path('../templates', __FILE__)
-      class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
 
       def initialize(args = [], options = {}, config = {})
         options << '--force'
@@ -48,14 +52,7 @@ module Cms
         end
 
         gem_group(:test, :development) do
-          gem('pry-rails')
-          gem('better_errors')
-          gem('binding_of_caller')
           gem('rspec-rails')
-        end
-
-        Bundler.with_clean_env do
-          run('bundle --quiet')
         end
       end
 
@@ -80,22 +77,14 @@ module Cms
       end
 
       def remove_erb_layout
-        application_erb_file = 'app/views/layouts/application.html.erb'
+        path = Rails.root + 'app/views/layouts/application.html.erb'
 
-        if File.exist?(application_erb_file)
-          remove_file(application_erb_file)
+        if File.exist?(path)
+          remove_file(path)
         end
       end
 
       def update_rails_configuration
-        gsub_file(
-          'config/application.rb',
-          "# config.time_zone = 'Central Time (US & Canada)'",
-          "config.time_zone = 'Berlin'"
-        )
-
-        log(:info, "set timezone to 'Berlin'")
-
         gsub_file(
           'config/application.rb',
           "# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]",
@@ -257,7 +246,6 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
-        Rails::Generators.invoke('cms:component:redirect')
         Rails::Generators.invoke('cms:widget:text', ['--example'])
         Rails::Generators.invoke('cms:widget:image', ['--example'])
       end

@@ -1,9 +1,13 @@
 # v2.1.0
-  * Improved introduction page, when the current workspace does not have a homepage, by switching to
-    a more positive message, giving clear directions and smoothing the transition to more help
+  * Extracted out developer tools into its own generator that is no longer part of the kickstart in
+    order to decrease dependencies. Just call `rails generate cms:component:developer_tools` if you
+    want them back. `thin` gem was added to replace the default Rails webserver WEBrick.
+  * Improved introduction page, when the current working copy does not have a homepage, by switching
+    to a more positive message, giving clear directions and smoothing the transition to more help
     through links in the footer.
-  * Extracted the redirect functionality into its own generator. It is still included as part of the
-    kickstart.
+  * Extracted the redirect functionality into its own generator that is no longer part of the
+    kickstart in order to decrease complexity. Please run `rails generate cms:component:redirect` to
+    get it back.
   * The language switch is now generated without an example. Use
     `rails generate cms:component:language_switch --example` for the old behavior.
   * Useless, empty controller `index` actions got removed.
