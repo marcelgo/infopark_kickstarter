@@ -1,25 +1,19 @@
 # Infopark Kickstarter
 
-The Kickstarter provides generators and rake tasks to quickly setup or enhance an [Infopark
-Cloud Express](http://infopark.de/infopark-cloud-express) Ruby on Rails project. All generated code
+Infopark Kickstarter provides generators and rake tasks to quickly setup or enhance an [Infopark
+Platform](http://infopark.de) Ruby on Rails project. All generated code
 represents a working example, but can be fully customized within the application.
 
 
 ## Installation and Usage
 
-Please visit our Knowledge Base to get the
-[latest installation and usage information](https://kb.infopark.de/89b37c1667cda31a/kurzanleitung-zum-gebrauch?locale=en).
-
-
-## Developer Dashboard
-
-Please visit our Knowledge Base to get the
-[latest developer dashboard information](https://kb.infopark.de/638a180eaff436f6/the-developer-dashboard?locale=en).
+Please visit our Dev Center to get the
+[latest installation and usage information](https://dev.infopark.net/kickstarter).
 
 
 ## Testing
 
-There are two types of tests. First there are standard rspec tests of the Infopark Kickstarter
+There are two types of tests. First there are rspec tests of the Infopark Kickstarter
 engine. Those include tests for the dashboard and for all generators. You can run these tests by
 simply calling:
 
@@ -29,8 +23,8 @@ There are also integration tests, that can be run by:
 
     $ rake test:integration
 
-In order to run them successfully, you need to create a ```config/local.yml``` file and put in your
-test tenant data. See [local.yml.template](https://github.com/infopark/infopark_kickstarter/blob/master/config/local.yml.template)
+In order to run the tests successfully, you need to create a ```config/local.yml``` file and put in your
+test project data. See [local.yml.template](https://github.com/infopark/infopark_kickstarter/blob/master/config/local.yml.template)
 for what is needed exactly. The integration tests create an entire new application execute
 ```rails generate cms:kickstart``` and run a few other generators and then execute the tests of the
 newly created application.
@@ -48,9 +42,10 @@ We would be very happy and thankful if you open new issues in order to further i
 Kickstarter. If you want to go a step further and extend the functionality or fix a problem, you can
 do so any time by following the steps below.
 
-1. Signup for a [free Infopark Cloud Express account](https://www.infopark.de/) and setup a test CMS
-   and CRM tenant in the Infopark console.
-2. Fork and clone the Infopark Kickstarter Github repository.
+1. Signup for a [free Infopark Platform account](http://www.infopark.de/) and setup a test CRM
+   and CMS component in the Infopark console.
+
+2. Fork and clone the Infopark Kickstarter GitHub repository.
 
         git clone git@github.com:_username_/infopark_kickstarter.git
         cd infopark_kickstarter
@@ -60,17 +55,15 @@ do so any time by following the steps below.
 
         ruby --version
 
-3. Download the configuration files from the Infopark console and unzip all files into the test
-   application that is part of the Infopark Kickstarter gem. Currently, you also have to create the
-   `deploy.yml` file manually. See the second step in the
-   [installation instructions](https://kb.infopark.de/89b37c1667cda31a/kurzanleitung-zum-gebrauch?locale=en).
+3. Download the application archive from the Infopark console and unzip all files into your project
+   directory. When you are done, copy the configuration files from your `config/` directory to the
+   following locations:
 
         spec/dummy/config/rails_connector.yml
         spec/dummy/config/custom_cloud.yml
-        spec/dummy/config/deploy.yml
 
-4. Set up and edit the local configuration file and provide the same credentials you just downloaded
-   from the Infopark console.
+4. Set up and edit the local configuration file and provide the same credentials you just copied
+   into your dummy application template.
 
         cp config/local.yml.template config/local.yml
 
@@ -87,6 +80,6 @@ do so any time by following the steps below.
 
 
 ## License
-Copyright (c) 2009 - 2012 Infopark AG (http://www.infopark.com)
+Copyright (c) 2009 - 2013 Infopark AG (http://www.infopark.com)
 
 This software can be used and modified under the LGPLv3. Please refer to http://www.gnu.org/licenses/lgpl-3.0.html for the license text.
