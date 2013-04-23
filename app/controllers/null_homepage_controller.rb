@@ -1,10 +1,11 @@
 class NullHomepageController < CmsController
   def index
-    flash.now[:alert] = '<h3>Oops. Homepage missing?</h3>The application could not
-      determine a homepage. Please check if your selected workspace provides a homepage when the
-      "choose_homepage" callback in "config/initializers/rails_connector.rb" is executed.'.html_safe
+    flash.now[:notice] = '<h3>Infopark Platform. Up and Running.</h3><p>The current working copy
+      does not have a homepage. Please select a different working copy using the button below or
+      the controls above.</p><p><a class="btn btn-primary" href="/?ws=rtc">Switch Working Copy</a>
+      </p>'.html_safe
 
-    render nothing: true, layout: true
+    render(nothing: true, layout: true)
   end
 
   def self.use_for_obj_dispatch?

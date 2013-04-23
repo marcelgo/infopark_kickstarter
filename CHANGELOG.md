@@ -1,4 +1,7 @@
 # v2.1.0
+  * Improved introduction page, when the current workspace does not have a homepage, by switching to
+    a more positive message, giving clear directions and smoothing the transition to more help
+    through links in the footer.
   * Extracted the redirect functionality into its own generator. It is still included as part of the
     kickstart.
   * The language switch is now generated without an example. Use
