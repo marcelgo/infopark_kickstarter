@@ -88,7 +88,7 @@ module Cms
         def copy_app_directory
           directory('app', force: true)
 
-          template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
+          template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
 
         def notice

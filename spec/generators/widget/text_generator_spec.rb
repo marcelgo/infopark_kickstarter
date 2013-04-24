@@ -30,8 +30,10 @@ describe Cms::Generators::Widget::TextGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'text_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
               file 'de.text_widget.yml'

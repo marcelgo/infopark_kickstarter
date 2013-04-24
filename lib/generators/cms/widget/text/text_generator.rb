@@ -23,7 +23,7 @@ module Cms
         def create_widget
           directory('app')
 
-          template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
+          template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
 
         def notice

@@ -81,8 +81,10 @@ describe Cms::Generators::Widget::VideoGenerator do
 
         directory 'widgets' do
           directory 'video_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
               file 'de.video_widget.yml'

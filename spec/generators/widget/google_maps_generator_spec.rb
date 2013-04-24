@@ -40,8 +40,10 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
               migration 'create_google_maps_widget'
             end
 
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
           end
         end
 

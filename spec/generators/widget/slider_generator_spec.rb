@@ -54,8 +54,10 @@ describe Cms::Generators::Widget::SliderGenerator do
 
         directory 'widgets' do
           directory 'slider_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
               file 'de.slider_widget.yml'
