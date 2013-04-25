@@ -5,7 +5,6 @@ class CreateSearchPageExample < ::RailsConnector::Migration
     create_obj(
       _path: path,
       _obj_class: '<%= class_name %>',
-      headline: 'Search Page Example',
       '<%= show_in_navigation_attribute_name %>' => 'Yes'
     )
 
