@@ -3,7 +3,7 @@ Description:
 
 Example:
     CMS: obj_class VideoWidget
-    CMS: attribute title (html)
+    CMS: attribute headline (html)
     CMS: attribute body (html)
     CMS: attribute source (linklist)
     CMS: attribute width (integer)

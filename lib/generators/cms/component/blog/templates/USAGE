@@ -12,7 +12,7 @@ Example:
 
     CMS: obj_class Blog
     CMS: obj_class BlogEntry
-    CMS: attribute title (html)
+    CMS: attribute headline (string)
     CMS: attribute author (string)
     CMS: attribute disqus_shortname (string)
     CMS: attribute description (text)

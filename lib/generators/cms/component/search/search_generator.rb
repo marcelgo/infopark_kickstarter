@@ -40,6 +40,11 @@ module Cms
               model.title = 'Page: Search'
               model.attributes = [
                 {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
                   name: show_in_navigation_attribute_name,
                   type: :boolean,
                   title: 'Show in navigation',

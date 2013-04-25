@@ -19,6 +19,11 @@ module Cms
               model.title = 'Page: Contact'
               model.attributes = [
                 {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
                   name: crm_activity_type_attribute_name,
                   type: :string,
                   title: 'CRM Activity Type',

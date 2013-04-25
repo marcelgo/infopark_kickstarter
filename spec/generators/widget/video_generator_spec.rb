@@ -58,6 +58,7 @@ describe Cms::Generators::Widget::VideoGenerator do
               file 'height.rb'
               file 'autoplay.rb'
               file 'poster.rb'
+              file 'headline.rb'
             end
           end
         end

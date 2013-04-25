@@ -51,6 +51,14 @@ describe Cms::Generators::Widget::TextGenerator do
             contains 'include Widget'
           end
         end
+
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'headline.rb'
+            end
+          end
+        end
       end
     }
   end

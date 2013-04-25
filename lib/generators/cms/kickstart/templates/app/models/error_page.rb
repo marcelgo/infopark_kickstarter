@@ -1,4 +1,5 @@
 class ErrorPage < Obj
+  include Cms::Attributes::Headline
   include Cms::Attributes::ShowInNavigation
 
   include Page

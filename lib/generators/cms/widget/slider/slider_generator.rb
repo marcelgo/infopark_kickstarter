@@ -15,7 +15,12 @@ module Cms
               model.model_path = model_path
               model.attributes = [
                 {
-                  name: images_attribute_name,
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'images',
                   type: :linklist,
                   title: 'Images',
                 },
@@ -49,16 +54,8 @@ module Cms
           'app/models'
         end
 
-        def example?
-          options[:example]
-        end
-
         def obj_class_name
           'SliderWidget'
-        end
-
-        def images_attribute_name
-          'images'
         end
       end
     end

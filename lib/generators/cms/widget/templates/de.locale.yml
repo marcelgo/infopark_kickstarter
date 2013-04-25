@@ -1,5 +1,5 @@
 de:
   widgets:
     <%= file_name %>:
-      title: '<%= title %>'
+      headline: '<%= headline %>'
       description: '<%= description %>'

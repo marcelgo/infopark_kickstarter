@@ -18,7 +18,12 @@ module Cms
                 model.model_path = model_path
                 model.attributes = [
                   {
-                    name: address_attribute_name,
+                    name: 'headline',
+                    type: :string,
+                    title: 'Headline',
+                  },
+                  {
+                    name: 'address',
                     type: :string,
                     title: 'Address',
                   },
@@ -54,10 +59,6 @@ module Cms
 
           def obj_class_name
             'GoogleMapsWidget'
-          end
-
-          def address_attribute_name
-            'address'
           end
         end
       end

@@ -13,6 +13,13 @@ module Cms
               model.title = 'Widget: Text'
               model.migration_path = "#{widget_path}/migrate"
               model.model_path = model_path
+              model.attributes = [
+                {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+              ]
             end
 
             turn_model_into_widget(obj_class_name, model_path)

@@ -7,7 +7,7 @@ Example:
     `rails generate cms:component:contact_page --cms_path=/website/en`
 
     CMS: obj_class ContactPage
-    CMS: attribute title (html)
+    CMS: attribute headline (string)
     CMS: attribute body (html)
     CMS: attribute show_in_navigation (enum)
     CMS: attribute sort_key (string)

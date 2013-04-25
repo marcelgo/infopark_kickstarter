@@ -1,9 +1,9 @@
 Description:
-    Generates a text widget that displays a title, body and is sortable.
+    Generates a text widget that displays a headline, body and is sortable.
 
 Example:
     CMS: obj_class TextWidget
-    CMS: attribute title (html)
+    CMS: attribute headline (string)
     CMS: attribute body (html)
 
     `rails generate cms:widget:text`

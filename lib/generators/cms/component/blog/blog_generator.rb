@@ -28,6 +28,11 @@ module Cms
               model.title = 'Page: Blog'
               model.attributes = [
                 {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
                   name: blog_disqus_shortname_attribute_name,
                   type: :string,
                   title: 'Disqus Shortname',
@@ -49,6 +54,11 @@ module Cms
               model.name = blog_entry_class_name
               model.title = 'Page: Blog Entry'
               model.attributes = [
+                {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
                 {
                   name: blog_entry_author_attribute_name,
                   type: :string,

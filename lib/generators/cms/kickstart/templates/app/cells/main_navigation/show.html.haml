@@ -11,4 +11,4 @@
           - @level1.each do |obj|
             %li{id: "main_nav_page_#{obj.id}"}
               = link_to(cms_path(obj)) do
-                = display_title(obj)
+                = obj.menu_title

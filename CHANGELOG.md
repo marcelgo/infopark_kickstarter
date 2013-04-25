@@ -1,4 +1,5 @@
 # v2.1.0
+  * Switched from system attributes title and body to custom attributes headline and content.
   * Updated to latest Infopark RailsConnector. Moved widget view templates into `views` folder.
     Replaced workspace toggle against new menu bar and added support for toclist inplace editing and
     inplace image upload.

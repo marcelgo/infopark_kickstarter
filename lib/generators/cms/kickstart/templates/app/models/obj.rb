@@ -61,6 +61,10 @@ class Obj < ::RailsConnector::BasicObj
     (homepage && homepage.locale) || I18n.default_locale
   end
 
+  def menu_title
+    self[:headline] || self.name
+  end
+
   # Overrides RailsConnector::BasicObj#body_data_url
   #
   # Changes protocol http: to https: so that the URLs work fine with pages delivered over https.

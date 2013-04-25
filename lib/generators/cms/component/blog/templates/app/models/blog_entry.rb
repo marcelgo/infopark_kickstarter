@@ -1,6 +1,7 @@
 class BlogEntry < Obj
   include Page
 
+  include Cms::Attributes::Headline
   include Cms::Attributes::Author
 
   def blog

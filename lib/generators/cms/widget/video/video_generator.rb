@@ -50,31 +50,36 @@ module Cms
               model.model_path = model_path
               model.attributes = [
                 {
-                  name: video_link_attribute_name,
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'source',
                   type: :linklist,
                   title: 'Source',
                   max_size: 1,
                 },
                 {
-                  name: video_poster_attribute_name,
+                  name: 'poster',
                   type: :linklist,
                   title: 'Poster',
                   max_size: 1,
                 },
                 {
-                  name: video_width_attribute_name,
+                  name: 'width',
                   type: :integer,
                   title: 'Width',
                   default: 660,
                 },
                 {
-                  name: video_height_attribute_name,
+                  name: 'height',
                   type: :string,
                   title: 'Height',
                   default: 430,
                 },
                 {
-                  name: video_autoplay_attribute_name,
+                  name: 'autoplay',
                   type: :boolean,
                   title: 'Autoplay this video?',
                   default: 'No',
@@ -109,26 +114,6 @@ module Cms
 
         def obj_class_name
           'VideoWidget'
-        end
-
-        def video_link_attribute_name
-          'source'
-        end
-
-        def video_poster_attribute_name
-          'poster'
-        end
-
-        def video_width_attribute_name
-          'width'
-        end
-
-        def video_height_attribute_name
-          'height'
-        end
-
-        def video_autoplay_attribute_name
-          'autoplay'
         end
       end
     end

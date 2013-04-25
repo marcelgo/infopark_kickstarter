@@ -4,7 +4,7 @@ Description:
 
 Example:
     CMS: obj_class GoogleMapsWidget
-    CMS: attribute title (html)
+    CMS: attribute headline (string)
     CMS: attribute body (html)
     CMS: attribute address (string)
 

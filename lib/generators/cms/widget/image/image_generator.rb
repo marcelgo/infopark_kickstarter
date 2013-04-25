@@ -15,18 +15,23 @@ module Cms
               model.model_path = model_path
               model.attributes = [
                 {
-                  name: caption_attribute_name,
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'caption',
                   type: :string,
                   title: 'Caption',
                 },
                 {
-                  name: link_to_attribute_name,
+                  name: 'link_to',
                   type: :linklist,
                   title: 'Link',
                   max_size: 1,
                 },
                 {
-                  name: source_attribute_name,
+                  name: 'source',
                   type: :linklist,
                   title: 'Source',
                   max_size: 1,
@@ -63,18 +68,6 @@ module Cms
 
         def obj_class_name
           'ImageWidget'
-        end
-
-        def source_attribute_name
-          'source'
-        end
-
-        def link_to_attribute_name
-          'link_to'
-        end
-
-        def caption_attribute_name
-          'caption'
         end
       end
     end

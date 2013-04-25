@@ -39,7 +39,7 @@ describe Cms::Generators::Widget::SliderGenerator do
               file 'indicators.html.haml'
               file 'left_control.html.haml'
               file 'right_control.html.haml'
-              file 'title.html.haml'
+              file 'headline.html.haml'
             end
           end
         end
@@ -48,6 +48,7 @@ describe Cms::Generators::Widget::SliderGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'images.rb'
+              file 'headline.rb'
             end
           end
         end

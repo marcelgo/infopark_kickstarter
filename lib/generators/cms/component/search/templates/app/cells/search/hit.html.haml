@@ -1,7 +1,7 @@
 %li
   %div
     = link_to(cms_path(@hit)) do
-      = display_title(@hit)
+      = @hit.menu_title
 
   %small
     = cms_path(@hit)

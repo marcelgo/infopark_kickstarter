@@ -67,6 +67,7 @@ describe Cms::Generators::Component::BlogGenerator do
               file 'disqus_shortname.rb'
               file 'description.rb'
               file 'author.rb'
+              file 'headline.rb'
             end
           end
         end
