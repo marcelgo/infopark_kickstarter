@@ -13,6 +13,18 @@ module Cms
               model.title = 'Widget: Text'
               model.migration_path = "#{widget_path}/migrate"
               model.model_path = model_path
+              model.attributes = [
+                {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+              ]
             end
 
             turn_model_into_widget(obj_class_name, model_path)
@@ -23,7 +35,7 @@ module Cms
         def create_widget
           directory('app')
 
-          template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
+          template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
 
         def notice

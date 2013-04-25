@@ -1,20 +1,22 @@
-body.ip_editing_active a#edit-toggle {
-  border: 1px solid black;
+@ip_editing_menu_bar_height: 47px;
+
+a#edit-toggle {
+  margin-top: 5px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1031;
 }
 
-.ip_field_editable:empty,
-.ip_field_editable:empty {
-  font-family: 'infopark_iconsregular',Arial,sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  vertical-align: middle;
-  color: #ccc;
-  display: block;
-  font-size: 13px;
-  padding: 0;
+body.ip_editing_active {
+  padding-top: (@ip_editing_menu_bar_height + 60px);
 
-  &:before {
-    content: '\F058';
+  a#edit-toggle {
+    display: none;
+  }
+
+  .navbar {
+    padding-top: @ip_editing_menu_bar_height;
   }
 }
 

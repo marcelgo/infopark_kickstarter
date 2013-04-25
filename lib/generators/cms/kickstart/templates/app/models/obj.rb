@@ -32,20 +32,6 @@ class Obj < ::RailsConnector::BasicObj
     parent.main_nav_item
   end
 
-  def sorted_toclist
-    toclist.sort_by { |obj| obj.sort_key.to_s }
-  end
-
-  def boxes
-    boxes_dir = Obj.find_by_path(path + '/_boxes')
-
-    if boxes_dir.present?
-      boxes_dir.sorted_toclist.select { |box| Box === box }
-    else
-      []
-    end
-  end
-
   # Return a page object or nil.
   #
   # Normally, objects are either pages, boxes, or media files/resources.
@@ -59,6 +45,10 @@ class Obj < ::RailsConnector::BasicObj
 
   def locale
     (homepage && homepage.locale) || I18n.default_locale
+  end
+
+  def menu_title
+    self[:headline] || self.name
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url

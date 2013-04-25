@@ -11,15 +11,11 @@ class MainNavigationCell < Cell::Rails
   end
 
   def show(page)
-    homepage = page.homepage
+    @root = page.homepage
 
-    @level1 = if homepage
-      [homepage] + homepage.sorted_toclist.select { |obj| Page === obj }
-    else
-      []
+    if @root
+      render
     end
-
-    render
   end
 
   cache(:highlight, if: :really_cache?) do |cell, page|

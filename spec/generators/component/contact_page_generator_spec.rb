@@ -47,6 +47,8 @@ describe Cms::Generators::Component::ContactPageGenerator do
               file 'crm_activity_type.rb'
               file 'sort_key.rb'
               file 'show_in_navigation.rb'
+              file 'headline.rb'
+              file 'content.rb'
             end
           end
         end

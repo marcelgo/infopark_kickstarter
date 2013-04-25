@@ -30,8 +30,11 @@ describe Cms::Generators::Widget::ImageGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'image_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+              file '_image.html.haml'
+            end
 
             directory 'locales' do
               file 'de.image_widget.yml'
@@ -59,6 +62,7 @@ describe Cms::Generators::Widget::ImageGenerator do
               file 'caption.rb'
               file 'source.rb'
               file 'link_to.rb'
+              file 'headline.rb'
             end
           end
         end

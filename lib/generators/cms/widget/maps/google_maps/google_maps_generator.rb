@@ -18,7 +18,17 @@ module Cms
                 model.model_path = model_path
                 model.attributes = [
                   {
-                    name: address_attribute_name,
+                    name: 'headline',
+                    type: :string,
+                    title: 'Headline',
+                  },
+                  {
+                    name: 'content',
+                    type: :html,
+                    title: 'Content',
+                  },
+                  {
+                    name: 'address',
                     type: :string,
                     title: 'Address',
                   },
@@ -33,7 +43,7 @@ module Cms
           def copy_app_directory
             directory('app', force: true)
 
-            template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
+            template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
           end
 
           def notice
@@ -54,10 +64,6 @@ module Cms
 
           def obj_class_name
             'GoogleMapsWidget'
-          end
-
-          def address_attribute_name
-            'address'
           end
         end
       end

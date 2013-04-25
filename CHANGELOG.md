@@ -1,4 +1,8 @@
 # v2.1.0
+  * Switched from system attributes title and body to custom attributes headline and content.
+  * Updated to latest Infopark RailsConnector. Moved widget view templates into `views` folder.
+    Replaced workspace toggle against new menu bar and added support for toclist inplace editing and
+    inplace image upload.
   * Extracted out testing setup into its own generator which is no longer part of the kickstart in
     order to decrease starting complexity. Please run `rails generate cms:component:testing` to add
     get it back. We also did this step in order to further improve and extend the functionality in

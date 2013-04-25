@@ -58,6 +58,8 @@ describe Cms::Generators::Widget::VideoGenerator do
               file 'height.rb'
               file 'autoplay.rb'
               file 'poster.rb'
+              file 'headline.rb'
+              file 'content.rb'
             end
           end
         end
@@ -81,8 +83,10 @@ describe Cms::Generators::Widget::VideoGenerator do
 
         directory 'widgets' do
           directory 'video_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
               file 'de.video_widget.yml'
@@ -98,6 +102,8 @@ describe Cms::Generators::Widget::VideoGenerator do
         directory 'models' do
           file 'video_widget.rb' do
             contains 'include Widget'
+            contains 'include Cms::Attributes::Headline'
+            contains 'include Cms::Attributes::Content'
             contains 'include Cms::Attributes::Source'
             contains 'include Cms::Attributes::Width'
             contains 'include Cms::Attributes::Height'

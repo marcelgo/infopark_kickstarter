@@ -30,8 +30,10 @@ describe Cms::Generators::Widget::PersonGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'person_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
               file 'de.person_widget.yml'

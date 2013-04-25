@@ -45,6 +45,8 @@ describe Cms::Generators::Component::ProfilePageGenerator do
             directory 'attributes' do
               file 'sort_key.rb'
               file 'show_in_navigation.rb'
+              file 'headline.rb'
+              file 'content.rb'
             end
           end
         end

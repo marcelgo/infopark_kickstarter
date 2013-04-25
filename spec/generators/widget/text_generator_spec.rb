@@ -30,8 +30,10 @@ describe Cms::Generators::Widget::TextGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'text_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
               file 'de.text_widget.yml'
@@ -47,6 +49,15 @@ describe Cms::Generators::Widget::TextGenerator do
         directory 'models' do
           file 'text_widget.rb' do
             contains 'include Widget'
+          end
+        end
+
+        directory 'concerns' do
+          directory 'cms' do
+            directory 'attributes' do
+              file 'headline.rb'
+              file 'content.rb'
+            end
           end
         end
       end

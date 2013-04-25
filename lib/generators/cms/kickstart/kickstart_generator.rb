@@ -92,6 +92,9 @@ module Cms
             model.name = 'Image'
             model.type = :generic
             model.title = 'Resource: Image'
+            model.attributes = [
+              title_attribute,
+            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -101,6 +104,9 @@ module Cms
             model.name = 'Video'
             model.type = :generic
             model.title = 'Resource: Video'
+            model.attributes = [
+              title_attribute,
+            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -112,6 +118,7 @@ module Cms
             model.name = class_name
             model.title = 'Page: Homepage'
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               {
@@ -160,6 +167,7 @@ module Cms
             model.name = 'Container'
             model.title = 'Container'
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -173,6 +181,7 @@ module Cms
             model.name = class_name
             model.title = 'Page: Content'
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               main_content_attribute,
@@ -192,6 +201,8 @@ module Cms
             model.name = class_name
             model.title = 'Page: Error'
             model.attributes = [
+              title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -209,6 +220,8 @@ module Cms
             model.name = class_name
             model.title = 'Page: Login'
             model.attributes = [
+              title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
             ]
@@ -265,6 +278,22 @@ module Cms
           name: 'main_content',
           type: :widget,
           title: 'Main content',
+        }
+      end
+
+      def title_attribute
+        {
+          name: 'headline',
+          type: :string,
+          title: 'Headline',
+        }
+      end
+
+      def content_attribute
+        {
+          name: 'content',
+          type: :html,
+          title: 'Content',
         }
       end
     end
