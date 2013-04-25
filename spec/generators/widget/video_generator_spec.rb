@@ -59,6 +59,7 @@ describe Cms::Generators::Widget::VideoGenerator do
               file 'autoplay.rb'
               file 'poster.rb'
               file 'headline.rb'
+              file 'content.rb'
             end
           end
         end
@@ -101,6 +102,8 @@ describe Cms::Generators::Widget::VideoGenerator do
         directory 'models' do
           file 'video_widget.rb' do
             contains 'include Widget'
+            contains 'include Cms::Attributes::Headline'
+            contains 'include Cms::Attributes::Content'
             contains 'include Cms::Attributes::Source'
             contains 'include Cms::Attributes::Width'
             contains 'include Cms::Attributes::Height'

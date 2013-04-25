@@ -57,7 +57,7 @@ module Cms
         begin
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
-            model.title = headline
+            model.title = title
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
@@ -72,7 +72,7 @@ module Cms
 
       private
 
-      def headline
+      def title
         options[:title] || human_name
       end
 
@@ -82,7 +82,6 @@ module Cms
       end
 
       def attributes
-        options[:attributes].reverse_merge!({ 'headline' => 'string' })
         options[:attributes].inject([]) do |list, (name, type)|
           list << {name: name, type: type}
         end

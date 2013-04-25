@@ -1,5 +1,5 @@
 en:
   widgets:
     text_widget:
-      headline: 'Text Widget'
-      description: 'Creates a section with headline and text.'
+      title: 'Text Widget'
+      description: 'Creates a section with headline and content.'

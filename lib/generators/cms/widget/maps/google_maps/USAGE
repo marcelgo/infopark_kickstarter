@@ -5,7 +5,7 @@ Description:
 Example:
     CMS: obj_class GoogleMapsWidget
     CMS: attribute headline (string)
-    CMS: attribute body (html)
+    CMS: attribute content (html)
     CMS: attribute address (string)
 
     `rails generate cms:widget:maps:google_maps`

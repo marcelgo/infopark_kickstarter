@@ -56,6 +56,7 @@ describe Cms::Generators::Widget::TextGenerator do
           directory 'cms' do
             directory 'attributes' do
               file 'headline.rb'
+              file 'content.rb'
             end
           end
         end

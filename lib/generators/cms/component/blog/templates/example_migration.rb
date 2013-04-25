@@ -30,7 +30,7 @@ class CreateBlogExample < ::RailsConnector::Migration
 
     add_widget(Obj.find(entry['id']), '<%= widget_attribute_name %>',
       _obj_class: 'TextWidget',
-      body: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
+      content: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
         urna ut sapien auctor mattis. Donec quis cursus enim. Pellentesque sodales, elit nec
         accumsan congue, orci velit commodo orci, vel luctus nisi mi vitae erat. Cras lacus urna,
         sagittis tristique placerat vel, consectetur id leo. Vestibulum in congue mauris. Donec

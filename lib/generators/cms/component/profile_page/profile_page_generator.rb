@@ -26,6 +26,11 @@ module Cms
                   title: 'Headline',
                 },
                 {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
                   name: show_in_navigation_attribute_name,
                   type: :boolean,
                   title: 'Show in navigation',

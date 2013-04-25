@@ -1,5 +1,5 @@
 de:
   widgets:
     video_widget:
-      headline: 'Video Widget'
+      title: 'Video Widget'
       description: 'Stellt einen Videoplayer bereit, der das angegebene Video abspielt.'

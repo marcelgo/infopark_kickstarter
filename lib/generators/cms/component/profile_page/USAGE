@@ -8,6 +8,6 @@ Example:
 
     CMS: obj_class ProfilePage
     CMS: attribute headline (string)
-    CMS: attribute body (html)
+    CMS: attribute content (html)
     CMS: attribute sort_key (string)
     CMS: attribute show_in_navigation (enum)

@@ -202,6 +202,7 @@ module Cms
             model.title = 'Page: Error'
             model.attributes = [
               title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -220,6 +221,7 @@ module Cms
             model.title = 'Page: Login'
             model.attributes = [
               title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
             ]
@@ -284,6 +286,14 @@ module Cms
           name: 'headline',
           type: :string,
           title: 'Headline',
+        }
+      end
+
+      def content_attribute
+        {
+          name: 'content',
+          type: :html,
+          title: 'Content',
         }
       end
     end

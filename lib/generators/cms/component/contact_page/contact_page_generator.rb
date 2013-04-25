@@ -24,6 +24,11 @@ module Cms
                   title: 'Headline',
                 },
                 {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
                   name: crm_activity_type_attribute_name,
                   type: :string,
                   title: 'CRM Activity Type',

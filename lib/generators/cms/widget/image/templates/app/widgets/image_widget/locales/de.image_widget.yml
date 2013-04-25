@@ -1,5 +1,5 @@
 de:
   widgets:
     image_widget:
-      headline: 'Bild Widget'
+      title: 'Bild Widget'
       description: 'Fügt ein Bild samt Untertitel hinzu. Optional kann das Bild auch verlinkt werden.'

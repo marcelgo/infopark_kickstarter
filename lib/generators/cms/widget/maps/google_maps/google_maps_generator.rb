@@ -23,6 +23,11 @@ module Cms
                     title: 'Headline',
                   },
                   {
+                    name: 'content',
+                    type: :html,
+                    title: 'Content',
+                  },
+                  {
                     name: 'address',
                     type: :string,
                     title: 'Address',

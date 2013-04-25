@@ -55,6 +55,11 @@ module Cms
                   title: 'Headline',
                 },
                 {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
                   name: 'source',
                   type: :linklist,
                   title: 'Source',

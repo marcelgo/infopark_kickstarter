@@ -19,6 +19,11 @@ module Cms
                   type: :string,
                   title: 'Headline',
                 },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
               ]
             end
 

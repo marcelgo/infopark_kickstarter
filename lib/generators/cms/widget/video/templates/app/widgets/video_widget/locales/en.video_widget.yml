@@ -1,5 +1,5 @@
 en:
   widgets:
     video_widget:
-      headline: 'Video Widget'
+      title: 'Video Widget'
       description: 'Displays a video player for the given video file.'

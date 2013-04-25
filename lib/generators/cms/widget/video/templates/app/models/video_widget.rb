@@ -2,6 +2,7 @@ class VideoWidget < Obj
   include Widget
 
   include Cms::Attributes::Headline
+  include Cms::Attributes::Content
   include Cms::Attributes::Source
   include Cms::Attributes::Width
   include Cms::Attributes::Height

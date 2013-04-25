@@ -8,7 +8,7 @@ Example:
 
     CMS: obj_class ContactPage
     CMS: attribute headline (string)
-    CMS: attribute body (html)
+    CMS: attribute content (html)
     CMS: attribute show_in_navigation (enum)
     CMS: attribute sort_key (string)
     CMS: attribute crm_activity_type (string)

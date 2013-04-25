@@ -29,7 +29,6 @@ describe Cms::Generators::WidgetGenerator do
             directory 'attributes' do
               file 'foo.rb'
               file 'bar.rb'
-              file 'headline.rb'
             end
           end
         end
@@ -48,12 +47,12 @@ describe Cms::Generators::WidgetGenerator do
 
             directory 'locales' do
               file 'en.news_widget.yml' do
-                contains "headline: 'Test News Title'"
+                contains "title: 'Test News Title'"
                 contains "description: 'Test News Description'"
               end
 
               file 'de.news_widget.yml' do
-                contains "headline: 'Test News Title'"
+                contains "title: 'Test News Title'"
                 contains "description: 'Test News Description'"
               end
             end
