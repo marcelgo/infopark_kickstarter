@@ -1,3 +1,7 @@
+# This file is only used to display an introduction page, in case the current
+# working copy does not return a valid homepage object. Usually, you can delete
+# this file safely once you first published your content. See
+# "app/models/null_homepage" and "config/initializers/rails_connector.rb" as well.
 class NullHomepageController < CmsController
   def index
     flash.now[:notice] = '<h3>Infopark Platform. Up and Running.</h3><p>The current working copy
