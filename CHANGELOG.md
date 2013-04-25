@@ -1,4 +1,6 @@
 # v2.1.0
+  * It is now not longer necessary to call `rails generate rails_connector:install` before running
+    `rails generate cms:kickstart`.
   * Switched from system attributes title and body to custom attributes headline and content.
   * Updated to latest Infopark RailsConnector. Moved widget view templates into `views` folder.
     Replaced workspace toggle against new menu bar and added support for toclist inplace editing and

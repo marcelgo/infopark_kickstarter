@@ -11,6 +11,4 @@ end
 
 run('bundle --quiet')
 
-generate('rails_connector:install', '--force')
-
 generate('cms:kickstart')

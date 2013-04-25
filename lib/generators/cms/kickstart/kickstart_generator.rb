@@ -41,6 +41,27 @@ module Cms
         end
       end
 
+      def remove_index_html
+        path = Rails.root + 'public/index.html'
+
+        if File.exist?(path)
+          remove_file(path)
+        end
+      end
+
+      def remove_rails_image
+        path = Rails.root + 'app/assets/images/rails.png'
+
+        if File.exist?(path)
+          remove_file(path)
+        end
+      end
+
+      def append_asset_manifests
+        append_file('app/assets/javascripts/application.js', '//= require infopark_rails_connector')
+        gsub_file('app/assets/stylesheets/application.css', '*= require_tree .', "*= require_tree .\n *= require infopark_rails_connector")
+      end
+
       def install_gems
         gem('active_attr')
         gem('simple_form')
@@ -58,14 +79,6 @@ module Cms
         remove_file('config/locales/simple_form.de.yml')
         remove_file('config/locales/simple_form.en.yml')
         remove_dir('lib/templates')
-      end
-
-      def crm_initializer
-        path = Rails.root + 'config/initializers/crm_connector.rb'
-
-        if File.exist?(path)
-          remove_file(path)
-        end
       end
 
       def remove_erb_layout
@@ -239,7 +252,7 @@ module Cms
       def copy_app_directory
         directory('app', force: true)
         directory('lib')
-        directory('config')
+        directory('config', force: true)
         directory('deploy')
       end
 
