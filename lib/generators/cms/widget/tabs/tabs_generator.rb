@@ -4,6 +4,7 @@ module Cms
       class TabsGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
+        include Actions
 
         class_option :cms_path,
           type: :string,
@@ -12,33 +13,6 @@ module Cms
           banner: 'LOCATION'
 
         source_root File.expand_path('../templates', __FILE__)
-
-        def update_application_js
-          file = 'app/assets/javascripts/application.js'
-          insert_point = "//= require infopark_rails_connector"
-
-          data = []
-
-          data << ''
-          data << '$(document).ready(function() {'
-          data << '});'
-
-          data = data.join("\n")
-
-          insert_into_file(file, data, after: insert_point)
-        end
-
-        def update_application_css
-          file = 'app/assets/stylesheets/application.css'
-          insert_point = '*= require infopark_rails_connector'
-
-          data = []
-          data << ''
-
-          data = data.join("\n")
-
-          insert_into_file(file, data, after: insert_point)
-        end
 
         def create_migration
           begin
@@ -66,7 +40,6 @@ module Cms
                 },
               ]
             end
-            turn_model_into_box(tab_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

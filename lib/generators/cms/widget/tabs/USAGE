@@ -1,0 +1,12 @@
+Description:
+    Generates a tab widget that displays horizontal tabs. It is also sortable.
+
+Example:
+    CMS: obj_class BoxTab
+    CMS: attribute sort_key (string)
+
+    CMS: obj_class Tab
+    CMS: attribute sort_key (string)
+
+    `rails generate cms:widget:tabs`
+    `rails generate cms:widget:tabs --cms_path=/website/en/_boxes`

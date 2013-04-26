@@ -65,6 +65,7 @@ module InfoparkKickstarter
               'cms:widget:video',
               'cms:widget:person',
               'cms:widget:slider',
+              'cms:widget:tabs --cms_path=/website/en/_boxes',
             ]
 
             generators.each do |generator|

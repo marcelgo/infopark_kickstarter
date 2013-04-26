@@ -1,4 +1,6 @@
 # v2.1.0
+  * A new tabs box type was added. It adds a tab navigation bar, which displays the content of the
+    current tab. See `rails generate cms:widget:tabs --help` for more details.
   * It is now not longer necessary to call `rails generate rails_connector:install` before running
     `rails generate cms:kickstart`.
   * Switched from system attributes title and body to custom attributes headline and content.
