@@ -11,6 +11,6 @@
 
       .container.nav-collapse
         = cms_tag_list(:ul, @root, :toclist, class: 'nav', id: 'main_nav') do |list, obj|
-          - list.tag(:li, id: "main_nav_page_#{obj.id}") do
+          - list.tag(:li, id: "main_nav_page_#{obj.id}", data: { path: obj.path }) do
             = link_to(cms_path(obj)) do
               = obj.menu_title
