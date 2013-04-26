@@ -3,6 +3,7 @@ class Homepage < Obj
   include Cms::Attributes::ErrorNotFoundPageLink
   include Cms::Attributes::LoginPageLink
   include Cms::Attributes::Locale
+  include Cms::Attributes::FooterLinks
 
   include Page
 

@@ -8,7 +8,9 @@ class FooterCell < Cell::Rails
     ]
   end
 
-  def show
+  def show(page)
+    @footer_links = page.homepage.footer_links
+
     render
   end
 

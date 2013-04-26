@@ -147,6 +147,11 @@ module Cms
                 max_size: 1,
               },
               {
+                name: 'footer_links',
+                type: :linklist,
+                title: 'Footer Links'
+              },
+              {
                 name: 'locale',
                 type: :string,
                 title: 'Locale',

@@ -4,23 +4,7 @@
   .row
     .span9
       %strong
-        Infopark:
-
-      = link_to('https://dev.infopark.net/getting-started', target: '_blank') do
-        Getting Started
-      |
-
-      = link_to('https://dev.infopark.net/developer-guide', target: '_blank') do
-        Developer Guide
-      |
-
-      = link_to('https://dev.infopark.net/api-doc', target: '_blank') do
-        API Reference
-      |
-
-      = link_to('https://dev.infopark.net/blog', target: '_blank') do
-        Blog
-      |
-
-      = link_to('https://dev.infopark.net/support', target: '_blank') do
-        Support
+        - @footer_links.each do |link|
+          = link_to(link.url, target: '_blank') do
+            = link.title
+            |
