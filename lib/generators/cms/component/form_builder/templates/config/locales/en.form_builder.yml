@@ -2,3 +2,13 @@ en:
   flash:
     form_builder:
       success: 'The form was sent successfully.'
+
+  simple_form:
+    labels:
+      form_presenter:
+        # custom_attribute: 'Translation'
+
+  helpers:
+    submit:
+      form_presenter:
+        create: 'Submit'

@@ -1,12 +1,15 @@
 Description:
-    Generates a form-builder that creates a form from an activity in the WebCRM. To create an example use the
-    "--cms_path" parameter.
+    Generates a form builder that creates a form from an activity in the WebCRM. To create an
+    example use the "--cms_path" parameter. In the WebCRM you can create a new activity type, where
+    you can add your form attribute, choose their input type and set required fields.
 
 Example:
     `rails generate cms:component:form_buider`
     `rails generate cms:component:form_buider --cms_path=/website/en`
 
     CMS: obj_class FormBuilder
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
     CMS: attribute show_in_navigation (enum)
     CMS: attribute sort_key (string)
     CMS: attribute crm_activity_type (string)

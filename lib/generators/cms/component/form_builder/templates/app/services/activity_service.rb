@@ -12,6 +12,10 @@ class ActivityService
     @definition ||= Infopark::Crm::CustomType.find(kind)
   end
 
+  def custom_attributes
+    @custom_attributes ||= definition.attributes[:custom_attributes].map(&:name)
+  end
+
   def submit
     activity_attributes = attributes.inject({}) do |hash, (key, value)|
       if custom_attributes.include?(key)
@@ -26,10 +30,6 @@ class ActivityService
     activity = Infopark::Crm::Activity.create(activity_attributes)
 
     map_errors(activity.errors)
-  end
-
-  def custom_attributes
-    definition.attributes[:custom_attributes].map(&:name)
   end
 
   private

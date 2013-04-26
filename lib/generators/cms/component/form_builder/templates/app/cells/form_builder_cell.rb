@@ -1,4 +1,8 @@
 class FormBuilderCell < Cell::Rails
+  helper :cms
+
+  # Cell actions:
+
   def show(presenter, obj)
     @obj = obj
     @presenter = presenter
@@ -7,38 +11,55 @@ class FormBuilderCell < Cell::Rails
     render
   end
 
-  # Cell states
+  # Cell states:
 
-  def element(form, attribute)
+  def input(form, attribute)
     @form = form
     @attribute = attribute
     @type, @name, @title, @mandatory = attribute.attributes.slice('type', 'name', 'title', 'mandatory').values
+    @options = send(@type)
 
     render
   end
 
-  def enum_element
-    @valid_values = @attribute.attributes['valid_values']
+  private
 
-    render
+  def enum
+    {
+      as: :radio_buttons,
+      collection: @attribute.attributes['valid_values'],
+      label: @title,
+      required: @mandatory,
+    }
   end
 
-  def text_element
-    @max_length = @attribute.attributes['max_length']
-
-    render
+  def text
+    {
+      as: :text,
+      label: @title,
+      input_html: {
+        maxlength: @attribute.attributes['max_length'],
+      },
+      required: @mandatory,
+    }
   end
 
-  def string_element
-    @max_length = @attribute.attributes['max_length']
-
-    render
+  def string
+    {
+      label: @title,
+      input_html: {
+        maxlength: @attribute.attributes['max_length'],
+      },
+      required: @mandatory,
+    }
   end
 
-  def multienum_element
-    @valid_values = @attribute.attributes['valid_values']
-
-    render
+  def multienum
+    {
+      as: :check_boxes,
+      collection: @attribute.attributes['valid_values'],
+      label: @title,
+      required: @mandatory,
+    }
   end
-
 end

@@ -20,6 +20,16 @@ module Cms
               model.title = 'Page: FormBuilder'
               model.attributes = [
                 {
+                  name: title_attribute_name,
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: body_attribute_name,
+                  type: :html,
+                  title: 'Content',
+                },
+                {
                   name: crm_activity_type_attribute_name,
                   type: :string,
                   title: 'CRM Activity Type',
@@ -45,6 +55,8 @@ module Cms
         def create_example
           if example?
             migration_template('example_migration.rb', 'cms/migrate/create_form_builder_example.rb')
+
+
           end
         end
 
@@ -86,7 +98,15 @@ module Cms
         end
 
         def activity_type
-          'contact-form'
+          'feedback-form'
+        end
+
+        def title_attribute_name
+          'headline'
+        end
+
+        def body_attribute_name
+          'content'
         end
       end
     end

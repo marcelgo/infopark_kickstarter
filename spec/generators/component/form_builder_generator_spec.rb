@@ -29,6 +29,15 @@ describe Cms::Generators::Component::FormBuilderGenerator do
           file 'form_builder.rb'
         end
 
+        directory 'cells' do
+          file 'form_builder_cell.rb'
+
+          directory 'form_builder' do
+            file 'show.html.haml'
+            file 'input.html.haml'
+          end
+        end
+
         directory 'presenters' do
           file 'form_presenter.rb'
         end
@@ -40,9 +49,11 @@ describe Cms::Generators::Component::FormBuilderGenerator do
         directory 'concerns' do
           directory 'cms' do
             directory 'attributes' do
-              file 'crm_activity_type.rb'
+              file 'headline.rb'
+              file 'content.rb'
               file 'sort_key.rb'
               file 'show_in_navigation.rb'
+              file 'crm_activity_type.rb'
             end
           end
         end

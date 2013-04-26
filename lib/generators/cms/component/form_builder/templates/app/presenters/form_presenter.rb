@@ -10,16 +10,7 @@ class FormPresenter
   def initialize(kind, params)
     self.kind = kind
 
-    create_attributes
-    prefill(params)
-  end
-
-  def prefill(params)
-    params ||= {}
-
-    params.each do |name, value|
-      self.send("#{name}=", value)
-    end
+    prefill(params, service)
   end
 
   def submit
@@ -38,18 +29,31 @@ class FormPresenter
   end
 
   def definition
-    service.definition
+    @definition ||= service.definition
   end
 
   private
 
-  def create_attributes
+  def prefill(params, service)
+    create_attributes(service)
+
+    params ||= {}
+    definition = service.definition
+
+    params.reverse_merge!({
+      id: definition.id,
+      name: definition.name,
+      state: definition.states.first,
+    })
+
+    params.each do |name, value|
+      self.send("#{name}=", value)
+    end
+  end
+
+  def create_attributes(service)
     service.custom_attributes.each do |value|
       self.class.attribute value
     end
-
-    self.id = definition.id
-    self.name = definition.name
-    self.state = definition.states.first
   end
 end

@@ -2,3 +2,13 @@ de:
   flash:
     form_builder:
       success: 'Das Formular wurde erfolgreich versandt.'
+
+  simple_form:
+    labels:
+      form_presenter:
+        # custom_attribute: 'Übersetzung'
+
+  helpers:
+    submit:
+      form_presenter:
+        create: 'Abschicken'

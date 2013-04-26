@@ -1,4 +1,7 @@
 # v2.1.0
+  * Added a form builder component that allows editors to define a form in the WebCRM. You can add
+    different kinds of input types and set required fields as well. Run
+    `rails generate cms:component:form_builder --help` for more information.
   * Extracted out testing setup into its own generator which is no longer part of the kickstart in
     order to decrease starting complexity. Please run `rails generate cms:component:testing` to add
     get it back. We also did this step in order to further improve and extend the functionality in
