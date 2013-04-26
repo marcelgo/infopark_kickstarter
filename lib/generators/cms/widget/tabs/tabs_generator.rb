@@ -27,7 +27,7 @@ module Cms
                 },
               ]
             end
-            turn_model_into_box(obj_class_name)
+            turn_model_into_widget(obj_class_name, model_path)
 
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = tab_class_name
@@ -64,6 +64,10 @@ module Cms
 
         def example?
           cms_path.present?
+        end
+
+        def model_path
+          'app/models'
         end
 
         def cms_path
