@@ -157,6 +157,7 @@ module Cms
                 title: 'Locale',
               },
               main_content_attribute,
+              right_content_attribute
             ]
           end
 
@@ -203,6 +204,7 @@ module Cms
               show_in_navigation_attribute,
               sort_key_attribute,
               main_content_attribute,
+              right_content_attribute
             ]
           end
 
@@ -296,6 +298,14 @@ module Cms
           name: 'main_content',
           type: :widget,
           title: 'Main content',
+        }
+      end
+
+      def right_content_attribute
+        {
+          name: 'right_content',
+          type: :widget,
+          title: 'Right content',
         }
       end
 

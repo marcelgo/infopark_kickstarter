@@ -37,6 +37,8 @@
           .span3
             = render_cell(:meta_navigation, :show, @obj, current_user)
 
+            = cms_tag(:div, @obj, :right_content)
+
     .container
       = render_cell(:footer, :show, @obj)
 
