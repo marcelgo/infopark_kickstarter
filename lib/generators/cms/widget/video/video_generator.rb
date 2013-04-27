@@ -43,13 +43,11 @@ module Cms
 
         def create_migration
           begin
-            Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = obj_class_name
-              model.title = 'Widget: Video'
-              model.migration_path = "#{widget_path}/migrate"
-              model.model_path = model_path
-              model.thumbnail = false
-              model.attributes = [
+            Widget::ApiGenerator.new(behavior: behavior) do |widget|
+              widget.name = 'VideoWidget'
+              widget.icon = '&#xF062;'
+              widget.description = 'Displays a video player for the given video file.'
+              widget.attributes = [
                 {
                   name: 'headline',
                   type: :string,
@@ -92,34 +90,16 @@ module Cms
                 },
               ]
             end
+
+            directory('app', force: true)
           rescue Cms::Generators::DuplicateResourceError
           end
-        end
-
-        def copy_app_directory
-          directory('app', force: true)
-
-          template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
 
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
-        end
-
-        private
-
-        def widget_path
-          'app/widgets/video_widget'
-        end
-
-        def model_path
-          'app/models'
-        end
-
-        def obj_class_name
-          'VideoWidget'
         end
       end
     end

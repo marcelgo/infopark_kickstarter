@@ -5,6 +5,7 @@ require 'rails/generators/test_case'
 require 'generators/cms/widget/text/text_generator.rb'
 require 'generators/cms/attribute/api/api_generator'
 require 'generators/cms/model/api/api_generator'
+require 'generators/cms/widget/api/api_generator'
 
 describe Cms::Generators::Widget::TextGenerator do
   include GeneratorSpec::TestCase
@@ -14,6 +15,7 @@ describe Cms::Generators::Widget::TextGenerator do
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -36,7 +38,6 @@ describe Cms::Generators::Widget::TextGenerator do
             end
 
             directory 'locales' do
-              file 'de.text_widget.yml'
               file 'en.text_widget.yml'
             end
 

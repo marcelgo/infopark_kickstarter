@@ -8,8 +8,8 @@ Example:
     `rails generate cms:widget NewsWidget --title="News Widget" --attributes=sort_key:string length:integer`
 
     Migration: app/widgets/news_widget/migrate/123456_create_news.rb
-    Views: app/widgets/news_widget/show.html.haml
-           app/widgets/news_widget/thumbnail.html.haml
+    Views: app/widgets/news_widget/views/show.html.haml
+           app/widgets/news_widget/views/thumbnail.html.haml
     Locales: app/widgets/news_widget/locales/en.news_widget.yml
              app/widgets/news_widget/locales/de.news_widget.yml
     Model: app/models/news_widget.rb

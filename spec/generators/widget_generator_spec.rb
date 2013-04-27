@@ -4,16 +4,18 @@ require 'generator_spec/test_case'
 require 'generators/cms/widget/widget_generator'
 require 'generators/cms/model/api/api_generator'
 require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/widget/api/api_generator'
 
 describe Cms::Generators::WidgetGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp/generators', __FILE__)
-  arguments ['news_widget', '--title=Test News Title', '--description=Test News Description', '--attributes=foo:html', 'bar:enum', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
+  arguments ['news_widget', '--title=Test News Title', '--icon=&#xF048;', '--description=Test News Description', '--attributes=foo:html', 'bar:enum', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
 
   before(:all) do
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -42,16 +44,15 @@ describe Cms::Generators::WidgetGenerator do
 
         directory 'widgets' do
           directory 'news_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml' do
+                contains '&#xF048;'
+              end
+            end
 
             directory 'locales' do
               file 'en.news_widget.yml' do
-                contains "title: 'Test News Title'"
-                contains "description: 'Test News Description'"
-              end
-
-              file 'de.news_widget.yml' do
                 contains "title: 'Test News Title'"
                 contains "description: 'Test News Description'"
               end

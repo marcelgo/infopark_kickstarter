@@ -5,6 +5,7 @@ require 'rails/generators/test_case'
 require 'generators/cms/widget/slider/slider_generator.rb'
 require 'generators/cms/attribute/api/api_generator'
 require 'generators/cms/model/api/api_generator'
+require 'generators/cms/widget/api/api_generator'
 
 describe Cms::Generators::Widget::SliderGenerator do
   include GeneratorSpec::TestCase
@@ -14,6 +15,7 @@ describe Cms::Generators::Widget::SliderGenerator do
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -61,7 +63,6 @@ describe Cms::Generators::Widget::SliderGenerator do
             end
 
             directory 'locales' do
-              file 'de.slider_widget.yml'
               file 'en.slider_widget.yml'
             end
 

@@ -5,6 +5,7 @@ require 'rails/generators/test_case'
 require 'generators/cms/widget/person/person_generator.rb'
 require 'generators/cms/attribute/api/api_generator'
 require 'generators/cms/model/api/api_generator'
+require 'generators/cms/widget/api/api_generator'
 
 describe Cms::Generators::Widget::PersonGenerator do
   include GeneratorSpec::TestCase
@@ -14,6 +15,7 @@ describe Cms::Generators::Widget::PersonGenerator do
   before(:all) do
     Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
   end
 
   before do
@@ -36,7 +38,6 @@ describe Cms::Generators::Widget::PersonGenerator do
             end
 
             directory 'locales' do
-              file 'de.person_widget.yml'
               file 'en.person_widget.yml'
             end
 

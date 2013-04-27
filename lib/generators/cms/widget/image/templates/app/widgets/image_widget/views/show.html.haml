@@ -1,5 +1,5 @@
 .widget.widget_image.well
-  = render('image_widget/views/image', widget: @widget)
+  = cms_image_tag(@widget, :source)
 
   = cms_tag(:h3, @widget, :headline)
 

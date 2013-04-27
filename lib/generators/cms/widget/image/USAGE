@@ -1,13 +1,10 @@
 Description:
-    Generates an image widget that displays a headline, a caption and an image. It is also sortable
-    and an optional link can be set that is visited when the image is clicked.
+    Generates an image widget that displays a headline, a caption and an image.
 
 Example:
     CMS: obj_class ImageWidget
     CMS: attribute headline (string)
-    CMS: attribute sort_key (string)
     CMS: attribute source (linklist)
     CMS: attribute caption (string)
-    CMS: attribute link_to (linklist)
 
     `rails generate cms:widget:image`
