@@ -7,6 +7,7 @@ describe Cms::Generators::Component::TestingGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--skip-bundle', '--skip-install']
 
   before do
     prepare_destination
