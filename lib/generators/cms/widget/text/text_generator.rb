@@ -13,6 +13,7 @@ module Cms
               model.title = 'Widget: Text'
               model.migration_path = "#{widget_path}/migrate"
               model.model_path = model_path
+              model.thumbnail = false
               model.attributes = [
                 {
                   name: 'headline',
