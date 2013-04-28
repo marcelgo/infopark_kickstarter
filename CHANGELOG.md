@@ -1,4 +1,7 @@
 # v2.1.0
+  * Added support for inplace navigation editing. All relevant obj classes now have a
+    `thumbnail.html.haml` in their view directory that gets displayed in the obj class browser, when
+    editing the main navigation.
   * It is now not longer necessary to call `rails generate rails_connector:install` before running
     `rails generate cms:kickstart`.
   * Switched from system attributes title and body to custom attributes headline and content.
