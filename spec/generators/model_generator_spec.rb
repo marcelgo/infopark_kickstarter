@@ -9,7 +9,15 @@ describe Cms::Generators::ModelGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp/generators', __FILE__)
-  arguments ['news', '--title=Test News Title', '--type=generic', '--attributes=foo:html', 'bar:enum', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
+  arguments [
+    'news',
+    '--title=Test News Title',
+    '--description=Test News Description',
+    '--type=generic',
+    '--attributes=foo:html', 'bar:enum',
+    '--mandatory_attributes=foo', 'bar',
+    '--preset_attributes=foo:f', 'bar:b'
+  ]
 
   before(:all) do
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
@@ -29,6 +37,12 @@ describe Cms::Generators::ModelGenerator do
             contains 'class News < Obj'
             contains '# include Page'
             contains '# include Widget'
+          end
+        end
+
+        directory 'views' do
+          directory 'news' do
+            file 'thumbnail.html.haml'
           end
         end
 
@@ -57,6 +71,16 @@ describe Cms::Generators::ModelGenerator do
             contains '{:name=>"bar", :type=>"enum"},'
             contains 'mandatory_attributes: ["foo", "bar"]'
             contains 'preset_attributes: {"foo"=>"f", "bar"=>"b"}'
+          end
+        end
+      end
+
+      directory 'config' do
+        directory 'locales' do
+          file 'en.obj_classes.yml' do
+            contains 'news:'
+            contains "title: 'Test News Title'"
+            contains "description: 'Test News Description'"
           end
         end
       end

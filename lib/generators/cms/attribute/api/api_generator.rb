@@ -44,8 +44,6 @@ module Cms
               'RailsConnector::LinkList.new(nil)'
             when 'integer'
               '0'
-            when 'float'
-              '0.0'
             else
               'nil'
           end

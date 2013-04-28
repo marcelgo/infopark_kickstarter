@@ -2,48 +2,37 @@ module Cms
   module Generators
     module Widget
       class TextGenerator < ::Rails::Generators::Base
-        include Actions
-
         source_root File.expand_path('../templates', __FILE__)
 
-        def create_migration
+        def create_widget
           begin
-            Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = obj_class_name
-              model.title = 'Widget: Text'
-              model.migration_path = "#{widget_path}/migrate"
-              model.model_path = model_path
+            Widget::ApiGenerator.new(behavior: behavior) do |widget|
+              widget.name = 'TextWidget'
+              widget.icon = '&#xF058;'
+              widget.description = 'Creates a simple widget with headline and content.'
+              widget.attributes = [
+                {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+              ]
             end
 
-            turn_model_into_widget(obj_class_name, model_path)
+            directory('app', force: true)
           rescue Cms::Generators::DuplicateResourceError
           end
-        end
-
-        def create_widget
-          directory('app')
-
-          template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
         end
 
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
-        end
-
-        private
-
-        def widget_path
-          'app/widgets/text_widget'
-        end
-
-        def model_path
-          'app/models'
-        end
-
-        def obj_class_name
-          'TextWidget'
         end
       end
     end

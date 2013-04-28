@@ -5,7 +5,7 @@ class CreateBlogExample < ::RailsConnector::Migration
     create_obj(
       _path: blog_path,
       _obj_class: '<%= blog_class_name %>',
-      title: 'Blog',
+      headline: 'Blog',
       '<%= blog_description_attribute_name %>' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -19,7 +19,7 @@ class CreateBlogExample < ::RailsConnector::Migration
     entry = create_obj(
       _path: entry_path,
       _obj_class: '<%= blog_entry_class_name %>',
-      title: 'Nulla viverra metus vitae nunc iaculis dignissim',
+      headline: 'Nulla viverra metus vitae nunc iaculis dignissim',
       '<%= blog_entry_author_attribute_name %>' => '',
       '<%= blog_entry_abstract_attribute_name %>' => '<p>Quisque eget sem sit amet risus gravida
         commodo et sed neque. Morbi pellentesque urna ut sapien auctor mattis. Donec quis cursus
@@ -30,7 +30,7 @@ class CreateBlogExample < ::RailsConnector::Migration
 
     add_widget(Obj.find(entry['id']), '<%= widget_attribute_name %>',
       _obj_class: 'TextWidget',
-      body: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
+      content: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
         urna ut sapien auctor mattis. Donec quis cursus enim. Pellentesque sodales, elit nec
         accumsan congue, orci velit commodo orci, vel luctus nisi mi vitae erat. Cras lacus urna,
         sagittis tristique placerat vel, consectetur id leo. Vestibulum in congue mauris. Donec

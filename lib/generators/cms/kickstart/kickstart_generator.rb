@@ -41,6 +41,27 @@ module Cms
         end
       end
 
+      def remove_index_html
+        path = Rails.root + 'public/index.html'
+
+        if File.exist?(path)
+          remove_file(path)
+        end
+      end
+
+      def remove_rails_image
+        path = Rails.root + 'app/assets/images/rails.png'
+
+        if File.exist?(path)
+          remove_file(path)
+        end
+      end
+
+      def append_asset_manifests
+        append_file('app/assets/javascripts/application.js', '//= require infopark_rails_connector')
+        gsub_file('app/assets/stylesheets/application.css', '*= require_tree .', "*= require_tree .\n *= require infopark_rails_connector")
+      end
+
       def install_gems
         gem('active_attr')
         gem('simple_form')
@@ -58,14 +79,6 @@ module Cms
         remove_file('config/locales/simple_form.de.yml')
         remove_file('config/locales/simple_form.en.yml')
         remove_dir('lib/templates')
-      end
-
-      def crm_initializer
-        path = Rails.root + 'config/initializers/crm_connector.rb'
-
-        if File.exist?(path)
-          remove_file(path)
-        end
       end
 
       def remove_erb_layout
@@ -92,6 +105,10 @@ module Cms
             model.name = 'Image'
             model.type = :generic
             model.title = 'Resource: Image'
+            model.thumbnail = false
+            model.attributes = [
+              title_attribute,
+            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -101,6 +118,10 @@ module Cms
             model.name = 'Video'
             model.type = :generic
             model.title = 'Resource: Video'
+            model.thumbnail = false
+            model.attributes = [
+              title_attribute,
+            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -111,7 +132,9 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Homepage'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               {
@@ -143,6 +166,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Root'
             model.title = 'Root'
+            model.thumbnail = false
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -151,6 +175,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Website'
             model.title = 'Website'
+            model.thumbnail = false
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -159,7 +184,9 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Container'
             model.title = 'Container'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -173,6 +200,7 @@ module Cms
             model.name = class_name
             model.title = 'Page: Content'
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               main_content_attribute,
@@ -191,7 +219,10 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Error'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -208,7 +239,10 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Login'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
             ]
@@ -226,7 +260,7 @@ module Cms
       def copy_app_directory
         directory('app', force: true)
         directory('lib')
-        directory('config')
+        directory('config', force: true)
         directory('deploy')
       end
 
@@ -265,6 +299,22 @@ module Cms
           name: 'main_content',
           type: :widget,
           title: 'Main content',
+        }
+      end
+
+      def title_attribute
+        {
+          name: 'headline',
+          type: :string,
+          title: 'Headline',
+        }
+      end
+
+      def content_attribute
+        {
+          name: 'content',
+          type: :html,
+          title: 'Content',
         }
       end
     end

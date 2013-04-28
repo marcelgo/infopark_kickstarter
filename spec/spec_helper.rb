@@ -4,6 +4,9 @@ require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
 
 require 'support/test_destination_root'
+require 'generators/cms/attribute/api/api_generator'
+require 'generators/cms/model/api/api_generator'
+require 'generators/cms/widget/api/api_generator'
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -14,4 +17,10 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.mock_with :rspec
   config.order = 'random'
+
+  config.before do
+    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
+  end
 end

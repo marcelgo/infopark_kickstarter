@@ -49,12 +49,6 @@ module RailsConnector
           define_method(name) do
             self[name] || default
           end
-        when :float
-          default = options[:default] || 0.0
-
-          define_method(name) do
-            (self[name] || default).to_f
-          end
         when :integer
           default = options[:default] || 0
 

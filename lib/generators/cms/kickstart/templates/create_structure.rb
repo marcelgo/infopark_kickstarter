@@ -10,14 +10,14 @@ class CreateStructure < ::RailsConnector::Migration
 
     try_create_obj(_path: "<%= website_path %>", _obj_class: 'Website')
 
-    try_create_obj(_path: "<%= homepage_path %>", _obj_class: 'Homepage', title: 'Homepage', locale: 'en')
+    try_create_obj(_path: "<%= homepage_path %>", _obj_class: 'Homepage', headline: 'Homepage', locale: 'en')
 
-    try_create_obj(_path: "<%= configuration_path %>", _obj_class: 'Container', title: '_Configuration')
+    try_create_obj(_path: "<%= configuration_path %>", _obj_class: 'Container')
 
-    try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', title: 'Content Page Example', show_in_navigation: 'Yes')
+    try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', headline: 'Content Page', show_in_navigation: 'Yes')
 
-    try_create_obj(_path: "<%= configuration_path %>/error-not-found", _obj_class: 'ErrorPage', title: 'Page not found', show_in_navigation: 'No')
-    try_create_obj(_path: "<%= configuration_path %>/login", _obj_class: 'LoginPage', title: 'Login', show_in_navigation: 'Yes')
+    try_create_obj(_path: "<%= configuration_path %>/error-not-found", _obj_class: 'ErrorPage', headline: 'Page not found', show_in_navigation: 'No')
+    try_create_obj(_path: "<%= configuration_path %>/login", _obj_class: 'LoginPage', headline: 'Login', show_in_navigation: 'Yes')
 
     try_update_obj(
       Obj.find_by_path("<%= homepage_path %>").id,
@@ -25,11 +25,11 @@ class CreateStructure < ::RailsConnector::Migration
       login_page_link: [{ url: "<%= configuration_path %>/login" }],
     )
 
-    try_create_obj(_path: "<%= resources_path %>", _obj_class: 'Container', title: 'Resources')
-    try_create_obj(_path: "<%= resources_path %>/images", _obj_class: 'Container', title: 'Images')
-    try_create_obj(_path: "<%= resources_path %>/audio", _obj_class: 'Container', title: 'Audio')
-    try_create_obj(_path: "<%= resources_path %>/videos", _obj_class: 'Container', title: 'Videos')
-    try_create_obj(_path: "<%= resources_path %>/pdfs", _obj_class: 'Container', title: 'Pdfs')
+    try_create_obj(_path: "<%= resources_path %>", _obj_class: 'Container', headline: 'Resources')
+    try_create_obj(_path: "<%= resources_path %>/images", _obj_class: 'Container', headline: 'Images')
+    try_create_obj(_path: "<%= resources_path %>/audio", _obj_class: 'Container', headline: 'Audio')
+    try_create_obj(_path: "<%= resources_path %>/videos", _obj_class: 'Container', headline: 'Videos')
+    try_create_obj(_path: "<%= resources_path %>/pdfs", _obj_class: 'Container', headline: 'Pdfs')
   end
 
   private

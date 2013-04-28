@@ -1,6 +1,7 @@
 class Blog < Obj
   include Page
 
+  include Cms::Attributes::Headline
   include Cms::Attributes::DisqusShortname
   include Cms::Attributes::Description
 

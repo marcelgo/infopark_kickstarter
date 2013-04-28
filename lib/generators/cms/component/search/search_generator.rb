@@ -38,6 +38,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = class_name
               model.title = 'Page: Search'
+              model.thumbnail = false
               model.attributes = [
                 {
                   name: show_in_navigation_attribute_name,

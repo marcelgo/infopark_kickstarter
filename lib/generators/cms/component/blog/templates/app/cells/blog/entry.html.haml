@@ -5,7 +5,7 @@
     .media-body
       %h3.media-heading
         = link_to(cms_path(@entry)) do
-          = cms_tag(:span, @entry, :title)
+          = cms_tag(:span, @entry, :headline)
 
       = render(state: :published_at)
 
