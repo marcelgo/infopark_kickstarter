@@ -2,8 +2,6 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/model/model_generator'
-require 'generators/cms/model/api/api_generator'
-require 'generators/cms/attribute/api/api_generator'
 
 describe Cms::Generators::ModelGenerator do
   include GeneratorSpec::TestCase
@@ -19,11 +17,6 @@ describe Cms::Generators::ModelGenerator do
     '--preset_attributes=foo:f', 'bar:b'
   ]
 
-  before(:all) do
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-  end
-
   before do
     prepare_destination
     run_generator
@@ -37,26 +30,14 @@ describe Cms::Generators::ModelGenerator do
             contains 'class News < Obj'
             contains '# include Page'
             contains '# include Widget'
+            contains 'cms_attribute :foo, type: :html'
+            contains 'cms_attribute :bar, type: :enum'
           end
         end
 
         directory 'views' do
           directory 'news' do
             file 'thumbnail.html.haml'
-          end
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'foo.rb' do
-                contains "(self[:foo] || 'f').html_safe"
-              end
-
-              file 'bar.rb' do
-                contains "self[:bar] || 'b'"
-              end
-            end
           end
         end
       end

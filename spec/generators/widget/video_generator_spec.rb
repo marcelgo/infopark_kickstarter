@@ -43,20 +43,6 @@ describe Cms::Generators::Widget::VideoGenerator do
           end
         end
 
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'source.rb'
-              file 'width.rb'
-              file 'height.rb'
-              file 'autoplay.rb'
-              file 'poster.rb'
-              file 'headline.rb'
-              file 'content.rb'
-            end
-          end
-        end
-
         directory 'assets' do
           directory 'javascripts' do
             file 'application.js' do
@@ -93,14 +79,14 @@ describe Cms::Generators::Widget::VideoGenerator do
 
         directory 'models' do
           file 'video_widget.rb' do
+            contains 'cms_attribute :source, type: :linklist, max_size: 1'
+            contains 'cms_attribute :width, type: :integer'
+            contains 'cms_attribute :height, type: :integer'
+            contains 'cms_attribute :autoplay, type: :boolean'
+            contains 'cms_attribute :poster, type: :linklist, max_size: 1'
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
-            contains 'include Cms::Attributes::Headline'
-            contains 'include Cms::Attributes::Content'
-            contains 'include Cms::Attributes::Source'
-            contains 'include Cms::Attributes::Width'
-            contains 'include Cms::Attributes::Height'
-            contains 'include Cms::Attributes::Autoplay'
-            contains 'include Cms::Attributes::Poster'
           end
         end
       end

@@ -77,7 +77,7 @@ module RailsConnector
           end
 
           define_method("#{name}?") do
-            name == 'Yes'
+            send(name) == 'Yes'
           end
         else
           raise ArgumentError.new("Unknown cms attribute type '#{type}'.")

@@ -40,16 +40,9 @@ describe Cms::Generators::Widget::TextGenerator do
 
         directory 'models' do
           file 'text_widget.rb' do
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
-          end
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'headline.rb'
-              file 'content.rb'
-            end
           end
         end
       end

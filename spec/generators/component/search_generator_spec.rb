@@ -2,20 +2,11 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/search/search_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
-require 'generators/cms/controller/controller_generator'
 
 describe Cms::Generators::Component::SearchGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ControllerGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -42,12 +33,12 @@ describe Cms::Generators::Component::SearchGenerator do
       directory 'app' do
         directory 'models' do
           file 'search_page.rb' do
-            contains 'include Cms::Attributes::ShowInNavigation'
+            contains 'cms_attribute :show_in_navigation, type: :boolean'
             contains '  include Page'
           end
 
           file 'homepage.rb' do
-            contains 'include Cms::Attributes::SearchPageLink'
+            contains 'cms_attribute :search_page_link, type: :linklist, max_size: 1'
           end
         end
 
@@ -67,15 +58,6 @@ describe Cms::Generators::Component::SearchGenerator do
 
         directory 'controllers' do
           file 'search_page_controller.rb'
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'search_page_link.rb'
-              file 'show_in_navigation.rb'
-            end
-          end
         end
 
         directory 'cells' do

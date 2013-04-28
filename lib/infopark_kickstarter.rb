@@ -9,7 +9,6 @@ require 'generators/cms/migration'
 require 'generators/cms/base_paths'
 require 'generators/cms/actions'
 require 'generators/cms/model/api/api_generator.rb'
-require 'generators/cms/attribute/api/api_generator.rb'
 require 'generators/cms/widget/api/api_generator.rb'
 
 module InfoparkKickstarter

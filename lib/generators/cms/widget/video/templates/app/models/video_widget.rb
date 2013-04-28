@@ -1,13 +1,13 @@
 class VideoWidget < Obj
   include Widget
 
-  include Cms::Attributes::Headline
-  include Cms::Attributes::Content
-  include Cms::Attributes::Source
-  include Cms::Attributes::Width
-  include Cms::Attributes::Height
-  include Cms::Attributes::Autoplay
-  include Cms::Attributes::Poster
+  cms_attribute :headline, type: :string
+  cms_attribute :content, type: :html
+  cms_attribute :source, type: :linklist, max_size: 1
+  cms_attribute :width, type: :integer
+  cms_attribute :height, type: :integer
+  cms_attribute :autoplay, type: :boolean
+  cms_attribute :poster, type: :linklist, max_size: 1
 
   # Determines the mime type of the video if it is stored in the CMS.
   def mime_type

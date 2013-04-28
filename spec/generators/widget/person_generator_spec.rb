@@ -41,15 +41,7 @@ describe Cms::Generators::Widget::PersonGenerator do
         directory 'models' do
           file 'person_widget.rb' do
             contains 'include Widget'
-            contains 'include Cms::Attributes::Person'
-          end
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'person.rb'
-            end
+            contains 'cms_attribute :person, type: :string'
           end
         end
       end
