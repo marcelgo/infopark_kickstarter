@@ -1,0 +1,17 @@
+.widget.tabs_widget
+  %ul.nav.nav-tabs
+    - @widget.toclist.each_with_index do |tab, index|
+      - class_name = index == 0 ? 'active' : nil
+
+      %li{class: class_name}
+        = link_to("#tab#{index}", data: { toggle: 'tab' }) do
+          = cms_tag(:span, tab, :headline)
+
+  %div.tab-content
+    - @widget.toclist.each_with_index do |tab, index|
+      - class_name = index == 0 ? 'active' : nil
+
+      %div.tab-pane{class: class_name, id: "tab#{index}"}
+        = cms_tag(:div, tab, :content)
+
+  = cms_tag_list(:div, @widget, :toclist) {}

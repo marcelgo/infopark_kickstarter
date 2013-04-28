@@ -8,4 +8,9 @@ module Widget
 
     Obj.find(id)
   end
+
+  # Overrides +parent+ method from +Obj+.
+  def parent
+    @parent ||= page
+  end
 end

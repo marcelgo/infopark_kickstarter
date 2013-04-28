@@ -3,20 +3,11 @@ require 'spec_helper'
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
 require 'generators/cms/widget/tabs/tabs_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::TabsGenerator do
   include GeneratorSpec::TestCase
 
-  destination File.expand_path('../../../../tmp', __FILE__)
-
-  arguments ['--cms_path=testdirectory']
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
+  destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   before do
     prepare_destination
@@ -25,46 +16,41 @@ describe Cms::Generators::Widget::TabsGenerator do
   end
 
   def prepare_environments
-    javascripts_path = "#{destination_root}/app/assets/javascripts"
-    stylesheets_path = "#{destination_root}/app/assets/stylesheets"
-
-    mkdir_p(javascripts_path)
-    mkdir_p(stylesheets_path)
-
-    File.open("#{javascripts_path}/application.js", 'w') { |file| file.write("//= require infopark_rails_connector\n") }
-    File.open("#{stylesheets_path}/application.css", 'w') { |file| file.write("*= require infopark_rails_connector\n") }
-    File.open("#{destination_root}/Gemfile", 'w')
   end
 
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
-          directory 'box' do
-            file 'box_tabs_cell.rb'
+          directory 'widget' do
+            file 'tabs_widget_cell.rb'
 
-            directory 'box_tabs' do
+            directory 'tabs_widget' do
               file 'show.html.haml'
-              file 'tab.html.haml'
-              file 'content.html.haml'
             end
           end
         end
 
         directory 'models' do
-          file 'box_tabs.rb' do
-            contains 'include Box'
-            contains 'include Cms::Attributes::SortKey'
+          file 'tabs_widget.rb' do
+            contains 'include Widget'
           end
           file 'tab.rb' do
-            contains 'include Cms::Attributes::SortKey'
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :content, type: :html'
           end
         end
 
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'sort_key.rb'
+        directory 'widgets' do
+          directory 'tabs_widget' do
+            directory 'migrate' do
+              migration 'create_tabs_widget'
+            end
+
+            directory 'views' do
+              file 'show.html.haml' do
+                contains '= render_cell(:widget, :show, @obj, @widget)'
+              end
             end
           end
         end
@@ -72,15 +58,7 @@ describe Cms::Generators::Widget::TabsGenerator do
 
       directory 'cms' do
         directory 'migrate' do
-          migration 'create_box_tabs'
           migration 'create_tab'
-          migration 'create_box_tabs_example'
-        end
-      end
-
-      directory 'spec' do
-        directory 'models' do
-          file 'box_tabs_spec.rb'
         end
       end
     }
