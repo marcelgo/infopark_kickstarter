@@ -14,7 +14,7 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         def extend_homepage
-          add_model_attribute('Homepage', search_page_attribute_name)
+          add_model_attribute('Homepage', search_page_attribute)
         end
 
         def extend_view
@@ -38,6 +38,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = class_name
               model.title = 'Page: Search'
+              model.thumbnail = false
               model.attributes = [
                 {
                   name: show_in_navigation_attribute_name,
@@ -79,8 +80,13 @@ module Cms
           'show_in_navigation'
         end
 
-        def search_page_attribute_name
-          'search_page_link'
+        def search_page_attribute
+          {
+            name: 'search_page_link',
+            type: :linklist,
+            title: 'Search Page',
+            max_size: 1,
+          }
         end
 
         def class_name

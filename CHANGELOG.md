@@ -1,12 +1,24 @@
 # v2.1.0
-  * A new tabs box type was added. It adds a tab navigation bar, which displays the content of the
+  * Added new tabs widget. It adds a tab navigation bar, which displays the content of the
     current tab. See `rails generate cms:widget:tabs --help` for more details.
+  * Switched from Ruby mixins to class level attribute definition to reflect and fully support local
+    cms obj class attributes. You can now define a cms attribute directly on the model using
+    `cms_attribute :headline, type: :string` for example. See generated model classes for more
+    examples.
+  * Removed float attribute type, as it was only used in special cases and it can be easily
+    integrated manually.
+  * Added support for inplace navigation editing. All relevant obj classes now have a
+    `thumbnail.html.haml` in their view directory that gets displayed in the obj class browser, when
+    editing the main navigation.
   * It is now not longer necessary to call `rails generate rails_connector:install` before running
     `rails generate cms:kickstart`.
   * Switched from system attributes title and body to custom attributes headline and content.
   * Updated to latest Infopark RailsConnector. Moved widget view templates into `views` folder.
     Replaced workspace toggle against new menu bar and added support for toclist inplace editing and
     inplace image upload.
+  * Added a form builder component that allows editors to define a form in the WebCRM. You can add
+    different kinds of input types and set required fields as well. Run
+    `rails generate cms:component:form_builder --help` for more information.
   * Extracted out testing setup into its own generator which is no longer part of the kickstart in
     order to decrease starting complexity. Please run `rails generate cms:component:testing` to add
     get it back. We also did this step in order to further improve and extend the functionality in

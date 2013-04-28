@@ -2,18 +2,11 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/blog/blog_generator'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Component::BlogGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -23,7 +16,6 @@ describe Cms::Generators::Component::BlogGenerator do
 
   def prepare_environments
     paths = {
-      config_path: "#{destination_root}/config",
       layout_path: "#{destination_root}/app/views/layouts",
     }
 
@@ -33,15 +25,24 @@ describe Cms::Generators::Component::BlogGenerator do
 
     File.open("#{destination_root}/Gemfile", 'w')
     File.open("#{paths[:layout_path]}/application.html.haml", 'w') { |f| f.write("%link{href: '/favicon.ico', rel: 'shortcut icon'}\n") }
-    File.open("#{paths[:config_path]}/custom_cloud.yml", 'w')
   end
 
   it 'create files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
-          file 'blog.rb'
-          file 'blog_entry.rb'
+          file 'blog.rb' do
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :show_in_navigation, type: :boolean'
+            contains 'cms_attribute :sort_key, type: :string'
+            contains 'cms_attribute :disqus_shortname, type: :string'
+            contains 'cms_attribute :description, type: :text'
+          end
+
+          file 'blog_entry.rb' do
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :author, type: :string'
+          end
         end
 
         directory 'views' do
@@ -57,17 +58,6 @@ describe Cms::Generators::Component::BlogGenerator do
           directory 'layouts' do
             file 'application.html.haml' do
               contains '= render_cell(:blog, :discovery, @obj)'
-            end
-          end
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'disqus_shortname.rb'
-              file 'description.rb'
-              file 'author.rb'
-              file 'headline.rb'
             end
           end
         end

@@ -1,11 +1,17 @@
 @ip_editing_menu_bar_height: 47px;
 
 a#edit-toggle {
-  margin-top: 5px;
   position: fixed;
   right: 0;
   top: 0;
   z-index: 1031;
+  margin-top: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+
+  &:hover .ip_icon {
+    color: #6e84a8;
+  }
 }
 
 body.ip_editing_active {

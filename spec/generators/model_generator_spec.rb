@@ -2,19 +2,20 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/model/model_generator'
-require 'generators/cms/model/api/api_generator'
-require 'generators/cms/attribute/api/api_generator'
 
 describe Cms::Generators::ModelGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp/generators', __FILE__)
-  arguments ['news', '--title=Test News Title', '--type=generic', '--attributes=foo:html', 'bar:enum', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
-
-  before(:all) do
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-  end
+  arguments [
+    'news',
+    '--title=Test News Title',
+    '--description=Test News Description',
+    '--type=generic',
+    '--attributes=foo:html', 'bar:enum',
+    '--mandatory_attributes=foo', 'bar',
+    '--preset_attributes=foo:f', 'bar:b'
+  ]
 
   before do
     prepare_destination
@@ -29,20 +30,14 @@ describe Cms::Generators::ModelGenerator do
             contains 'class News < Obj'
             contains '# include Page'
             contains '# include Widget'
+            contains 'cms_attribute :foo, type: :html'
+            contains 'cms_attribute :bar, type: :enum'
           end
         end
 
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'foo.rb' do
-                contains "(self[:foo] || 'f').html_safe"
-              end
-
-              file 'bar.rb' do
-                contains "self[:bar] || 'b'"
-              end
-            end
+        directory 'views' do
+          directory 'news' do
+            file 'thumbnail.html.haml'
           end
         end
       end
@@ -57,6 +52,16 @@ describe Cms::Generators::ModelGenerator do
             contains '{:name=>"bar", :type=>"enum"},'
             contains 'mandatory_attributes: ["foo", "bar"]'
             contains 'preset_attributes: {"foo"=>"f", "bar"=>"b"}'
+          end
+        end
+      end
+
+      directory 'config' do
+        directory 'locales' do
+          file 'en.obj_classes.yml' do
+            contains 'news:'
+            contains "title: 'Test News Title'"
+            contains "description: 'Test News Description'"
           end
         end
       end

@@ -1,9 +1,11 @@
 class Blog < Obj
   include Page
 
-  include Cms::Attributes::Headline
-  include Cms::Attributes::DisqusShortname
-  include Cms::Attributes::Description
+  cms_attribute :headline, type: :string
+  cms_attribute :show_in_navigation, type: :boolean
+  cms_attribute :sort_key, type: :string
+  cms_attribute :disqus_shortname, type: :string
+  cms_attribute :description, type: :text
 
   def blog
     self

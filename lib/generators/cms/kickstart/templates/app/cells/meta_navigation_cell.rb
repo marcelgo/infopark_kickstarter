@@ -13,7 +13,7 @@ class MetaNavigationCell < Cell::Rails
     @current_user = current_user
     homepage = page.homepage
 
-    if homepage
+    if homepage && homepage.login_page_link?
       @login_page = homepage.login_page
 
       render

@@ -105,6 +105,7 @@ module Cms
             model.name = 'Image'
             model.type = :generic
             model.title = 'Resource: Image'
+            model.thumbnail = false
             model.attributes = [
               title_attribute,
             ]
@@ -117,6 +118,7 @@ module Cms
             model.name = 'Video'
             model.type = :generic
             model.title = 'Resource: Video'
+            model.thumbnail = false
             model.attributes = [
               title_attribute,
             ]
@@ -130,6 +132,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Homepage'
+            model.thumbnail = false
             model.attributes = [
               title_attribute,
               show_in_navigation_attribute,
@@ -163,6 +166,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Root'
             model.title = 'Root'
+            model.thumbnail = false
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -171,6 +175,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Website'
             model.title = 'Website'
+            model.thumbnail = false
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -179,6 +184,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Container'
             model.title = 'Container'
+            model.thumbnail = false
             model.attributes = [
               title_attribute,
               show_in_navigation_attribute,
@@ -213,6 +219,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Error'
+            model.thumbnail = false
             model.attributes = [
               title_attribute,
               content_attribute,
@@ -232,6 +239,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Login'
+            model.thumbnail = false
             model.attributes = [
               title_attribute,
               content_attribute,

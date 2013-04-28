@@ -1,6 +1,6 @@
 class <%= class_name %> < Obj
   <%- attributes.each do |definition| -%>
-  <%= "include Cms::Attributes::#{definition[:name].camelize}" %>
+  <%= generate_attribute_method(definition) %>
   <%- end -%>
 
   # Most CMS objects are either a page or a box. In order for them to
