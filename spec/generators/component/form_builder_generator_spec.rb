@@ -2,8 +2,6 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/form_builder/form_builder_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Component::FormBuilderGenerator do
   include GeneratorSpec::TestCase
@@ -11,11 +9,6 @@ describe Cms::Generators::Component::FormBuilderGenerator do
   destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   arguments ['--cms_path=/website/en']
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -26,7 +19,13 @@ describe Cms::Generators::Component::FormBuilderGenerator do
     destination_root.should have_structure do
       directory 'app' do
         directory 'models' do
-          file 'form_builder.rb'
+          file 'form_builder.rb' do
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :content, type: :html'
+            contains 'cms_attribute :sort_key, type: :string'
+            contains 'cms_attribute :show_in_navigation, type: :boolean'
+            contains 'cms_attribute :crm_activity_type, type: :string'
+          end
         end
 
         directory 'cells' do
@@ -44,18 +43,6 @@ describe Cms::Generators::Component::FormBuilderGenerator do
 
         directory 'services' do
           file 'activity_service.rb'
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'headline.rb'
-              file 'content.rb'
-              file 'sort_key.rb'
-              file 'show_in_navigation.rb'
-              file 'crm_activity_type.rb'
-            end
-          end
         end
       end
 

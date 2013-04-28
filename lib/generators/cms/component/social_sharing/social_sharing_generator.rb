@@ -17,16 +17,16 @@ module Cms
           return unless example?
 
           file = 'app/views/layouts/application.html.haml'
-          insert_point = "            = yield"
+          insert_point = "      = render_cell(:footer, :show)"
 
           data = []
 
+          data << "      = render_cell(:social_sharing, :show, cms_url(@obj))"
           data << "\n"
-          data << "            = render_cell(:social_sharing, :show, cms_url(@obj))"
 
           data = data.join("\n")
 
-          insert_into_file(file, data, after: insert_point)
+          insert_into_file(file, data, before: insert_point)
         end
 
         private

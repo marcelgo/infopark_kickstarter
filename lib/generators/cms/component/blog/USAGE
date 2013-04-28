@@ -11,11 +11,15 @@ Example:
     `rails generate cms:component:blog --cms_path=/website/en`
 
     CMS: obj_class Blog
+           attribute headline (string)
+           attribute show_in_navigation (enum)
+           attribute sort_key (string)
+           attribute disqus_shortname (string)
+           attribute description (text)
+
     CMS: obj_class BlogEntry
-    CMS: attribute headline (string)
-    CMS: attribute author (string)
-    CMS: attribute disqus_shortname (string)
-    CMS: attribute description (text)
+           attribute author (string)
+
     Gems: gravatar_image_tag
     Locale: adds config/locale/en.blog.yml
     Misc: updates app/views/layouts/application.html.haml

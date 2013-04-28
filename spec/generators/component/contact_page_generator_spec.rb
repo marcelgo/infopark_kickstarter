@@ -2,8 +2,6 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/contact_page/contact_page_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Component::ContactPageGenerator do
   include GeneratorSpec::TestCase
@@ -11,11 +9,6 @@ describe Cms::Generators::Component::ContactPageGenerator do
   destination File.expand_path('../../../../tmp/generators', __FILE__)
 
   arguments ['--cms_path=/website/en']
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -30,7 +23,13 @@ describe Cms::Generators::Component::ContactPageGenerator do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
-          file 'contact_page.rb'
+          file 'contact_page.rb' do
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :show_in_navigation, type: :boolean'
+            contains 'cms_attribute :content, type: :html'
+            contains 'cms_attribute :sort_key, type: :string'
+            contains 'cms_attribute :crm_activity_type, type: :string'
+          end
         end
 
         directory 'presenters' do
@@ -40,24 +39,11 @@ describe Cms::Generators::Component::ContactPageGenerator do
         directory 'services' do
           file 'contact_activity_service.rb'
         end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'crm_activity_type.rb'
-              file 'sort_key.rb'
-              file 'show_in_navigation.rb'
-              file 'headline.rb'
-              file 'content.rb'
-            end
-          end
-        end
       end
 
       directory 'config' do
         directory 'locales' do
           file 'en.contact_page.yml'
-          file 'de.contact_page.yml'
         end
       end
 

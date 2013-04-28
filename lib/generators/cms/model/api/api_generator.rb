@@ -4,6 +4,7 @@ module Cms
       class ApiGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
         include Migration
+        include Actions
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -24,39 +25,6 @@ module Cms
           super([name], {}, config)
 
           self.invoke_all
-        end
-
-        def handle_attributes
-          attributes.each do |definition|
-            name = definition[:name]
-            type = definition[:type]
-            default = definition.delete(:default)
-
-            if default.present?
-              preset_attributes[name] = default
-            end
-
-            Attribute::ApiGenerator.new(behavior: behavior) do |attribute|
-              attribute.name = name
-              attribute.type = type
-
-              if preset_attributes[name].present?
-                attribute.default = preset_attributes[name]
-              end
-            end
-
-            case type.to_s
-              when 'boolean'
-                definition[:type] = :enum
-                definition[:values] = ['Yes', 'No']
-              when 'integer', 'float'
-                definition[:type] = :string
-            end
-          end
-        end
-
-        def validate_model
-          validate_obj_class(class_name)
         end
 
         def create_model_file
@@ -84,6 +52,26 @@ module Cms
             locale_path,
             "    #{file_name}:\n      title: '#{title}'\n      description: '#{description}'\n"
           )
+        end
+
+        def handle_attributes
+          attributes.each do |definition|
+            name = definition[:name]
+            type = definition[:type]
+            default = definition.delete(:default)
+
+            if default.present?
+              preset_attributes[name] = default
+            end
+
+            case type.to_s
+              when 'boolean'
+                definition[:type] = :enum
+                definition[:values] = ['Yes', 'No']
+              when 'integer'
+                definition[:type] = :string
+            end
+          end
         end
 
         def create_migration_file

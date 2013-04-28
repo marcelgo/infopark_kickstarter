@@ -55,8 +55,6 @@ module Cms
         def create_example
           if example?
             migration_template('example_migration.rb', 'cms/migrate/create_form_builder_example.rb')
-
-
           end
         end
 

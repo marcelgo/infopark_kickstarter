@@ -40,16 +40,11 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
         end
 
         directory 'models' do
-          file 'google_maps_widget.rb'
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'address.rb'
-              file 'headline.rb'
-              file 'content.rb'
-            end
+          file 'google_maps_widget.rb' do
+            contains 'cms_attribute :address, type: :string'
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :content, type: :html'
+            contains 'include Widget'
           end
         end
       end

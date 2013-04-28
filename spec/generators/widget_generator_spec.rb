@@ -2,21 +2,20 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/widget/widget_generator'
-require 'generators/cms/model/api/api_generator'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/widget/api/api_generator'
 
 describe Cms::Generators::WidgetGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp/generators', __FILE__)
-  arguments ['news_widget', '--title=Test News Title', '--icon=&#xF048;', '--description=Test News Description', '--attributes=foo:html', 'bar:enum', '--mandatory_attributes=foo', 'bar', '--preset_attributes=foo:f', 'bar:b']
-
-  before(:all) do
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
-  end
+  arguments [
+    'news_widget',
+    '--title=Test News Title',
+    '--icon=&#xF048;',
+    '--description=Test News Description',
+    '--attributes=foo:html', 'bar:enum',
+    '--mandatory_attributes=foo', 'bar',
+    '--preset_attributes=foo:f', 'bar:b'
+  ]
 
   before do
     prepare_destination
@@ -26,19 +25,12 @@ describe Cms::Generators::WidgetGenerator do
   it 'generates model files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'foo.rb'
-              file 'bar.rb'
-            end
-          end
-        end
-
         directory 'models' do
           file 'news_widget.rb' do
             contains 'class NewsWidget < Obj'
             contains 'include Widget'
+            contains 'cms_attribute :foo, type: :html'
+            contains 'cms_attribute :bar, type: :enum'
           end
         end
 

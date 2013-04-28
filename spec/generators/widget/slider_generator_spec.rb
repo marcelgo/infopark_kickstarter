@@ -37,15 +37,6 @@ describe Cms::Generators::Widget::SliderGenerator do
           end
         end
 
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'images.rb'
-              file 'headline.rb'
-            end
-          end
-        end
-
         directory 'widgets' do
           directory 'slider_widget' do
             directory 'views' do
@@ -65,7 +56,8 @@ describe Cms::Generators::Widget::SliderGenerator do
 
         directory 'models' do
           file 'slider_widget.rb' do
-            contains 'include Cms::Attributes::Images'
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :images, type: :linklist'
             contains 'include Widget'
           end
         end

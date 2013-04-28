@@ -1,4 +1,10 @@
 # v2.1.0
+  * Switched from Ruby mixins to class level attribute definition to reflect and fully support local
+    cms obj class attributes. You can now define a cms attribute directly on the model using
+    `cms_attribute :headline, type: :string` for example. See generated model classes for more
+    examples.
+  * Removed float attribute type, as it was only used in special cases and it can be easily
+    integrated manually.
   * Added support for inplace navigation editing. All relevant obj classes now have a
     `thumbnail.html.haml` in their view directory that gets displayed in the obj class browser, when
     editing the main navigation.
