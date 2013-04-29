@@ -152,7 +152,7 @@ module Cms
               {
                 name: 'footer_links',
                 type: :linklist,
-                title: 'Footer Links'
+                title: 'Footer Links',
               },
               {
                 name: 'locale',
@@ -160,7 +160,7 @@ module Cms
                 title: 'Locale',
               },
               main_content_attribute,
-              right_content_attribute
+              sidebar_content_attribute,
             ]
           end
 
@@ -210,7 +210,7 @@ module Cms
               show_in_navigation_attribute,
               sort_key_attribute,
               main_content_attribute,
-              right_content_attribute
+              sidebar_content_attribute
             ]
           end
 
@@ -309,11 +309,11 @@ module Cms
         }
       end
 
-      def right_content_attribute
+      def sidebar_content_attribute
         {
-          name: 'right_content',
+          name: 'sidebar_content',
           type: :widget,
-          title: 'Right content',
+          title: 'Sidebar content',
         }
       end
 

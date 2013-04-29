@@ -5,10 +5,8 @@ module ApplicationHelper
         params[:controller],
       ],
       data: {
-        current_obj: {
-          path: @obj.path,
-        }
-      }
+        current_obj_path: @obj.path,
+      },
     }
   end
 
