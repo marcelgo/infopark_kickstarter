@@ -37,8 +37,10 @@
           .span3
             = render_cell(:meta_navigation, :show, @obj, current_user)
 
+            = cms_tag(:div, @obj, :sidebar_content)
+
     .container
-      = render_cell(:footer, :show)
+      = render_cell(:footer, :show, @obj)
 
     = javascript_include_tag('application')
 
