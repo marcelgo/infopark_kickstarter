@@ -42,7 +42,7 @@ module InfoparkKickstarter
       def crm_configuration
         {
           'crm' => {
-            'url' => "https://#{tenant_name}.saas.infopark.net/crm",
+            'url' => "https://#{tenant_name}.crm.infopark.net",
             'login' => 'root',
             'api_key' => choose_correct_value(local_configuration['integration_test_crm_api_key']),
             'http_host' => tenant_name,

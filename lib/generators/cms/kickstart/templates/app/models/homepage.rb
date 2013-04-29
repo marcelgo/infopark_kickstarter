@@ -1,9 +1,9 @@
 class Homepage < Obj
-  include Cms::Attributes::Headline
-  include Cms::Attributes::ErrorNotFoundPageLink
-  include Cms::Attributes::LoginPageLink
-  include Cms::Attributes::Locale
-  include Cms::Attributes::FooterLinks
+  cms_attribute :headline, type: :string
+  cms_attribute :error_not_found_page_link, type: :linklist
+  cms_attribute :login_page_link, type: :linklist
+  cms_attribute :footer_links, type: :linklist
+  cms_attribute :locale, type: :string
 
   include Page
 
@@ -28,5 +28,13 @@ class Homepage < Obj
 
   def main_nav_item
     nil
+  end
+
+  def error_not_found_page
+    error_not_found_page_link.destination_objects.first
+  end
+
+  def login_page
+    login_page_link.destination_objects.first
   end
 end

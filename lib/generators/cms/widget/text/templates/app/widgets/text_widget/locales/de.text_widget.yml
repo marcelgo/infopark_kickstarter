@@ -1,5 +1,0 @@
-de:
-  widgets:
-    text_widget:
-      title: 'Text Widget'
-      description: 'Erzeugt einen Bereich aus Titel und Text.'

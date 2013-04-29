@@ -2,19 +2,12 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/scaffold/scaffold_generator'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::ScaffoldGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../tmp/generators', __FILE__)
   arguments ['news']
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination

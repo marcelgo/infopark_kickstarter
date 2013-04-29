@@ -4,17 +4,20 @@ module Cms
       class ApiGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
         include Migration
+        include Actions
 
         source_root File.expand_path('../templates', __FILE__)
 
         attr_accessor :name
         attr_accessor :title
+        attr_accessor :description
         attr_accessor :type
         attr_accessor :attributes
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
         attr_accessor :migration_path
         attr_accessor :model_path
+        attr_accessor :thumbnail
 
         def initialize(config = {})
           yield self if block_given?
@@ -22,6 +25,33 @@ module Cms
           super([name], {}, config)
 
           self.invoke_all
+        end
+
+        def create_model_file
+          template('model.rb', File.join(model_path, "#{file_name}.rb"))
+        end
+
+        def create_model_thumbnail
+          if thumbnail?
+            template('thumbnail.html.haml', File.join('app/views/', file_name, 'thumbnail.html.haml'))
+          end
+        end
+
+        def add_locales
+          locale_path = Pathname.new(File.join(destination_root, 'config/locales/en.obj_classes.yml'))
+
+          unless File.exist?(locale_path)
+            FileUtils.mkdir_p(locale_path.dirname)
+
+            File.open(locale_path, 'w') do |file|
+              file.write("en:\n  obj_classes:\n")
+            end
+          end
+
+          append_file(
+            locale_path,
+            "    #{file_name}:\n      title: '#{title}'\n      description: '#{description}'\n"
+          )
         end
 
         def handle_attributes
@@ -34,31 +64,14 @@ module Cms
               preset_attributes[name] = default
             end
 
-            Attribute::ApiGenerator.new(behavior: behavior) do |attribute|
-              attribute.name = name
-              attribute.type = type
-
-              if preset_attributes[name].present?
-                attribute.default = preset_attributes[name]
-              end
-            end
-
             case type.to_s
               when 'boolean'
                 definition[:type] = :enum
                 definition[:values] = ['Yes', 'No']
-              when 'integer', 'float'
+              when 'integer'
                 definition[:type] = :string
             end
           end
-        end
-
-        def validate_model
-          validate_obj_class(class_name)
-        end
-
-        def create_model_file
-          template('model.rb', File.join(model_path, "#{file_name}.rb"))
         end
 
         def create_migration_file
@@ -69,12 +82,20 @@ module Cms
 
         private
 
+        def thumbnail?
+          @thumbnail.nil? ? true : @thumbnail
+        end
+
         def type
           @type ||= :publication
         end
 
         def title
           @title ||= human_name
+        end
+
+        def description
+          @description ||= title
         end
 
         def attributes

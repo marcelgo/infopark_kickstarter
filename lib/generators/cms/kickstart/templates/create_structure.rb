@@ -14,7 +14,7 @@ class CreateStructure < ::RailsConnector::Migration
 
     try_create_obj(_path: "<%= configuration_path %>", _obj_class: 'Container')
 
-    try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', headline: 'Content Page Example', show_in_navigation: 'Yes')
+    try_create_obj(_path: "<%= homepage_path %>/example-page", _obj_class: 'ContentPage', headline: 'Content Page', show_in_navigation: 'Yes')
 
     try_create_obj(_path: "<%= configuration_path %>/error-not-found", _obj_class: 'ErrorPage', headline: 'Page not found', show_in_navigation: 'No')
     try_create_obj(_path: "<%= configuration_path %>/login", _obj_class: 'LoginPage', headline: 'Login', show_in_navigation: 'Yes')
