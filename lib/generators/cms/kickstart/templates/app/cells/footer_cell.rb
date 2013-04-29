@@ -8,7 +8,9 @@ class FooterCell < Cell::Rails
     ]
   end
 
-  def show
+  def show(page)
+    @page = page
+
     render
   end
 

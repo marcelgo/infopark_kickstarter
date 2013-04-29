@@ -11,6 +11,7 @@ class MainNavigationCell < Cell::Rails
   end
 
   def show(page)
+    @page = page
     @root = page.homepage
 
     if @root

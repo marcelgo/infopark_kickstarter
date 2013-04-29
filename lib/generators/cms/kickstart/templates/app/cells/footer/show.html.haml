@@ -3,24 +3,28 @@
 %footer
   .row
     .span9
-      %strong
-        Infopark:
+      %p
+        = link_to('https://dev.infopark.net/getting-started', target: '_blank') do
+          Getting Started
+        &#xb7;
 
-      = link_to('https://dev.infopark.net/getting-started', target: '_blank') do
-        Getting Started
-      |
+        = link_to('https://dev.infopark.net/developer-guide', target: '_blank') do
+          Developer Guide
+        &#xb7;
 
-      = link_to('https://dev.infopark.net/developer-guide', target: '_blank') do
-        Developer Guide
-      |
+        = link_to('https://dev.infopark.net/api-doc', target: '_blank') do
+          API Reference
+        &#xb7;
 
-      = link_to('https://dev.infopark.net/api-doc', target: '_blank') do
-        API Reference
-      |
+        = link_to('https://dev.infopark.net/blog', target: '_blank') do
+          Blog
+        &#xb7;
 
-      = link_to('https://dev.infopark.net/blog', target: '_blank') do
-        Blog
-      |
+        = link_to('https://dev.infopark.net/support', target: '_blank') do
+          Support
 
-      = link_to('https://dev.infopark.net/support', target: '_blank') do
-        Support
+    .span3
+      = render_cell(:login, :show, @page)
+
+      %span.pull-right
+        &copy; 2013 Company, Inc.

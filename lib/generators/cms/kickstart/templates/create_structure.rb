@@ -10,7 +10,7 @@ class CreateStructure < ::RailsConnector::Migration
 
     try_create_obj(_path: "<%= website_path %>", _obj_class: 'Website')
 
-    try_create_obj(_path: "<%= homepage_path %>", _obj_class: 'Homepage', headline: 'Homepage', locale: 'en')
+    try_create_obj(_path: "<%= homepage_path %>", _obj_class: 'Homepage', locale: 'en', headline: 'Project name')
 
     try_create_obj(_path: "<%= configuration_path %>", _obj_class: 'Container')
 

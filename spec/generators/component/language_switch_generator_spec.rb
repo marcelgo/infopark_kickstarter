@@ -46,7 +46,6 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
 
       directory 'config' do
         directory 'locales' do
-          file 'de.language_switch.yml'
           file 'en.language_switch.yml'
         end
       end

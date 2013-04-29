@@ -17,7 +17,7 @@ describe Cms::Generators::Component::SearchGenerator do
   def prepare_environments
     paths = {
       models: "#{destination_root}/app/models",
-      layouts: "#{destination_root}/app/views/layouts",
+      main_navigation: "#{destination_root}/app/cells/main_navigation",
     }
 
     paths.each do |_, path|
@@ -25,7 +25,7 @@ describe Cms::Generators::Component::SearchGenerator do
     end
 
     File.open("#{paths[:models]}/homepage.rb", 'w') { |f| f.write("class Homepage < Obj\n") }
-    File.open("#{paths[:layouts]}/application.html.haml", 'w') { |f| f.write("          .span3\n") }
+    File.open("#{paths[:main_navigation]}/show.html.haml", 'w') { |f| f.write("    .container\n") }
   end
 
   it 'creates files' do
@@ -48,12 +48,6 @@ describe Cms::Generators::Component::SearchGenerator do
               contains 'render_cell(:search, :results, @query, @hits)'
             end
           end
-
-          directory 'layouts' do
-            file 'application.html.haml' do
-              contains 'render_cell(:search, :form, @obj, @query)'
-            end
-          end
         end
 
         directory 'controllers' do
@@ -68,6 +62,12 @@ describe Cms::Generators::Component::SearchGenerator do
             file 'hit.html.haml'
             file 'hits.html.haml'
             file 'no_hits.html.haml'
+          end
+
+          directory 'main_navigation' do
+            file 'show.html.haml' do
+              contains 'render_cell(:search, :form, @page, params[:q])'
+            end
           end
         end
       end

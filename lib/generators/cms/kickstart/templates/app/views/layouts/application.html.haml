@@ -35,10 +35,9 @@
             = yield
 
           .span3
-            = render_cell(:meta_navigation, :show, @obj, current_user)
 
     .container
-      = render_cell(:footer, :show)
+      = render_cell(:footer, :show, @obj)
 
     = javascript_include_tag('application')
 
