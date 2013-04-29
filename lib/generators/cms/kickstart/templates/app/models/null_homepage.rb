@@ -30,7 +30,4 @@ class NullHomepage < Obj
   def homepages
     []
   end
-
-  def main_nav_item
-  end
 end

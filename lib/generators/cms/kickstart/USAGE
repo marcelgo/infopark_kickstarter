@@ -3,3 +3,12 @@ Description:
 
 Example:
     `rails generate cms:kickstart`
+
+    CMS: obj_class Homepage
+           attribute headline (string)
+           attribute show_in_navigation (enum)
+           attribute sort_key (string)
+           attribute main_content (widget)
+           attribute error_not_found_page_link (linklist)
+           attribute login_page_link (linklist)
+           attribute locale (string)

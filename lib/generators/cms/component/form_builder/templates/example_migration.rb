@@ -3,7 +3,6 @@ class CreateFormBuilderExample < ::RailsConnector::Migration
     create_obj(
       _path: '<%= cms_path %>/feedback',
       _obj_class: '<%= class_name %>',
-      title: 'Feedback',
       '<%= title_attribute_name %>' => 'Feedback',
       '<%= body_attribute_name %>' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
         do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -22,7 +21,7 @@ class CreateFormBuilderExample < ::RailsConnector::Migration
     Infopark::Crm::CustomType.find('<%= activity_type %>')
   rescue ActiveResource::ResourceNotFound
     custom_attributes = [
-      { name: 'email', title: 'Email Adress', type: 'string' },
+      { name: 'email', title: 'E-mail address', type: 'string' },
       { name: 'message', title: 'Message', type: 'text', max_length: 1000 }
     ]
 

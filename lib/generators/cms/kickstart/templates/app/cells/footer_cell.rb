@@ -9,6 +9,7 @@ class FooterCell < Cell::Rails
   end
 
   def show(page)
+    @page = page
     homepage = page.homepage
 
     @footer_links = if homepage

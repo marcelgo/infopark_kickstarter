@@ -26,10 +26,6 @@ class Homepage < Obj
     parent
   end
 
-  def main_nav_item
-    nil
-  end
-
   def error_not_found_page
     error_not_found_page_link.destination_objects.first
   end
