@@ -135,6 +135,7 @@ module Cms
             model.thumbnail = false
             model.attributes = [
               title_attribute,
+              main_content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               {
@@ -159,8 +160,6 @@ module Cms
                 type: :string,
                 title: 'Locale',
               },
-              main_content_attribute,
-              sidebar_content_attribute,
             ]
           end
 

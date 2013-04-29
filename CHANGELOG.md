@@ -1,4 +1,5 @@
 # v2.1.0
+  * Updated `rails generate cms:kickstart` to include the search panel in the main navigation and
   * Switched from Ruby mixins to class level attribute definition to reflect and fully support local
     cms obj class attributes. You can now define a cms attribute directly on the model using
     `cms_attribute :headline, type: :string` for example. See generated model classes for more
