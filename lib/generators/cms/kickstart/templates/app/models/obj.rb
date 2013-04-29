@@ -29,8 +29,9 @@ class Obj < ::RailsConnector::BasicObj
     @website ||= homepage.website
   end
 
-  def main_nav_item
-    parent.main_nav_item
+  # Overriden method +slug+ from +RailsConnector::BasicObj+.
+  def slug
+    (self[:headline] || '').parameterize
   end
 
   # Return a page object or nil.

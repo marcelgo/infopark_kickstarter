@@ -10,6 +10,13 @@ class FooterCell < Cell::Rails
 
   def show(page)
     @page = page
+    homepage = page.homepage
+
+    @footer_links = if homepage
+      homepage.footer_links
+    else
+      RailsConnector::LinkList.new(nil)
+    end
 
     render
   end

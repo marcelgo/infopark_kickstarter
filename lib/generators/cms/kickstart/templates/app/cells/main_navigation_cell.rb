@@ -19,19 +19,6 @@ class MainNavigationCell < Cell::Rails
     end
   end
 
-  cache(:highlight, if: :really_cache?) do |cell, page|
-    [
-      RailsConnector::Workspace.current.revision_id,
-      page && page.id,
-    ]
-  end
-
-  def highlight(page)
-    @active = page.main_nav_item
-
-    render
-  end
-
   # Cell states:
 
   def edit_toggle

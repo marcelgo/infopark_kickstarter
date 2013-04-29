@@ -10,6 +10,6 @@ doc/*
 spec/tmp/*
 spec/dummy/db/*.sqlite3
 spec/dummy/log/*
-spec/dummy/config/*
+spec/dummy/config/*.yml
 spec/dummy/tmp/
 spec/dummy/.sass-cache
