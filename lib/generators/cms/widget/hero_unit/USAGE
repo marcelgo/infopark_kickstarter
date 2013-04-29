@@ -1,0 +1,10 @@
+Description:
+    Generates an widget that displays a hero unit.
+
+Example:
+    CMS: obj_class HeroUnitWidget
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
+    CMS: attribute link (linklist)
+
+    `rails generate cms:widget:hero_unit`

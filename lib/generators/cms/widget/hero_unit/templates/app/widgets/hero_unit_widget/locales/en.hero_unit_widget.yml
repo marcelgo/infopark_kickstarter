@@ -1,0 +1,6 @@
+en:
+  widgets:
+    hero_unit:
+      title: 'HeroUnit widget'
+      description: 'Widget that adds a hero unit to the page.'
+      link_to: 'Learn more'

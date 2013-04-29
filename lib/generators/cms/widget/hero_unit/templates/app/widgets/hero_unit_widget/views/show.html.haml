@@ -1,0 +1,8 @@
+%div.hero-unit
+  = cms_tag(:h1, @widget, :headline)
+
+  = cms_tag(:p, @widget, :content)
+
+  %p
+    = link_to cms_path(@widget.link_to), class: ['btn', 'btn-primary', 'btn-large'] do
+      = t('widgets.hero_unit.link_to')
