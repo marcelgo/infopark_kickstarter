@@ -38,8 +38,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'haml'
   gem.add_dependency 'launchy'
   gem.add_dependency 'less-rails-bootstrap'
-  gem.add_dependency 'infopark_rails_connector', '>= 6.9.0.3.197272233'
-  gem.add_dependency 'infopark_cloud_connector', '>= 6.9.0.3.197272233'
+  gem.add_dependency 'infopark_rails_connector', '>= 6.9.1.20.105513622'
+  gem.add_dependency 'infopark_cloud_connector', '>= 6.9.1.20.105513622'
 
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'pry'
