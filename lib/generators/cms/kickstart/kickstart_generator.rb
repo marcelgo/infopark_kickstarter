@@ -12,6 +12,11 @@ module Cms
         default: nil,
         desc: 'Path to a JSON configuration file.'
 
+      class_option :tutorial,
+        type: :boolean,
+        default: false,
+        desc: 'Creates tutorial content along with setting up your project.'
+
       source_root File.expand_path('../templates', __FILE__)
 
       def initialize(args = [], options = {}, config = {})
@@ -278,11 +283,31 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
-        Rails::Generators.invoke('cms:widget:text', ['--example'])
-        Rails::Generators.invoke('cms:widget:image', ['--example'])
+        Rails::Generators.invoke('cms:widget:text')
+        Rails::Generators.invoke('cms:widget:image')
+      end
+
+      def create_tutorial_content
+        if tutorial?
+          Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:form_builder', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:social_sharing', ['--example'])
+          Rails::Generators.invoke('cms:widget:maps', ['--provider=google_maps'])
+          Rails::Generators.invoke('cms:widget:video')
+          Rails::Generators.invoke('cms:widget:person')
+          Rails::Generators.invoke('cms:widget:slider')
+
+          migration_template('create_tutorial.rb', 'cms/migrate/create_tutorial.rb')
+        end
       end
 
       private
+
+      def tutorial?
+        options[:tutorial]
+      end
 
       def show_in_navigation_attribute
         {
