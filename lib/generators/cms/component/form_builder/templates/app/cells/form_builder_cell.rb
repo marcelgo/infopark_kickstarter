@@ -39,6 +39,8 @@ class FormBuilderCell < Cell::Rails
       label: @title,
       input_html: {
         maxlength: @attribute.attributes['max_length'],
+        rows: 10,
+        class: 'span5',
       },
       required: @mandatory,
     }

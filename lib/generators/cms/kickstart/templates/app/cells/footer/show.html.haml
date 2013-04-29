@@ -3,24 +3,15 @@
 %footer
   .row
     .span9
-      %strong
-        Infopark:
+      - @footer_links.each do |link|
+        = link_to(cms_path(link), target: '_blank') do
+          = link.title
 
-      = link_to('https://dev.infopark.net/getting-started', target: '_blank') do
-        Getting Started
-      |
+        - unless @footer_links.last == link
+          &#xb7;
 
-      = link_to('https://dev.infopark.net/developer-guide', target: '_blank') do
-        Developer Guide
-      |
+    .span3
+      = render_cell(:login, :show, @page)
 
-      = link_to('https://dev.infopark.net/api-doc', target: '_blank') do
-        API Reference
-      |
-
-      = link_to('https://dev.infopark.net/blog', target: '_blank') do
-        Blog
-      |
-
-      = link_to('https://dev.infopark.net/support', target: '_blank') do
-        Support
+      %span.pull-right
+        &copy; 2013 Company, Inc.

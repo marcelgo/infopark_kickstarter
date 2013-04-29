@@ -1,0 +1,7 @@
+- if @current_user.logged_in?
+  = link_to(cms_path(@login_page), method: :delete) do
+    = t('.logout')
+
+- else
+  = link_to(cms_path(@login_page)) do
+    = t('.login')

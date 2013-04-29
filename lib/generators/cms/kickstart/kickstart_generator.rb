@@ -135,6 +135,7 @@ module Cms
             model.thumbnail = false
             model.attributes = [
               title_attribute,
+              main_content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               {
@@ -150,11 +151,15 @@ module Cms
                 max_size: 1,
               },
               {
+                name: 'footer_links',
+                type: :linklist,
+                title: 'Footer Links',
+              },
+              {
                 name: 'locale',
                 type: :string,
                 title: 'Locale',
               },
-              main_content_attribute,
             ]
           end
 
@@ -204,6 +209,7 @@ module Cms
               show_in_navigation_attribute,
               sort_key_attribute,
               main_content_attribute,
+              sidebar_content_attribute
             ]
           end
 
@@ -299,6 +305,14 @@ module Cms
           name: 'main_content',
           type: :widget,
           title: 'Main content',
+        }
+      end
+
+      def sidebar_content_attribute
+        {
+          name: 'sidebar_content',
+          type: :widget,
+          title: 'Sidebar content',
         }
       end
 

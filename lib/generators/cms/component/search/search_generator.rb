@@ -7,9 +7,9 @@ module Cms
         include Actions
 
         class_option :homepage_path,
-          :type => :string,
-          :default => nil,
-          :desc => 'Path to a CMS homepage, for which to enable search.'
+          type: :string,
+          default: nil,
+          desc: 'Path to a CMS homepage, for which to enable search.'
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -18,17 +18,17 @@ module Cms
         end
 
         def extend_view
-          file = 'app/views/layouts/application.html.haml'
-          insert_point = "          .span3\n"
+          file = 'app/cells/main_navigation/show.html.haml'
+          insert_point = "    .container\n"
 
           data = []
 
-          data << "            = render_cell(:search, :form, @obj, @query)\n"
+          data << "      = render_cell(:search, :form, @page, params[:q])\n"
           data << ''
 
           data = data.join("\n")
 
-          insert_into_file(file, data, :after => insert_point)
+          insert_into_file(file, data, after: insert_point)
         end
 
         def create_migration
