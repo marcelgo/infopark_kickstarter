@@ -11,4 +11,4 @@ end
 
 run('bundle --quiet')
 
-generate('cms:kickstart')
+generate('cms:kickstart --tutorial')
