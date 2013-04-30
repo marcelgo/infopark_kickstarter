@@ -9,6 +9,10 @@ module Cms
         type: :string,
         desc: 'Model title'
 
+      class_option :description,
+        type: :string,
+        desc: 'Model description'
+
       class_option :type,
         type: :string,
         aliases: '-t',
@@ -33,18 +37,29 @@ module Cms
         default: [],
         desc: 'List of mandatory attributes'
 
+      class_option :thumbnail,
+        type: :boolean,
+        default: true,
+        desc: 'Generate thumbnail for obj class browser'
+
       def create
         Model::ApiGenerator.new(behavior: behavior) do |model|
           model.name = name
           model.title = title
+          model.description = description
           model.type = type
           model.attributes = attributes
           model.preset_attributes = preset_attributes
           model.mandatory_attributes = mandatory_attributes
+          model.thumbnail = thumbnail?
         end
       end
 
       private
+
+      def thumbnail?
+        options[:thumbnail]
+      end
 
       def type
         options[:type]
@@ -52,6 +67,10 @@ module Cms
 
       def title
         options[:title] || human_name
+      end
+
+      def description
+        options[:description] || title
       end
 
       def attributes

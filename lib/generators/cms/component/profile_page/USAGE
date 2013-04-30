@@ -1,13 +1,13 @@
 Description:
-    Installs the profile component including a profile page example. The place in the hierarchy can
-    be configured with the ```--cms_path``` parameter.
+    Creates a profile page, where logged in users can edit their profile. To create an example use
+    the "--cms_path" parameter.
 
 Example:
     `rails generate cms:component:profile`
     `rails generate cms:component:profile --cms_path=/website/en`
 
     CMS: obj_class ProfilePage
-    CMS: attribute title (html)
-    CMS: attribute body (html)
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
     CMS: attribute sort_key (string)
     CMS: attribute show_in_navigation (enum)

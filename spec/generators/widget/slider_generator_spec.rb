@@ -3,18 +3,11 @@ require 'spec_helper'
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
 require 'generators/cms/widget/slider/slider_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::SliderGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -39,26 +32,19 @@ describe Cms::Generators::Widget::SliderGenerator do
               file 'indicators.html.haml'
               file 'left_control.html.haml'
               file 'right_control.html.haml'
-              file 'title.html.haml'
-            end
-          end
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'images.rb'
+              file 'headline.html.haml'
             end
           end
         end
 
         directory 'widgets' do
           directory 'slider_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
-              file 'de.slider_widget.yml'
               file 'en.slider_widget.yml'
             end
 
@@ -70,7 +56,8 @@ describe Cms::Generators::Widget::SliderGenerator do
 
         directory 'models' do
           file 'slider_widget.rb' do
-            contains 'include Cms::Attributes::Images'
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :images, type: :linklist'
             contains 'include Widget'
           end
         end

@@ -17,7 +17,7 @@ module Cms
           :desc => "Select what error tracking provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
 
         def validate_provider
-          unless SUPPORTED_PROVIDER.include?(options[:provider])
+          unless SUPPORTED_PROVIDER.include?(provider)
             puts 'Please choose a supported provider. See options for more details.'
             puts
 
@@ -29,10 +29,16 @@ module Cms
 
         def run_generator_for_selected_provider
           Rails::Generators.invoke(
-            "cms:component:error_tracking:#{options[:provider]}",
+            "cms:component:error_tracking:#{provider}",
             ["--skip-deployment-notification=#{options[:skip_deployment_notification]}"],
             behavior: behavior
           )
+        end
+
+        private
+
+        def provider
+          options[:provider]
         end
       end
     end

@@ -1,12 +1,14 @@
 Description:
-    Generates a contact page that creates an activity in the WebCRM.
+    Generates a contact page that creates an activity in the WebCRM. To create an example use the
+    "--cms_path" parameter.
 
 Example:
+    `rails generate cms:component:contact_page`
     `rails generate cms:component:contact_page --cms_path=/website/en`
 
     CMS: obj_class ContactPage
-    CMS: attribute title (html)
-    CMS: attribute body (html)
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
     CMS: attribute show_in_navigation (enum)
     CMS: attribute sort_key (string)
     CMS: attribute crm_activity_type (string)

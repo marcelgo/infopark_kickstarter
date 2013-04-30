@@ -1,8 +1,9 @@
+require './lib/rails_connector/cms_attributes'
+
 # This class represents the base class of all CMS objects and implements behavior that all CMS
 # objects, regardless whether they are pages, boxes or resources have in common.
 class Obj < ::RailsConnector::BasicObj
-  include Cms::Attributes::SortKey
-  include Cms::Attributes::ShowInNavigation
+  include RailsConnector::CmsAttributes
 
   def self.homepage
     default_homepage
@@ -28,22 +29,9 @@ class Obj < ::RailsConnector::BasicObj
     @website ||= homepage.website
   end
 
-  def main_nav_item
-    parent.main_nav_item
-  end
-
-  def sorted_toclist
-    toclist.sort_by { |obj| obj.sort_key.to_s }
-  end
-
-  def boxes
-    boxes_dir = Obj.find_by_path(path + '/_boxes')
-
-    if boxes_dir.present?
-      boxes_dir.sorted_toclist.select { |box| Box === box }
-    else
-      []
-    end
+  # Overriden method +slug+ from +RailsConnector::BasicObj+.
+  def slug
+    (self[:headline] || '').parameterize
   end
 
   # Return a page object or nil.
@@ -59,6 +47,10 @@ class Obj < ::RailsConnector::BasicObj
 
   def locale
     (homepage && homepage.locale) || I18n.default_locale
+  end
+
+  def menu_title
+    self[:headline] || self.name
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url

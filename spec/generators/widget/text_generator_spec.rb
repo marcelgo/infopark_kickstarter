@@ -3,18 +3,11 @@ require 'spec_helper'
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
 require 'generators/cms/widget/text/text_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
 
 describe Cms::Generators::Widget::TextGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -30,11 +23,12 @@ describe Cms::Generators::Widget::TextGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'text_widget' do
-            file 'show.html.haml'
-            file 'thumbnail.html.haml'
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
+            end
 
             directory 'locales' do
-              file 'de.text_widget.yml'
               file 'en.text_widget.yml'
             end
 
@@ -46,6 +40,8 @@ describe Cms::Generators::Widget::TextGenerator do
 
         directory 'models' do
           file 'text_widget.rb' do
+            contains 'cms_attribute :headline, type: :string'
+            contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
           end
         end

@@ -7,8 +7,8 @@ class CreateContactPageExample < ::RailsConnector::Migration
     create_obj(
       _path: path,
       _obj_class: '<%= class_name %>',
-      title: 'Contact',
-      body: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      headline: 'Contact',
+      content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse

@@ -1,5 +1,0 @@
-de:
-  widgets:
-    person_widget:
-      title: 'Personen Widget'
-      description: 'Bindet eine WebCRM Person ein und zeigt deren Details.'

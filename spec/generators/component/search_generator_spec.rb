@@ -2,20 +2,11 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'generators/cms/component/search/search_generator.rb'
-require 'generators/cms/attribute/api/api_generator'
-require 'generators/cms/model/api/api_generator'
-require 'generators/cms/controller/controller_generator'
 
 describe Cms::Generators::Component::SearchGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-
-  before(:all) do
-    Cms::Generators::Attribute::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::ControllerGenerator.send(:include, TestDestinationRoot)
-  end
 
   before do
     prepare_destination
@@ -26,7 +17,7 @@ describe Cms::Generators::Component::SearchGenerator do
   def prepare_environments
     paths = {
       models: "#{destination_root}/app/models",
-      layouts: "#{destination_root}/app/views/layouts",
+      main_navigation: "#{destination_root}/app/cells/main_navigation",
     }
 
     paths.each do |_, path|
@@ -34,7 +25,7 @@ describe Cms::Generators::Component::SearchGenerator do
     end
 
     File.open("#{paths[:models]}/homepage.rb", 'w') { |f| f.write("class Homepage < Obj\n") }
-    File.open("#{paths[:layouts]}/application.html.haml", 'w') { |f| f.write("          .span3\n") }
+    File.open("#{paths[:main_navigation]}/show.html.haml", 'w') { |f| f.write("    .container\n") }
   end
 
   it 'creates files' do
@@ -42,12 +33,12 @@ describe Cms::Generators::Component::SearchGenerator do
       directory 'app' do
         directory 'models' do
           file 'search_page.rb' do
-            contains 'include Cms::Attributes::ShowInNavigation'
+            contains 'cms_attribute :show_in_navigation, type: :boolean'
             contains '  include Page'
           end
 
           file 'homepage.rb' do
-            contains 'include Cms::Attributes::SearchPageLink'
+            contains 'cms_attribute :search_page_link, type: :linklist, max_size: 1'
           end
         end
 
@@ -57,25 +48,10 @@ describe Cms::Generators::Component::SearchGenerator do
               contains 'render_cell(:search, :results, @query, @hits)'
             end
           end
-
-          directory 'layouts' do
-            file 'application.html.haml' do
-              contains 'render_cell(:search, :form, @obj, @query)'
-            end
-          end
         end
 
         directory 'controllers' do
           file 'search_page_controller.rb'
-        end
-
-        directory 'concerns' do
-          directory 'cms' do
-            directory 'attributes' do
-              file 'search_page_link.rb'
-              file 'show_in_navigation.rb'
-            end
-          end
         end
 
         directory 'cells' do
@@ -86,6 +62,12 @@ describe Cms::Generators::Component::SearchGenerator do
             file 'hit.html.haml'
             file 'hits.html.haml'
             file 'no_hits.html.haml'
+          end
+
+          directory 'main_navigation' do
+            file 'show.html.haml' do
+              contains 'render_cell(:search, :form, @page, params[:q])'
+            end
           end
         end
       end

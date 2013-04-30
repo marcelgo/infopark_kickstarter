@@ -1,7 +1,8 @@
 class BlogEntry < Obj
   include Page
 
-  include Cms::Attributes::Author
+  cms_attribute :headline, type: :string
+  cms_attribute :author, type: :string
 
   def blog
     parent.blog
@@ -13,5 +14,15 @@ class BlogEntry < Obj
 
   def enable_comments?
     true
+  end
+
+  # Override auto-generated method +author+ from +CmsAttribute+.
+  def author
+    author = self[:author] || ''
+
+    if author.present?
+      @author ||= Infopark::Crm::Contact.search(params: { login: author }).first
+      @author ||= Infopark::Crm::Contact.search(params: { email: author }).first
+    end
   end
 end

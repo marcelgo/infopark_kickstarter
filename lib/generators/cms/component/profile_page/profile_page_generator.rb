@@ -21,6 +21,16 @@ module Cms
               model.title = 'Page: Profile'
               model.attributes = [
                 {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
                   name: show_in_navigation_attribute_name,
                   type: :boolean,
                   title: 'Show in navigation',
@@ -51,7 +61,7 @@ module Cms
 
         def notice
           if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes and "bundle" to install new gem.')
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes.')
           end
         end
 

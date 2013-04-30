@@ -43,92 +43,63 @@ module Cms
 
         def create_migration
           begin
-            Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = obj_class_name
-              model.title = 'Widget: Video'
-              model.migration_path = "#{widget_path}/migrate"
-              model.model_path = model_path
-              model.attributes = [
+            Widget::ApiGenerator.new(behavior: behavior) do |widget|
+              widget.name = 'VideoWidget'
+              widget.icon = '&#xF062;'
+              widget.description = 'Displays a video player for the given video file.'
+              widget.attributes = [
                 {
-                  name: video_link_attribute_name,
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
+                  name: 'source',
                   type: :linklist,
                   title: 'Source',
                   max_size: 1,
                 },
                 {
-                  name: video_poster_attribute_name,
+                  name: 'poster',
                   type: :linklist,
                   title: 'Poster',
                   max_size: 1,
                 },
                 {
-                  name: video_width_attribute_name,
+                  name: 'width',
                   type: :integer,
                   title: 'Width',
                   default: 660,
                 },
                 {
-                  name: video_height_attribute_name,
+                  name: 'height',
                   type: :string,
                   title: 'Height',
                   default: 430,
                 },
                 {
-                  name: video_autoplay_attribute_name,
+                  name: 'autoplay',
                   type: :boolean,
                   title: 'Autoplay this video?',
                   default: 'No',
                 },
               ]
             end
+
+            directory('app', force: true)
           rescue Cms::Generators::DuplicateResourceError
           end
-        end
-
-        def copy_app_directory
-          directory('app', force: true)
-
-          template('thumbnail.html.haml', "#{widget_path}/thumbnail.html.haml")
         end
 
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
-        end
-
-        private
-
-        def widget_path
-          'app/widgets/video_widget'
-        end
-
-        def model_path
-          'app/models'
-        end
-
-        def obj_class_name
-          'VideoWidget'
-        end
-
-        def video_link_attribute_name
-          'source'
-        end
-
-        def video_poster_attribute_name
-          'poster'
-        end
-
-        def video_width_attribute_name
-          'width'
-        end
-
-        def video_height_attribute_name
-          'height'
-        end
-
-        def video_autoplay_attribute_name
-          'autoplay'
         end
       end
     end

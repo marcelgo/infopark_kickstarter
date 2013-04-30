@@ -1,0 +1,17 @@
+:javascript
+  var _gaq = _gaq || [];
+
+  #{render(state: :tracking_id)}
+  #{render(state: :anonymize)}
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script');
+
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+    var script = document.getElementsByTagName('script')[0];
+    script.parentNode.insertBefore(ga, script);
+  })();

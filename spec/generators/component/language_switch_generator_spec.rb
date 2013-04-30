@@ -7,7 +7,7 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-  arguments []
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -46,7 +46,6 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
 
       directory 'config' do
         directory 'locales' do
-          file 'de.language_switch.yml'
           file 'en.language_switch.yml'
         end
       end

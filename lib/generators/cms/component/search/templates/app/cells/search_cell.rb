@@ -7,8 +7,8 @@ class SearchCell < Cell::Rails
     @query = query
     homepage = page.homepage
 
-    if homepage
-      @search_page = homepage.search_page
+    if homepage && homepage.search_page_link?
+      @search_page = homepage.search_page_link.first
 
       render
     end

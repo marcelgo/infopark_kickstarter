@@ -1,0 +1,25 @@
+Description:
+    Generates a blog based on the Infopark Kickstarter widget framework. The
+    blog also supports disqus comments that can be enabled by entering the
+    disqus shortname on the blog object. You can also set an optional author
+    which is either the WebCRM login or email. The author is displayed with its
+    gravatar image, if available. A RSS discovery link is placed in the layout
+    file to get the blog feed.
+
+Example:
+    `rails generate cms:component:blog`
+    `rails generate cms:component:blog --cms_path=/website/en`
+
+    CMS: obj_class Blog
+           attribute headline (string)
+           attribute show_in_navigation (enum)
+           attribute sort_key (string)
+           attribute disqus_shortname (string)
+           attribute description (text)
+
+    CMS: obj_class BlogEntry
+           attribute author (string)
+
+    Gems: gravatar_image_tag
+    Locale: adds config/locale/en.blog.yml
+    Misc: updates app/views/layouts/application.html.haml

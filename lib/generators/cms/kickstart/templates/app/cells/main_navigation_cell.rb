@@ -11,28 +11,12 @@ class MainNavigationCell < Cell::Rails
   end
 
   def show(page)
-    homepage = page.homepage
+    @page = page
+    @root = page.homepage
 
-    @level1 = if homepage
-      [homepage] + homepage.sorted_toclist.select { |obj| Page === obj }
-    else
-      []
+    if @root
+      render
     end
-
-    render
-  end
-
-  cache(:highlight, if: :really_cache?) do |cell, page|
-    [
-      RailsConnector::Workspace.current.revision_id,
-      page && page.id,
-    ]
-  end
-
-  def highlight(page)
-    @active = page.main_nav_item
-
-    render
   end
 
   # Cell states:

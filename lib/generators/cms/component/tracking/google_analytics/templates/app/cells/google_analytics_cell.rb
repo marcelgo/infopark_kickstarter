@@ -1,27 +1,28 @@
 class GoogleAnalyticsCell < Cell::Rails
-  cache :show, if: :really_cache? do |cell, page|
-    [
-      RailsConnector::Workspace.current.revision_id,
-      page && page.homepage.id
-    ]
-  end
+  # Cell actions:
 
-  def show(homepage)
-    return unless homepage
+  def javascript(tracking_id, anonymize)
+    @tracking_id = tracking_id
+    @anonymize = anonymize
 
-    obj = homepage.google_analytics.destination_objects.first
-
-    @tracking_id = obj.tracking_id
-    @anonymize_ip = obj.anonymize_ip?
-
-    if @tracking_id.present?
+    if Rails.env.production?
       render
     end
   end
 
-  private
+  # Cell states:
+  # The following states assume @anonymize and @tracking_id to be given and that they are
+  # rendered in a javascript context.
 
-  def really_cache?(*args)
-    RailsConnector::Workspace.current.published?
+  def tracking_id
+    if @tracking_id.present?
+      render(format: :js)
+    end
+  end
+
+  def anonymize
+    if @anonymize
+      render(format: :js)
+    end
   end
 end

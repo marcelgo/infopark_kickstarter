@@ -7,28 +7,28 @@ module Cms
         include Actions
 
         class_option :homepage_path,
-          :type => :string,
-          :default => nil,
-          :desc => 'Path to a CMS homepage, for which to enable search.'
+          type: :string,
+          default: nil,
+          desc: 'Path to a CMS homepage, for which to enable search.'
 
         source_root File.expand_path('../templates', __FILE__)
 
         def extend_homepage
-          add_model_attribute('Homepage', search_page_attribute_name)
+          add_model_attribute('Homepage', search_page_attribute)
         end
 
         def extend_view
-          file = 'app/views/layouts/application.html.haml'
-          insert_point = "          .span3\n"
+          file = 'app/cells/main_navigation/show.html.haml'
+          insert_point = "    .container\n"
 
           data = []
 
-          data << "            = render_cell(:search, :form, @obj, @query)\n"
+          data << "      = render_cell(:search, :form, @page, params[:q])\n"
           data << ''
 
           data = data.join("\n")
 
-          insert_into_file(file, data, :after => insert_point)
+          insert_into_file(file, data, after: insert_point)
         end
 
         def create_migration
@@ -38,6 +38,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = class_name
               model.title = 'Page: Search'
+              model.thumbnail = false
               model.attributes = [
                 {
                   name: show_in_navigation_attribute_name,
@@ -64,7 +65,7 @@ module Cms
 
         def notice
           if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes and "bundle" to install new gem.')
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes.')
           end
         end
 
@@ -79,8 +80,13 @@ module Cms
           'show_in_navigation'
         end
 
-        def search_page_attribute_name
-          'search_page_link'
+        def search_page_attribute
+          {
+            name: 'search_page_link',
+            type: :linklist,
+            title: 'Search Page',
+            max_size: 1,
+          }
         end
 
         def class_name

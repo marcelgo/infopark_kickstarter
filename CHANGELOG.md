@@ -1,3 +1,47 @@
+# v2.1.0
+  * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
+    basic components together with setting up the project. This should simplify the getting started
+    process for beginners.
+  * Added a hero unit widget, that displays a more visually highlighted headline and body and also
+    allows to place a link button below.
+  * Updated `rails generate cms:kickstart` to include the search panel in the main navigation and
+  * Switched from Ruby mixins to class level attribute definition to reflect and fully support local
+    cms obj class attributes. You can now define a cms attribute directly on the model using
+    `cms_attribute :headline, type: :string` for example. See generated model classes for more
+    examples.
+  * Removed float attribute type, as it was only used in special cases and it can be easily
+    integrated manually.
+  * Added support for inplace navigation editing. All relevant obj classes now have a
+    `thumbnail.html.haml` in their view directory that gets displayed in the obj class browser, when
+    editing the main navigation.
+  * It is now not longer necessary to call `rails generate rails_connector:install` before running
+    `rails generate cms:kickstart`.
+  * Switched from system attributes title and body to custom attributes headline and content.
+  * Updated to latest Infopark RailsConnector. Moved widget view templates into `views` folder.
+    Replaced workspace toggle against new menu bar and added support for toclist inplace editing and
+    inplace image upload.
+  * Added a form builder component that allows editors to define a form in the WebCRM. You can add
+    different kinds of input types and set required fields as well. Run
+    `rails generate cms:component:form_builder --help` for more information.
+  * Extracted out testing setup into its own generator which is no longer part of the kickstart in
+    order to decrease starting complexity. Please run `rails generate cms:component:testing` to add
+    get it back. We also did this step in order to further improve and extend the functionality in
+    the future, like adding integration testing or supporting different provider. (Thanks @cedrics)
+  * Extracted out developer tools into its own generator which is no longer part of the kickstart in
+    order to decrease dependencies. Just call `rails generate cms:component:developer_tools` if you
+    want them back. `thin` gem was added to replace the default Rails webserver WEBrick.
+    (Thanks @cedrics)
+  * Improved introduction page, when the current working copy does not have a homepage, by switching
+    to a more positive message, giving clear directions and smoothing the transition to more help
+    through links in the footer.
+  * Extracted the redirect functionality into its own generator which is no longer part of the
+    kickstart in order to decrease complexity. Please run `rails generate cms:component:redirect` to
+    get it back. (Thanks @cedrics)
+  * The language switch is now generated without an example. Use
+    `rails generate cms:component:language_switch --example` for the old behavior.
+  * Useless, empty controller `index` actions got removed.
+  * Useless spec files got removed.
+
 # v2.0.1
   * Bugfix: Some widgets still had a sort key attribute, which is not longer needed due to the built
     in sort feature of widgets.

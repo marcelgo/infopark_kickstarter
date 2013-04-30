@@ -1,4 +1,8 @@
 RailsConnector::Configuration.choose_homepage do |env|
+  # Returns an introduction page, when no Homepage found. Usually, you can delete
+  # the NullHomepage.new fallback once you first published your content. See
+  # "app/controllers/null_homepage_controller.rb" and
+  # "app/models/null_homepage.rb" as well.
   Homepage.for_hostname(Rack::Request.new(env).host) || NullHomepage.new
 end
 

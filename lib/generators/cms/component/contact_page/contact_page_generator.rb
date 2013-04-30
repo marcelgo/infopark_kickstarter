@@ -19,6 +19,16 @@ module Cms
               model.title = 'Page: Contact'
               model.attributes = [
                 {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
                   name: crm_activity_type_attribute_name,
                   type: :string,
                   title: 'CRM Activity Type',
@@ -70,7 +80,7 @@ module Cms
 
         def notice
           if behavior == :invoke
-            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes and "bundle" to install new gem.')
+            log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes.')
           end
         end
 

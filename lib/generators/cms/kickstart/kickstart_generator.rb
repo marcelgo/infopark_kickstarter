@@ -1,4 +1,5 @@
 require 'uri'
+require 'infopark_kickstarter/configuration'
 
 module Cms
   module Generators
@@ -7,8 +8,17 @@ module Cms
       include BasePaths
       include Actions
 
+      class_option :configuration_path,
+        type: :string,
+        default: nil,
+        desc: 'Path to a JSON configuration file.'
+
+      class_option :examples,
+        type: :boolean,
+        default: false,
+        desc: 'Creates example content along with setting up your project.'
+
       source_root File.expand_path('../templates', __FILE__)
-      class_option :configuration_path, type: :string, default: nil, desc: 'Path to a JSON configuration file.'
 
       def initialize(args = [], options = {}, config = {})
         options << '--force'
@@ -37,6 +47,27 @@ module Cms
         end
       end
 
+      def remove_index_html
+        path = Rails.root + 'public/index.html'
+
+        if File.exist?(path)
+          remove_file(path)
+        end
+      end
+
+      def remove_rails_image
+        path = Rails.root + 'app/assets/images/rails.png'
+
+        if File.exist?(path)
+          remove_file(path)
+        end
+      end
+
+      def append_asset_manifests
+        append_file('app/assets/javascripts/application.js', '//= require infopark_rails_connector')
+        gsub_file('app/assets/stylesheets/application.css', '*= require_tree .', "*= require_tree .\n *= require infopark_rails_connector")
+      end
+
       def install_gems
         gem('active_attr')
         gem('simple_form')
@@ -45,17 +76,6 @@ module Cms
 
         gem_group(:assets) do
           gem('less-rails-bootstrap')
-        end
-
-        gem_group(:test, :development) do
-          gem('pry-rails')
-          gem('better_errors')
-          gem('binding_of_caller')
-          gem('rspec-rails')
-        end
-
-        Bundler.with_clean_env do
-          run('bundle --quiet')
         end
       end
 
@@ -67,35 +87,15 @@ module Cms
         remove_dir('lib/templates')
       end
 
-      def install_test_framework
-        generate('rspec:install')
-      end
-
-      def crm_initializer
-        path = Rails.root + 'config/initializers/crm_connector.rb'
+      def remove_erb_layout
+        path = Rails.root + 'app/views/layouts/application.html.erb'
 
         if File.exist?(path)
           remove_file(path)
         end
       end
 
-      def remove_erb_layout
-        application_erb_file = 'app/views/layouts/application.html.erb'
-
-        if File.exist?(application_erb_file)
-          remove_file(application_erb_file)
-        end
-      end
-
       def update_rails_configuration
-        gsub_file(
-          'config/application.rb',
-          "# config.time_zone = 'Central Time (US & Canada)'",
-          "config.time_zone = 'Berlin'"
-        )
-
-        log(:info, "set timezone to 'Berlin'")
-
         gsub_file(
           'config/application.rb',
           "# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]",
@@ -111,6 +111,10 @@ module Cms
             model.name = 'Image'
             model.type = :generic
             model.title = 'Resource: Image'
+            model.thumbnail = false
+            model.attributes = [
+              title_attribute,
+            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -120,6 +124,10 @@ module Cms
             model.name = 'Video'
             model.type = :generic
             model.title = 'Resource: Video'
+            model.thumbnail = false
+            model.attributes = [
+              title_attribute,
+            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -130,7 +138,10 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Homepage'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
+              main_content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               {
@@ -146,11 +157,15 @@ module Cms
                 max_size: 1,
               },
               {
+                name: 'footer_links',
+                type: :linklist,
+                title: 'Footer Links',
+              },
+              {
                 name: 'locale',
                 type: :string,
                 title: 'Locale',
               },
-              main_content_attribute,
             ]
           end
 
@@ -162,6 +177,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Root'
             model.title = 'Root'
+            model.thumbnail = false
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -170,6 +186,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Website'
             model.title = 'Website'
+            model.thumbnail = false
           end
         rescue Cms::Generators::DuplicateResourceError
         end
@@ -178,7 +195,9 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = 'Container'
             model.title = 'Container'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -192,9 +211,11 @@ module Cms
             model.name = class_name
             model.title = 'Page: Content'
             model.attributes = [
+              title_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
               main_content_attribute,
+              sidebar_content_attribute
             ]
           end
 
@@ -210,7 +231,10 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Error'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
             ]
           end
@@ -227,7 +251,10 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Login'
+            model.thumbnail = false
             model.attributes = [
+              title_attribute,
+              content_attribute,
               show_in_navigation_attribute,
               sort_key_attribute,
             ]
@@ -239,37 +266,14 @@ module Cms
         rescue Cms::Generators::DuplicateResourceError
         end
 
-        begin
-          class_name = 'Redirect'
-
-          Model::ApiGenerator.new(behavior: behavior) do |model|
-            model.name = class_name
-            model.title = 'Redirect'
-            model.attributes = [
-              show_in_navigation_attribute,
-              sort_key_attribute,
-              {
-                name: 'redirect_link',
-                type: :linklist,
-                title: 'Redirect link',
-                max_size: 1,
-              },
-            ]
-          end
-
-          turn_model_into_page(class_name)
-        rescue Cms::Generators::DuplicateResourceError
-        end
-
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
       end
 
       def copy_app_directory
         directory('app', force: true)
         directory('lib')
-        directory('config')
+        directory('config', force: true)
         directory('deploy')
-        directory('spec')
       end
 
       def extend_gitignore
@@ -280,11 +284,26 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
-        Rails::Generators.invoke('cms:widget:text', ['--example'])
-        Rails::Generators.invoke('cms:widget:image', ['--example'])
+        Rails::Generators.invoke('cms:widget:text')
+        Rails::Generators.invoke('cms:widget:image')
+      end
+
+      def create_example_content
+        if examples?
+          Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:widget:hero_unit')
+
+          migration_template('create_examples.rb', 'cms/migrate/create_examples.rb')
+        end
       end
 
       private
+
+      def examples?
+        options[:examples]
+      end
 
       def show_in_navigation_attribute
         {
@@ -305,15 +324,33 @@ module Cms
       def main_content_attribute
         {
           name: 'main_content',
-          type: 'widget',
+          type: :widget,
           title: 'Main content',
         }
       end
 
-      def tenant_name
-        content = File.read("#{Rails.root}/config/rails_connector.yml")
+      def sidebar_content_attribute
+        {
+          name: 'sidebar_content',
+          type: :widget,
+          title: 'Sidebar content',
+        }
+      end
 
-        YAML.load(content)['cms_api']['http_host']
+      def title_attribute
+        {
+          name: 'headline',
+          type: :string,
+          title: 'Headline',
+        }
+      end
+
+      def content_attribute
+        {
+          name: 'content',
+          type: :html,
+          title: 'Content',
+        }
       end
     end
   end
