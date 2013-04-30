@@ -292,7 +292,6 @@ module Cms
         if tutorial?
           Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
-          Rails::Generators.invoke('cms:component:form_builder', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:social_sharing', ['--example'])
           Rails::Generators.invoke('cms:widget:maps', ['--provider=google_maps'])

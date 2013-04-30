@@ -3,13 +3,13 @@ class CreateTutorial < ::RailsConnector::Migration
     homepage = Obj.find_by_path("<%= homepage_path %>")
     add_widget(homepage, '<%= main_content_attribute[:name] %>', {
       _obj_class: 'TextWidget',
-      content: '<div class="hero-unit"><h1>Welcome to Infopark.</h1><p>You successfully started your
-        project. We created some example content for you and extended the Ruby on Rails application
-        a bit, so you have something to start with. You are probably asking yourself, what can I do
-        now, where does all that come from and how does it work? Don\'t worry, you can find extensive
-        help and support in the Infopark Dev Center. We recommend to start there and also get
-        comfortable with your Ruby on Rails Application.</p><p>
-        <a href="https://dev.infopark.net/preparation">Explore your platform</a></p></div>',
+      content: '<div class="hero-unit"><h1>Welcome to Infopark</h1><p>You successfully started your
+        project. Basic components such as a top navigation, a search panel, this text widget, and a
+        login page have been created for you to experiment with the building blocks of your website
+        application. To access the documentation or get in touch with the Infopark support team,
+        visit the Dev Center.</p><p>
+        <a class="btn btn-large btn-primary" href="https://dev.infopark.net/preparation">Browse
+        Infopark Dev Center</a></p></div>',
     })
   end
 
