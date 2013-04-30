@@ -42,7 +42,7 @@ describe Cms::Generators::Widget::HeroUnitGenerator do
           file 'hero_unit_widget.rb' do
             contains 'cms_attribute :content, type: :html'
             contains 'cms_attribute :headline, type: :string'
-            contains 'cms_attribute :link, type: :linklist, max_size: 1'
+            contains 'cms_attribute :link_to, type: :linklist, max_size: 1'
             contains 'include Widget'
           end
         end
