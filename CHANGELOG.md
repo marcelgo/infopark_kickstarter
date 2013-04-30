@@ -1,4 +1,9 @@
 # v2.1.0
+  * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
+    basic components together with setting up the project. This should simplify the getting started
+    process for beginners.
+  * Added a hero unit widget, that displays a more visually highlighted headline and body and also
+    allows to place a link button below.
   * Updated `rails generate cms:kickstart` to include the search panel in the main navigation and
   * Switched from Ruby mixins to class level attribute definition to reflect and fully support local
     cms obj class attributes. You can now define a cms attribute directly on the model using
