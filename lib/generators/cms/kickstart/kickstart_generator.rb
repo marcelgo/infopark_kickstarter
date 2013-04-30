@@ -293,6 +293,7 @@ module Cms
           Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:widget:hero_unit')
 
           migration_template('create_examples.rb', 'cms/migrate/create_examples.rb')
         end

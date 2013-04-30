@@ -1,0 +1,11 @@
+.widget.hero-unit
+  = cms_tag(:h1, @widget, :headline)
+
+  = cms_tag(:div, @widget, :content)
+
+  - if @widget.link_to.present?
+    - link = @widget.link_to.first
+
+    %p
+      = link_to(cms_path(link), class: 'btn btn-primary btn-large') do
+        = link.title
