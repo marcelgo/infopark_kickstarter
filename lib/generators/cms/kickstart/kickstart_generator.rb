@@ -13,10 +13,10 @@ module Cms
         default: nil,
         desc: 'Path to a JSON configuration file.'
 
-      class_option :tutorial,
+      class_option :examples,
         type: :boolean,
         default: false,
-        desc: 'Creates tutorial content along with setting up your project.'
+        desc: 'Creates example content along with setting up your project.'
 
       source_root File.expand_path('../templates', __FILE__)
 
@@ -288,25 +288,20 @@ module Cms
         Rails::Generators.invoke('cms:widget:image')
       end
 
-      def create_tutorial_content
-        if tutorial?
+      def create_example_content
+        if examples?
           Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
-          Rails::Generators.invoke('cms:component:social_sharing', ['--example'])
-          Rails::Generators.invoke('cms:widget:maps', ['--provider=google_maps'])
-          Rails::Generators.invoke('cms:widget:video')
-          Rails::Generators.invoke('cms:widget:person')
-          Rails::Generators.invoke('cms:widget:slider')
 
-          migration_template('create_tutorial.rb', 'cms/migrate/create_tutorial.rb')
+          migration_template('create_examples.rb', 'cms/migrate/create_examples.rb')
         end
       end
 
       private
 
-      def tutorial?
-        options[:tutorial]
+      def examples?
+        options[:examples]
       end
 
       def show_in_navigation_attribute

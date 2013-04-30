@@ -1,4 +1,4 @@
-class CreateTutorial < ::RailsConnector::Migration
+class CreateExamples < ::RailsConnector::Migration
   def up
     homepage = Obj.find_by_path("<%= homepage_path %>")
     add_widget(homepage, '<%= main_content_attribute[:name] %>', {
@@ -8,8 +8,8 @@ class CreateTutorial < ::RailsConnector::Migration
         login page have been created for you to experiment with the building blocks of your website
         application. To access the documentation or get in touch with the Infopark support team,
         visit the Dev Center.</p><p>
-        <a class="btn btn-large btn-primary" href="https://dev.infopark.net/preparation">Browse
-        Infopark Dev Center</a></p></div>',
+        <a class="btn btn-large btn-primary" href="https://dev.infopark.net/preparation" target="_blank">
+        Browse Infopark Dev Center</a></p></div>',
     })
   end
 

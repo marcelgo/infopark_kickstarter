@@ -17,7 +17,7 @@ module Cms
           return unless example?
 
           file = 'app/views/layouts/application.html.haml'
-          insert_point = "      = render_cell(:footer, :show)"
+          insert_point = "      = render_cell(:footer, :show, @obj)"
 
           data = []
 
