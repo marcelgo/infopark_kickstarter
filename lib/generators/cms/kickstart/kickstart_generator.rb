@@ -1,4 +1,5 @@
 require 'uri'
+require 'infopark_kickstarter/configuration'
 
 module Cms
   module Generators
@@ -11,6 +12,11 @@ module Cms
         type: :string,
         default: nil,
         desc: 'Path to a JSON configuration file.'
+
+      class_option :examples,
+        type: :boolean,
+        default: false,
+        desc: 'Creates example content along with setting up your project.'
 
       source_root File.expand_path('../templates', __FILE__)
 
@@ -278,11 +284,26 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
-        Rails::Generators.invoke('cms:widget:text', ['--example'])
-        Rails::Generators.invoke('cms:widget:image', ['--example'])
+        Rails::Generators.invoke('cms:widget:text')
+        Rails::Generators.invoke('cms:widget:image')
+      end
+
+      def create_example_content
+        if examples?
+          Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:widget:hero_unit')
+
+          migration_template('create_examples.rb', 'cms/migrate/create_examples.rb')
+        end
       end
 
       private
+
+      def examples?
+        options[:examples]
+      end
 
       def show_in_navigation_attribute
         {
