@@ -8,7 +8,7 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = 'HeroUnitWidget'
-              widget.icon = '&#xF061;'
+              widget.icon = '&#xF010;'
               widget.description = 'Widget that adds a hero unit to the page.'
               widget.attributes = [
                 {
