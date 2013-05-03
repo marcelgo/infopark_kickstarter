@@ -10,7 +10,11 @@ module HostnameSelection
   def select_hostname
     if check_hostname? && switch_hostname?
       desired_hostname = @obj.homepage.desired_hostname
-      redirect_to(cms_url(@obj, host: desired_hostname))
+
+      query_params = request.query_parameters
+      query_params.merge!(host: desired_hostname)
+
+      redirect_to(cms_url(@obj, query_params))
     end
   end
 
