@@ -1,3 +1,9 @@
+# v2.2.0
+  * By default only "superuser" are now allowed to edit on the production website. This is due to a
+    change in the WebCRM. (Thanks @Peter Mielke)
+  * A fallback menu title `[no headline]` is now displayed in the menu bar, when a new object is
+    created via the page menu. (Thanks @franziska-luecke)
+  * Query parameters are now kept on redirects. (Thanks @thomaswitt)
 # v2.1.0
   * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
     basic components together with setting up the project. This should simplify the getting started
