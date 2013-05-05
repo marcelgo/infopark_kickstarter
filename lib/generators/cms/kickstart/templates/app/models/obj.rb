@@ -50,7 +50,7 @@ class Obj < ::RailsConnector::BasicObj
   end
 
   def menu_title
-    self[:headline] || self.name
+    self[:headline] || '[no headline]'
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url
