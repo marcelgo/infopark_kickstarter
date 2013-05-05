@@ -24,7 +24,7 @@ class User
   end
 
   def admin?
-    role_names.include?('cmsadmin')
+    role_names.include?('superuser')
   end
 
   def fetch
