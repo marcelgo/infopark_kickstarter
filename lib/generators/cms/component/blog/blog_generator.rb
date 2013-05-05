@@ -53,6 +53,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = blog_entry_class_name
               model.title = 'Page: Blog Entry'
+              model.thumbnail = false
               model.attributes = [
                 {
                   name: 'headline',
