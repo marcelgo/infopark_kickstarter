@@ -1,4 +1,7 @@
 # v2.2.0
+  * Added a rake task `rake cms:reset` that resets the CMS completely. Please be cautious when using
+    this command, as it completely wipes your CMS content and is not reversable. So use it on your
+    own risk.
   * By default only "superuser" are now allowed to edit on the production website. This is due to a
     change in the WebCRM. (Thanks @Peter Mielke)
   * A fallback menu title `[no headline]` is now displayed in the menu bar, when a new object is
