@@ -12,10 +12,17 @@ module InfoparkKickstarter
 
           task :integration do
             prepare_directory
-            create_configuration_files
             create_application
-            call_generators
-            run_tests
+            create_configuration_files
+
+            cd(app_path) do
+              Bundler.with_clean_env do
+                reset_cms
+                kickstart
+                call_generators
+                run_tests
+              end
+            end
           end
         end
       end
@@ -27,67 +34,59 @@ module InfoparkKickstarter
         mkdir_p(config_path)
       end
 
+      def create_application
+        sh("rails new #{app_path} --skip-test-unit --skip-active-record --template template.rb")
+      end
+
       def create_configuration_files
         ConfigurationHelper.new(local_configuration_file, :cms, "#{config_path}/rails_connector.yml").write
         ConfigurationHelper.new(local_configuration_file, :crm, "#{config_path}/custom_cloud.yml").write
         ConfigurationHelper.new(local_configuration_file, :deploy, "#{config_path}/deploy.yml").write
       end
 
-      def create_application
-        Bundler.with_clean_env do
-          sh("rails new #{app_path} --skip-test-unit --skip-active-record --skip-bundle --template template.rb")
+      def reset_cms
+        sh('bundle exec rake cms:reset[true]')
+      end
 
-          cd(app_path) do
-            sh('bundle --quiet')
+      def bundle
+        sh('bundle --quiet')
+      end
 
-            migrate!
-          end
-        end
+      def kickstart
+        sh('bundle exec rails generate cms:kickstart')
       end
 
       def call_generators
-        Bundler.with_clean_env do
-          cd(app_path) do
-            generators = [
-              'cms:component:developer_tools',
-              'cms:component:testing',
-              'cms:component:redirect',
-              'cms:component:error_tracking --provider=airbrake',
-              'cms:component:error_tracking --provider=honeybadger',
-              'cms:component:monitoring "Test Website" --provider=newrelic',
-              'cms:component:tracking --provider=google_analytics',
-              'cms:component:language_switch --example',
-              'cms:component:profile_page --cms_path=/website/en',
-              'cms:component:contact_page --cms_path=/website/en',
-              'cms:component:form_builder --cms_path=/website/en',
-              'cms:component:blog --cms_path=/website/en',
-              'cms:component:social_sharing --example',
-              'cms:widget:maps --provider=google_maps',
-              'cms:widget:video',
-              'cms:widget:person',
-              'cms:widget:slider',
-              'cms:widget:hero_unit',
-            ]
+        generators = [
+          'cms:component:developer_tools',
+          'cms:component:testing',
+          'cms:component:redirect',
+          'cms:component:error_tracking --provider=airbrake',
+          'cms:component:error_tracking --provider=honeybadger',
+          'cms:component:monitoring "Test Website" --provider=newrelic',
+          'cms:component:tracking --provider=google_analytics',
+          'cms:component:language_switch --example',
+          'cms:component:profile_page --cms_path=/website/en',
+          'cms:component:contact_page --cms_path=/website/en',
+          'cms:component:form_builder --cms_path=/website/en',
+          'cms:component:blog --cms_path=/website/en',
+          'cms:component:social_sharing --example',
+          'cms:widget:maps --provider=google_maps',
+          'cms:widget:video',
+          'cms:widget:person',
+          'cms:widget:slider',
+          'cms:widget:hero_unit',
+        ]
 
-            generators.each do |generator|
-              sh("bundle exec rails generate #{generator}")
-            end
-
-            migrate!
-          end
+        generators.each do |generator|
+          sh("bundle exec rails generate #{generator}")
         end
-      end
 
-      def migrate!
         sh('bundle exec rake cms:migrate')
       end
 
       def run_tests
-        Bundler.with_clean_env do
-          cd(app_path) do
-            sh('bundle exec rake spec')
-          end
-        end
+        sh('bundle exec rake spec')
       end
 
       def app_path

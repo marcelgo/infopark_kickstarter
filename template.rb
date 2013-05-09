@@ -8,7 +8,3 @@ end
 gem_group(:test, :development) do
   gem('infopark_kickstarter', path: '../../../')
 end
-
-run('bundle --quiet')
-
-generate('cms:kickstart')
