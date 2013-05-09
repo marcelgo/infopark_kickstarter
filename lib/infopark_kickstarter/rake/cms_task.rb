@@ -11,8 +11,8 @@ module InfoparkKickstarter
       def initialize
         namespace :cms do
           desc 'Reset the CMS'
-          task reset: :environment do
-            if yes?("Are you sure to reset the CMS '#{tenant_name}'?\nThe reset is not reversable and all content will be lost. (y|n)")
+          task :reset, [:force] => :environment do |_, args|
+            if reset?(args[:force])
               reset(tenant_name)
 
               puts 'CMS resetted successfully.'
@@ -22,6 +22,11 @@ module InfoparkKickstarter
       end
 
       private
+
+      def reset?(force)
+        force == 'true' ||
+        yes?("Are you sure to reset the CMS '#{tenant_name}'?\nThe reset is not reversable and all content will be lost. (y|n)")
+      end
 
       def reset(tenant_name)
         RailsConnector::CmsRestApi.delete('workspaces', {
