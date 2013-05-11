@@ -1,4 +1,6 @@
 # v2.2.0
+  * The page title is now created dynamically as a combination of the title attribute and the
+    homepage title. (Thanks @benzimmer)
   * Added a rake task `rake cms:reset` that resets the CMS completely. Please be cautious when using
     this command, as it completely wipes your CMS content and is not reversable. So use it on your
     own risk.
