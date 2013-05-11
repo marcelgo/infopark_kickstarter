@@ -13,4 +13,9 @@ module Page
   def toclist
     super.select { |obj| obj.is_a?(Page) && obj.show_in_navigation? }.sort_by { |obj| obj.sort_key.to_s }
   end
+
+  # Overriden method +title+ from +RailsConnector::BasicObj+.
+  def title
+    [super().presence, homepage.title].compact.join(' - ')
+  end
 end

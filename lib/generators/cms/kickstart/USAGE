@@ -5,6 +5,7 @@ Example:
     `rails generate cms:kickstart`
 
     CMS: obj_class Homepage
+           attribute title (string)
            attribute headline (string)
            attribute show_in_navigation (enum)
            attribute sort_key (string)

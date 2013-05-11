@@ -26,6 +26,11 @@ class Homepage < Obj
     parent
   end
 
+  # Overriden method +title+ from +Page+.
+  def title
+    read_attribute('title').presence
+  end
+
   def error_not_found_page
     error_not_found_page_link.destination_objects.first
   end
