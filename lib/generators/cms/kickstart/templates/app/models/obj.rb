@@ -36,9 +36,9 @@ class Obj < ::RailsConnector::BasicObj
 
   # Return a page object or nil.
   #
-  # Normally, objects are either pages, boxes, or media files/resources.
-  # Pages are pages in itself, Widgets are treated differently. Media files
-  # and resources are filtered out.
+  # Normally, objects are either pages, widgets, or resources.
+  # Pages are pages in itself, Widgets are treated differently. Resources are
+  # filtered out.
   #
   # This method can be overridden by subclasses to implement this behaviour.
   def page
