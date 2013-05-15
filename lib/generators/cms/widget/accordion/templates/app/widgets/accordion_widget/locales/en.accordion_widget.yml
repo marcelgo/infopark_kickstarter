@@ -1,0 +1,5 @@
+en:
+  widgets:
+    accordion:
+      title: 'Accordion widget'
+      description: 'Widget that adds a boostrap collapse component.'

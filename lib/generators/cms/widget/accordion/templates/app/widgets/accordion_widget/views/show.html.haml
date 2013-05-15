@@ -1,0 +1,10 @@
+.widget.accordion_widget.well
+  .accordion
+    .accordion-group
+      - (0..3).to_a.each do |num|
+        .accordion-heading
+          %a.accordion-toggle{ href: "#collapse#{num}", data: { toggle: 'collapse', parent: '#accordion2' } }
+            = cms_tag(:h3, @widget, "headline_#{num}")
+        .accordion-body.collapse.out{ id: "collapse#{num}" }
+          .accordion-inner
+            = cms_tag(:div, @widget, "content_#{num}")
