@@ -11,14 +11,19 @@ module Cms
               widget.icon = '&#xF010;'
               widget.description = 'Widget that adds a boostrap collapse component.'
               widget.attributes = [
-                {:name=>"headline_0", :type=>:string, :title=>"Headline One"},
-                {:name=>"content_0", :type=>:html, :title=>"Content One"},
-                {:name=>"headline_1", :type=>:string, :title=>"Headline Two"},
-                {:name=>"content_1", :type=>:html, :title=>"Content Two"},
-                {:name=>"headline_2", :type=>:string, :title=>"Headline Three"},
-                {:name=>"content_2", :type=>:html, :title=>"Content Three"},
-                {:name=>"headline_3", :type=>:string, :title=>"Headline Four"},
-                {:name=>"content_3", :type=>:html, :title=>"Content Four"},
+                {:name=>"content", :type=>:string, :title=>"Content"},
+                {:name=>"headline", :type=>:string, :title=>"Headline"},
+              ]
+            end
+
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = 'AccordionContent'
+              model.title = '&#xF010;'
+              model.description = 'Content row of the accordion widget.'
+              model.type = 'publication'
+              model.attributes = [
+                {:name=>"headline", :type=>:string, :title=>"Headline"},
+                {:name=>"content", :type=>:html, :title=>"Content"},
               ]
             end
 
