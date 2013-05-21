@@ -1,4 +1,6 @@
 # v2.2.0
+  * Bugfix: The slider widget used a wrong attribute of the image link to
+    display the slider headline.
   * The page title is now created dynamically as a combination of the title attribute and the
     homepage title. (Thanks @benzimmer)
   * Added a rake task `rake cms:reset` that resets the CMS completely. Please be cautious when using
