@@ -76,6 +76,7 @@ module InfoparkKickstarter
           'cms:widget:person',
           'cms:widget:slider',
           'cms:widget:hero_unit',
+          'cms:widget:slideshare',
         ]
 
         generators.each do |generator|
