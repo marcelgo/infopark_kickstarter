@@ -32,7 +32,7 @@ describe Cms::Generators::Widget::SliderGenerator do
               file 'indicators.html.haml'
               file 'left_control.html.haml'
               file 'right_control.html.haml'
-              file 'headline.html.haml'
+              file 'title.html.haml'
             end
           end
         end
