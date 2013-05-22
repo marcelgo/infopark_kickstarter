@@ -12,3 +12,6 @@ InfoparkKickstarter::Rake::CloudConfigTask.new
 
 require 'infopark_kickstarter/rake/cms_task'
 InfoparkKickstarter::Rake::CmsTask.new
+
+require 'infopark_kickstarter/rake/system_info'
+InfoparkKickstarter::Rake::SystemInfo.new
