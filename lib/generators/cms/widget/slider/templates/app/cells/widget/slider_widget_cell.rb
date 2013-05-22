@@ -45,8 +45,8 @@ class Widget::SliderWidgetCell < WidgetCell
 
   # The following states assume @image to be given.
 
-  def headline
-    if @image.headline.present?
+  def title
+    if @image.title.present?
       render
     end
   end

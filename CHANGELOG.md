@@ -1,6 +1,8 @@
 # v2.2.0
   * Added a slideshare widget that embedds the slideshare player for a given slide url. See
     `rails generate cms:widget:slideshare --help` for more details.
+  * Bugfix: The slider widget used a wrong attribute of the image link to
+    display the slider headline.
   * The page title is now created dynamically as a combination of the title attribute and the
     homepage title. (Thanks @benzimmer)
   * Added a rake task `rake cms:reset` that resets the CMS completely. Please be cautious when using
