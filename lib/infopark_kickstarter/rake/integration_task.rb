@@ -61,6 +61,7 @@ module InfoparkKickstarter
           'cms:component:developer_tools',
           'cms:component:testing',
           'cms:component:redirect',
+          'cms:component:sitemap',
           'cms:component:error_tracking --provider=airbrake',
           'cms:component:error_tracking --provider=honeybadger',
           'cms:component:monitoring "Test Website" --provider=newrelic',
