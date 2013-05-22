@@ -22,10 +22,10 @@ module Cms
                   title: 'content',
                 },
                 {
-                  :name=>"source",
+                  name: 'source',
                   type: :linklist,
-                  :title => "Source",
-                  max_size: 1
+                  title: 'Source',
+                  max_size: 1,
                 }
               ]
             end

@@ -1,4 +1,6 @@
 # v2.2.0
+  * Added a slideshare widget that embedds the slideshare player for a given slide url. See
+    `rails generate cms:widget:slideshare --help` for more details.
   * The page title is now created dynamically as a combination of the title attribute and the
     homepage title. (Thanks @benzimmer)
   * Added a rake task `rake cms:reset` that resets the CMS completely. Please be cautious when using
@@ -9,6 +11,7 @@
   * A fallback menu title `[no headline]` is now displayed in the menu bar, when a new object is
     created via the page menu. (Thanks @franziska-luecke)
   * Query parameters are now kept on redirects. (Thanks @thomaswitt)
+
 # v2.1.0
   * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
     basic components together with setting up the project. This should simplify the getting started
