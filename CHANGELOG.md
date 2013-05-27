@@ -1,4 +1,6 @@
 # v2.2.0
+  * Footer navigation refactored to highlight and reposition the company reference and add a tiny
+    remark to display the platform the webpage is build on.
   * Extended footer navigation links to include link to the Dev Center User Guide.
   * Added a sitemap component that dynamically generates a sitemap.xml file.
   * Added a slideshare widget that embedds the slideshare player for a given slide url. See
