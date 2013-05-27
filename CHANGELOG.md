@@ -1,4 +1,5 @@
 # v2.2.0
+  * Extended footer navigation links to include link to the Dev Center User Guide.
   * Added a sitemap component that dynamically generates a sitemap.xml file.
   * Added a slideshare widget that embedds the slideshare player for a given slide url. See
     `rails generate cms:widget:slideshare --help` for more details.
