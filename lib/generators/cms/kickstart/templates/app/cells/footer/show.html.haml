@@ -2,16 +2,28 @@
 
 %footer
   .row
+    .span12
+      %p
+        - @footer_links.each do |link|
+          = link_to(cms_path(link), target: '_blank') do
+            = link.title
+
+          - unless @footer_links.last == link
+            &#xb7;
+
+  .row
     .span9
-      - @footer_links.each do |link|
-        = link_to(cms_path(link), target: '_blank') do
-          = link.title
-
-        - unless @footer_links.last == link
-          &#xb7;
-
-    .span3
-      = render_cell(:login, :show, @page)
-
-      %span.pull-right
+      %p
         &copy; 2013 Company, Inc.
+
+    .span3.text-right
+      %p
+        %small.muted
+          Powered by
+
+          %a{href: 'http://www.infopark.com', title: 'Infopark powers great websites.'}
+            Infopark
+
+          |
+
+          = render_cell(:login, :show, @page)

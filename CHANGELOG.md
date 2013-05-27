@@ -1,6 +1,14 @@
 # v2.2.0
   * Added a new rake task `cms:system_info` to create an overview of your system that can help the
     Infopark support team to quickly adress your issues.
+  * Footer navigation refactored to highlight and reposition the company reference and add a tiny
+    remark to display the platform the webpage is build on.
+  * Extended footer navigation links to include link to the Dev Center User Guide.
+  * Added a sitemap component that dynamically generates a sitemap.xml file.
+  * Added a slideshare widget that embedds the slideshare player for a given slide url. See
+    `rails generate cms:widget:slideshare --help` for more details.
+  * Bugfix: The slider widget used a wrong attribute of the image link to
+    display the slider headline.
   * The page title is now created dynamically as a combination of the title attribute and the
     homepage title. (Thanks @benzimmer)
   * Added a rake task `rake cms:reset` that resets the CMS completely. Please be cautious when using
@@ -11,6 +19,7 @@
   * A fallback menu title `[no headline]` is now displayed in the menu bar, when a new object is
     created via the page menu. (Thanks @franziska-luecke)
   * Query parameters are now kept on redirects. (Thanks @thomaswitt)
+
 # v2.1.0
   * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
     basic components together with setting up the project. This should simplify the getting started

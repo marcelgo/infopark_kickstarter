@@ -1,7 +1,7 @@
 require './lib/rails_connector/cms_attributes'
 
 # This class represents the base class of all CMS objects and implements behavior that all CMS
-# objects, regardless whether they are pages, boxes or resources have in common.
+# objects, regardless whether they are pages, widgets or resources have in common.
 class Obj < ::RailsConnector::BasicObj
   include RailsConnector::CmsAttributes
 
@@ -51,6 +51,19 @@ class Obj < ::RailsConnector::BasicObj
 
   def menu_title
     self[:headline] || '[no headline]'
+  end
+
+  # By default, objects can be displayed in navigation sections. Either add a
+  # boolean cms attribute +show_in_navigation+ or override the method directly
+  # in your model.
+  def show_in_navigation?
+    true
+  end
+
+  # By default, objects have no sort_key set. Either add a string cms attribute
+  # +sort_key+ or override the method directly in your model.
+  def sort_key
+    ''
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url

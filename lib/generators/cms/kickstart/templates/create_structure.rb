@@ -27,6 +27,7 @@ class CreateStructure < ::RailsConnector::Migration
         { title: 'Getting Started', url: 'https://dev.infopark.net/getting-started' },
         { title: 'Developer Guide', url: 'https://dev.infopark.net/developer-guide' },
         { title: 'API Reference', url: 'https://dev.infopark.net/api-doc' },
+        { title: 'User Guide', url: 'https://dev.infopark.net/user-guide' },
         { title: 'Blog', url: 'https://dev.infopark.net/blog' },
         { title: 'Support', url: 'https://dev.infopark.net/support' },
         { title: 'Dashboard', url: 'http://localhost:3000/cms/dashboard' },

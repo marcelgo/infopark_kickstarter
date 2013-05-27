@@ -8,25 +8,30 @@ class SlideshareWidget < Obj
   # include Page
   include Widget
 
-  def html
-    json = open(json_url).read
-    json_object = JSON.parse(json)
+  def embed_html
+    @embed_html ||= if source.present?
+      data = embedded_information(source.first.url)
 
-    json_object['html'].html_safe
-  rescue
-    ''
+      data && data['html'].html_safe
+    end
   end
 
   private
 
-  def json_url
-    "http://www.slideshare.net/api/oembed/2?url=#{url}&format=json"
+  def embedded_information(slide_url)
+    url = slideshare_url(slide_url)
+    json = RestClient.get(url)
+
+    JSON.parse(json)
+  rescue RestClient::ResourceNotFound
   end
 
-  def url
-    self.source.first.url
-  rescue
-    ''
+  def slideshare_url(slide_url)
+    params = {
+      url: slide_url,
+      format: 'json',
+    }
+
+    "http://www.slideshare.net/api/oembed/2?#{params.to_param}"
   end
 end
-
