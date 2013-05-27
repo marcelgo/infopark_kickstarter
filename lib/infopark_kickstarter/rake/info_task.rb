@@ -19,6 +19,11 @@ module InfoparkKickstarter
             status
           end
 
+          desc 'Gathers important system information'
+          task system_info: :environment do |_, args|
+            system_info
+          end
+
           namespace :info do
             desc 'Get information about all object classes in the given workspace (default "published")'
             task :obj_classes, [:workspace] => :environment do |_, args|
@@ -38,6 +43,60 @@ module InfoparkKickstarter
       end
 
       private
+
+      def system_info
+        puts ''
+        puts 'System Component Versions'
+        puts '----------------------'
+        puts "Ruby Version: #{ruby_version}"
+        puts "Gem Version: #{gem_version}"
+        puts "Ruby on Rails Version: #{rails_gem_version}"
+        puts "Infopark Kickstarter Version: #{infopark_gem_version}"
+        puts "Infopark RailsConnector Version: #{infopark_rails_connector_version}"
+        puts "Infopark CloudConnector Version: #{infopark_cloud_connector_version}"
+        puts "Infopark CrmConnector Version: #{infopark_crm_connector_version}"
+
+        puts ''
+        puts 'CMS Structure Information'
+        puts '-------------------------'
+        puts obj_class_information('published').to_yaml
+      end
+
+      def ruby_version
+        %x{ruby -v}
+      end
+
+      def gem_version
+        %x{gem -v}
+      end
+
+      def rails_gem_version
+        gem_version_for('rails')
+      end
+
+      def infopark_gem_version
+        gem_version_for('infopark_kickstarter')
+      end
+
+      def infopark_rails_connector_version
+        gem_version_for('infopark_rails_connector')
+      end
+
+      def infopark_cloud_connector_version
+        gem_version_for('infopark_cloud_connector')
+      end
+
+      def infopark_crm_connector_version
+        gem_version_for('infopark_crm_connector')
+      end
+
+      def gem_version_for(name)
+        gemspec = Gem.latest_spec_for(name)
+
+        if gemspec
+          gemspec.version.to_s
+        end
+      end
 
       def obj_class_information(workspace)
         RailsConnector::Workspace.find(workspace).as_current do
