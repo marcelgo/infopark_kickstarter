@@ -1,4 +1,6 @@
 # v2.2.0
+  * Bugfix: The Ruby on Rails application could not handle invalid utf8 characters in the request
+    url. The gem `utf8-cleaner` fixes that.
   * Bugfix: Ghost paths (an object with a missing parent) are now handled correctly when searching
     for their homepage.
   * Footer navigation refactored to highlight and reposition the company reference and add a tiny
