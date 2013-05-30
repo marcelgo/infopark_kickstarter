@@ -1,4 +1,6 @@
 # v2.2.0
+  * Bugfix: Ghost paths (an object with a missing parent) are now handled correctly when searching
+    for their homepage.
   * Footer navigation refactored to highlight and reposition the company reference and add a tiny
     remark to display the platform the webpage is build on.
   * Extended footer navigation links to include link to the Dev Center User Guide.
