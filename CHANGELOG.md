@@ -1,6 +1,9 @@
 # v2.2.0
-  * Added a new rake task `infopark:info:system` to create an overview of your system that can help the
-    Infopark support team to quickly adress your issues.
+  * Moved tasks `cms:console`, `cms:status`, `cms:info:obj_classes` and `cms:info:permalinks` under
+    the `infopark` namespace. You get an overview of all available rake tasks by running `rake -T`
+    in your project folder.
+  * Added a new rake task `infopark:info:system` to create an overview of your system that can help
+    the Infopark support team to more quickly adress your issues.
   * Bugfix: The Ruby on Rails application could not handle invalid utf8 characters in the request
     url. The gem `utf8-cleaner` fixes that.
   * Bugfix: Ghost paths (an object with a missing parent) are now handled correctly when searching

@@ -35,7 +35,7 @@ module InfoparkKickstarter
             end
 
             desc 'Gathers important system information'
-            task system: :environment do |_, args|
+            task system: :environment do
               system_info
             end
           end
@@ -49,16 +49,21 @@ module InfoparkKickstarter
 
         output << ''
         output << 'System Component Versions'
-        output << '----------------------'
-        output << "Ruby Version: #{ruby_version}"
-        output << "Gem Version: #{gem_version}"
-        output << "Ruby on Rails Version: #{rails_gem_version}"
-        output << "RVM Version: #{rvm_version}"
-        output << "rbenv Version: #{rbenv_version}"
-        output << "Infopark Kickstarter Version: #{infopark_gem_version}"
-        output << "Infopark RailsConnector Version: #{infopark_rails_connector_version}"
-        output << "Infopark CloudConnector Version: #{infopark_cloud_connector_version}"
-        output << "Infopark CrmConnector Version: #{infopark_crm_connector_version}"
+        output << '-------------------------'
+
+        %w(ruby gem rvm rbenv).each do |name|
+          output << "#{name}: #{command_version_for(name)}"
+        end
+
+        %w(
+          rails
+          infopark_kickstarter
+          infopark_rails_connector
+          infopark_cloud_connector
+          infopark_crm_connector
+        ).each do |name|
+          output << "#{name}: #{gem_version_for(name)}"
+        end
 
         output << ''
         output << 'CMS Structure Information'
@@ -67,53 +72,19 @@ module InfoparkKickstarter
 
         output = output.join("\n")
 
-        path = "#{Rails.root}/tmp/infopark-support-#{Time.now.to_i}.txt"
+        path = Rails.root + "tmp/infopark-support-#{Time.now.to_i}.txt"
 
-        File.open(path, 'w+') do |f|
-          f.write(output)
+        File.open(path, 'w+') do |file|
+          file.write(output)
         end
 
         puts output
       end
 
-      def ruby_version
-        %x{ruby -v}
-      end
-
-      def gem_version
-        %x{gem -v}
-      end
-
-      def rvm_version
-        unless %x{which rvm}.empty?
-          %x{rvm -v}
+      def command_version_for(name)
+        unless %x{which #{name}}.empty?
+          %x{#{name} -v}.strip
         end
-      end
-
-      def rbenv_version
-        unless %x{which rbenv}.empty?
-          %x{rbenv -v}
-        end
-      end
-
-      def rails_gem_version
-        gem_version_for('rails')
-      end
-
-      def infopark_gem_version
-        gem_version_for('infopark_kickstarter')
-      end
-
-      def infopark_rails_connector_version
-        gem_version_for('infopark_rails_connector')
-      end
-
-      def infopark_cloud_connector_version
-        gem_version_for('infopark_cloud_connector')
-      end
-
-      def infopark_crm_connector_version
-        gem_version_for('infopark_crm_connector')
       end
 
       def gem_version_for(name)
