@@ -8,7 +8,7 @@ module InfoparkKickstarter
   module Rake
     class InfoTask < ::Rake::TaskLib
       def initialize
-        namespace :cms do
+        namespace :infopark do
           desc 'Open the Infopark console in your web browser'
           task :console do
             Launchy.open('https://console.infopark.net')
@@ -33,11 +33,67 @@ module InfoparkKickstarter
 
               puts permalinks(args[:workspace]).to_yaml
             end
+
+            desc 'Gathers important system information'
+            task system: :environment do
+              system_info
+            end
           end
         end
       end
 
       private
+
+      def system_info
+        output = []
+
+        output << ''
+        output << 'System Component Versions'
+        output << '-------------------------'
+
+        %w(ruby gem rvm rbenv).each do |name|
+          output << "#{name}: #{command_version_for(name)}"
+        end
+
+        %w(
+          rails
+          infopark_kickstarter
+          infopark_rails_connector
+          infopark_cloud_connector
+          infopark_crm_connector
+        ).each do |name|
+          output << "#{name}: #{gem_version_for(name)}"
+        end
+
+        output << ''
+        output << 'CMS Structure Information'
+        output << '-------------------------'
+        output << obj_class_information('published').to_yaml
+
+        output = output.join("\n")
+
+        path = Rails.root + "tmp/infopark-support-#{Time.now.to_i}.txt"
+
+        File.open(path, 'w+') do |file|
+          file.write(output)
+        end
+
+        puts output
+      end
+
+      def command_version_for(name)
+        unless %x{which #{name}}.empty?
+          %x{#{name} -v}.strip
+        end
+      end
+
+      def gem_version_for(name)
+        gemspec = Gem.latest_spec_for(name)
+
+        if gemspec
+          gemspec.version.to_s
+        end
+      end
 
       def obj_class_information(workspace)
         RailsConnector::Workspace.find(workspace).as_current do
