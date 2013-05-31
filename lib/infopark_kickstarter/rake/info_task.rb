@@ -8,7 +8,7 @@ module InfoparkKickstarter
   module Rake
     class InfoTask < ::Rake::TaskLib
       def initialize
-        namespace :cms do
+        namespace :infopark do
           desc 'Open the Infopark console in your web browser'
           task :console do
             Launchy.open('https://console.infopark.net')
@@ -45,21 +45,35 @@ module InfoparkKickstarter
       private
 
       def system_info
-        puts ''
-        puts 'System Component Versions'
-        puts '----------------------'
-        puts "Ruby Version: #{ruby_version}"
-        puts "Gem Version: #{gem_version}"
-        puts "Ruby on Rails Version: #{rails_gem_version}"
-        puts "Infopark Kickstarter Version: #{infopark_gem_version}"
-        puts "Infopark RailsConnector Version: #{infopark_rails_connector_version}"
-        puts "Infopark CloudConnector Version: #{infopark_cloud_connector_version}"
-        puts "Infopark CrmConnector Version: #{infopark_crm_connector_version}"
+        output = []
 
-        puts ''
-        puts 'CMS Structure Information'
-        puts '-------------------------'
-        puts obj_class_information('published').to_yaml
+        output << ''
+        output << 'System Component Versions'
+        output << '----------------------'
+        output << "Ruby Version: #{ruby_version}"
+        output << "Gem Version: #{gem_version}"
+        output << "Ruby on Rails Version: #{rails_gem_version}"
+        output << "RVM Version: #{rvm_version}"
+        output << "rbenv Version: #{rbenv_version}"
+        output << "Infopark Kickstarter Version: #{infopark_gem_version}"
+        output << "Infopark RailsConnector Version: #{infopark_rails_connector_version}"
+        output << "Infopark CloudConnector Version: #{infopark_cloud_connector_version}"
+        output << "Infopark CrmConnector Version: #{infopark_crm_connector_version}"
+
+        output << ''
+        output << 'CMS Structure Information'
+        output << '-------------------------'
+        output << obj_class_information('published').to_yaml
+
+        output = output.join("\n")
+
+        path = "#{Rails.root}/tmp/infopark-support-#{Time.now.to_i}.txt"
+
+        File.open(path, 'w+') do |f|
+          f.write(output)
+        end
+
+        puts output
       end
 
       def ruby_version
@@ -68,6 +82,18 @@ module InfoparkKickstarter
 
       def gem_version
         %x{gem -v}
+      end
+
+      def rvm_version
+        unless %x{which rvm}.empty?
+          %x{rvm -v}
+        end
+      end
+
+      def rbenv_version
+        unless %x{which rbenv}.empty?
+          %x{rbenv -v}
+        end
       end
 
       def rails_gem_version
