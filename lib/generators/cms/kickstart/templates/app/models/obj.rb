@@ -17,8 +17,15 @@ class Obj < ::RailsConnector::BasicObj
     @parent ||= super()
   end
 
+  # Determines the homepage for the current object by traversing up the tree
+  # until a homepage is found. In case of a ghost path (no parent) the default
+  # homepage is returned.
   def homepage
-    @homepage ||= parent.homepage
+    @homepage ||= if parent
+      parent.homepage
+    else
+      self.class.default_homepage
+    end
   end
 
   def homepages

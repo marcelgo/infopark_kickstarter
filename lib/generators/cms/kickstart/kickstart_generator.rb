@@ -73,6 +73,7 @@ module Cms
         gem('simple_form')
         gem('haml-rails')
         gem('cells')
+        gem('utf8-cleaner')
 
         gem_group(:assets) do
           gem('less-rails-bootstrap')

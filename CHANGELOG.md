@@ -1,6 +1,10 @@
 # v2.2.0
-  * Added a new rake task `cms:system_info` to create an overview of your system that can help the
+  * Added a new rake task `infopark:info:system` to create an overview of your system that can help the
     Infopark support team to quickly adress your issues.
+  * Bugfix: The Ruby on Rails application could not handle invalid utf8 characters in the request
+    url. The gem `utf8-cleaner` fixes that.
+  * Bugfix: Ghost paths (an object with a missing parent) are now handled correctly when searching
+    for their homepage.
   * Footer navigation refactored to highlight and reposition the company reference and add a tiny
     remark to display the platform the webpage is build on.
   * Extended footer navigation links to include link to the Dev Center User Guide.
