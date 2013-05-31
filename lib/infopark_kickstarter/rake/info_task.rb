@@ -19,11 +19,6 @@ module InfoparkKickstarter
             status
           end
 
-          desc 'Gathers important system information'
-          task system_info: :environment do |_, args|
-            system_info
-          end
-
           namespace :info do
             desc 'Get information about all object classes in the given workspace (default "published")'
             task :obj_classes, [:workspace] => :environment do |_, args|
@@ -37,6 +32,11 @@ module InfoparkKickstarter
               args.with_defaults(workspace: 'published')
 
               puts permalinks(args[:workspace]).to_yaml
+            end
+
+            desc 'Gathers important system information'
+            task system: :environment do |_, args|
+              system_info
             end
           end
         end
