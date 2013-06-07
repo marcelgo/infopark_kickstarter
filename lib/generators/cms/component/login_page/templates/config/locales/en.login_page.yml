@@ -5,16 +5,22 @@ en:
       success: 'You logged in successfully.'
     logout:
       success: 'You logged out successfully.'
+    reset_password:
+      failed: 'Password reset failed'
+      success: 'Password reset successfully. You receive an email with further instructions.'
 
   helpers:
     submit:
       login_presenter:
         create: 'Login'
+      reset_password_presenter:
+        create: 'Reset'
 
   login:
     show:
       login: 'Login'
       logout: 'Logout'
+      reset_password: 'Reset Password'
 
   simple_form:
     error_notification:

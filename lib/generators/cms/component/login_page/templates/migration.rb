@@ -1,6 +1,7 @@
 class UpdateHomepageObj < ::RailsConnector::Migration
   def up
     create_login_page_obj
+    create_reset_password_page_obj
     update_homepage_obj_class
     update_homepage_obj
   end
@@ -8,8 +9,17 @@ class UpdateHomepageObj < ::RailsConnector::Migration
   def create_login_page_obj
     login_obj = create_obj(
       _path: "<%= configuration_path %>/login",
-      _obj_class: 'LoginPage',
+      _obj_class: "<%= login_obj_class_name %>",
       headline: 'Login',
+      show_in_navigation: 'Yes'
+    )
+  end
+
+  def create_reset_password_page_obj
+    login_obj = create_obj(
+      _path: "<%= configuration_path %>/login/reset-password",
+      _obj_class: "<%= reset_password_obj_class_name %>",
+      headline: 'Reset Password',
       show_in_navigation: 'Yes'
     )
   end

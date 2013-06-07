@@ -13,3 +13,6 @@
     = form.input(:password)
 
     = form.button(:submit)
+
+  = link_to(cms_path(@obj.reset_password_page)) do
+    = t('login.show.reset_password')

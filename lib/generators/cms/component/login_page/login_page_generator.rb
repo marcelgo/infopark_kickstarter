@@ -11,7 +11,7 @@ module Cms
         def create_migration
           begin
             Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = obj_class_name
+              model.name = login_obj_class_name
               model.title = 'Page: Login'
               model.thumbnail = false
               model.attributes = [
@@ -38,7 +38,40 @@ module Cms
               ]
             end
 
-            turn_model_into_page(obj_class_name)
+            turn_model_into_page(login_obj_class_name)
+          rescue Cms::Generators::DuplicateResourceError
+          end
+
+          begin
+            Model::ApiGenerator.new(behavior: behavior) do |model|
+              model.name = reset_password_obj_class_name
+              model.title = 'Page: ResetPassword'
+              model.thumbnail = false
+              model.attributes = [
+                {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+                {
+                  name: 'content',
+                  type: :html,
+                  title: 'Content',
+                },
+                {
+                  name: 'show_in_navigation',
+                  type: :boolean,
+                  title: 'Show in Navigation',
+                },
+                {
+                  name: 'sort_key',
+                  type: :string,
+                  title: 'Sort key',
+                },
+              ]
+            end
+
+            turn_model_into_page(reset_password_obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end
@@ -53,23 +86,22 @@ module Cms
         end
 
         def update_homepage_model
-            file = 'app/models/homepage.rb'
+          file = 'app/models/homepage.rb'
 
-            data = "\n  cms_attribute :login_page_link, type: :linklist"
-            insert_point = "class Homepage < Obj"
+          data = "\n  cms_attribute :login_page_link, type: :linklist"
+          insert_point = "class Homepage < Obj"
 
-            insert_into_file(file, data, after: insert_point)
+          insert_into_file(file, data, after: insert_point)
 
-            data = [
-              "\n",
-              '  def login_page',
-              '    login_page_link.destination_objects.first',
-              '  end',
-            ].join("\n")
-            insert_point = "include Page"
+          data = [
+            "\n",
+            '  def login_page',
+            '    login_page_link.destination_objects.first',
+            '  end',
+          ].join("\n")
+          insert_point = "include Page"
 
-            insert_into_file(file, data, after: insert_point)
-
+          insert_into_file(file, data, after: insert_point)
         end
 
         def update_footer_cell
@@ -80,7 +112,6 @@ module Cms
               '          = render_cell(:login, :show, @page)',
             ].join("\n")
           end
-
         end
 
         def notice
@@ -91,8 +122,12 @@ module Cms
 
         private
 
-        def obj_class_name
+        def login_obj_class_name
           'LoginPage'
+        end
+
+        def reset_password_obj_class_name
+          'ResetPasswordPage'
         end
       end
     end
