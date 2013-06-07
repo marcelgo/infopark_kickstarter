@@ -152,12 +152,6 @@ module Cms
                 max_size: 1,
               },
               {
-                name: 'login_page_link',
-                type: :linklist,
-                title: 'Login Page',
-                max_size: 1,
-              },
-              {
                 name: 'footer_links',
                 type: :linklist,
                 title: 'Footer Links',
@@ -246,27 +240,6 @@ module Cms
         rescue Cms::Generators::DuplicateResourceError
         end
 
-        begin
-          class_name = 'LoginPage'
-
-          Model::ApiGenerator.new(behavior: behavior) do |model|
-            model.name = class_name
-            model.title = 'Page: Login'
-            model.thumbnail = false
-            model.attributes = [
-              title_attribute,
-              content_attribute,
-              show_in_navigation_attribute,
-              sort_key_attribute,
-            ]
-          end
-
-          Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
-        rescue Cms::Generators::DuplicateResourceError
-        end
-
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
       end
 
@@ -285,6 +258,7 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
+        Rails::Generators.invoke('cms:component:login_page')
         Rails::Generators.invoke('cms:widget:text')
         Rails::Generators.invoke('cms:widget:image')
       end

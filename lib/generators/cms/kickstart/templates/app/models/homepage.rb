@@ -1,7 +1,6 @@
 class Homepage < Obj
   cms_attribute :headline, type: :string
   cms_attribute :error_not_found_page_link, type: :linklist
-  cms_attribute :login_page_link, type: :linklist
   cms_attribute :footer_links, type: :linklist
   cms_attribute :locale, type: :string
 
@@ -33,9 +32,5 @@ class Homepage < Obj
 
   def error_not_found_page
     error_not_found_page_link.destination_objects.first
-  end
-
-  def login_page
-    login_page_link.destination_objects.first
   end
 end
