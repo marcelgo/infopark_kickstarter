@@ -11,7 +11,7 @@ class ResetPasswordPageController < CmsController
 
   def send_new_password(presenter)
     contact = @presenter.find_contact
-    target_path = cms_path(@obj)
+    target_path = cms_path(@obj.homepage.login_page)
 
     if contact.present?
       contact.password_request
