@@ -1,0 +1,10 @@
+Description:
+    Generates a widget that displays a login mask for the authentification against the Infopark
+    CRM.
+
+Example:
+    CMS: obj_class LoginWidget
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
+
+    `rails generate cms:widget:login`

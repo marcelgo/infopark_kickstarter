@@ -1,0 +1,10 @@
+en:
+  widgets:
+    login_widget:
+      title: 'Login widget'
+      description: 'Widget that holds a login mask.'
+
+      form:
+        login: '* Username'
+        password: '* Password'
+        submit: 'Login'

@@ -1,0 +1,6 @@
+.row
+  .span12
+    = "You are logged in as: #{@current_user.login}"
+.row
+  .span12
+    = render({state: :logout})
