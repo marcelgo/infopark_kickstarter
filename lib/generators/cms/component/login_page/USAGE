@@ -1,0 +1,19 @@
+Description:
+    Creates a login page and reset password page where users can login with
+    their Infopark CRM user credentials. This generator is part of the
+    `cms:kickstart` generator.
+
+Example:
+    `rails generate cms:component:login_page`
+
+    CMS: obj_class LoginPage
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
+    CMS: attribute sort_key (string)
+    CMS: attribute show_in_navigation (enum)
+
+    CMS: obj_class ResetPasswordPage
+    CMS: attribute headline (string)
+    CMS: attribute content (html)
+    CMS: attribute sort_key (string)
+    CMS: attribute show_in_navigation (enum)
