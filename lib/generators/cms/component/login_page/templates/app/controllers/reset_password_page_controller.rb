@@ -3,22 +3,23 @@ class ResetPasswordPageController < CmsController
     @presenter = ResetPasswordPresenter.new(params[:reset_password_presenter])
 
     if request.post? && @presenter.valid?
-      send_new_password(@presenter)
+      handle_redirect(@presenter.password_request, @obj)
     end
   end
 
   private
 
-  def send_new_password(presenter)
-    contact = @presenter.find_contact
-    target_path = cms_path(@obj.homepage.login_page)
+  def handle_redirect(status, target)
+    options = {}
 
-    if contact.present?
-      contact.password_request
-
-      redirect_to(target_path, notice: t('flash.reset_password.success'))
+    if status
+      target = target.homepage
+      options[:notice] = t('flash.reset_password.success')
     else
-      redirect_to(target_path, alert: t('flash.reset_password.failed'))
+      options[:alert] = t('flash.reset_password.failed')
     end
+
+    target_path = cms_path(target)
+    redirect_to(target_path, options)
   end
 end
