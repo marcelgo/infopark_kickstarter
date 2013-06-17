@@ -1,4 +1,6 @@
 # v2.2.0
+  * Controls for the generic video player (flowplayer) are now enabled by default.
+    (Thanks @steenkamp)
   * Moved tasks `cms:console`, `cms:status`, `cms:info:obj_classes` and `cms:info:permalinks` under
     the `infopark` namespace. You get an overview of all available rake tasks by running `rake -T`
     in your project folder.

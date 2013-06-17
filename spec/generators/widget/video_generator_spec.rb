@@ -50,7 +50,9 @@ describe Cms::Generators::Widget::VideoGenerator do
               contains '//= require projekktor.config'
             end
 
-            file 'projekktor.config.js.coffee'
+            file 'projekktor.config.js.coffee' do
+              contains 'controls: true'
+            end
           end
 
           directory 'stylesheets' do
