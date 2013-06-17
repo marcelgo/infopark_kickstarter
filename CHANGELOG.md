@@ -1,4 +1,7 @@
 # v2.2.0
+  * Moved login logic into a separate component to allow more flexibility and easier future
+    maintainance. You can generate the login page by running `rails g cms:component:login_page`. In
+    the course thereof, support was added to reset the password.
   * Moved tasks `cms:console`, `cms:status`, `cms:info:obj_classes` and `cms:info:permalinks` under
     the `infopark` namespace. You get an overview of all available rake tasks by running `rake -T`
     in your project folder.

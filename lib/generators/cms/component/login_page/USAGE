@@ -1,6 +1,7 @@
 Description:
-    Creates a login page and reset password page where users can login with the account of the
-    connected Infopark CRM. This generator is called by the kickstart generator.
+    Creates a login page and reset password page where users can login with
+    their Infopark CRM user credentials. This generator is part of the
+    `cms:kickstart` generator.
 
 Example:
     `rails generate cms:component:login_page`

@@ -82,13 +82,13 @@ module Cms
         end
 
         def update_homepage
-          migration_template('migration.rb', 'cms/migrate/update_homepage_obj.rb')
+          migration_template('migration.rb', 'cms/migrate/login_page_example.rb')
         end
 
         def update_homepage_model
           file = 'app/models/homepage.rb'
 
-          data = "\n  cms_attribute :login_page_link, type: :linklist"
+          data = "\n  cms_attribute :login_page_link, type: :linklist, max_size: 1"
           insert_point = "class Homepage < Obj"
 
           insert_into_file(file, data, after: insert_point)
@@ -99,7 +99,7 @@ module Cms
             '    login_page_link.destination_objects.first',
             '  end',
           ].join("\n")
-          insert_point = "include Page"
+          insert_point = 'include Page'
 
           insert_into_file(file, data, after: insert_point)
         end

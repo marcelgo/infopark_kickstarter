@@ -9,9 +9,10 @@ class LoginPage < Obj
   include Page
   # include Widget
 
+  # Returns the first ResetPasswordPage child.
   def reset_password_page
-    self.children.detect do |child|
-      child.class == ResetPasswordPage
+    @reset_password_page ||= children.detect do |child|
+      child.is_a?(ResetPasswordPage)
     end
   end
 end

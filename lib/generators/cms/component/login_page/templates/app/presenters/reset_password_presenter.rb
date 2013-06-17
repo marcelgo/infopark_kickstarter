@@ -6,9 +6,13 @@ class ResetPasswordPresenter
 
   validates :login, presence: true
 
-  def find_contact
-    contact = Infopark::Crm::Contact.search(params: {login: login}).first
+  def password_request
+    contact = Infopark::Crm::Contact.search(params: { login: login }).first
 
-    return contact
+    if contact
+      contact.password_request
+    end
+
+    contact
   end
 end
