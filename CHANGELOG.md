@@ -1,4 +1,6 @@
 # v2.2.0
+  * Refactored twitter bootstrap integration to more easily allow changes and give examples on how
+    to customize the bootstrap framework.
   * Added a login widget that allows the editor to place a login form anywhere on the page. The
     login widget also holds a link to reset the password and displays a logout link and the login of
     the current user if the user is already logged in. Run `rails generate cms:widget:login --help`
