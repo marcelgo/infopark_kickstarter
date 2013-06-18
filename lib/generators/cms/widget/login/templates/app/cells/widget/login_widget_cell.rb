@@ -9,11 +9,15 @@ class Widget::LoginWidgetCell < WidgetCell
     @current_user = current_user
 
     if @current_user.logged_in?
+      @login = @current_user.fetch.login
+
       render
     else
       @login_page = login_page(@page)
 
-      render(view: 'login_form')
+      if @login_page
+        render(view: 'form')
+      end
     end
   end
 
@@ -21,9 +25,9 @@ class Widget::LoginWidgetCell < WidgetCell
   # The following states assume @page to be given.
 
   def logout
-    if homepage(@page) && homepage(@page).login_page_link?
-      @login_page = login_page(@page)
+    @login_page = login_page(@page)
 
+    if @login_page
       render
     end
   end
@@ -36,12 +40,10 @@ class Widget::LoginWidgetCell < WidgetCell
 
   private
 
-  def homepage(page)
-    page.homepage
-  end
-
   def login_page(page)
-    homepage(page).login_page
+    if page && page.homepage
+      page.homepage.login_page
+    end
   end
 
   def session
