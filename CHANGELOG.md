@@ -1,4 +1,6 @@
 # v2.2.0
+  * Added a simple breadcrumb navigation that displays pages up to the homepage on top of the page.
+    Run `rails generate cms:component:breadcrumbs --help` to get further details.
   * Refactored twitter bootstrap integration to more easily allow changes and give examples on how
     to customize the bootstrap framework.
   * Added a login widget that allows the editor to place a login form anywhere on the page. The
