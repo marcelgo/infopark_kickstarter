@@ -1,0 +1,11 @@
+.row
+  .span12
+    = @current_user.fetch.login
+
+.row
+  .span12
+    = render({ state: :logout })
+
+    |
+
+    = render({ state: :reset_password })
