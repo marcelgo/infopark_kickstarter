@@ -8,8 +8,8 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = 'LoginWidget'
-              widget.icon = '&#xF061;'
-              widget.description = 'Widget that holds login mask.'
+              widget.icon = '&#xF02E;'
+              widget.description = 'Displays a login form.'
               widget.attributes = [
                 {
                   name: 'headline',

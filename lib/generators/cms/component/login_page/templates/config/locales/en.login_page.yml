@@ -13,6 +13,7 @@ en:
     submit:
       login_presenter:
         create: 'Login'
+        submit: 'Login'
       reset_password_presenter:
         create: 'Reset'
 

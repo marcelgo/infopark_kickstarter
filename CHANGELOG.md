@@ -1,7 +1,12 @@
 # v2.2.0
+  * Added a login widget that allows the editor to place a login form anywhere on the page. The
+    login widget also holds a link to reset the password and displays a logout link and the login of
+    the current user if the user is already logged in. Run `rails generate cms:widget:login --help`
+    for more details. The login widgets depends on the core `login_page` component.
   * Moved login logic into a separate component to allow more flexibility and easier future
-    maintainance. You can generate the login page by running `rails g cms:component:login_page`. In
-    the course thereof, support was added to reset the password.
+    maintainance. You can generate the login page by running
+    `rails generate cms:component:login_page`. In the course thereof, support was added to reset the
+    password.
   * Controls for the generic video player (flowplayer) are now enabled by default.
     (Thanks @steenkamp)
   * Moved tasks `cms:console`, `cms:status`, `cms:info:obj_classes` and `cms:info:permalinks` under

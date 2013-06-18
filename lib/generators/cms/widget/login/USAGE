@@ -1,6 +1,6 @@
 Description:
-    Generates a widget that displays a login mask for the authentification against the Infopark
-    CRM.
+    Generates a widget that displays a login form for authentication against the Infopark CRM. It
+    depends on the core "login_page" component.
 
 Example:
     CMS: obj_class LoginWidget

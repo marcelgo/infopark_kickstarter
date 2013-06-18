@@ -1,28 +1,48 @@
 class Widget::LoginWidgetCell < WidgetCell
   include Authentication
 
+  # Cell actions:
+
   def show(page, widget)
     @page = page
     @widget = widget
     @current_user = current_user
 
-    unless @current_user.logged_in?
-      render view: 'login_form'
+    if @current_user.logged_in?
+      render
     else
+      @login_page = login_page(@page)
+
+      render(view: 'login_form')
+    end
+  end
+
+  # Cell states:
+  # The following states assume @page to be given.
+
+  def logout
+    if homepage(@page) && homepage(@page).login_page_link?
+      @login_page = login_page(@page)
+
       render
     end
   end
 
-  # states
-  def logout
-    if @page.homepage && @page.homepage.login_page_link?
-      @login_page = @page.homepage.login_page
+  # The following states assume @login_page to be given.
 
-      render
-    end
+  def reset_password
+    render
   end
 
   private
+
+  def homepage(page)
+    page.homepage
+  end
+
+  def login_page(page)
+    homepage(page).login_page
+  end
 
   def session
     request.session

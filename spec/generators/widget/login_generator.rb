@@ -29,6 +29,7 @@ describe Cms::Generators::Widget::LoginGenerator do
               file 'show.html.haml'
               file 'login_form.html.haml'
               file 'logout.html.haml'
+              file 'reset_password.html.haml'
             end
           end
         end

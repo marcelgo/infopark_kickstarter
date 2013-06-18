@@ -1,6 +1,11 @@
 .row
   .span12
-    = "You are logged in as: #{@current_user.login}"
+    = @current_user.fetch.login
+
 .row
   .span12
-    = render({state: :logout})
+    = render({ state: :logout })
+
+    |
+
+    = render({ state: :reset_password })
