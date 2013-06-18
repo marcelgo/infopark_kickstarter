@@ -2,5 +2,7 @@ Description:
     Scaffolds an entire CMS object class, from model and migration to controller and views, along
     with a full test suite.
 
+    Run `rails generate cms:model --help` to see all available options.
+
 Example:
-    `rails generate cms:scaffold News show_in_navigation max_results`
+    `rails generate cms:scaffold News --attributes=show_in_navigation:boolean max_results:string`
