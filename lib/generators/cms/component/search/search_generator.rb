@@ -39,6 +39,7 @@ module Cms
               model.name = class_name
               model.title = 'Page: Search'
               model.thumbnail = false
+              model.page = true
               model.attributes = [
                 {
                   name: show_in_navigation_attribute_name,
@@ -49,8 +50,6 @@ module Cms
             end
 
             Rails::Generators.invoke('cms:controller', [class_name])
-
-            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 

@@ -6,7 +6,6 @@ module Cms
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
       include BasePaths
-      include Actions
 
       class_option :configuration_path,
         type: :string,
@@ -205,6 +204,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Content'
+            model.page = true
             model.attributes = [
               title_attribute,
               show_in_navigation_attribute,
@@ -215,8 +215,6 @@ module Cms
           end
 
           Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -227,6 +225,7 @@ module Cms
             model.name = class_name
             model.title = 'Page: Error'
             model.thumbnail = false
+            model.page = true
             model.attributes = [
               title_attribute,
               content_attribute,
@@ -235,8 +234,6 @@ module Cms
           end
 
           Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 

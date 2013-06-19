@@ -1,4 +1,7 @@
 # v2.2.0
+  * Added `--page` and `--widget` options to the model generator to allow to turn a model into a
+    page or widget object via the command line. See `rails generate cms:model --help` for more
+    details. (Thanks @tritz)
   * Added a simple breadcrumb navigation that displays pages up to the homepage on top of the page.
     Run `rails generate cms:component:breadcrumbs --help` to get further details.
     (Thanks @rouvenbehnke)

@@ -4,7 +4,6 @@ module Cms
       class LoginPageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
-        include Actions
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -14,6 +13,7 @@ module Cms
               model.name = login_obj_class_name
               model.title = 'Page: Login'
               model.thumbnail = false
+              model.page = true
               model.attributes = [
                 {
                   name: 'headline',
@@ -37,8 +37,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(login_obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 
@@ -47,6 +45,7 @@ module Cms
               model.name = reset_password_obj_class_name
               model.title = 'Page: ResetPassword'
               model.thumbnail = false
+              model.page = true
               model.attributes = [
                 {
                   name: 'headline',
@@ -70,8 +69,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(reset_password_obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

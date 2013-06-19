@@ -3,7 +3,6 @@ module Cms
     module Widget
       class ApiGenerator < ::Rails::Generators::NamedBase
         include Migration
-        include Actions
 
         Rails::Generators.hide_namespace(self.namespace)
 
@@ -35,12 +34,11 @@ module Cms
               model.migration_path = "#{widget_path}/migrate"
               model.model_path = model_path
               model.thumbnail = false
+              model.widget = true
               model.attributes = attributes
               model.preset_attributes = preset_attributes
               model.mandatory_attributes = mandatory_attributes
             end
-
-            turn_model_into_widget(name, model_path)
 
             template('en.locale.yml', "#{widget_path}/locales/en.#{file_name}.yml")
             template('show.html.haml', "#{widget_path}/views/show.html.haml")

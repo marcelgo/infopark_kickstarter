@@ -2,8 +2,6 @@ module Cms
   module Generators
     module Component
       class RedirectGenerator < ::Rails::Generators::Base
-        include Actions
-
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
@@ -13,6 +11,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = class_name
               model.title = 'Redirect'
+              model.page = true
               model.attributes = [
                 {
                   name: 'show_in_navigation',
@@ -32,8 +31,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

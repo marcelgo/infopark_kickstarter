@@ -31,7 +31,7 @@ module InfoparkKickstarter
       def reset(tenant_name)
         RailsConnector::CmsRestApi.delete('workspaces', {
           revision_id: RailsConnector::Workspace.default.revision_id,
-          tenant_name: tenant_name
+          tenant_name: tenant_name,
         })
 
         system('bundle exec rake tmp:cache:clear')
