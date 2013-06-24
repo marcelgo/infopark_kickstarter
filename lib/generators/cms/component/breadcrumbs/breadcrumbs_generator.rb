@@ -14,7 +14,7 @@ module Cms
             '  def show_breadcrumbs?',
             '    true',
             '  end',
-
+            "\n",
             '  # Returns all breadcrumb pages. A breadcrumb page must be a +Page+ and needs',
             '  # to allow to be displayed in the navigation. Both +Root+ and +Website+ are',
             '  # not pages, so only pages up to the homepage are displayed.',
