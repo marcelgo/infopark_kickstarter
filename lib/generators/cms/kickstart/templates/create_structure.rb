@@ -22,12 +22,8 @@ class CreateStructure < ::RailsConnector::Migration
       Obj.find_by_path("<%= homepage_path %>").id,
       error_not_found_page_link: [{ url: "<%= configuration_path %>/error-not-found" }],
       footer_links: [
-        { title: 'Getting Started', url: 'https://dev.infopark.net/getting-started' },
-        { title: 'Developer Guide', url: 'https://dev.infopark.net/developer-guide' },
-        { title: 'API Reference', url: 'https://dev.infopark.net/api-doc' },
-        { title: 'User Guide', url: 'https://dev.infopark.net/user-guide' },
-        { title: 'Blog', url: 'https://dev.infopark.net/blog' },
-        { title: 'Support', url: 'https://dev.infopark.net/support' },
+        { title: 'Dev Center', url: 'https://dev.infopark.net' },
+        { title: 'Need help?', url: 'https://dev.infopark.net/support' },
         { title: 'Dashboard', url: 'http://localhost:3000/cms/dashboard' },
       ]
     )
