@@ -1,11 +1,1 @@
-Description:
-    Generates a widget that displays a hero unit, which is often used on top of important pages that
-    need a certain focus and highlight.
-
-Example:
-    CMS: obj_class HeroUnitWidget
-    CMS: attribute headline (string)
-    CMS: attribute content (html)
-    CMS: attribute link_to (linklist)
-
-    `rails generate cms:widget:hero_unit`
+Documentation: https://dev.infopark.net/hero-unit-widget

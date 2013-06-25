@@ -1,10 +1,1 @@
-Description:
-    Generates a widget that displays a login form for authentication against the Infopark CRM. It
-    depends on the core "login_page" component.
-
-Example:
-    CMS: obj_class LoginWidget
-    CMS: attribute headline (string)
-    CMS: attribute content (html)
-
-    `rails generate cms:widget:login`
+Documentation: https://dev.infopark.net/login-widget
