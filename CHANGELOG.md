@@ -1,4 +1,6 @@
 # v2.2.0
+  * Insert a placeholder image in the slider widget if no images are configured. This is the case,
+    when the widget is created. (Thanks @rouvenbehnke)
   * Added `--page` and `--widget` options to the model generator to allow to turn a model into a
     page or widget object via the command line. See `rails generate cms:model --help` for more
     details. (Thanks @tritz)
