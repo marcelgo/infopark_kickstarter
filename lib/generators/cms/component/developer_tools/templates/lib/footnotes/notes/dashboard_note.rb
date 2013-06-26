@@ -11,7 +11,7 @@ module Footnotes
       # If it's nil, Footnotes will use '#'.
       #
       def link
-        'http://localhost:3000/cms/dashboard'
+        '/cms/dashboard'
       end
 
       # Returns the title that represents this note.
