@@ -20,12 +20,7 @@ class CreateStructure < ::RailsConnector::Migration
 
     try_update_obj(
       Obj.find_by_path("<%= homepage_path %>").id,
-      error_not_found_page_link: [{ url: "<%= configuration_path %>/error-not-found" }],
-      footer_links: [
-        { title: 'Dev Center', url: 'https://dev.infopark.net' },
-        { title: 'Need help?', url: 'https://dev.infopark.net/support' },
-        { title: 'Dashboard', url: 'http://localhost:3000/cms/dashboard' },
-      ]
+      error_not_found_page_link: [{ url: "<%= configuration_path %>/error-not-found" }]
     )
 
     try_create_obj(_path: "<%= resources_path %>", _obj_class: 'Container', headline: 'Resources')

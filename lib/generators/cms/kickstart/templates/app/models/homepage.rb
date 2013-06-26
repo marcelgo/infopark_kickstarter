@@ -1,7 +1,6 @@
 class Homepage < Obj
   cms_attribute :headline, type: :string
   cms_attribute :error_not_found_page_link, type: :linklist
-  cms_attribute :footer_links, type: :linklist
   cms_attribute :locale, type: :string
 
   include Page

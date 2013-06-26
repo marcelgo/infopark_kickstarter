@@ -1,4 +1,6 @@
 # v2.2.0
+  * Removed unused footer links feature. This feature did not reflect the needs of an actual
+    project. A how-to guide will be integrated in the Infopark Dev Center.
   * Insert a placeholder image in the slider widget if no images are configured. This is the case,
     when the widget is created. (Thanks @rouvenbehnke)
   * Added `--page` and `--widget` options to the model generator to allow to turn a model into a
