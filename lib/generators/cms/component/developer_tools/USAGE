@@ -7,4 +7,5 @@ Example:
     Gem: thin
     Gem: better_errors
     Gem: binding_of_caller
+    Gem: rails-footnotes
     Gem: pry-rails

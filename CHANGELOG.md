@@ -1,6 +1,9 @@
 # v2.2.0
   * Removed unused footer links feature. This feature did not reflect the needs of an actual
     project. A how-to guide will be integrated in the Infopark Dev Center.
+  * The developer tools (rake cms:component:developer_tools) got a new Infopark Developer Bar. This
+    is an extension of the `rails-footnotes` gem and displays helpful information and links at the
+    bottom of each page. (Thanks @tritz)
   * Insert a placeholder image in the slider widget if no images are configured. This is the case,
     when the widget is created. (Thanks @rouvenbehnke)
   * Added `--page` and `--widget` options to the model generator to allow to turn a model into a

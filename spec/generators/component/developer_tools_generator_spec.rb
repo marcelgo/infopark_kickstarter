@@ -24,7 +24,25 @@ describe Cms::Generators::Component::DeveloperToolsGenerator do
         contains 'gem "pry-rails"'
         contains 'gem "better_errors"'
         contains 'gem "binding_of_caller"'
+        contains 'gem "rails-footnotes"'
         contains 'gem "thin"'
+      end
+
+      directory 'config' do
+        directory 'initializers' do
+          file 'rails_footnotes.rb'
+        end
+      end
+
+      directory 'lib' do
+        directory 'footnotes' do
+          directory 'notes' do
+            file 'help_note.rb'
+            file 'dashboard_note.rb'
+            file 'dev_center_note.rb'
+            file 'obj_class_note.rb'
+          end
+        end
       end
     }
   end
