@@ -1,4 +1,5 @@
 # v2.2.0
+  * Updated most of the gems to the current version, eventhough we don't support Rails 4 yet.
   * Bugfix: Error page now uses a correct grid layout and displays the content correctly.
   * Removed unused footer links feature. This feature did not reflect the needs of an actual
     project. A how-to guide will be integrated in the Infopark Dev Center.
