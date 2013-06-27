@@ -66,8 +66,8 @@ module InfoparkKickstarter
         end
 
         output << ''
-        output << 'CMS Structure Information'
-        output << '-------------------------'
+        output << 'Object Class Definitions'
+        output << '------------------------'
         output << obj_class_information('published').to_yaml
 
         output = output.join("\n")
