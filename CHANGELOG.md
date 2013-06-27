@@ -4,12 +4,12 @@
     project. A how-to guide will be integrated in the Infopark Dev Center.
   * The developer tools (rake cms:component:developer_tools) got a new Infopark Developer Bar. This
     is an extension of the `rails-footnotes` gem and displays helpful information and links at the
-    bottom of each page. (Thanks @tritz)
+    bottom of each page. (Thanks @thomasritz)
   * Insert a placeholder image in the slider widget if no images are configured. This is the case,
     when the widget is created. (Thanks @rouvenbehnke)
   * Added `--page` and `--widget` options to the model generator to allow to turn a model into a
     page or widget object via the command line. See `rails generate cms:model --help` for more
-    details. (Thanks @tritz)
+    details. (Thanks @thomasritz)
   * Added a simple breadcrumb navigation that displays pages up to the homepage on top of the page.
     Run `rails generate cms:component:breadcrumbs --help` to get further details.
     (Thanks @rouvenbehnke)
@@ -142,7 +142,7 @@
   * Search support moved into its own generator and got cleaned up and simplified. See
     `rails generate cms:component:search --help` for more details.
   * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
-    of Infopark RailsConnector. (Thanks @tritz)
+    of Infopark RailsConnector. (Thanks @thomasritz)
   * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
     of accept headers. (Thanks @awendt)
   * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.
