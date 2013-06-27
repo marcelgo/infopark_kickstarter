@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.description = 'Infopark Kickstarter'
   gem.has_rdoc    = 'yard'
 
-  gem.required_ruby_version     = Gem::Requirement.new('>= 1.9.3')
+  gem.required_ruby_version     = Gem::Requirement.new('>= 1.9')
   gem.required_rubygems_version = Gem::Requirement.new('>= 1.8')
 
   gem.license = 'LGPLv3'

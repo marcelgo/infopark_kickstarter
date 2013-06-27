@@ -4,12 +4,8 @@
   = cms_tag(:div, @obj, :content)
 
   = simple_form_for(@presenter, url: cms_path(@obj)) do |form|
-    = hidden_field_tag(:return_to, params[:return_to])
-
     = form.error_notification
 
     = form.input(:login)
 
-    = form.input(:password)
-
-    = form.button(:submit)
+    = form.button(:submit, class: 'btn-danger')

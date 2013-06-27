@@ -53,7 +53,11 @@ module WorkspaceSelection
   end
 
   def redirect_to_workspace(workspace)
-    target = "#{request.path}?_rc-ws=#{workspace}"
+    query_params = request.query_parameters
+    query_params.delete('ws')
+    query_params.merge!('_rc-ws' => workspace)
+
+    target = request.path + '?' + query_params.to_query
 
     redirect_to(target)
   end

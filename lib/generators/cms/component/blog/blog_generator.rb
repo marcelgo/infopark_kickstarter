@@ -3,7 +3,6 @@ module Cms
     module Component
       class BlogGenerator < ::Rails::Generators::Base
         include Migration
-        include Actions
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -26,6 +25,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = blog_class_name
               model.title = 'Page: Blog'
+              model.page = true
               model.attributes = [
                 {
                   name: 'headline',
@@ -44,8 +44,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(blog_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 
@@ -53,6 +51,8 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = blog_entry_class_name
               model.title = 'Page: Blog Entry'
+              model.thumbnail = false
+              model.page = true
               model.attributes = [
                 {
                   name: 'headline',
@@ -76,8 +76,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(blog_entry_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

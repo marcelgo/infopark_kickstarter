@@ -1,7 +1,7 @@
 require './lib/rails_connector/cms_attributes'
 
 # This class represents the base class of all CMS objects and implements behavior that all CMS
-# objects, regardless whether they are pages, boxes or resources have in common.
+# objects, regardless whether they are pages, widgets or resources have in common.
 class Obj < ::RailsConnector::BasicObj
   include RailsConnector::CmsAttributes
 
@@ -17,8 +17,19 @@ class Obj < ::RailsConnector::BasicObj
     @parent ||= super()
   end
 
+  def ancestors
+    @ancestors ||= super()
+  end
+
+  # Determines the homepage for the current object by traversing up the tree
+  # until a homepage is found. In case of a ghost path (no parent) the default
+  # homepage is returned.
   def homepage
-    @homepage ||= parent.homepage
+    @homepage ||= if parent
+      parent.homepage
+    else
+      self.class.default_homepage
+    end
   end
 
   def homepages
@@ -36,9 +47,9 @@ class Obj < ::RailsConnector::BasicObj
 
   # Return a page object or nil.
   #
-  # Normally, objects are either pages, boxes, or media files/resources.
-  # Pages are pages in itself, Widgets are treated differently. Media files
-  # and resources are filtered out.
+  # Normally, objects are either pages, widgets, or resources.
+  # Pages are pages in itself, Widgets are treated differently. Resources are
+  # filtered out.
   #
   # This method can be overridden by subclasses to implement this behaviour.
   def page
@@ -50,7 +61,20 @@ class Obj < ::RailsConnector::BasicObj
   end
 
   def menu_title
-    self[:headline] || self.name
+    self[:headline] || '[no headline]'
+  end
+
+  # By default, objects can be displayed in navigation sections. Either add a
+  # boolean cms attribute +show_in_navigation+ or override the method directly
+  # in your model.
+  def show_in_navigation?
+    true
+  end
+
+  # By default, objects have no sort_key set. Either add a string cms attribute
+  # +sort_key+ or override the method directly in your model.
+  def sort_key
+    ''
   end
 
   # Overrides RailsConnector::BasicObj#body_data_url

@@ -1,8 +1,6 @@
 class Homepage < Obj
   cms_attribute :headline, type: :string
   cms_attribute :error_not_found_page_link, type: :linklist
-  cms_attribute :login_page_link, type: :linklist
-  cms_attribute :footer_links, type: :linklist
   cms_attribute :locale, type: :string
 
   include Page
@@ -26,11 +24,12 @@ class Homepage < Obj
     parent
   end
 
-  def error_not_found_page
-    error_not_found_page_link.destination_objects.first
+  # Overriden method +title+ from +Page+.
+  def title
+    read_attribute('title').presence
   end
 
-  def login_page
-    login_page_link.destination_objects.first
+  def error_not_found_page
+    error_not_found_page_link.destination_objects.first
   end
 end

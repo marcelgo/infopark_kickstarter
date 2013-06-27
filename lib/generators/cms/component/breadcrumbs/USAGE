@@ -1,0 +1,10 @@
+Description:
+    Creates a breadcrumb navigation that displays pages up to the homepage. Each
+    page type can be configured to display breadcrumbs or not. By default all
+    page types display breadcrumbs.
+
+Example:
+    `rails generate cms:component:breadcrumbs`
+
+    Misc: Extends "app/concerns/page.rb".
+          Extends "app/views/layouts/application.html.haml".

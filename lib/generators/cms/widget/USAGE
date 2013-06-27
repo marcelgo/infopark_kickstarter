@@ -4,6 +4,8 @@ Description:
     displayed in the widget browser. As for normal object classes, you can define attribute,
     mandatory attributes and give default values to them.
 
+    Run `rails generate cms:widget --help` to see all available options.
+
 Example:
     `rails generate cms:widget NewsWidget --title="News Widget" --attributes=sort_key:string length:integer`
 

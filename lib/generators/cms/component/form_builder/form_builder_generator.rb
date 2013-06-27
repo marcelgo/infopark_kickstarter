@@ -3,7 +3,6 @@ module Cms
     module Component
       class FormBuilderGenerator < ::Rails::Generators::Base
         include Migration
-        include Actions
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -18,6 +17,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = class_name
               model.title = 'Page: FormBuilder'
+              model.page = true
               model.attributes = [
                 {
                   name: title_attribute_name,
@@ -46,8 +46,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

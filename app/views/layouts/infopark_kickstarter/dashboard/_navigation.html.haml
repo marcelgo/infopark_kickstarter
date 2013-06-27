@@ -1,7 +1,7 @@
 .navbar.navbar-fixed-top
   .navbar-inner
     .container-fluid
-      %button.btn.btn-navbar{type: 'button', :'data-toggle' => 'collapse', :'data-target' => '.nav-collapse'}
+      %button.btn.btn-navbar{type: 'button', data: { toggle: 'collapse', target: '.nav-collapse' }}
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
@@ -15,4 +15,4 @@
             = link_to(Rails.configuration.infopark_kickstarter.support_url, target: :_blank) do
               %i.icon-envelope
 
-              Feedback &amp; Support
+              Need help?

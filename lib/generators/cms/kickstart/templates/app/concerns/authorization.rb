@@ -23,7 +23,10 @@ module Authorization
   # set, so that the user returns to the originally requested page after
   # a successfull login.
   def redirect_to_login_page
-    target = cms_path(homepage.login_page, return_to: request.path)
+    query_params = request.query_parameters
+    query_params.merge!(return_to: request.path)
+
+    target = cms_path(homepage.login_page, query_params)
 
     redirect_to(target, alert: I18n.t(:'flash.authorization_failed'))
   end

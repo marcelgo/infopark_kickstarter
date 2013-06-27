@@ -6,7 +6,6 @@ module Cms
     class KickstartGenerator < ::Rails::Generators::Base
       include Migration
       include BasePaths
-      include Actions
 
       class_option :configuration_path,
         type: :string,
@@ -73,6 +72,7 @@ module Cms
         gem('simple_form')
         gem('haml-rails')
         gem('cells')
+        gem('utf8-cleaner')
 
         gem_group(:assets) do
           gem('less-rails-bootstrap')
@@ -151,17 +151,6 @@ module Cms
                 max_size: 1,
               },
               {
-                name: 'login_page_link',
-                type: :linklist,
-                title: 'Login Page',
-                max_size: 1,
-              },
-              {
-                name: 'footer_links',
-                type: :linklist,
-                title: 'Footer Links',
-              },
-              {
                 name: 'locale',
                 type: :string,
                 title: 'Locale',
@@ -210,6 +199,7 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Content'
+            model.page = true
             model.attributes = [
               title_attribute,
               show_in_navigation_attribute,
@@ -220,8 +210,6 @@ module Cms
           end
 
           Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -232,6 +220,7 @@ module Cms
             model.name = class_name
             model.title = 'Page: Error'
             model.thumbnail = false
+            model.page = true
             model.attributes = [
               title_attribute,
               content_attribute,
@@ -240,29 +229,6 @@ module Cms
           end
 
           Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
-        rescue Cms::Generators::DuplicateResourceError
-        end
-
-        begin
-          class_name = 'LoginPage'
-
-          Model::ApiGenerator.new(behavior: behavior) do |model|
-            model.name = class_name
-            model.title = 'Page: Login'
-            model.thumbnail = false
-            model.attributes = [
-              title_attribute,
-              content_attribute,
-              show_in_navigation_attribute,
-              sort_key_attribute,
-            ]
-          end
-
-          Rails::Generators.invoke('cms:controller', [class_name])
-
-          turn_model_into_page(class_name)
         rescue Cms::Generators::DuplicateResourceError
         end
 
@@ -284,6 +250,7 @@ module Cms
 
       def add_initial_content
         Rails::Generators.invoke('cms:component:search')
+        Rails::Generators.invoke('cms:component:login_page')
         Rails::Generators.invoke('cms:widget:text')
         Rails::Generators.invoke('cms:widget:image')
       end

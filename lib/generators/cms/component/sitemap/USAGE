@@ -1,0 +1,10 @@
+Description:
+    Sets up a sitemap.xml per homepage that is created using the cms search
+    capabilities.
+
+Example:
+    `rails generate cms:component:sitemap`
+
+    Controller: app/controllers/sitemap_controller.rb
+    Views: app/views/sitemap/index.xml.builder
+    Routes: adds GET /sitemap.xml

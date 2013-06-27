@@ -13,11 +13,11 @@ module InfoparkKickstarter
     end
 
     def cms_url
-      rails_connector['cms_api']['url'].gsub('admin', tenant_name)
+      rails_connector['cms_api']['url']
     end
 
     def crm_url
-      custom_cloud['crm']['url'].gsub('admin', tenant_name)
+      custom_cloud['crm']['url']
     end
 
     def contact_url(id)
@@ -53,7 +53,7 @@ module InfoparkKickstarter
     end
 
     def tenant_name
-      rails_connector['cms_api']['http_host']
+      cms_url.match(/\/\/(.*?)\./)[1]
     end
 
     def tenant_api_url

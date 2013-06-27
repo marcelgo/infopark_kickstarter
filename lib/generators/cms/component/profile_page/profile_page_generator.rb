@@ -4,7 +4,6 @@ module Cms
       class ProfilePageGenerator < ::Rails::Generators::Base
         include Migration
         include BasePaths
-        include Actions
 
         class_option :cms_path,
           type: :string,
@@ -19,6 +18,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = obj_class_name
               model.title = 'Page: Profile'
+              model.page = true
               model.attributes = [
                 {
                   name: 'headline',
@@ -42,8 +42,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(obj_class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end
