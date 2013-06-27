@@ -1,4 +1,5 @@
 # v2.2.0
+  * Bugfix: Error page now uses a correct grid layout and displays the content correctly.
   * Removed unused footer links feature. This feature did not reflect the needs of an actual
     project. A how-to guide will be integrated in the Infopark Dev Center.
   * The developer tools (rake cms:component:developer_tools) got a new Infopark Developer Bar. This
@@ -53,7 +54,7 @@
   * Query parameters are now kept on redirects. (Thanks @thomaswitt)
 
 # v2.1.0
-  * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
+  * Added the option `--examples` to the `rails generate cms:kickstart` command, that will generate
     basic components together with setting up the project. This should simplify the getting started
     process for beginners.
   * Added a hero unit widget, that displays a more visually highlighted headline and body and also
