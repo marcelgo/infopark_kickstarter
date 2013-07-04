@@ -1,0 +1,6 @@
+en:
+  widgets:
+    person_widget:
+      description: 'Displays a WebCRM person and shows their details.'
+      person_identifier: 'Person identifier'
+      title: 'Person widget'
