@@ -1,9 +1,11 @@
 require './lib/rails_connector/cms_attributes'
+require './lib/rails_connector/cms_definitions'
 
 # This class represents the base class of all CMS objects and implements behavior that all CMS
 # objects, regardless whether they are pages, widgets or resources have in common.
 class Obj < ::RailsConnector::BasicObj
   include RailsConnector::CmsAttributes
+  include RailsConnector::CmsDefinitions
 
   def self.homepage
     default_homepage
@@ -84,5 +86,9 @@ class Obj < ::RailsConnector::BasicObj
     else
       url
     end
+  end
+
+  def to_key
+    [id]
   end
 end

@@ -43,6 +43,7 @@ module Cms
             turn_model_into_widget(name, model_path)
 
             template('en.locale.yml', "#{widget_path}/locales/en.#{file_name}.yml")
+            template('edit.html.haml', "#{widget_path}/views/edit.html.haml")
             template('show.html.haml', "#{widget_path}/views/show.html.haml")
             template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
           rescue Cms::Generators::DuplicateResourceError

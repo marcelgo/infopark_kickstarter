@@ -43,6 +43,28 @@ module Cms
         method
       end
 
+      def generate_edit_form_field(attribute)
+        field = nil
+
+        if attribute[:type].eql?(:string)
+          field = "= form.input :#{attribute[:name]}"
+        end
+
+        if attribute[:type].eql?(:html)
+          field = "= form.input :#{attribute[:name]}"
+        end
+
+        if attribute[:type].eql?(:enum)
+          field = "= form.input :#{attribute[:name]}, as: :select"
+        end
+
+        if attribute[:type].eql?(:multienum)
+          field = "= form.input :#{attribute[:name]}, as: :select, input_html: { multiple: true }"
+        end
+
+        field
+      end
+
       def add_model_attribute(model, attribute, model_path = 'app/models')
         file = "#{model_path}/#{model.underscore}.rb"
         insert_point = "class #{model} < Obj\n"
