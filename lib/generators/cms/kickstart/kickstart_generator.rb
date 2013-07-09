@@ -112,9 +112,6 @@ module Cms
             model.type = :generic
             model.title = 'Resource: Image'
             model.thumbnail = false
-            model.attributes = [
-              title_attribute,
-            ]
           end
         rescue Cms::Generators::DuplicateResourceError
         end

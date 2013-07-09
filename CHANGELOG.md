@@ -1,5 +1,6 @@
 # v3.0.0
-  * Added `headline` string attribute to search page.
+  * Removed `headline` string attribute from `Image`.
+  * Added `headline` string attribute to `SearchPage`.
   * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
   * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
 # v2.2.0
