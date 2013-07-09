@@ -1,4 +1,5 @@
 # v3.0.0
+  * Excluded `LoginPage` and `ResetPasswordPage` from the Sitemap.
   * Bugfix: Adopt `body_attributes` helper method, to be independent from the given cms object, so
     it also works on non cms pages correctly. (Thanks @Etecture)
   * Removed unused `headline` string attribute from `Image` and `SliderWidget`.
