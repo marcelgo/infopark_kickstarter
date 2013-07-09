@@ -1,4 +1,6 @@
 # v3.0.0
+  * Bugfix: Adopt `body_attributes` helper method, to be independent from the given cms object, so
+    it also works on non cms pages correctly. (Thanks @Etecture)
   * Removed unused `headline` string attribute from `Image` and `SliderWidget`.
   * Added `headline` string attribute to `SearchPage`.
   * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
