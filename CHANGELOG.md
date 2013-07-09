@@ -1,4 +1,5 @@
 # v3.0.0
+  * Removed the `.well` class from all widgets, as most projects removed it right away.
   * Bugfix: `Homepage` model was missing cms attribute definitions for `sort_key`, `main_content`
     and `show_in_navigation`. (Thanks @Etecture)
   * Excluded `LoginPage` and `ResetPasswordPage` from the Sitemap.
