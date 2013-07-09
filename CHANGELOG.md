@@ -1,4 +1,6 @@
 # v3.0.0
+  * Changed the `hero_unit` widget description to be more precise and not self referential.
+    (Thanks @krishan)
   * The `developer_tools` and the `sitemap` are now part of every kickstarted project.
   * The `maps` widget is now part of the examples generated when running
     `rails generate cms:kickstart --examples`.
