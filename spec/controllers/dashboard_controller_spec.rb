@@ -3,11 +3,11 @@ require 'pry'
 
 module InfoparkKickstarter
   describe DashboardsController do
-    let(:editors) { [mock('Editor')] }
-    let(:developers) { [mock('Developer')] }
-    let(:gems) { [mock('Gem')] }
-    let(:cms_stats) { [mock('CmsStats')] }
-    let(:crm_stats) { [mock('CrmStats')] }
+    let(:editors) { [double('Editor')] }
+    let(:developers) { [double('Developer')] }
+    let(:gems) { [double('Gem')] }
+    let(:cms_stats) { [double('CmsStats')] }
+    let(:crm_stats) { [double('CrmStats')] }
 
     before do
       Dashboard::Editor.stub(:all).and_return(editors)

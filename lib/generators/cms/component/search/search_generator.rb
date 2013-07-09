@@ -39,18 +39,22 @@ module Cms
               model.name = class_name
               model.title = 'Page: Search'
               model.thumbnail = false
+              model.page = true
               model.attributes = [
                 {
                   name: show_in_navigation_attribute_name,
                   type: :boolean,
                   title: 'Show in navigation',
                 },
+                {
+                  name: headline_attribute_name,
+                  type: :string,
+                  title: 'Headline',
+                },
               ]
             end
 
             Rails::Generators.invoke('cms:controller', [class_name])
-
-            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
 
@@ -78,6 +82,10 @@ module Cms
 
         def show_in_navigation_attribute_name
           'show_in_navigation'
+        end
+
+        def headline_attribute_name
+          'headline'
         end
 
         def search_page_attribute

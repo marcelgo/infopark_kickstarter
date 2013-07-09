@@ -18,6 +18,8 @@ module Cms
         attr_accessor :migration_path
         attr_accessor :model_path
         attr_accessor :thumbnail
+        attr_accessor :page
+        attr_accessor :widget
 
         def initialize(config = {})
           yield self if block_given?
@@ -80,7 +82,39 @@ module Cms
         rescue DuplicateResourceError
         end
 
+        def turn_into_page
+          if page?
+            file_name = "#{class_name.underscore}.rb"
+
+            gsub_file(
+              "#{model_path}/#{file_name}",
+              '# include Page',
+              'include Page'
+            )
+          end
+        end
+
+        def turn_into_widget
+          if widget?
+            file_name = "#{class_name.underscore}.rb"
+
+            gsub_file(
+              "#{model_path}/#{file_name}",
+              '# include Widget',
+              'include Widget'
+            )
+          end
+        end
+
         private
+
+        def page?
+          @page.nil? ? false : @page
+        end
+
+        def widget?
+          @widget.nil? ? false : @widget
+        end
 
         def thumbnail?
           @thumbnail.nil? ? true : @thumbnail

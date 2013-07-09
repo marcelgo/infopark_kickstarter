@@ -56,7 +56,6 @@ describe Cms::Generators::Widget::SliderGenerator do
 
         directory 'models' do
           file 'slider_widget.rb' do
-            contains 'cms_attribute :headline, type: :string'
             contains 'cms_attribute :images, type: :linklist'
             contains 'include Widget'
           end

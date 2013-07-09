@@ -9,11 +9,23 @@ module Cms
             gem('pry-rails')
             gem('better_errors')
             gem('binding_of_caller')
+            gem('rails-footnotes')
             gem('thin')
           end
 
           Bundler.with_clean_env do
             run('bundle --quiet')
+          end
+        end
+
+        def copy_app_directory
+          directory('lib')
+          directory('config', force: true)
+        end
+
+        def notice
+          if behavior == :invoke
+            log(:server, 'Please make sure to restart your server, because of gem changes.')
           end
         end
       end

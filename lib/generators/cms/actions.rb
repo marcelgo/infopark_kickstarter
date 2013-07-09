@@ -1,26 +1,6 @@
 module Cms
   module Generators
     module Actions
-      def turn_model_into_page(class_name, model_path = 'app/models')
-        file_name = "#{class_name.underscore}.rb"
-
-        gsub_file(
-          "#{model_path}/#{file_name}",
-          '# include Page',
-          'include Page'
-        )
-      end
-
-      def turn_model_into_widget(class_name, model_path = 'app/models')
-        file_name = "#{class_name.underscore}.rb"
-
-        gsub_file(
-          "#{model_path}/#{file_name}",
-          '# include Widget',
-          'include Widget'
-        )
-      end
-
       def generate_attribute_method(attribute)
         method = "cms_attribute :#{attribute[:name]}, type: :#{attribute[:type]}"
 

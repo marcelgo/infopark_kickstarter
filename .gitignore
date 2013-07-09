@@ -13,3 +13,4 @@ spec/dummy/log/*
 spec/dummy/config/*.yml
 spec/dummy/tmp/
 spec/dummy/.sass-cache
+Gemfile.lock

@@ -19,6 +19,10 @@ class Obj < ::RailsConnector::BasicObj
     @parent ||= super()
   end
 
+  def ancestors
+    @ancestors ||= super()
+  end
+
   # Determines the homepage for the current object by traversing up the tree
   # until a homepage is found. In case of a ghost path (no parent) the default
   # homepage is returned.

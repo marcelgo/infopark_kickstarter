@@ -1,12 +1,1 @@
 en:
-  flash:
-    login:
-      success: 'You logged in successfully.'
-    logout:
-      success: 'You logged out successfully.'
-    authorization_failed: "This page is protected. You either don't have neccessary access rights or you are not logged in."
-
-  login:
-    show:
-      login: 'Login'
-      logout: 'Logout'

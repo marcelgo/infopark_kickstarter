@@ -1,4 +1,47 @@
+# v3.0.0
+  * Changed the `hero_unit` widget description to be more precise and not self referential.
+    (Thanks @krishan)
+  * The `developer_tools` and the `sitemap` are now part of every kickstarted project.
+  * The `maps` widget is now part of the examples generated when running
+    `rails generate cms:kickstart --examples`.
+  * Removed the `.well` class from all widgets, as most projects removed it right away.
+  * Bugfix: `Homepage` model was missing cms attribute definitions for `sort_key`, `main_content`
+    and `show_in_navigation`. (Thanks @Etecture)
+  * Excluded `LoginPage` and `ResetPasswordPage` from the Sitemap.
+  * Bugfix: Adopt `body_attributes` helper method, to be independent from the given cms object, so
+    it also works on non cms pages correctly. (Thanks @Etecture)
+  * Removed unused `headline` string attribute from `Image` and `SliderWidget`.
+  * Added `headline` string attribute to `SearchPage`.
+  * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
+  * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
 # v2.2.0
+  * Updated most of the gems to the current version, eventhough we don't support Rails 4 yet.
+  * Bugfix: Error page now uses a correct grid layout and displays the content correctly.
+  * Removed unused footer links feature. This feature did not reflect the needs of an actual
+    project. A how-to guide will be integrated in the Infopark Dev Center.
+  * The developer tools (rake cms:component:developer_tools) got a new Infopark Developer Bar. This
+    is an extension of the `rails-footnotes` gem and displays helpful information and links at the
+    bottom of each page. (Thanks @thomasritz)
+  * Insert a placeholder image in the slider widget if no images are configured. This is the case,
+    when the widget is created. (Thanks @rouvenbehnke)
+  * Added `--page` and `--widget` options to the model generator to allow to turn a model into a
+    page or widget object via the command line. See `rails generate cms:model --help` for more
+    details. (Thanks @thomasritz)
+  * Added a simple breadcrumb navigation that displays pages up to the homepage on top of the page.
+    Run `rails generate cms:component:breadcrumbs --help` to get further details.
+    (Thanks @rouvenbehnke)
+  * Refactored twitter bootstrap integration to more easily allow changes and give examples on how
+    to customize the bootstrap framework.
+  * Added a login widget that allows the editor to place a login form anywhere on the page. The
+    login widget also holds a link to reset the password and displays a logout link and the login of
+    the current user if the user is already logged in. Run `rails generate cms:widget:login --help`
+    for more details. The login widgets depends on the core `login_page` component.
+  * Moved login logic into a separate component to allow more flexibility and easier future
+    maintainance. You can generate the login page by running
+    `rails generate cms:component:login_page`. In the course thereof, support was added to reset the
+    password.
+  * Controls for the generic video player (flowplayer) are now enabled by default.
+    (Thanks @steenkamp)
   * Moved tasks `cms:console`, `cms:status`, `cms:info:obj_classes` and `cms:info:permalinks` under
     the `infopark` namespace. You get an overview of all available rake tasks by running `rake -T`
     in your project folder.
@@ -28,7 +71,7 @@
   * Query parameters are now kept on redirects. (Thanks @thomaswitt)
 
 # v2.1.0
-  * Added the option `--example` to the `rails generate cms:kickstart` command, that will generate
+  * Added the option `--examples` to the `rails generate cms:kickstart` command, that will generate
     basic components together with setting up the project. This should simplify the getting started
     process for beginners.
   * Added a hero unit widget, that displays a more visually highlighted headline and body and also
@@ -116,7 +159,7 @@
   * Search support moved into its own generator and got cleaned up and simplified. See
     `rails generate cms:component:search --help` for more details.
   * Edit-Marker no longer are included by Infopark Kickstarter, as it became a default feature of
-    of Infopark RailsConnector. (Thanks @tritz)
+    of Infopark RailsConnector. (Thanks @thomasritz)
   * All rake tasks now use RestClient instead of curl, for better compatibility and consistent use
     of accept headers. (Thanks @awendt)
   * Bugfix: Dashboard could not be displayed, because the engine files were not packaged in the gem.

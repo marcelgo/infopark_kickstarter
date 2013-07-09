@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.description = 'Infopark Kickstarter'
   gem.has_rdoc    = 'yard'
 
-  gem.required_ruby_version     = Gem::Requirement.new('>= 1.9.3')
+  gem.required_ruby_version     = Gem::Requirement.new('>= 1.9')
   gem.required_rubygems_version = Gem::Requirement.new('>= 1.8')
 
   gem.license = 'LGPLv3'
@@ -38,6 +38,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'haml'
   gem.add_dependency 'launchy'
   gem.add_dependency 'less-rails-bootstrap'
+  gem.add_dependency 'therubyracer'
   gem.add_dependency 'infopark_rails_connector', '>= 6.9.1.3.22208381'
   gem.add_dependency 'infopark_cloud_connector', '>= 6.9.1.3.22208381'
 

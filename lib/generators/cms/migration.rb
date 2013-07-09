@@ -48,7 +48,7 @@ module Cms
         endpoint = "revisions/#{revision_id}/obj_classes/#{name}"
 
         ::RailsConnector::CmsRestApi.get(endpoint).present?
-      rescue RailsConnector::ClientError
+      rescue ::RailsConnector::ClientError
         false
       end
 

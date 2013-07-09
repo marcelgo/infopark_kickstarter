@@ -1,10 +1,1 @@
-Description:
-    Generates a slider widget that displays selected images and a headline in an overlay for each
-    image.
-
-Example:
-    CMS: obj_class SliderWidget
-    CMS: attribute headline (string)
-    CMS: attribute images (linklist)
-
-    `rails generate cms:widget:slider`
+Documentation: https://dev.infopark.net/slider-widget

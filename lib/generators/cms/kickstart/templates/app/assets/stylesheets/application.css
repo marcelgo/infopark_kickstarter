@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require infopark_rails_connector
- *= require twitter/bootstrap
+ *= require bootstrap_and_override
  *= require_tree .
  */
 

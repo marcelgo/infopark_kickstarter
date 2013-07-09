@@ -4,7 +4,8 @@ class CreateSearchPageExample < ::RailsConnector::Migration
 
     create_obj(
       _path: path,
-      _obj_class: '<%= class_name %>'
+      _obj_class: '<%= class_name %>',
+      '<%= headline_attribute_name %>' => 'Search'
     )
 
     attributes = get_obj_class('Homepage')['attributes']

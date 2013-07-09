@@ -1,10 +1,1 @@
-Description:
-    Generates an image widget that displays a headline, a caption and an image.
-
-Example:
-    CMS: obj_class ImageWidget
-    CMS: attribute headline (string)
-    CMS: attribute source (linklist)
-    CMS: attribute caption (string)
-
-    `rails generate cms:widget:image`
+Documentation: https://dev.infopark.net/image-widget

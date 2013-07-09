@@ -72,10 +72,12 @@ module InfoparkKickstarter
           'cms:component:form_builder --cms_path=/website/en',
           'cms:component:blog --cms_path=/website/en',
           'cms:component:social_sharing --example',
+          'cms:component:breadcrumbs',
           'cms:widget:maps --provider=google_maps',
           'cms:widget:video',
           'cms:widget:person',
           'cms:widget:slider',
+          'cms:widget:login',
           'cms:widget:hero_unit',
           'cms:widget:slideshare',
         ]

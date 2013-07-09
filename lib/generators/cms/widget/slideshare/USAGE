@@ -1,11 +1,1 @@
-Description:
-    Generates a slideshare widget to display a slide from the slideshare
-    website.
-
-Example:
-    CMS: obj_class SlideshareWidget
-    CMS: attribute content (html)
-    CMS: attribute headline (string)
-    CMS: attribute source (linklist)
-
-    `rails generate cms:widget:slideshare`
+Documentation: https://dev.infopark.net/slideshare-widget

@@ -3,7 +3,6 @@ module Cms
     module Component
       class ContactPageGenerator < ::Rails::Generators::Base
         include Migration
-        include Actions
 
         class_option :cms_path,
           type: :string,
@@ -17,6 +16,7 @@ module Cms
             Model::ApiGenerator.new(behavior: behavior) do |model|
               model.name = class_name
               model.title = 'Page: Contact'
+              model.page = true
               model.attributes = [
                 {
                   name: 'headline',
@@ -45,8 +45,6 @@ module Cms
                 },
               ]
             end
-
-            turn_model_into_page(class_name)
           rescue Cms::Generators::DuplicateResourceError
           end
         end

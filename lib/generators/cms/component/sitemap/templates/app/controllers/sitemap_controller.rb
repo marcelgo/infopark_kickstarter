@@ -30,6 +30,8 @@ class SitemapController < ActionController::Base
       Website
       Root
       ErrorPage
+      LoginPage
+      ResetPasswordPage
     )
   end
 end
