@@ -1,4 +1,7 @@
 # v3.0.0
+  * The `developer_tools` and the `sitemap` are now part of every kickstarted project.
+  * The `maps` widget is now part of the examples generated when running
+    `rails generate cms:kickstart --examples`.
   * Removed the `.well` class from all widgets, as most projects removed it right away.
   * Bugfix: `Homepage` model was missing cms attribute definitions for `sort_key`, `main_content`
     and `show_in_navigation`. (Thanks @Etecture)

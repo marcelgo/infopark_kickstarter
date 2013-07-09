@@ -246,8 +246,10 @@ module Cms
       end
 
       def add_initial_content
+        Rails::Generators.invoke('cms:component:developer_tools')
         Rails::Generators.invoke('cms:component:search')
         Rails::Generators.invoke('cms:component:login_page')
+        Rails::Generators.invoke('cms:component:sitemap')
         Rails::Generators.invoke('cms:widget:text')
         Rails::Generators.invoke('cms:widget:image')
       end
@@ -258,6 +260,7 @@ module Cms
           Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
           Rails::Generators.invoke('cms:widget:hero_unit')
+          Rails::Generators.invoke('cms:widget:maps')
 
           migration_template('create_examples.rb', 'cms/migrate/create_examples.rb')
         end
