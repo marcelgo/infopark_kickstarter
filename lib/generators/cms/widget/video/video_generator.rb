@@ -49,16 +49,6 @@ module Cms
               widget.description = 'Displays a video player for the given video file.'
               widget.attributes = [
                 {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: 'content',
-                  type: :html,
-                  title: 'Content',
-                },
-                {
                   name: 'source',
                   type: :linklist,
                   title: 'Source',

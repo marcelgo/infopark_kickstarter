@@ -12,16 +12,6 @@ module Cms
               widget.description = 'Creates a widget that shows a slide from slideshare.'
               widget.attributes = [
                 {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: 'content',
-                  type: :html,
-                  title: 'content',
-                },
-                {
                   name: 'source',
                   type: :linklist,
                   title: 'Source',

@@ -9,18 +9,8 @@ module Cms
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = 'ImageWidget'
               widget.icon = '&#xF061;'
-              widget.description = 'Widget that holds an image with a caption and a headline.'
+              widget.description = 'Widget that holds an image.'
               widget.attributes = [
-                {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: 'caption',
-                  type: :string,
-                  title: 'Caption',
-                },
                 {
                   name: 'source',
                   type: :linklist,

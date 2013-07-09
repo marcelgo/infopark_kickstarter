@@ -9,13 +9,8 @@ module Cms
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = 'TextWidget'
               widget.icon = '&#xF058;'
-              widget.description = 'Creates a simple widget with headline and content.'
+              widget.description = 'Creates a simple widget with content.'
               widget.attributes = [
-                {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
                 {
                   name: 'content',
                   type: :html,

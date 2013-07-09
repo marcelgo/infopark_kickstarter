@@ -1,6 +1,4 @@
 class GoogleMapsWidget < Obj
-  cms_attribute :headline, type: :string
-  cms_attribute :content, type: :html
   cms_attribute :address, type: :string
 
   # Most CMS objects are either a page or a box. In order for them to

@@ -252,6 +252,7 @@ module Cms
         Rails::Generators.invoke('cms:component:sitemap')
         Rails::Generators.invoke('cms:widget:text')
         Rails::Generators.invoke('cms:widget:image')
+        Rails::Generators.invoke('cms:widget:headline')
       end
 
       def create_example_content

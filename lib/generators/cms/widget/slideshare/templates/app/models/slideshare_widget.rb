@@ -1,6 +1,4 @@
 class SlideshareWidget < Obj
-  cms_attribute :content, type: :html
-  cms_attribute :headline, type: :string
   cms_attribute :source, type: :linklist
 
   # Most CMS objects are either a page or a box. In order for them to

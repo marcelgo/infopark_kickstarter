@@ -1,9 +1,5 @@
 .row-fluid
   .span12
-    = cms_tag(:h1, @widget, :headline)
-
-    = cms_tag(:div, @widget, :content)
-
     = simple_form_for(:login_presenter, url: cms_path(@login_page), method: :post) do |form|
       = hidden_field_tag(:return_to, cms_path(@page))
       = hidden_field_tag(:authenticity_token, form_authenticity_token)

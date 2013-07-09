@@ -1,15 +1,22 @@
 module Cms
   module Generators
     module Widget
-      class LoginGenerator < ::Rails::Generators::Base
+      class HeadlineGenerator < ::Rails::Generators::Base
         source_root File.expand_path('../templates', __FILE__)
 
         def create_widget
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = 'LoginWidget'
-              widget.icon = '&#xF02E;'
-              widget.description = 'Displays a login form.'
+              widget.name = 'HeadlineWidget'
+              widget.icon = '&#xF010;'
+              widget.description = 'Creates a simple widget with a headline.'
+              widget.attributes = [
+                {
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
+                },
+              ]
             end
 
             directory('app', force: true)

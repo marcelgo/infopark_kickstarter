@@ -15,16 +15,6 @@ module Cms
                 widget.description = 'Integrates a map that displays a pin for a given address.'
                 widget.attributes = [
                   {
-                    name: 'headline',
-                    type: :string,
-                    title: 'Headline',
-                  },
-                  {
-                    name: 'content',
-                    type: :html,
-                    title: 'Content',
-                  },
-                  {
                     name: 'address',
                     type: :string,
                     title: 'Address',
