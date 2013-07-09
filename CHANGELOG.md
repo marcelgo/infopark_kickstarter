@@ -1,4 +1,5 @@
 # v3.0.0
+  * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
   * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
 # v2.2.0
   * Updated most of the gems to the current version, eventhough we don't support Rails 4 yet.
