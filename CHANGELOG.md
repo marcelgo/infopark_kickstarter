@@ -1,4 +1,6 @@
 # v3.0.0
+  * Bugfix: `Homepage` model was missing cms attribute definitions for `sort_key`, `main_content`
+    and `show_in_navigation`. (Thanks @Etecture)
   * Excluded `LoginPage` and `ResetPasswordPage` from the Sitemap.
   * Bugfix: Adopt `body_attributes` helper method, to be independent from the given cms object, so
     it also works on non cms pages correctly. (Thanks @Etecture)
