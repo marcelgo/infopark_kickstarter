@@ -46,6 +46,11 @@ module Cms
                   type: :boolean,
                   title: 'Show in navigation',
                 },
+                {
+                  name: headline_attribute_name,
+                  type: :string,
+                  title: 'Headline',
+                },
               ]
             end
 
@@ -77,6 +82,10 @@ module Cms
 
         def show_in_navigation_attribute_name
           'show_in_navigation'
+        end
+
+        def headline_attribute_name
+          'headline'
         end
 
         def search_page_attribute
