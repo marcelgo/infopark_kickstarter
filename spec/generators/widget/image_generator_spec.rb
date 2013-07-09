@@ -40,9 +40,7 @@ describe Cms::Generators::Widget::ImageGenerator do
 
         directory 'models' do
           file 'image_widget.rb' do
-            contains 'cms_attribute :caption, type: :string'
             contains 'cms_attribute :source, type: :linklist, max_size: 1'
-            contains 'cms_attribute :headline, type: :string'
             contains 'include Widget'
           end
         end
