@@ -1,3 +1,5 @@
+# v3.0.0
+  * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
 # v2.2.0
   * Updated most of the gems to the current version, eventhough we don't support Rails 4 yet.
   * Bugfix: Error page now uses a correct grid layout and displays the content correctly.
