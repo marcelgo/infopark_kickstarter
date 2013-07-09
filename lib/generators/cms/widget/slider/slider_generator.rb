@@ -12,11 +12,6 @@ module Cms
               widget.description = 'Creates a rotating slider galerie from a list of images.'
               widget.attributes = [
                 {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
                   name: 'images',
                   type: :linklist,
                   title: 'Images',

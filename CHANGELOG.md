@@ -1,5 +1,5 @@
 # v3.0.0
-  * Removed `headline` string attribute from `Image`.
+  * Removed unused `headline` string attribute from `Image` and `SliderWidget`.
   * Added `headline` string attribute to `SearchPage`.
   * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
   * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
