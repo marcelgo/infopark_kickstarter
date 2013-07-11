@@ -3,8 +3,8 @@
 :javascript
   // See http://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables for more details on all
   // Disqus javascript variables.
-  var disqus_shortname = '#{@entry.disqus_shortname}';
-  var disqus_identifier = '#{@entry.id}';
+  var disqus_shortname = '#{@post.disqus_shortname}';
+  var disqus_identifier = '#{@post.id}';
 
   (function() {
     var dsq = document.createElement('script');

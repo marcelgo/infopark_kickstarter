@@ -39,7 +39,7 @@ describe Cms::Generators::Component::BlogGenerator do
             contains 'cms_attribute :description, type: :text'
           end
 
-          file 'blog_entry.rb' do
+          file 'blog_post.rb' do
             contains 'cms_attribute :headline, type: :string'
             contains 'cms_attribute :author, type: :string'
           end
@@ -51,7 +51,7 @@ describe Cms::Generators::Component::BlogGenerator do
             file 'index.rss.builder'
           end
 
-          directory 'blog_entry' do
+          directory 'blog_post' do
             file 'index.html.haml'
           end
 
@@ -66,10 +66,10 @@ describe Cms::Generators::Component::BlogGenerator do
           file 'blog_cell.rb'
 
           directory 'blog' do
-            file 'entries.html.haml'
-            file 'entries.rss.builder'
-            file 'entry.html.haml'
-            file 'entry.rss.builder'
+            file 'posts.html.haml'
+            file 'posts.rss.builder'
+            file 'post.html.haml'
+            file 'post.rss.builder'
             file 'discovery.html.haml'
             file 'comment.html.haml'
             file 'snippet.html.haml'
@@ -77,13 +77,13 @@ describe Cms::Generators::Component::BlogGenerator do
             file 'published_by.html.haml'
             file 'published_at.html.haml'
             file 'gravatar.html.haml'
-            file 'entry_details.html.haml'
+            file 'post_details.html.haml'
           end
         end
 
         directory 'controllers' do
           file 'blog_controller.rb'
-          file 'blog_entry_controller.rb'
+          file 'blog_post_controller.rb'
         end
       end
 

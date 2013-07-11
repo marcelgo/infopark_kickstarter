@@ -1,4 +1,4 @@
-class BlogEntry < Obj
+class BlogPost < Obj
   include Page
 
   cms_attribute :headline, type: :string
