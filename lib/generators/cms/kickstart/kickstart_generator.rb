@@ -77,6 +77,10 @@ module Cms
         gem_group(:assets) do
           gem('less-rails-bootstrap')
         end
+
+        Bundler.with_clean_env do
+          run('bundle --quiet')
+        end
       end
 
       def form_tools
