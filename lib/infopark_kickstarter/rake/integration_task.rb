@@ -78,7 +78,7 @@ module InfoparkKickstarter
           'cms:widget:person',
           'cms:widget:slider',
           'cms:widget:login',
-          'cms:widget:hero_unit',
+          'cms:widget:teaser',
           'cms:widget:slideshare',
         ]
 

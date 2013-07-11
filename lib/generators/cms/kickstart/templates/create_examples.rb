@@ -2,7 +2,7 @@ class CreateExamples < ::RailsConnector::Migration
   def up
     homepage = Obj.find_by_path("<%= homepage_path %>")
     add_widget(homepage, '<%= main_content_attribute[:name] %>', {
-      _obj_class: 'HeroUnitWidget',
+      _obj_class: 'TeaserWidget',
       headline: 'Welcome to Infopark',
       content: '<p>You successfully started your
         project. Basic components such as a top navigation, a search panel, this text widget, and a

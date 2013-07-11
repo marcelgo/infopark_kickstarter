@@ -1,4 +1,9 @@
 # v3.0.0
+  * Renamed `HeroUnitWidget` to `TeaserWidget`, which is not so much tight to the Twitter Bootstrap
+    wording and should now be more clear to editors.
+  * Renamed `BlogEntry` to `BlogPost` to adjust to the more common wording. (Thanks @thomasritz)
+  * Bugfix: Kickstarter gems are now installed right after they are inserted in the Gemfile to
+    prevent an error message, when running `rails g cms:kickstart`. (Thanks @dcsaszar)
   * Changed the `hero_unit` widget description to be more precise and not self referential.
     (Thanks @krishan)
   * The `developer_tools` and the `sitemap` are now part of every kickstarted project.
