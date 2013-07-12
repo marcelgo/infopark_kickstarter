@@ -10,7 +10,7 @@ module Cms
         def create_widget
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = obj_class
+              widget.name = obj_class_name
               widget.icon = '&#xF061;'
               widget.description = 'Widget that holds an image.'
               widget.attributes = [
@@ -29,12 +29,7 @@ module Cms
         end
 
         def create_example
-          if example?
-            migration_template(
-              'example_migration.rb',
-              'cms/migrate/create_image_widget_example.rb'
-            )
-          end
+          example_migration_template(obj_class_name.underscore)
         end
 
         def notice
@@ -45,7 +40,7 @@ module Cms
 
         private
 
-        def obj_class
+        def obj_class_name
           'ImageWidget'
         end
       end

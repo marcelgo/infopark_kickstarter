@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::TeaserGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -45,6 +46,12 @@ describe Cms::Generators::Widget::TeaserGenerator do
             contains 'cms_attribute :link_to, type: :linklist, max_size: 1'
             contains 'include Widget'
           end
+        end
+      end
+
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_teaser_widget_example'
         end
       end
     }

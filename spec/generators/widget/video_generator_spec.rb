@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::VideoGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -94,6 +95,12 @@ describe Cms::Generators::Widget::VideoGenerator do
       file 'Gemfile' do
         contains 'gem "video_info"'
         contains 'gem "projekktor-rails"'
+      end
+
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_video_widget_example'
+        end
       end
     }
   end

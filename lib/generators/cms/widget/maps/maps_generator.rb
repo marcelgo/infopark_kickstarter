@@ -25,15 +25,12 @@ module Cms
         end
 
         def run_generator_for_selected_provider
-          invoke_options = []
-
-          invoke_options << '--example' if example?
-          invoke_options << "--obj_path=#{example_obj_path}" if example_obj_path?
-          invoke_options << "--attribute=#{example_obj_widget_attribute}" if example_obj_widget_attribute?
+          puts "args #{ARGV.inspect}"
+          puts "options #{options.inspect}"
 
           Rails::Generators.invoke(
             "cms:widget:maps:#{options[:provider]}",
-            invoke_options
+            ARGV
           )
         end
       end

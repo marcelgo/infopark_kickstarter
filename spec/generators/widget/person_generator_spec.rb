@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::PersonGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -43,6 +44,12 @@ describe Cms::Generators::Widget::PersonGenerator do
             contains 'include Widget'
             contains 'cms_attribute :person, type: :string'
           end
+        end
+      end
+
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_person_widget_example'
         end
       end
     }

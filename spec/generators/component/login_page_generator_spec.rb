@@ -28,7 +28,7 @@ describe Cms::Generators::Component::LoginPageGenerator do
   end
 
   it 'creates files' do
-    destination_root.should have_structure do
+    destination_root.should have_structure {
       directory 'app' do
         directory 'cells' do
           file 'login_cell.rb'
@@ -79,6 +79,6 @@ describe Cms::Generators::Component::LoginPageGenerator do
       directory 'config' do
         file 'en.login_page.yml'
       end
-    end
+    }
   end
 end

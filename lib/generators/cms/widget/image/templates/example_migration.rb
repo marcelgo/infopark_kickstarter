@@ -3,7 +3,7 @@ class CreateImageWidgetExample < RailsConnector::Migration
     homepage = Obj.find_by_path("<%= example_obj_path %>")
 
     add_widget(homepage, "<%= example_obj_widget_attribute %>", {
-      _obj_class: "<%= obj_class %>",
+      _obj_class: "<%= obj_class_name %>",
       source: [{ url: 'http://lorempixel.com/400/400/' }]
     })
   end

@@ -1,14 +1,15 @@
-class CreateTextWidgetExample < RailsConnector::Migration
+class CreateVideoWidgetExample < RailsConnector::Migration
   def up
     homepage = Obj.find_by_path("<%= example_obj_path %>")
 
     add_widget(homepage, "<%= example_obj_widget_attribute %>", {
       _obj_class: "<%= obj_class_name %>",
-      content: 'Nullam sed velit libero. Nullam pharetra metus non justo lobortis, eu vehicula magna
-        mollis. Suspendisse feugiat volutpat neque, eget volutpat nulla. Phasellus non ipsum ac
-        ipsum venenatis iaculis. Maecenas dictum congue nulla id fringilla. Suspendisse sit amet
-        enim dapibus, volutpat dui quis, suscipit nunc. Morbi imperdiet pellentesque augue, at
-        ornare mauris consectetur faucibus.'
+      source: [{
+        url: 'https://ip-saas-infoparkdev-cms.s3.amazonaws.com/public/506c948822d39176/7d452f7d1bd716d10bcb609cbe7e3c51/getting-started.mp4'
+      }],
+      poster: [{
+        url: 'https://ip-saas-infoparkdev-cms.s3.amazonaws.com/public/284444b2216d2bec/7e0b65a4d87d224d622a41327f07a9bd/getting-started-poster.png'
+      }],
     })
   end
 

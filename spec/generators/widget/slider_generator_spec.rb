@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::SliderGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -59,6 +60,12 @@ describe Cms::Generators::Widget::SliderGenerator do
             contains 'cms_attribute :images, type: :linklist'
             contains 'include Widget'
           end
+        end
+      end
+
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_slider_widget_example'
         end
       end
     }

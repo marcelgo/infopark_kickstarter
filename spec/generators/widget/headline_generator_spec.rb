@@ -7,6 +7,7 @@ describe Cms::Generators::Widget::HeadlineGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -14,7 +15,7 @@ describe Cms::Generators::Widget::HeadlineGenerator do
   end
 
   it 'creates files' do
-    destination_root.should have_structure do
+    destination_root.should have_structure {
       directory 'app' do
         directory 'widgets' do
           directory 'headline_widget' do
@@ -40,6 +41,12 @@ describe Cms::Generators::Widget::HeadlineGenerator do
           end
         end
       end
-    end
+
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_headline_widget_example'
+        end
+      end
+    }
   end
 end

@@ -13,7 +13,7 @@ module Cms
           def create_migration
             begin
               Widget::ApiGenerator.new(behavior: behavior) do |widget|
-                widget.name = obj_class
+                widget.name = obj_class_name
                 widget.icon = '&#xF008;'
                 widget.description = 'Integrates a map that displays a pin for a given address.'
                 widget.attributes = [
@@ -31,12 +31,7 @@ module Cms
           end
 
           def create_example
-            if example?
-              migration_template(
-                'example_migration.rb',
-                'cms/migrate/create_google_maps_widget_example.rb'
-              )
-            end
+            example_migration_template(obj_class_name.underscore)
           end
 
           def notice
@@ -47,7 +42,7 @@ module Cms
 
           private
 
-          def obj_class
+          def obj_class_name
             'GoogleMapsWidget'
           end
         end

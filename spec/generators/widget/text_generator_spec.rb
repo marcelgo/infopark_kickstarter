@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::TextGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -43,6 +44,12 @@ describe Cms::Generators::Widget::TextGenerator do
             contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
           end
+        end
+      end
+
+      directory 'cms' do
+        directory 'migrate' do
+          migration 'create_text_widget_example'
         end
       end
     }
