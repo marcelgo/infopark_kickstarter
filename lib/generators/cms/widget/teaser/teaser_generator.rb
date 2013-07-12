@@ -1,13 +1,13 @@
 module Cms
   module Generators
     module Widget
-      class HeroUnitGenerator < ::Rails::Generators::Base
+      class TeaserGenerator < ::Rails::Generators::Base
         source_root File.expand_path('../templates', __FILE__)
 
         def create_widget
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = 'HeroUnitWidget'
+              widget.name = 'TeaserWidget'
               widget.icon = '&#xF010;'
               widget.description = 'Adds a teaser with a big headline and call-to-action button.'
               widget.attributes = [

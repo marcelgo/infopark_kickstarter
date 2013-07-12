@@ -6,8 +6,8 @@ xml.rss :version => '2.0' do
     xml.description @blog.description
     xml.link cms_url(@blog)
 
-    for entry in @entries
-      xml << render({ state: :entry }, entry)
+    for post in @posts
+      xml << render({ state: :post }, post)
     end
   end
 end

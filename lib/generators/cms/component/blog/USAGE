@@ -17,7 +17,7 @@ Example:
            attribute disqus_shortname (string)
            attribute description (text)
 
-    CMS: obj_class BlogEntry
+    CMS: obj_class BlogPost
            attribute author (string)
 
     Gems: gravatar_image_tag

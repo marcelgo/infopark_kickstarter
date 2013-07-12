@@ -1,11 +1,11 @@
-.blog-entry
+.blog-post
   .media
     = render(state: :gravatar)
 
     .media-body
       %h3.media-heading
-        = link_to(cms_path(@entry)) do
-          = cms_tag(:span, @entry, :headline)
+        = link_to(cms_path(@post)) do
+          = cms_tag(:span, @post, :headline)
 
       = render(state: :published_at)
 
@@ -14,7 +14,7 @@
   = render(state: :snippet)
 
   %p
-    = link_to(cms_path(@entry)) do
+    = link_to(cms_path(@post)) do
       = t('blog.read_more')
 
     %i.icon-chevron-right
