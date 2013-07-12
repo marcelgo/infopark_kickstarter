@@ -14,3 +14,5 @@ spec/dummy/config/*.yml
 spec/dummy/tmp/
 spec/dummy/.sass-cache
 Gemfile.lock
+*.sublime-project
+*.sublime-workspace
