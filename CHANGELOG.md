@@ -1,4 +1,7 @@
 # v3.0.0
+  * Bugfix: Widgets no longer create an entry in the `en.obj_class.yml` file, as they are not
+    displayed in the obj class browser and therefore don't need a translation.
+    (Thanks @EtectureVolkerBenders)
   * All widgets now have some new options to not only create the structure, but also an example. You
     can call `--example` and optionally `--cms_path` and `--attribute` to determine the location of
     the example widget. For example,
