@@ -1,4 +1,14 @@
 # v3.0.0
+  * All widgets now have some new options to not only create the structure, but also an example. You
+    can call `--example` and optionally `--cms_path` and `--attribute` to determine the location of
+    the example widget. For example,
+    `rails generate cms:widget:slider --example --cms_path=/website/en --attribute=main_content`
+    creates the example on the english homepage.
+  * Simplified widgets by focusing on their main functionality and making them more generally
+    usable. For example, we changed the `TextWidget` to only have one html attribute, instead
+    of an additional headline. But, in order to mix and match widgets more easily, we created a new
+    `HeadlineWidget`. We did that for almost all widgets, which makes them more flexible.
+    (Thanks @thomaswitt)
   * Removed the name of the controller in the body html tag, because we noticed that it used only on
     special pages and leads to conflicts on overview pages, for example `blog_post`.
     (Thanks @agessler)

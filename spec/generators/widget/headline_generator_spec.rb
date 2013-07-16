@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'rails/generators/test_case'
-require 'generators/cms/widget/text/text_generator.rb'
+require 'generators/cms/widget/headline/headline_generator.rb'
 
-describe Cms::Generators::Widget::TextGenerator do
+describe Cms::Generators::Widget::HeadlineGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -12,37 +11,33 @@ describe Cms::Generators::Widget::TextGenerator do
 
   before do
     prepare_destination
-    prepare_environments
     run_generator
-  end
-
-  def prepare_environments
   end
 
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'widgets' do
-          directory 'text_widget' do
-            directory 'views' do
-              file 'show.html.haml'
-              file 'thumbnail.html.haml'
-            end
-
+          directory 'headline_widget' do
             directory 'locales' do
-              file 'en.text_widget.yml'
+              file 'en.headline_widget.yml'
             end
 
             directory 'migrate' do
-              migration 'create_text_widget'
-              migration 'create_text_widget_example'
+              migration 'create_headline_widget'
+              migration 'create_headline_widget_example'
+            end
+
+            directory 'views' do
+              file 'show.html.haml'
+              file 'thumbnail.html.haml'
             end
           end
         end
 
         directory 'models' do
-          file 'text_widget.rb' do
-            contains 'cms_attribute :content, type: :html'
+          file 'headline_widget.rb' do
+            contains 'cms_attribute :headline, type: :string'
             contains 'include Widget'
           end
         end

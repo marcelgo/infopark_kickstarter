@@ -1,7 +1,7 @@
 module Cms
   module Generators
     module Widget
-      class ImageGenerator < ::Rails::Generators::Base
+      class HeadlineGenerator < ::Rails::Generators::Base
         include Example
         include Migration
 
@@ -11,14 +11,13 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
-              widget.icon = '&#xF061;'
-              widget.description = 'Widget that holds an image.'
+              widget.icon = '&#xF010;'
+              widget.description = 'The headline widget displays a title on the page.'
               widget.attributes = [
                 {
-                  name: 'source',
-                  type: :linklist,
-                  title: 'Source',
-                  max_size: 1,
+                  name: 'headline',
+                  type: :string,
+                  title: 'Headline',
                 },
               ]
             end
@@ -41,7 +40,7 @@ module Cms
         private
 
         def obj_class_name
-          'ImageWidget'
+          'HeadlineWidget'
         end
       end
     end

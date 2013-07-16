@@ -16,7 +16,7 @@ describe Cms::Generators::Component::FormBuilderGenerator do
   end
 
   it 'creates file' do
-    destination_root.should have_structure do
+    destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
           file 'form_builder.rb' do
@@ -49,7 +49,6 @@ describe Cms::Generators::Component::FormBuilderGenerator do
       directory 'config' do
         directory 'locales' do
           file 'en.form_builder.yml'
-          file 'de.form_builder.yml'
         end
       end
 
@@ -59,6 +58,6 @@ describe Cms::Generators::Component::FormBuilderGenerator do
           migration 'create_form_builder_example'
         end
       end
-    end
+    }
   end
 end

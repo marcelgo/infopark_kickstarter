@@ -2,12 +2,15 @@ module Cms
   module Generators
     module Widget
       class TeaserGenerator < ::Rails::Generators::Base
+        include Example
+        include Migration
+
         source_root File.expand_path('../templates', __FILE__)
 
         def create_widget
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = 'TeaserWidget'
+              widget.name = obj_class_name
               widget.icon = '&#xF010;'
               widget.description = 'Adds a teaser with a big headline and call-to-action button.'
               widget.attributes = [
@@ -35,10 +38,20 @@ module Cms
           end
         end
 
+        def create_example
+          example_migration_template(obj_class_name.underscore)
+        end
+
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
+        end
+
+        private
+
+        def obj_class_name
+          'TeaserWidget'
         end
       end
     end

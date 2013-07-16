@@ -2,6 +2,7 @@ module Cms
   module Generators
     module Widget
       class ApiGenerator < ::Rails::Generators::NamedBase
+        include BasePaths
         include Migration
 
         Rails::Generators.hide_namespace(self.namespace)
@@ -78,7 +79,7 @@ module Cms
         end
 
         def widget_path
-          "app/widgets/#{file_name}"
+          widget_path_for(file_name)
         end
       end
     end

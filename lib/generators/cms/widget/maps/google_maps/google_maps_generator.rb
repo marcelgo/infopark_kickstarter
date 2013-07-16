@@ -3,6 +3,9 @@ module Cms
     module Widget
       module Maps
         class GoogleMapsGenerator < ::Rails::Generators::Base
+          include Example
+          include Migration
+
           Rails::Generators.hide_namespace(self.namespace)
 
           source_root File.expand_path('../templates', __FILE__)
@@ -10,20 +13,10 @@ module Cms
           def create_migration
             begin
               Widget::ApiGenerator.new(behavior: behavior) do |widget|
-                widget.name = 'GoogleMapsWidget'
+                widget.name = obj_class_name
                 widget.icon = '&#xF008;'
                 widget.description = 'Integrates a map that displays a pin for a given address.'
                 widget.attributes = [
-                  {
-                    name: 'headline',
-                    type: :string,
-                    title: 'Headline',
-                  },
-                  {
-                    name: 'content',
-                    type: :html,
-                    title: 'Content',
-                  },
                   {
                     name: 'address',
                     type: :string,
@@ -37,10 +30,20 @@ module Cms
             end
           end
 
+          def create_example
+            example_migration_template(obj_class_name.underscore)
+          end
+
           def notice
             if behavior == :invoke
               log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
             end
+          end
+
+          private
+
+          def obj_class_name
+            'GoogleMapsWidget'
           end
         end
       end
