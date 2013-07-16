@@ -40,20 +40,22 @@ module Cms
         end
 
         def add_locales
-          locale_path = Pathname.new(File.join(destination_root, 'config/locales/en.obj_classes.yml'))
+          unless widget?
+            locale_path = Pathname.new(File.join(destination_root, 'config/locales/en.obj_classes.yml'))
 
-          unless File.exist?(locale_path)
-            FileUtils.mkdir_p(locale_path.dirname)
+            unless File.exist?(locale_path)
+              FileUtils.mkdir_p(locale_path.dirname)
 
-            File.open(locale_path, 'w') do |file|
-              file.write("en:\n  obj_classes:\n")
+              File.open(locale_path, 'w') do |file|
+                file.write("en:\n  obj_classes:\n")
+              end
             end
-          end
 
-          append_file(
-            locale_path,
-            "    #{file_name}:\n      title: '#{title}'\n      description: '#{description}'\n"
-          )
+            append_file(
+              locale_path,
+              "    #{file_name}:\n      title: '#{title}'\n      description: '#{description}'\n"
+            )
+          end
         end
 
         def handle_attributes
