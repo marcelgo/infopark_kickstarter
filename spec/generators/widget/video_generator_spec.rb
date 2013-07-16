@@ -76,6 +76,7 @@ describe Cms::Generators::Widget::VideoGenerator do
 
             directory 'migrate' do
               migration 'create_video_widget'
+              migration 'create_video_widget_example'
             end
           end
         end
@@ -95,12 +96,6 @@ describe Cms::Generators::Widget::VideoGenerator do
       file 'Gemfile' do
         contains 'gem "video_info"'
         contains 'gem "projekktor-rails"'
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_video_widget_example'
-        end
       end
     }
   end

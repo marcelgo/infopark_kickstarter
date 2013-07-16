@@ -35,6 +35,7 @@ describe Cms::Generators::Widget::ImageGenerator do
 
             directory 'migrate' do
               migration 'create_image_widget'
+              migration 'create_image_widget_example'
             end
           end
         end
@@ -44,12 +45,6 @@ describe Cms::Generators::Widget::ImageGenerator do
             contains 'cms_attribute :source, type: :linklist, max_size: 1'
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_image_widget_example'
         end
       end
     }

@@ -25,6 +25,7 @@ describe Cms::Generators::Widget::HeadlineGenerator do
 
             directory 'migrate' do
               migration 'create_headline_widget'
+              migration 'create_headline_widget_example'
             end
 
             directory 'views' do
@@ -39,12 +40,6 @@ describe Cms::Generators::Widget::HeadlineGenerator do
             contains 'cms_attribute :headline, type: :string'
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_headline_widget_example'
         end
       end
     }

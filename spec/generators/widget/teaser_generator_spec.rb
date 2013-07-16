@@ -35,6 +35,7 @@ describe Cms::Generators::Widget::TeaserGenerator do
 
             directory 'migrate' do
               migration 'create_teaser_widget'
+              migration 'create_teaser_widget_example'
             end
           end
         end
@@ -46,12 +47,6 @@ describe Cms::Generators::Widget::TeaserGenerator do
             contains 'cms_attribute :link_to, type: :linklist, max_size: 1'
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_teaser_widget_example'
         end
       end
     }

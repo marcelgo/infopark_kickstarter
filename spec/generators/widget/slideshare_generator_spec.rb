@@ -35,6 +35,7 @@ describe Cms::Generators::Widget::SlideshareGenerator do
 
             directory 'migrate' do
               migration 'create_slideshare_widget'
+              migration 'create_slideshare_widget_example'
             end
           end
         end
@@ -44,12 +45,6 @@ describe Cms::Generators::Widget::SlideshareGenerator do
             contains 'cms_attribute :source, type: :linklist'
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_slideshare_widget_example'
         end
       end
     }

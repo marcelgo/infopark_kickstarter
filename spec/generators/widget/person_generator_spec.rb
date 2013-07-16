@@ -35,6 +35,7 @@ describe Cms::Generators::Widget::PersonGenerator do
 
             directory 'migrate' do
               migration 'create_person_widget'
+              migration 'create_person_widget_example'
             end
           end
         end
@@ -44,12 +45,6 @@ describe Cms::Generators::Widget::PersonGenerator do
             contains 'include Widget'
             contains 'cms_attribute :person, type: :string'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_person_widget_example'
         end
       end
     }

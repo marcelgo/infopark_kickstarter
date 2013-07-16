@@ -18,7 +18,11 @@ module Cms
       end
 
       def widgets_path
-        "#{homepage_path}/_boxes"
+        'app/widgets'
+      end
+
+      def widget_path_for(name)
+        "#{widgets_path}/#{name}"
       end
     end
   end

@@ -1,13 +1,13 @@
 class CreateSliderWidgetExample < RailsConnector::Migration
   def up
-    homepage = Obj.find_by_path("<%= example_obj_path %>")
+    homepage = Obj.find_by_path("<%= example_cms_path %>")
 
-    add_widget(homepage, "<%= example_obj_widget_attribute %>", {
+    add_widget(homepage, "<%= example_widget_attribute %>", {
       _obj_class: "<%= obj_class_name %>",
       images: [
-        { url: 'http://lorempixel.com/1170/400/' },
-        { url: 'http://lorempixel.com/1170/400/' },
-        { url: 'http://lorempixel.com/1170/400/' },
+        { url: 'http://lorempixel.com/1170/400/abstract' },
+        { url: 'http://lorempixel.com/1170/400/sports' },
+        { url: 'http://lorempixel.com/1170/400/city' },
       ]
     })
   end

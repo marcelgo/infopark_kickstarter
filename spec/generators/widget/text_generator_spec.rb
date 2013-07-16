@@ -35,6 +35,7 @@ describe Cms::Generators::Widget::TextGenerator do
 
             directory 'migrate' do
               migration 'create_text_widget'
+              migration 'create_text_widget_example'
             end
           end
         end
@@ -44,12 +45,6 @@ describe Cms::Generators::Widget::TextGenerator do
             contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_text_widget_example'
         end
       end
     }

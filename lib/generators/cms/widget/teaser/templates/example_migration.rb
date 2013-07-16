@@ -1,18 +1,18 @@
 class CreateTeaserWidgetExample < RailsConnector::Migration
   def up
-    homepage = Obj.find_by_path("<%= example_obj_path %>")
+    homepage = Obj.find_by_path("<%= example_cms_path %>")
 
-    add_widget(homepage, "<%= example_obj_widget_attribute %>", {
+    add_widget(homepage, "<%= example_widget_attribute %>", {
       _obj_class: "<%= obj_class_name %>",
-      headline: 'Mauris semper purus nec lorem vulputate tempor',
-      content: '<p>Donec mollis turpis vitae tortor aliquam pulvinar. In malesuada mi eget mollis
-        euismod. Donec mollis quam quis est ultrices, id volutpat neque sagittis. Vivamus ac neque
-        non diam egestas bibendum. Nunc molestie fringilla laoreet. Fusce interdum mollis augue id
-        fermentum. Fusce nec odio elementum, scelerisque nibh bibendum, eleifend odio. Sed sed
-        placerat arcu, a auctor ligula. Vivamus feugiat faucibus euismod.</p>',
+      headline: 'Welcome to Infopark',
+      content: '<p>You successfully started your
+        project. Basic components such as a top navigation, a search panel, this text widget, and a
+        login page have been created for you to experiment with the building blocks of your website
+        application. To access the documentation or get in touch with the Infopark support team,
+        visit the Dev Center.</p>',
       link_to: [{
-        title: 'Infopark Dev',
-        url: 'http://dev.infopark.de',
+        title: 'Browse Infopark Dev Center',
+        url: 'https://dev.infopark.net/preparation',
       }],
     })
   end

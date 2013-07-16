@@ -1,8 +1,8 @@
 class CreateVideoWidgetExample < RailsConnector::Migration
   def up
-    homepage = Obj.find_by_path("<%= example_obj_path %>")
+    homepage = Obj.find_by_path("<%= example_cms_path %>")
 
-    add_widget(homepage, "<%= example_obj_widget_attribute %>", {
+    add_widget(homepage, "<%= example_widget_attribute %>", {
       _obj_class: "<%= obj_class_name %>",
       source: [{
         url: 'https://ip-saas-infoparkdev-cms.s3.amazonaws.com/public/506c948822d39176/7d452f7d1bd716d10bcb609cbe7e3c51/getting-started.mp4'

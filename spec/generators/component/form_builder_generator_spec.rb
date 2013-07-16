@@ -49,7 +49,6 @@ describe Cms::Generators::Component::FormBuilderGenerator do
       directory 'config' do
         directory 'locales' do
           file 'en.form_builder.yml'
-          file 'de.form_builder.yml'
         end
       end
 

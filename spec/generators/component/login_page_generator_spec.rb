@@ -77,7 +77,9 @@ describe Cms::Generators::Component::LoginPageGenerator do
       end
 
       directory 'config' do
-        file 'en.login_page.yml'
+        directory 'locales' do
+          file 'en.login_page.yml'
+        end
       end
     }
   end

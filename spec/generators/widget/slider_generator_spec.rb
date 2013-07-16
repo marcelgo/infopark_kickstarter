@@ -51,6 +51,7 @@ describe Cms::Generators::Widget::SliderGenerator do
 
             directory 'migrate' do
               migration 'create_slider_widget'
+              migration 'create_slider_widget_example'
             end
           end
         end
@@ -60,12 +61,6 @@ describe Cms::Generators::Widget::SliderGenerator do
             contains 'cms_attribute :images, type: :linklist'
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_slider_widget_example'
         end
       end
     }

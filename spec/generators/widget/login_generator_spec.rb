@@ -48,6 +48,7 @@ describe Cms::Generators::Widget::LoginGenerator do
 
             directory 'migrate' do
               migration 'create_login_widget'
+              migration 'create_login_widget_example'
             end
           end
         end
@@ -56,12 +57,6 @@ describe Cms::Generators::Widget::LoginGenerator do
           file 'login_widget.rb' do
             contains 'include Widget'
           end
-        end
-      end
-
-      directory 'cms' do
-        directory 'migrate' do
-          migration 'create_login_widget_example'
         end
       end
     }
