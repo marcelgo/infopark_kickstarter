@@ -24,6 +24,10 @@ module Cms
       def widget_path_for(name)
         "#{widgets_path}/#{name}"
       end
+
+      def migration_path
+        'cms/migrate'
+      end
     end
   end
 end

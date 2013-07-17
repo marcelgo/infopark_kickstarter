@@ -36,6 +36,33 @@ module Cms
 
         insert_into_file(file, data, :after => insert_point)
       end
+
+      def insert_into_javascript_manifest(insert_file, require_file)
+        file = 'app/assets/javascripts/application.js'
+        insert_point = "//= require #{insert_file}"
+
+        data = []
+
+        data << ''
+        data << "//= require #{require_file}"
+
+        data = data.join("\n")
+
+        insert_into_file(file, data, after: insert_point)
+      end
+
+      def insert_into_stylesheet_manifest(insert_file, require_file)
+        file = 'app/assets/stylesheets/application.css'
+        insert_point = "*= require #{insert_file}"
+
+        data = []
+        data << ''
+        data << " *= require #{require_file}"
+
+        data = data.join("\n")
+
+        insert_into_file(file, data, after: insert_point)
+      end
     end
   end
 end
