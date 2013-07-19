@@ -15,3 +15,8 @@ RailsConnector::Configuration.editing_auth do |env|
   request = Rack::Request.new(env)
   EditModeDetection.editing_allowed?(request.session)
 end
+
+RailsConnector::WidgetRenderer.send(:include, Authentication)
+
+RailsConnector::WidgetRenderer.send(:include, ActionController::RequestForgeryProtection)
+RailsConnector::WidgetRenderer.protect_from_forgery

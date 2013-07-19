@@ -1,0 +1,8 @@
+.row
+  .span12
+    = render 'login_widget/views/form', url: url, return_to: return_to
+
+.row
+  .span12
+    = link_to(reset_password_path) do
+      = t('login.show.reset_password')

@@ -1,2 +1,5 @@
 .widget.login-widget
-  = render_cell(:widget, :show, @obj, @widget)
+  - if current_user_logged_in?(current_user)
+    = render 'login_widget/views/logout', logout_path: cms_path(login_page(@obj)), user_name: current_user_login(current_user)
+  - else
+    = render 'login_widget/views/login', url: cms_path(login_page(@obj)), return_to: cms_path(@obj), reset_password_path: cms_path(login_page(@obj).reset_password_page)

@@ -1,0 +1,7 @@
+.row
+  .span12
+    = user_name
+.row
+  .span12
+    = link_to(logout_path, method: :delete, class: 'btn') do
+      = t('login.show.logout')

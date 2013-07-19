@@ -31,4 +31,8 @@ module Authentication
   def discard_user
     session.delete(:user)
   end
+
+  def session
+    request.session
+  end
 end

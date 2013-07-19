@@ -41,6 +41,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'therubyracer'
   gem.add_dependency 'infopark_rails_connector', '>= 6.9.1.3.22208381'
   gem.add_dependency 'infopark_cloud_connector', '>= 6.9.1.3.22208381'
+  gem.add_dependency 'infopark_crm_connector'
 
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'pry'

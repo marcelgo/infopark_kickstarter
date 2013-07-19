@@ -1,0 +1,12 @@
+.row-fluid
+  .span12
+    = simple_form_for(:login_presenter, url: url, method: :post) do |form|
+      = hidden_field_tag(:return_to, return_to)
+      = hidden_field_tag(:authenticity_token, form_authenticity_token)
+
+      = form.input(:login)
+
+      = form.input(:password)
+
+      = form.button(:submit)
+
