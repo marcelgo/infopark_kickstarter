@@ -1,1 +1,10 @@
-= render_cell(:widget, :show, @obj, @widget)
+%div.carousel.slide{id: slider_id(@widget)}
+  %ol.carousel-indicators
+    - slider_images(@widget).each_with_index do |_, index|
+      = render 'slider_widget/views/indicator', index: index, slider_id: slider_id(@widget), indicator_class: slider_indicator_class_name(index)
+
+  %div.carousel-inner
+    - slider_images(@widget).each_with_index do |image, index|
+      = render 'slider_widget/views/image', image: image, index: index
+
+    = render 'slider_widget/views/controls'

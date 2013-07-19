@@ -1,1 +1,2 @@
-= render_cell(:widget, :show, @obj, @widget)
+.widget.video-widget
+  = render video_provider_partial_path(@widget), video_partial_attributes(@widget)

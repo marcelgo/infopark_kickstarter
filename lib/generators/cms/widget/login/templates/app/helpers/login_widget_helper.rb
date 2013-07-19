@@ -1,4 +1,4 @@
-module LoginHelper
+module LoginWidgetHelper
   def current_user_logged_in?(current_user)
     current_user.logged_in?
   end

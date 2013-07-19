@@ -22,27 +22,14 @@ describe Cms::Generators::Widget::SliderGenerator do
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          directory 'widget' do
-            file 'slider_widget_cell.rb'
-
-            directory 'slider_widget' do
-              file 'show.html.haml'
-              file 'image.html.haml'
-              file 'images.html.haml'
-              file 'indicators.html.haml'
-              file 'left_control.html.haml'
-              file 'right_control.html.haml'
-              file 'title.html.haml'
-            end
-          end
-        end
-
         directory 'widgets' do
           directory 'slider_widget' do
             directory 'views' do
               file 'show.html.haml'
               file 'thumbnail.html.haml'
+              file '_controls.html.haml'
+              file '_image.html.haml'
+              file '_indicator.html.haml'
             end
 
             directory 'locales' do
