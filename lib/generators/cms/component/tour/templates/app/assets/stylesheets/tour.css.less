@@ -1,0 +1,169 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+// --------------------------------------------------------- //
+// Tour - style
+// --------------------------------------------------------- //
+
+.tour {
+  &.modal {
+    background: #fff;
+    border: 1px solid #fff;
+    display: none;
+    height: 80%;
+    left: 50%;
+    margin: 0 0 0 -40%;
+    overflow: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    position: fixed;
+    top: 50%;
+    width: 80%;
+    z-index: 333333;
+
+    #gradient.radial(#fff, #eee);
+    .border-radius(6px);
+    .box-shadow(0 5px 30px #000);
+
+    .modal-body {
+      padding: 0;
+      max-height: none;
+    }
+  }
+
+  .tabs-left .nav-tabs {
+    display: block;
+    float: left;
+    padding: 0;
+    width: 20%;
+    margin: 0 50px 0 0;
+    min-height: 300px;
+
+    .box-shadow(~"45px 0 55px -70px #999, 3px 0 1px -3px #ccc");
+    .box-sizing(border-box);
+
+    li {
+      display: block;
+      margin: 0;
+      padding: 0;
+      background: #f6f6f6;
+      color: #333;
+      position: relative;
+      z-index: 1;
+
+      a {
+        border: none;
+        display: block;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 20px;
+        color: #333;
+        padding: 10px;
+        margin: 0;
+        text-decoration: none;
+
+        .border-radius(0);
+        .box-shadow(0 -3px 2px -3px #999 inset);
+
+        &:after,
+        &:before {
+          left: 100%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+        }
+
+        &:after {
+          border-color: rgba(255, 255, 255, 0);
+          border-left-color: #f6f6f6;
+          border-width: 19px;
+          top: 50%;
+          margin-top: -19px;
+        }
+
+        &:before {
+          border-color: rgba(170, 170, 170, 0);
+          border-left-color: #ccc;
+          border-width: 20px;
+          top: 50%;
+          margin-top: -20px;
+        }
+      }
+
+      a:hover,
+      &.active a {
+        color: #fff;
+        background: #6d84ab;
+        border: none;
+
+        .box-shadow(0 -3px 2px -3px #555 inset);
+      }
+
+      a:hover:after,
+      &.active a:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-left-color: #6d84ab;
+      }
+
+      a:hover:before,
+      &.active a:before {
+        border-color: rgba(170, 170, 170, 0);
+        border-left-color: #ccc;
+      }
+    }
+  }
+
+  .tab-content {
+    h1, h2, h3, h4, h5, h6 {
+      color: #3F5F85;
+    }
+  }
+}
+
+// --------------------------------------------------------- //
+// Responsive: up to landscape
+// --------------------------------------------------------- //
+
+@media (max-width: 480px) {
+  .tour,
+  .tour.modal {
+    margin: 0 0 0 -45%;
+    width: 90%;
+  }
+}
+
+// --------------------------------------------------------- //
+// Responsive: landscape to tablet
+// --------------------------------------------------------- //
+
+@media (max-width: 768px) {
+  .tour .tabs-left {
+    .nav-tabs {
+      display: none;
+    }
+
+    .tab-content {
+      padding: 10px;
+    }
+
+    .tab-pane {
+      display: block;
+    }
+  }
+}
+
+// --------------------------------------------------------- //
+// Responsive: tablet to desktop
+// --------------------------------------------------------- //
+
+@media (min-width: 769px) and (max-width: 979px) {
+  .tour,
+  .tour.modal {
+    margin: 0 0 0 -45%;
+    width: 90%;
+  }
+}

@@ -1,0 +1,11 @@
+.tabbable.tabs-left
+  %ul.nav.nav-tabs
+    - @obj.steps.each_with_index do |step, index|
+      %li{class: ('active' if index == 0)}
+        %a{href: "#tour#{index}", data: { toggle: 'tab' }}
+          = step.headline
+
+  .tab-content
+    - @obj.steps.each_with_index do |step, index|
+      .tab-pane.fade{id: "tour#{index}", class: ('in active' if index == 0)}
+        = cms_tag(:div, step, :content)

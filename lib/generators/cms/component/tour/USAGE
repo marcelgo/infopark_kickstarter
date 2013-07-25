@@ -1,0 +1,18 @@
+Description:
+    Generates an implementation of a tour component. A tour is managed in the
+    CMS. It has an object class "Tour" and an object class "TourStep". Each tour
+    consists of a tour object and its steps defined as children below the tour. Each step again can
+    be composed with widgets right on the tour page.
+
+Example:
+    `rails generate cms:component:tour`
+    `rails generate cms:component:tour --example`
+
+    CMS: obj_class Tour
+           attribute headline (string)
+
+         obj class TourStep
+           attribute headline (string)
+           attribute content (html)
+           attribute show_in_navigation (enum)
+           attribute sort_key (string)
