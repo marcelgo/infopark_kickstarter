@@ -1,4 +1,6 @@
 # v3.0.0
+  * Update `infopark_rails_connector` and `infopark_cloud_connector` to version 6.9.2.1.125136549
+    and Ruby on Rails to version 3.2.14. Also other minor gem updates.
   * Bugfix: Widgets no longer create an entry in the `en.obj_class.yml` file, as they are not
     displayed in the obj class browser and therefore don't need a translation.
     (Thanks @EtectureVolkerBenders)
