@@ -53,33 +53,26 @@ module InfoparkKickstarter
       end
 
       def kickstart
-        sh('bundle exec rails generate cms:kickstart')
+        sh('bundle exec rails generate cms:kickstart --examples')
       end
 
       def call_generators
         generators = [
-          'cms:component:developer_tools',
           'cms:component:testing',
           'cms:component:redirect',
-          'cms:component:sitemap',
           'cms:component:error_tracking --provider=airbrake',
           'cms:component:error_tracking --provider=honeybadger',
           'cms:component:monitoring "Test Website" --provider=newrelic',
           'cms:component:tracking --provider=google_analytics',
           'cms:component:language_switch --example',
-          'cms:component:profile_page --cms_path=/website/en',
-          'cms:component:contact_page --cms_path=/website/en',
           'cms:component:form_builder --cms_path=/website/en',
-          'cms:component:blog --cms_path=/website/en',
           'cms:component:social_sharing --example',
           'cms:component:breadcrumbs',
-          'cms:widget:maps --provider=google_maps',
-          'cms:widget:video',
-          'cms:widget:person',
-          'cms:widget:slider',
-          'cms:widget:login',
-          'cms:widget:hero_unit',
-          'cms:widget:slideshare',
+          'cms:widget:video --example',
+          'cms:widget:person --example',
+          'cms:widget:slider --example',
+          'cms:widget:login --example',
+          'cms:widget:slideshare --example',
         ]
 
         generators.each do |generator|

@@ -16,7 +16,6 @@ describe Cms::Generators::ModelGenerator do
     '--mandatory_attributes=foo', 'bar',
     '--preset_attributes=foo:f', 'bar:b',
     '--page',
-    '--widget',
   ]
 
   before do
@@ -31,7 +30,6 @@ describe Cms::Generators::ModelGenerator do
           file 'news.rb' do
             contains 'class News < Obj'
             contains 'include Page'
-            contains 'include Widget'
             contains 'cms_attribute :foo, type: :html'
             contains 'cms_attribute :bar, type: :enum'
           end

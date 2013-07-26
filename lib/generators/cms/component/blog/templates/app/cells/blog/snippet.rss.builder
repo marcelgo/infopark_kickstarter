@@ -1,1 +1,1 @@
-xml.description cms_tag(:div, @entry, :abstract)
+xml.description cms_tag(:div, @post, :abstract)

@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::VideoGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -75,6 +76,7 @@ describe Cms::Generators::Widget::VideoGenerator do
 
             directory 'migrate' do
               migration 'create_video_widget'
+              migration 'create_video_widget_example'
             end
           end
         end
@@ -86,8 +88,6 @@ describe Cms::Generators::Widget::VideoGenerator do
             contains 'cms_attribute :height, type: :integer'
             contains 'cms_attribute :autoplay, type: :boolean'
             contains 'cms_attribute :poster, type: :linklist, max_size: 1'
-            contains 'cms_attribute :headline, type: :string'
-            contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
           end
         end

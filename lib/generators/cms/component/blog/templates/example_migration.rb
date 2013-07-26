@@ -14,30 +14,30 @@ class CreateBlogExample < ::RailsConnector::Migration
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
     )
 
-    entry_path = "#{blog_path}/entry-1"
+    post_path = "#{blog_path}/post-example"
 
-    entry = create_obj(
-      _path: entry_path,
-      _obj_class: '<%= blog_entry_class_name %>',
+    post = create_obj(
+      _path: post_path,
+      _obj_class: '<%= blog_post_class_name %>',
       headline: 'Nulla viverra metus vitae nunc iaculis dignissim',
-      '<%= blog_entry_author_attribute_name %>' => '',
-      '<%= blog_entry_abstract_attribute_name %>' => '<p>Quisque eget sem sit amet risus gravida
+      '<%= blog_post_author_attribute_name %>' => '',
+      '<%= blog_post_abstract_attribute_name %>' => '<p>Quisque eget sem sit amet risus gravida
         commodo et sed neque. Morbi pellentesque urna ut sapien auctor mattis. Donec quis cursus
         enim. Pellentesque sodales, elit nec accumsan congue, orci velit commodo orci, vel luctus
         nisi mi vitae erat. Cras lacus urna, sagittis tristique placerat vel, consectetur id leo.
         </p>'
     )
 
-    add_widget(Obj.find(entry['id']), '<%= widget_attribute_name %>',
+    add_widget(Obj.find(post['id']), '<%= widget_attribute_name %>',
       _obj_class: 'TextWidget',
-      content: 'Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
+      content: '<p>Quisque eget sem sit amet risus gravida commodo et sed neque. Morbi pellentesque
         urna ut sapien auctor mattis. Donec quis cursus enim. Pellentesque sodales, elit nec
         accumsan congue, orci velit commodo orci, vel luctus nisi mi vitae erat. Cras lacus urna,
         sagittis tristique placerat vel, consectetur id leo. Vestibulum in congue mauris. Donec
         volutpat nibh ut nunc hendrerit porta. Pellentesque habitant morbi tristique senectus et
         netus et malesuada fames ac turpis egestas. Aliquam in felis quis neque aliquet rutrum.
         Morbi interdum aliquet sollicitudin. Curabitur eget erat vitae risus aliquam ultricies ac
-        ut leo. Praesent eget lectus lorem, eu luctus velit. Proin rhoncus consequat consectetur.',
+        ut leo. Praesent eget lectus lorem, eu luctus velit. Proin rhoncus consequat consectetur.<p>',
     )
   end
 
@@ -59,7 +59,5 @@ class CreateBlogExample < ::RailsConnector::Migration
     list << { widget: widget['id'] }
 
     update_obj(obj.id, attribute => { layout: list })
-
-    puts "Created '#{widget['_obj_class']}'..."
   end
 end

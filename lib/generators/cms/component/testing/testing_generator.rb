@@ -29,6 +29,9 @@ module Cms
         def install_test_framework
           unless options[:skip_install]
             generate('rspec:install')
+
+            comment_lines 'spec/spec_helper.rb', 'config.fixture_path = "#{::Rails.root}/spec/fixtures"'
+            comment_lines 'spec/spec_helper.rb', 'config.use_transactional_fixtures = true'
           end
         end
       end

@@ -1,10 +1,6 @@
 module ApplicationHelper
-  # Extracts controller and current object information to pass them on to
-  # JavaScript via html class and data attributes.
   def body_attributes(obj)
-    attributes = {
-      class: params[:controller],
-    }
+    attributes = {}
 
     if obj
       attributes[:data] = {

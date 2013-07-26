@@ -1,1 +1,1 @@
-xml << render_cell(:box, :entries, @obj, @entries)
+xml << render_cell(:box, :posts, @obj, @posts)

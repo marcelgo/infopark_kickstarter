@@ -7,6 +7,7 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -30,6 +31,7 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
 
             directory 'migrate' do
               migration 'create_google_maps_widget'
+              migration 'create_google_maps_widget_example'
             end
 
             directory 'views' do
@@ -42,8 +44,6 @@ describe Cms::Generators::Widget::Maps::GoogleMapsGenerator do
         directory 'models' do
           file 'google_maps_widget.rb' do
             contains 'cms_attribute :address, type: :string'
-            contains 'cms_attribute :headline, type: :string'
-            contains 'cms_attribute :content, type: :html'
             contains 'include Widget'
           end
         end
