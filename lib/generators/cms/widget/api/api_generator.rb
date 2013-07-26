@@ -4,6 +4,7 @@ module Cms
       class ApiGenerator < ::Rails::Generators::NamedBase
         include BasePaths
         include Migration
+        include Actions
 
         Rails::Generators.hide_namespace(self.namespace)
 
@@ -42,6 +43,7 @@ module Cms
             end
 
             template('en.locale.yml', "#{widget_path}/locales/en.#{file_name}.yml")
+            template('edit.html.haml', "#{widget_path}/views/edit.html.haml")
             template('show.html.haml', "#{widget_path}/views/show.html.haml")
             template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
           rescue Cms::Generators::DuplicateResourceError
