@@ -1,0 +1,5 @@
+en:
+  editing:
+    linklist:
+      title: 'Title: %{title}'
+      url: 'Url: %{url}'

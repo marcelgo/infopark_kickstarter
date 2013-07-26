@@ -91,8 +91,4 @@ class Obj < ::RailsConnector::BasicObj
       url
     end
   end
-
-  def to_key
-    [id]
-  end
 end

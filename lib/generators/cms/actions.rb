@@ -23,26 +23,17 @@ module Cms
         method
       end
 
-      def generate_edit_form_field(attribute)
-        field = nil
+      def generate_edit_field(attribute)
+        name = attribute[:name]
+        type = attribute[:type]
 
-        if attribute[:type].eql?(:string)
-          field = "= form.input :#{attribute[:name]}"
-        end
+        "= cms_edit_#{type}(@widget, :#{name})"
+      end
 
-        if attribute[:type].eql?(:html)
-          field = "= form.input :#{attribute[:name]}"
-        end
+      def generate_label(attribute)
+        name = attribute[:name]
 
-        if attribute[:type].eql?(:enum)
-          field = "= form.input :#{attribute[:name]}, as: :select"
-        end
-
-        if attribute[:type].eql?(:multienum)
-          field = "= form.input :#{attribute[:name]}, as: :select, input_html: { multiple: true }"
-        end
-
-        field
+        "= cms_edit_label(@widget, :#{name})"
       end
 
       def add_model_attribute(model, attribute, model_path = 'app/models')

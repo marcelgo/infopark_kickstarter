@@ -4,6 +4,7 @@ module Cms
       class ApiGenerator < ::Rails::Generators::NamedBase
         include BasePaths
         include Migration
+        include Actions
 
         Rails::Generators.hide_namespace(self.namespace)
 

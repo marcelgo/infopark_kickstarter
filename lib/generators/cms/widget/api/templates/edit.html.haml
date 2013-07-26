@@ -1,5 +1,6 @@
-.box.<%= file_name %>.well
-  = cms_edit_form_for(@widget, url: '/', method: :get) do |form|
-  <%- attributes.each do |definition| -%>
-    <%= generate_edit_form_field(definition) %>
-  <%- end -%>
+.editing.<%= file_name %>
+<%- attributes.each do |definition| -%>
+  <%= generate_label(definition) %>
+  <%= generate_edit_field(definition) %>
+
+<%- end -%>
