@@ -1,10 +1,10 @@
 class BlogController < CmsController
   def index
-    @entries = @obj.latest_entries
+    @posts = @obj.latest_posts
 
     respond_to do |format|
-      format.html { @entries }
-      format.rss { @entries }
+      format.html { @posts }
+      format.rss { @posts }
     end
   end
 end

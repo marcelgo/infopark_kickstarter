@@ -1,8 +1,4 @@
-.widget.slideshare-widget.well
-  = cms_tag(:h3, @widget, :headline)
-
-  = cms_tag(:p, @widget, :content)
-
+.widget.slideshare-widget
   - if @widget.embed_html.present?
     .slideshare
       = @widget.embed_html

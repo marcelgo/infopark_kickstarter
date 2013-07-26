@@ -8,6 +8,7 @@ describe Cms::Generators::Widget::ImageGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
+  arguments ['--example']
 
   before do
     prepare_destination
@@ -34,15 +35,14 @@ describe Cms::Generators::Widget::ImageGenerator do
 
             directory 'migrate' do
               migration 'create_image_widget'
+              migration 'create_image_widget_example'
             end
           end
         end
 
         directory 'models' do
           file 'image_widget.rb' do
-            contains 'cms_attribute :caption, type: :string'
             contains 'cms_attribute :source, type: :linklist, max_size: 1'
-            contains 'cms_attribute :headline, type: :string'
             contains 'include Widget'
           end
         end

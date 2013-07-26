@@ -49,8 +49,8 @@ module Cms
 
           begin
             Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = blog_entry_class_name
-              model.title = 'Page: Blog Entry'
+              model.name = blog_post_class_name
+              model.title = 'Page: Blog Post'
               model.thumbnail = false
               model.page = true
               model.attributes = [
@@ -60,7 +60,7 @@ module Cms
                   title: 'Headline',
                 },
                 {
-                  name: blog_entry_author_attribute_name,
+                  name: blog_post_author_attribute_name,
                   type: :string,
                   title: 'Author',
                 },
@@ -70,12 +70,14 @@ module Cms
                   title: 'Main content',
                 },
                 {
-                  name: blog_entry_abstract_attribute_name,
+                  name: blog_post_abstract_attribute_name,
                   type: :html,
                   title: 'Abstract',
                 },
               ]
             end
+
+            Rails::Generators.invoke('cms:controller', [blog_post_class_name])
           rescue Cms::Generators::DuplicateResourceError
           end
         end
@@ -126,11 +128,11 @@ module Cms
           'main_content'
         end
 
-        def blog_entry_abstract_attribute_name
+        def blog_post_abstract_attribute_name
           'abstract'
         end
 
-        def blog_entry_author_attribute_name
+        def blog_post_author_attribute_name
           'author'
         end
 
@@ -146,8 +148,8 @@ module Cms
           'Blog'
         end
 
-        def blog_entry_class_name
-          'BlogEntry'
+        def blog_post_class_name
+          'BlogPost'
         end
       end
     end

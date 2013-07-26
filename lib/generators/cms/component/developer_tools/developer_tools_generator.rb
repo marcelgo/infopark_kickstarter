@@ -22,6 +22,12 @@ module Cms
           directory('lib')
           directory('config', force: true)
         end
+
+        def notice
+          if behavior == :invoke
+            log(:server, 'Please make sure to restart your server, because of gem changes.')
+          end
+        end
       end
     end
   end

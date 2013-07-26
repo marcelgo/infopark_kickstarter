@@ -3,16 +3,16 @@ class BlogCell < Cell::Rails
 
   # Cell actions:
 
-  def entries(blog, entries)
+  def posts(blog, posts)
     @blog = blog
-    @entries = entries
+    @posts = posts
 
     render(format: params[:format]) # html, rss
   end
 
-  def entry_details(entry)
-    @blog = entry.blog
-    @entry = entry
+  def post_details(post)
+    @blog = post.blog
+    @post = post
 
     render
   end
@@ -28,22 +28,22 @@ class BlogCell < Cell::Rails
   # Cell states:
   # The following states assume that @blog is given.
 
-  def entry(entry)
-    @entry = entry
+  def post(post)
+    @post = post
 
     render
   end
 
-  # The following states assume that @blog and @entry are given.
+  # The following states assume that @blog and @post are given.
 
   def comment
-    if @entry.enable_comments? && @entry.disqus_shortname.present?
+    if @post.enable_comments? && @post.disqus_shortname.present?
       render
     end
   end
 
   def gravatar
-    @author = @entry.author
+    @author = @post.author
 
     if @author
       render
@@ -51,13 +51,13 @@ class BlogCell < Cell::Rails
   end
 
   def published_at
-    @date = @entry.valid_from.to_date
+    @date = @post.valid_from.to_date
 
     render
   end
 
   def published_by
-    @author = @entry.author
+    @author = @post.author
 
     if @author
       render

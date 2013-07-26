@@ -25,18 +25,13 @@ module Footnotes
       # If it's not valid, it won't be displayed
       #
       def valid?
-        @obj
+        @obj && obj_class_data
       end
 
       # The fieldset content
       #
       def content
-        name = @obj.class.name
-        revision_id = RailsConnector::Workspace.current.revision_id
-        endpoint = "revisions/#{revision_id}/obj_classes/#{name}"
-        response = ::RailsConnector::CmsRestApi.get(endpoint)
-
-        mount_table_for_hash(response, :summary => "Debug information for #{title}")
+        mount_table_for_hash(obj_class_data, summary: "Debug information for #{title}")
       end
 
       # Specifies in which row should appear the title.
@@ -44,6 +39,19 @@ module Footnotes
       #
       def row
         :infopark
+      end
+
+      private
+
+      def obj_class_data
+        @obj_class_data ||= begin
+          name = @obj.class.name
+          revision_id = RailsConnector::Workspace.current.revision_id
+          endpoint = "revisions/#{revision_id}/obj_classes/#{name}"
+
+          ::RailsConnector::CmsRestApi.get(endpoint)
+        rescue ::RailsConnector::ClientError
+        end
       end
     end
   end

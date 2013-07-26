@@ -34,6 +34,7 @@ describe Cms::Generators::Component::SearchGenerator do
         directory 'models' do
           file 'search_page.rb' do
             contains 'cms_attribute :show_in_navigation, type: :boolean'
+            contains 'cms_attribute :headline, type: :string'
             contains '  include Page'
           end
 

@@ -2,25 +2,18 @@ module Cms
   module Generators
     module Widget
       class ImageGenerator < ::Rails::Generators::Base
+        include Example
+        include Migration
+
         source_root File.expand_path('../templates', __FILE__)
 
         def create_widget
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = 'ImageWidget'
+              widget.name = obj_class_name
               widget.icon = '&#xF061;'
-              widget.description = 'Widget that holds an image with a caption and a headline.'
+              widget.description = 'Widget that holds an image.'
               widget.attributes = [
-                {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: 'caption',
-                  type: :string,
-                  title: 'Caption',
-                },
                 {
                   name: 'source',
                   type: :linklist,
@@ -35,10 +28,20 @@ module Cms
           end
         end
 
+        def create_example
+          example_migration_template(obj_class_name.underscore)
+        end
+
         def notice
           if behavior == :invoke
             log(:migration, 'Make sure to run "rake cms:migrate" to apply CMS changes')
           end
+        end
+
+        private
+
+        def obj_class_name
+          'ImageWidget'
         end
       end
     end
