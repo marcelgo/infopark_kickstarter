@@ -1,4 +1,12 @@
 # v3.0.0
+  * All generated widgets now have an edit view. You can access the edit view via the widget edit
+    menu `Edit widget`. The edit view uses simple Ruby on Rails helper to ease the creation of
+    custom edit view input fields for all different kinds of CMS attributes. The `CmsEditHelper`
+    provides methods for all CMS attribute types, eventhough not all of them are yet supported for
+    editing. `linklist`, and `date` attributes are only readable. The edit view also features a
+    helper to create a label that is marked as required, if the attribute is required in the CMS.
+  * Update `infopark_rails_connector` and `infopark_cloud_connector` to version 6.9.2.1.125136549
+    and Ruby on Rails to version 3.2.14. Also other minor gem updates.
   * Bugfix: Widgets no longer create an entry in the `en.obj_class.yml` file, as they are not
     displayed in the obj class browser and therefore don't need a translation.
     (Thanks @EtectureVolkerBenders)

@@ -22,7 +22,7 @@ describe Cms::Generators::WidgetGenerator do
     run_generator
   end
 
-  it 'generates model files' do
+  it 'generates widget' do
     destination_root.should have_structure {
       directory 'app' do
         directory 'models' do
@@ -38,6 +38,13 @@ describe Cms::Generators::WidgetGenerator do
           directory 'news_widget' do
             directory 'views' do
               file 'show.html.haml'
+              file 'edit.html.haml' do
+                contains '.editing.news_widget'
+                contains 'cms_edit_label(@widget, :foo)'
+                contains 'cms_edit_html(@widget, :foo)'
+                contains 'cms_edit_label(@widget, :bar)'
+                contains 'cms_edit_enum(@widget, :bar)'
+              end
               file 'thumbnail.html.haml' do
                 contains '&#xF048;'
               end
