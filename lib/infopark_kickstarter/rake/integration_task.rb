@@ -73,6 +73,8 @@ module InfoparkKickstarter
           'cms:widget:slider --example',
           'cms:widget:login --example',
           'cms:widget:slideshare --example',
+          'cms:widget:column --columns=2',
+          'cms:widget:column --columns=3',
         ]
 
         generators.each do |generator|
