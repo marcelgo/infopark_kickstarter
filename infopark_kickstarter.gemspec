@@ -39,8 +39,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'launchy'
   gem.add_dependency 'less-rails-bootstrap'
   gem.add_dependency 'therubyracer'
-  gem.add_dependency 'infopark_rails_connector', '>= 6.9.1.3.22208381'
-  gem.add_dependency 'infopark_cloud_connector', '>= 6.9.1.3.22208381'
+  gem.add_dependency 'infopark_rails_connector', '>= 6.9.2.1.125136549'
+  gem.add_dependency 'infopark_cloud_connector', '>= 6.9.2.1.125136549'
+  gem.add_dependency 'infopark_crm_connector', '>= 1.0.1'
 
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'pry'
