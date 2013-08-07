@@ -9,15 +9,9 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         class_option :columns,
-          :type => :string,
-          :default => '2',
-          :desc => "Number of columns"
-
-        def check_max_columns
-          if columns > max_columns
-            raise "Maximum possible columns is #{max_columns}"
-          end
-        end
+          type: :string,
+          default: '2',
+          desc: 'Number of columns'
 
         def create_widget
           begin
@@ -50,11 +44,11 @@ module Cms
         private
 
         def widget_attributes
-          (1..columns).inject([]) do |array, n|
+          (1..columns).inject([]) do |array, index|
             array << {
-              name: column_name(n),
+              name: column_name(index),
               type: :widget,
-              title: column_title(n),
+              title: column_title(index),
             }
 
             array
@@ -65,16 +59,12 @@ module Cms
           options[:columns].to_i
         end
 
-        def max_columns
-          3
-        end
-
         def obj_class_name
           "#{columns}ColumnWidget"
         end
 
         def folder_name
-          "#{obj_class_name.underscore}"
+          obj_class_name.underscore
         end
 
         def column_title(column)
