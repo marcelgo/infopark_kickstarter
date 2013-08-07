@@ -1,6 +1,1 @@
-This widget generator provides the possibility to generate a column widgets with a specific count of
-columns. Each column includes a widget field. The count of the colums is controlled by the --columns
-paramter. The maximum count of columns is restricted to 3.
-
-rails generate cms:widget:column
-rails generate cms:widget:column --columns=3
+Documentation: https://dev.infopark.net/column-widget
