@@ -2,5 +2,6 @@
   .row-fluid
   <%- (1..columns).each do |index| -%>
     .span<%= 12 / columns %>
-      = cms_tag(:div, @widget, <%= column_name(index) %>)
+      = cms_tag(:div, @widget, :<%= column_name(index) %>)
+
   <%- end -%>

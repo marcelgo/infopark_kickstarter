@@ -60,7 +60,7 @@ module Cms
         end
 
         def obj_class_name
-          "#{columns}ColumnWidget"
+          "Column#{columns}Widget"
         end
 
         def folder_name
