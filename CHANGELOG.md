@@ -1,3 +1,7 @@
+# v3.1.0
+  * The `add_widget` method inside of example migrations was changed, to only use the public
+    RailsConnector API, instead of an API that might change in the future.
+
 # v3.0.0
   * All generated widgets now have an edit view. You can access the edit view via the widget edit
     menu `Edit widget`. The edit view uses simple Ruby on Rails helper to ease the creation of
