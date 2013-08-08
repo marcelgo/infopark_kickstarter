@@ -1,14 +1,11 @@
-class CreateHeadlineWidgetExample < RailsConnector::Migration
+class CreateColumn<%= columns %>WidgetExample < RailsConnector::Migration
   def up
     homepage = Obj.find_by_path("<%= example_cms_path %>")
 
     add_widget(homepage, "<%= example_widget_attribute %>", {
       _obj_class: "<%= obj_class_name %>",
-      headline: 'Integer eget justo at ipsum interdum mattis'
     })
   end
-
-  private
 
   def add_widget(obj, attribute, widget)
     widget.reverse_merge!({

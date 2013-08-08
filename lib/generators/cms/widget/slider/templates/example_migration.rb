@@ -12,21 +12,22 @@ class CreateSliderWidgetExample < RailsConnector::Migration
     })
   end
 
-  def add_widget(obj, attribute, widget_params)
-    widget_params.reverse_merge!({
+  private
+
+  def add_widget(obj, attribute, widget)
+    widget.reverse_merge!({
       _path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",
     })
 
-    widget = create_obj(widget_params)
+    widget = create_obj(widget)
 
-    widgets = obj.widgets(attribute)
+    revision_id = RailsConnector::Workspace.current.revision_id
+    definition = RailsConnector::CmsRestApi.get("revisions/#{revision_id}/objs/#{obj.id}")
 
-    list = widgets.inject([]) do |values, widget|
-      values << { widget: widget['id'] }
-    end
+    widgets = definition[attribute] || {}
+    widgets['layout'] ||= []
+    widgets['layout'] << { widget: widget['id'] }
 
-    list << { widget: widget['id'] }
-
-    update_obj(obj.id, attribute => { layout: list })
+    update_obj(definition['id'], attribute => widgets)
   end
 end
