@@ -7,7 +7,7 @@ describe Cms::Generators::Widget::ColumnGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-  arguments ['--columns=3']
+  arguments ['--columns=3', '--example']
 
   before do
     prepare_destination
@@ -18,24 +18,26 @@ describe Cms::Generators::Widget::ColumnGenerator do
     destination_root.should have_structure {
       directory 'app' do
         directory 'widgets' do
-          directory '3_column_widget' do
+          directory 'column3_widget' do
             directory 'locales' do
-              file 'en.3_column_widget.yml'
+              file 'en.column3_widget.yml'
             end
 
             directory 'migrate' do
-              migration 'create_3_column_widget'
+              migration 'create_column3_widget'
+              migration 'create_column3_widget_example'
             end
 
             directory 'views' do
               file 'show.html.haml'
+              file 'edit.html.haml'
               file 'thumbnail.html.haml'
             end
           end
         end
 
         directory 'models' do
-          file '3_column_widget.rb' do
+          file 'column3_widget.rb' do
             contains 'cms_attribute :column_1, type: :widget'
             contains 'cms_attribute :column_2, type: :widget'
             contains 'cms_attribute :column_3, type: :widget'
