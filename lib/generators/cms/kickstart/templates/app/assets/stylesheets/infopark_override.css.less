@@ -45,15 +45,19 @@ body.ip_editing_active {
   content: '\F058';
 }
 
-.ip_editing_active .structure {
+.ip_editing_active .widget.structure {
   padding-top: 30px;
 }
 
-.ip_editing_active .structure *[class*=span] {
+.ip_editing_active .widget.structure *[class*=span] {
   outline: 2px dotted rgba(0, 186, 255, 0.2);
   .transition(~"all ease-in-out .3s");
 }
 
-.ip_editing_active .structure:hover *[class*=span] {
+.ip_editing_active .widget.structure .highlighted {
   outline: 2px dotted rgba(0, 186, 255, 1);
+}
+
+.ip_editing_active .ip_editing_marker.structure {
+  border-color: rgb(0, 186, 255);
 }
