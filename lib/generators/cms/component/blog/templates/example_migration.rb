@@ -50,14 +50,13 @@ class CreateBlogExample < ::RailsConnector::Migration
 
     widget = create_obj(widget)
 
-    widgets = obj.widgets(attribute)
+    revision_id = RailsConnector::Workspace.current.revision_id
+    definition = RailsConnector::CmsRestApi.get("revisions/#{revision_id}/objs/#{obj.id}")
 
-    list = widgets.inject([]) do |values, widget|
-      values << { widget: widget['id'] }
-    end
+    widgets = definition[attribute] || {}
+    widgets['layout'] ||= []
+    widgets['layout'] << { widget: widget['id'] }
 
-    list << { widget: widget['id'] }
-
-    update_obj(obj.id, attribute => { layout: list })
+    update_obj(definition['id'], attribute => widgets)
   end
 end

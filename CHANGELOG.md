@@ -3,6 +3,8 @@
     number of columns, which are widget attributes again. This means you can created nested widgets
     and the editor can define the layout of a single row. Run
     `rails generate cms:widget:column --help` for more information.
+  * The `add_widget` method inside of example migrations was changed, to only use the public
+    RailsConnector API, instead of an API that might change in the future.
 
 # v3.0.0
   * All generated widgets now have an edit view. You can access the edit view via the widget edit
