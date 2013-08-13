@@ -38,20 +38,23 @@ body.ip_editing_active {
 
   .widget.structure {
     padding-top: 30px;
+    outline: 2px dotted rgba(0, 186, 255, 0.2);
+
+    &:hover {
+      outline: 2px dotted rgba(0, 186, 255, 1);
+    }
 
     & *[class*=span] {
-      .transition(~"all ease-in-out .3s");
-
       outline: 2px dotted rgba(0, 186, 255, 0.2);
 
-      .highlighted {
+      &:hover {
         outline: 2px dotted rgba(0, 186, 255, 1);
       }
     }
+  }
 
-    .ip_editing_marker.structure {
-      border-color: rgb(0, 186, 255);
-    }
+  .ip_editing_marker.structure {
+    border-color: rgb(0, 186, 255);
   }
 }
 
