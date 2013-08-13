@@ -35,6 +35,24 @@ body.ip_editing_active {
   .editing-content {
     display: block;
   }
+
+  .widget.structure {
+    padding-top: 30px;
+
+    & *[class*=span] {
+      .transition(~"all ease-in-out .3s");
+
+      outline: 2px dotted rgba(0, 186, 255, 0.2);
+
+      .highlighted {
+        outline: 2px dotted rgba(0, 186, 255, 1);
+      }
+    }
+
+    .ip_editing_marker.structure {
+      border-color: rgb(0, 186, 255);
+    }
+  }
 }
 
 .ip_field_editable[data-ip-field-type=html]:empty:before {
@@ -43,21 +61,4 @@ body.ip_editing_active {
 
 .ip_field_editable[data-ip-field-type=string]:empty:before {
   content: '\F058';
-}
-
-.ip_editing_active .widget.structure {
-  padding-top: 30px;
-}
-
-.ip_editing_active .widget.structure *[class*=span] {
-  outline: 2px dotted rgba(0, 186, 255, 0.2);
-  .transition(~"all ease-in-out .3s");
-}
-
-.ip_editing_active .widget.structure .highlighted {
-  outline: 2px dotted rgba(0, 186, 255, 1);
-}
-
-.ip_editing_active .ip_editing_marker.structure {
-  border-color: rgb(0, 186, 255);
 }
