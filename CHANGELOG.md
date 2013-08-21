@@ -5,6 +5,8 @@
     `rails generate cms:widget:column --help` for more information.
   * The `add_widget` method inside of example migrations was changed, to only use the public
     RailsConnector API, instead of an API that might change in the future.
+  * Remove the need for the `local.yml` configuration and instead use the `rails_connector.yml`
+    and `custom_cloud.yml` provided by the console.
 
 # v3.0.0
   * All generated widgets now have an edit view. You can access the edit view via the widget edit

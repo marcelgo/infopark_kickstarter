@@ -39,9 +39,9 @@ module InfoparkKickstarter
       end
 
       def create_configuration_files
-        ConfigurationHelper.new(local_configuration_file, :cms, "#{config_path}/rails_connector.yml").write
-        ConfigurationHelper.new(local_configuration_file, :crm, "#{config_path}/custom_cloud.yml").write
-        ConfigurationHelper.new(local_configuration_file, :deploy, "#{config_path}/deploy.yml").write
+        test_app_config = File.expand_path('../../../../tmp/test_app/config', __FILE__)
+
+        ConfigurationHelper.new(test_app_config).copy_configurations
       end
 
       def reset_cms
@@ -96,22 +96,6 @@ module InfoparkKickstarter
         "#{app_path}/config"
       end
 
-      def local_configuration_file
-        file_locations = [
-          'config/local.yml',
-          "#{ENV["HOME"]}/.config/infopark/kickstarter.yml",
-        ]
-
-        file = file_locations.detect do |path|
-          Pathname(path).exist?
-        end
-
-        unless file
-          raise 'Local configuration file not found. Provide either "config/local.yml" or "~/.config/infopark/kickstarter.yml". See "config/local.yml.template" for an example.'
-        end
-
-        file
-      end
     end
   end
 end
