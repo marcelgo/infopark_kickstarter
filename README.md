@@ -59,26 +59,20 @@ do so any time by following the steps below.
 
         ruby --version
 
-3. Download the application archive from the Infopark console and unzip all files into your project
-   directory. When you are done, copy the configuration files from your `config/` directory to the
-   following locations:
+3. Download the configuration files for your Ruby on Rails application from the Infopark console and copy them to your project's `config` folder.
 
-        spec/dummy/config/rails_connector.yml
-        spec/dummy/config/custom_cloud.yml
+        config/rails_connector.yml
+        config/custom_cloud.yml
 
-4. Set up and edit the local configuration file and provide the same credentials you just copied
-   into your dummy application template.
 
-        cp config/local.yml.template config/local.yml
-
-5. Create the bundle and run all test to make sure everything is working before you add your own
+4. Create the bundle and run all test to make sure everything is working before you add your own
    changes. You find some more details about testing above in the __Testing__ section.
 
         bundle
         rake spec
         rake test:integration
 
-6. Create your feature branch and create a pull request for the `develop` branch. Please take a
+5. Create your feature branch and create a pull request for the `develop` branch. Please take a
    look at the already existing generators and rake tasks to get an impression of our coding style
    and the general architecture.
 

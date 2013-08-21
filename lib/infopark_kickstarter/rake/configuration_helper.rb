@@ -1,80 +1,21 @@
-require 'yaml'
 
 module InfoparkKickstarter
   module Rake
-    class ConfigurationHelper
-      attr_reader :file
-      attr_reader :configuration
-      attr_reader :target
+    ConfigurationHelper = Struct.new(:cp_target) do
+      def copy_configurations
+        ['rails_connector.yml', 'custom_cloud.yml', 'deploy.yml'].each do |file_name|
+          file_path = File.join(config_path, file_name)
 
-      def initialize(file, type, target)
-        @file = file
-        @configuration = send("#{type}_configuration")
-        @target = target
-      end
-
-      def write
-        content = configuration.to_yaml
-
-        File.open(target, 'w') do |file|
-          file.write(content)
+          if File.exist?(file_path)
+            FileUtils.cp(file_path, cp_target)
+          end
         end
       end
 
       private
 
-      def cms_configuration
-        {
-          'cms_api' => {
-            'url' => "https://#{tenant_name}.cms.infopark.net",
-            'login' => 'root',
-            'api_key' => choose_correct_value(local_configuration['integration_test_cms_api_key']),
-          },
-          'content_service' => {
-            'url' => 'https://contents.infopark.net',
-            'login' => choose_correct_value(local_configuration['integration_test_tenant_name']),
-            'api_key' => choose_correct_value(local_configuration['integration_test_content_read_api_key']),
-          }
-        }
-      end
-
-      def crm_configuration
-        {
-          'crm' => {
-            'url' => "https://#{tenant_name}.crm.infopark.net",
-            'login' => 'root',
-            'api_key' => choose_correct_value(local_configuration['integration_test_crm_api_key']),
-          }
-        }
-      end
-
-      def tenant_name
-        choose_correct_value(local_configuration['integration_test_tenant_name'])
-      end
-
-      def deploy_configuration
-        {
-          'url' => choose_correct_value(local_configuration['integration_test_tenant_url']),
-          'api_key' => choose_correct_value(local_configuration['integration_test_tenant_api_key']),
-        }
-      end
-
-      def local_configuration
-        content = File.read(file)
-
-        ::YAML.load(content)
-      end
-
-      def choose_correct_value(value)
-        if value.instance_of?(Hash)
-          value[server_name]
-        else
-          value
-        end
-      end
-
-      def server_name
-        %x'hostname'.strip
+      def config_path
+        File.expand_path('../../../../config', __FILE__)
       end
     end
   end

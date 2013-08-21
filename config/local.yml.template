@@ -1,7 +1,0 @@
----
-integration_test_tenant_name: ''
-integration_test_cms_api_key: ''
-integration_test_crm_api_key: ''
-integration_test_content_read_api_key: ''
-integration_test_tenant_url: ''
-integration_test_tenant_api_key: ''
