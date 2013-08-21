@@ -59,8 +59,7 @@ do so any time by following the steps below.
 
         ruby --version
 
-3. Download the application archive from the Infopark console and copy the contents of the project's
-   `/config` directory to:
+3. Download the configuration files for your Ruby on Rails application from the Infopark console and copy them to your project's `config` folder.
 
         config/rails_connector.yml
         config/custom_cloud.yml
