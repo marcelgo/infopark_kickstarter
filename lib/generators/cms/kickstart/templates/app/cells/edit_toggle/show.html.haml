@@ -1,3 +1,18 @@
-%a#edit-toggle.ip_editing_button
-  %i.ip_icon
-    &#xF03D;
+#edit-toggle.ip_topbar
+  .ip_first_level
+    .ip_button_bar.ip_app.ip_no_hover
+      %span.ip_logo
+      %span.ip_product_name
+        CMS
+
+    .ip_button_bar.ip_no_hover
+      %i.ip_icon
+        &#xF011;
+      %span
+        = t('.current_workspace')
+        = @current_workspace
+
+    .ip_button_bar.ip_right
+      %a
+        %i.ip_icon
+          &#xF03D;
