@@ -1,0 +1,5 @@
+en:
+  widgets:
+    column3_widget:
+      title: 'Column3 widget'
+      description: 'The 3 column widget displays a box with 3 widget fields.'

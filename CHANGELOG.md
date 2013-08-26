@@ -1,4 +1,8 @@
 # v3.1.0
+  * Added a column widget generator that allows to create structure widgets that hold a certain
+    number of columns, which are widget attributes again. This means you can create nested widgets
+    and the editor can define the layout of a single row. Run
+    `rails generate cms:widget:column --help` for more information.
   * Bugfix: The `better_errors` gem lead to segmentation faults in the test application, because it
     was loaded in `test` mode. We only load the gem in development mode now to prevent the failures.
     (Thanks @spiderpug)
@@ -59,6 +63,7 @@
   * Added `headline` string attribute to `SearchPage`.
   * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
   * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
+
 # v2.2.0
   * Updated most of the gems to the current version, eventhough we don't support Rails 4 yet.
   * Bugfix: Error page now uses a correct grid layout and displays the content correctly.
