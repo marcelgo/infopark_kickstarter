@@ -60,7 +60,7 @@ GEM
     bootstrap-datepicker-rails (1.1.1.7)
       railties (>= 3.0)
     builder (3.0.4)
-    cells (3.8.7)
+    cells (3.8.8)
       actionpack (>= 3.0)
       railties (>= 3.0)
     coderay (1.0.9)
