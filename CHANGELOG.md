@@ -1,4 +1,7 @@
 # v3.1.0
+  * Removed `.widget` and `.editing` CSS classes in the `show.html.haml` and `edit.html.haml` of
+    widgets. They were not needed and we switched to use the public API provided by the
+    RailsConnector.
   * Added a column widget generator that allows to create structure widgets that hold a certain
     number of columns, which are widget attributes again. This means you can create nested widgets
     and the editor can define the layout of a single row. Run
