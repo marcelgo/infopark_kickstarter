@@ -39,7 +39,6 @@ describe Cms::Generators::WidgetGenerator do
             directory 'views' do
               file 'show.html.haml'
               file 'edit.html.haml' do
-                contains '.editing.news_widget'
                 contains 'cms_edit_label(@widget, :foo)'
                 contains 'cms_edit_html(@widget, :foo)'
                 contains 'cms_edit_label(@widget, :bar)'
