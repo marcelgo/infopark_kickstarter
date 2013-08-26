@@ -1,0 +1,5 @@
+- if @active
+  :javascript
+    $(document).ready(function() {
+      $("#main_nav li#main_nav_page_#{@active.id}").addClass('active');
+    });

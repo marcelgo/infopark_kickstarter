@@ -1,0 +1,6 @@
+%p
+  = t('search.hits_found_html', query: h(@query), count: @hits.size)
+
+%ul
+  - @hits.each do |hit|
+    = render({ state: :hit }, hit)

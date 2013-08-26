@@ -1,0 +1,1 @@
+require './lib/rails_connector/date_attribute'

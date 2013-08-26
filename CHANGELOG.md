@@ -1,4 +1,6 @@
 # v3.1.0
+  * The integration test application is now checked in for more convenient development of
+    Kickstarter features. (Thanks @marcelgo)
   * The `add_widget` method inside of example migrations was changed, to only use the public
     RailsConnector API, instead of an API that might change in the future.
   * Remove the need for the `local.yml` configuration and instead use the `rails_connector.yml`
