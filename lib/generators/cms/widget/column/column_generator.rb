@@ -27,6 +27,12 @@ module Cms
               "app/widgets/#{folder_name}/views/show.html.haml",
               force: true
             )
+
+            template(
+              'edit.html.haml',
+              "app/widgets/#{folder_name}/views/edit.html.haml",
+              force: true
+            )
           rescue Cms::Generators::DuplicateResourceError
           end
         end

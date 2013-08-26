@@ -1,15 +1,23 @@
-$(document).ready(function() {
-  infopark.on('new_content', function() {
-    var elements = $('.editing').find('[data-ip-field-type=enum], [data-ip-field-type=multienum]')
+var Editing = {
+  // Support enum and multienum fields on edit view to save their data back to
+  // the CMS using the Infopark JavaScript API.
+  enumSupport: function() {
+    var elements = $('.editing').find('[data-ip-field-type=enum], [data-ip-field-type=multienum]');
 
     elements.each(function(index) {
-      var element = $(this)
+      var element = $(this);
 
       element.on('focusout', function() {
-        var self = $(this)
+        var self = $(this);
 
-        self.infopark('save', self.val())
+        self.infopark('save', self.val());
       });
     });
+  }
+};
+
+$(document).ready(function() {
+  infopark.on('new_content', function() {
+    Editing.enumSupport();
   });
 });

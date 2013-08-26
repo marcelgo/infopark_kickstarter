@@ -36,25 +36,30 @@ body.ip_editing_active {
     display: block;
   }
 
-  .widget.structure {
+  div[data-ip-widget-obj-class] {
+    min-height: 30px;
+  }
+
+  div[data-ip-widget-obj-class*=Column] {
     padding-top: 30px;
-    outline: 2px dotted rgba(0, 186, 255, 0.2);
+    outline: 1px solid rgba(116, 224, 0, 0.2);
+
+    & > .ip_editing_marker {
+      margin-top: -30px;
+      border-color: rgb(116, 224, 0);
+    }
 
     &:hover {
-      outline: 2px dotted rgba(0, 186, 255, 1);
+      outline: 1px solid rgba(116, 224, 0, 1);
     }
 
     & *[class*=span] {
-      outline: 2px dotted rgba(0, 186, 255, 0.2);
+      outline: 1px solid rgba(116, 224, 0, 0.2);
 
       &:hover {
-        outline: 2px dotted rgba(0, 186, 255, 1);
+        outline: 1px solid rgba(116, 224, 0, 1);
       }
     }
-  }
-
-  .ip_editing_marker.structure {
-    border-color: rgb(0, 186, 255);
   }
 }
 
