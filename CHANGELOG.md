@@ -1,4 +1,6 @@
 # v3.1.0
+  * The Kickstarter and the dashboard currently depend on Twitter Bootstrap version 2. We are
+    working hard to support Twitter Bootstrap 3 in the near future.
   * The integration test application is now checked in for more convenient development of
     Kickstarter features. (Thanks @marcelgo)
   * The `add_widget` method inside of example migrations was changed, to only use the public

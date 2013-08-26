@@ -9,7 +9,7 @@ PATH
       infopark_rails_connector (>= 6.9.2.1.125136549)
       jquery-rails
       launchy
-      less-rails-bootstrap
+      less-rails-bootstrap (~> 2.3)
       rails (>= 3.2)
       therubyracer
 
@@ -115,7 +115,7 @@ GEM
     less-rails (2.3.3)
       actionpack (>= 3.1)
       less (~> 2.3.1)
-    less-rails-bootstrap (3.0.0.1)
+    less-rails-bootstrap (2.3.3)
       less-rails (~> 2.3.1)
     libv8 (3.16.14.3)
     mail (2.5.4)
@@ -230,7 +230,7 @@ DEPENDENCIES
   infopark_kickstarter!
   infopark_rails_connector
   jquery-rails
-  less-rails-bootstrap
+  less-rails-bootstrap (~> 2.3)
   newrelic_rpm
   projekktor-rails
   pry-rails
