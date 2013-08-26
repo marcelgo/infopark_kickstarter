@@ -17,6 +17,7 @@ module InfoparkKickstarter
 
             cd(app_path) do
               Bundler.with_clean_env do
+                bundle
                 reset_cms
                 kickstart
                 call_generators
@@ -44,12 +45,12 @@ module InfoparkKickstarter
         ConfigurationHelper.new(test_app_config).copy_configurations
       end
 
-      def reset_cms
-        sh('bundle exec rake cms:reset[true]')
-      end
-
       def bundle
         sh('bundle --quiet')
+      end
+
+      def reset_cms
+        sh('bundle exec rake cms:reset[true]')
       end
 
       def kickstart
