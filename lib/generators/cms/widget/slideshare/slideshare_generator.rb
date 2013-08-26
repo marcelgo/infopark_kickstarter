@@ -24,6 +24,7 @@ module Cms
             end
 
             directory('app', force: true)
+            directory('spec')
           rescue Cms::Generators::DuplicateResourceError
           end
         end

@@ -7,8 +7,8 @@ class SlideshareWidget < Obj
   include Widget
 
   def embed_html
-    @embed_html ||= if source.present?
-      data = embedded_information(source.first.url)
+    @embed_html ||= if source_url.present?
+      data = embedded_information(source_url)
 
       data && data['html'].html_safe
     end
@@ -16,11 +16,19 @@ class SlideshareWidget < Obj
 
   private
 
+  def source_url
+    @source_url ||= source.first.try(:url)
+  end
+
   def embedded_information(slide_url)
     url = slideshare_url(slide_url)
     json = RestClient.get(url)
 
     JSON.parse(json)
+  rescue JSON::ParserError => error
+    Rails.logger.error("Could not parse Slideshare response: #{error.message}")
+
+    nil
   rescue RestClient::ResourceNotFound
   end
 
