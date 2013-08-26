@@ -53,6 +53,7 @@ gem "cells"
 gem "utf8-cleaner"
 group :assets do
   gem "less-rails-bootstrap", "~> 2.3"
+  gem "bootstrap-datepicker-rails"
 end
 
 group :test, :development do

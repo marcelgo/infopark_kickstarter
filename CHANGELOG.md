@@ -10,6 +10,7 @@
     RailsConnector API, instead of an API that might change in the future.
   * Remove the need for the `local.yml` configuration and instead use the `rails_connector.yml`
     and `custom_cloud.yml` provided by the console.
+  * Add inline editing for date attributes
 
 # v3.0.0
   * All generated widgets now have an edit view. You can access the edit view via the widget edit
