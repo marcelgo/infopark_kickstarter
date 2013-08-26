@@ -1,6 +1,4 @@
-.editing.<%= file_name %>
 <%- attributes.each do |definition| -%>
-  <%= generate_label(definition) %>
-  <%= generate_edit_field(definition) %>
-
+<%= generate_label(definition) %>
+<%= generate_edit_field(definition) %>
 <%- end -%>

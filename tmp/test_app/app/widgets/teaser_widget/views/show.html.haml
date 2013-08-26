@@ -1,11 +1,10 @@
-.widget.teaser
-  = cms_tag(:h1, @widget, :headline)
+= cms_tag(:h1, @widget, :headline)
 
-  = cms_tag(:div, @widget, :content)
+= cms_tag(:div, @widget, :content)
 
-  - if @widget.link_to.present?
-    - link = @widget.link_to.first
+- if @widget.link_to.present?
+  - link = @widget.link_to.first
 
-    %p
-      = link_to(cms_path(link), class: 'btn btn-primary btn-large') do
-        = link.title
+  %p
+    = link_to(cms_path(link), class: 'btn btn-primary btn-large') do
+      = link.title
