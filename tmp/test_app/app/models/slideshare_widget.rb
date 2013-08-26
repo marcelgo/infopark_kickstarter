@@ -30,6 +30,9 @@ class SlideshareWidget < Obj
 
     nil
   rescue RestClient::ResourceNotFound
+    Rails.logger.error("Unknown slideshare url: #{url}")
+
+    nil
   end
 
   def slideshare_url(slide_url)
