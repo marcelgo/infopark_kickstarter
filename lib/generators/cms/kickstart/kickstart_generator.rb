@@ -75,7 +75,7 @@ module Cms
         gem('utf8-cleaner')
 
         gem_group(:assets) do
-          gem('less-rails-bootstrap')
+          gem('less-rails-bootstrap', '~> 2.3')
         end
 
         Bundler.with_clean_env do

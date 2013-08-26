@@ -52,15 +52,18 @@ gem "haml-rails"
 gem "cells"
 gem "utf8-cleaner"
 group :assets do
-  gem "less-rails-bootstrap"
+  gem "less-rails-bootstrap", "~> 2.3"
 end
 
 group :test, :development do
   gem "pry-rails"
-  gem "better_errors"
-  gem "binding_of_caller"
   gem "rails-footnotes"
   gem "thin"
+end
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem "gravatar_image_tag"

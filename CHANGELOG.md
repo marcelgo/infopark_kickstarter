@@ -3,6 +3,11 @@
     number of columns, which are widget attributes again. This means you can create nested widgets
     and the editor can define the layout of a single row. Run
     `rails generate cms:widget:column --help` for more information.
+  * Bugfix: The `better_errors` gem lead to segmentation faults in the test application, because it
+    was loaded in `test` mode. We only load the gem in development mode now to prevent the failures.
+    (Thanks @spiderpug)
+  * The Kickstarter and the dashboard currently depend on Twitter Bootstrap version 2. We are
+    working hard to support Twitter Bootstrap 3 in the near future.
   * The integration test application is now checked in for more convenient development of
     Kickstarter features. (Thanks @marcelgo)
   * The `add_widget` method inside of example migrations was changed, to only use the public
