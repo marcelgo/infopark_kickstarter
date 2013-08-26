@@ -1,6 +1,6 @@
 $(document).ready(function() {
   infopark.on('new_content', function() {
-    var elements = $('.editing').find('[data-ip-field-type=enum], [data-ip-field-type=multienum]')
+    var elements = $('[data-ip-field-type=enum], [data-ip-field-type=multienum]')
 
     elements.each(function(index) {
       var element = $(this)
