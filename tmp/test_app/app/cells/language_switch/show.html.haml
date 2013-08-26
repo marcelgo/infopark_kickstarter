@@ -1,0 +1,7 @@
+.well
+  %ul.nav.nav-list
+    %li.nav-header
+      = t('.languages')
+
+    - @homepages.each do |homepage|
+      = render({state: :entry}, homepage)

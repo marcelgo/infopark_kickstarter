@@ -1,0 +1,43 @@
+@ip_editing_menu_bar_height: 47px;
+
+a#edit-toggle {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1031;
+  margin-top: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+
+  &:hover .ip_icon {
+    color: #6e84a8;
+  }
+}
+
+.editing-content {
+  display: none;
+}
+
+body.ip_editing_active {
+  padding-top: (@ip_editing_menu_bar_height + 60px);
+
+  a#edit-toggle {
+    display: none;
+  }
+
+  .navbar {
+    padding-top: @ip_editing_menu_bar_height;
+  }
+
+  .editing-content {
+    display: block;
+  }
+}
+
+.ip_field_editable[data-ip-field-type=html]:empty:before {
+  content: '\F04F';
+}
+
+.ip_field_editable[data-ip-field-type=string]:empty:before {
+  content: '\F058';
+}

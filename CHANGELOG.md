@@ -1,8 +1,10 @@
 # v3.1.0
   * Added a column widget generator that allows to create structure widgets that hold a certain
-    number of columns, which are widget attributes again. This means you can created nested widgets
+    number of columns, which are widget attributes again. This means you can create nested widgets
     and the editor can define the layout of a single row. Run
     `rails generate cms:widget:column --help` for more information.
+  * The integration test application is now checked in for more convenient development of
+    Kickstarter features. (Thanks @marcelgo)
   * The `add_widget` method inside of example migrations was changed, to only use the public
     RailsConnector API, instead of an API that might change in the future.
   * Remove the need for the `local.yml` configuration and instead use the `rails_connector.yml`
