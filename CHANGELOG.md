@@ -1,4 +1,5 @@
 # v3.1.0
+  * Added inline editing for CMS date attributes. (Thanks @cedrics)
   * Bugfix: Made slideshare widget more robust against invalid slideshare API responses.
   * Removed `.widget` and `.editing` CSS classes in the `show.html.haml` and `edit.html.haml` of
     widgets. They were not needed and we switched to use the public API provided by the

@@ -22,12 +22,17 @@ module EditingHelper
   def cms_edit_date(object, attribute_name)
     value = object.send(attribute_name)
 
-    if value
-      cms_tag(:div, object, attribute_name) do
-        I18n.l(value)
-      end
+    value_string = if value.present?
+      value.strftime("%Y-%m-%d")
+    else
+      ''
+    end
+
+    cms_tag(:div, object, attribute_name) do
+     tag(:input, type: 'text', value: value_string)
     end
   end
+
 
   def cms_edit_linklist(object, attribute_name)
     linklist = object.send(attribute_name)
