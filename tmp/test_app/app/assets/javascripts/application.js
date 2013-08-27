@@ -17,4 +17,9 @@
 //= require projekktor
 //= require projekktor.config
 //= require bootstrap-datepicker
+
+//= redactor
+//= redactor_de
+//= redactor.config
+
 //= require_tree .
