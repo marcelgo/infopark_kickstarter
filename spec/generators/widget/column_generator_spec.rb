@@ -41,6 +41,9 @@ describe Cms::Generators::Widget::ColumnGenerator do
             contains 'cms_attribute :column_1, type: :widget'
             contains 'cms_attribute :column_2, type: :widget'
             contains 'cms_attribute :column_3, type: :widget'
+            contains 'cms_attribute :column_1_width, type: :string, default: \'4\''
+            contains 'cms_attribute :column_2_width, type: :string, default: \'4\''
+            contains 'cms_attribute :column_3_width, type: :string, default: \'4\''
             contains 'include Widget'
           end
         end
