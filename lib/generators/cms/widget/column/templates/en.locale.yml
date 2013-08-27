@@ -1,0 +1,6 @@
+en:
+  widgets:
+    <%= folder_name %>:
+      title: '<%= "#{columns} column widget" %>'
+      description: '<%= "The #{columns} column widget displays a box with #{columns} widget fields." %>'
+      grid_sum_notice: 'The sum of all widths should equal twelve.'

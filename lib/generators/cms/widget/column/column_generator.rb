@@ -19,10 +19,10 @@ module Cms
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
               widget.icon = '&#xF010;'
-              widget.description = "The #{columns} column widget displays a box with #{columns} widget fields."
               widget.attributes = column_attributes + column_size_attributes
             end
 
+            template('en.locale.yml', "#{widget_path_for(folder_name)}/locales/en.#{folder_name}.yml", force: true)
             template(
               'show.html.haml',
               "app/widgets/#{folder_name}/views/show.html.haml",
