@@ -4,6 +4,7 @@ module Cms
       class ColumnGenerator < ::Rails::Generators::Base
         include BasePaths
         include Example
+        include Actions
         include Migration
 
         source_root File.expand_path('../templates', __FILE__)
@@ -19,7 +20,7 @@ module Cms
               widget.name = obj_class_name
               widget.icon = '&#xF010;'
               widget.description = "The #{columns} column widget displays a box with #{columns} widget fields."
-              widget.attributes = widget_attributes
+              widget.attributes = column_attributes + column_size_attributes
             end
 
             template(
@@ -49,7 +50,18 @@ module Cms
 
         private
 
-        def widget_attributes
+        def column_size_attributes
+          (1..columns).inject([]) do |array, index|
+            array + [{
+              name: column_size_name(index),
+              type: :string,
+              default: (12 / columns),
+              title: column_size_title(index),
+            }]
+          end
+        end
+
+        def column_attributes
           (1..columns).inject([]) do |array, index|
             array << {
               name: column_name(index),
@@ -79,6 +91,14 @@ module Cms
 
         def column_name(column)
           "column_#{column}".to_sym
+        end
+
+        def column_size_name(column)
+          "column_#{column}_width".to_sym
+        end
+
+        def column_size_title(column)
+          "Column #{column} width"
         end
       end
     end
