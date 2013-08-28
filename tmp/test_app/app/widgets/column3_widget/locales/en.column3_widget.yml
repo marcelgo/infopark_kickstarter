@@ -1,5 +1,6 @@
 en:
   widgets:
     column3_widget:
-      title: 'Column3 widget'
-      description: 'The 3 column widget displays a box with 3 widget fields.'
+      title: '3 column widget'
+      description: 'The 3 column widget displays a box with #{columns} widget fields.'
+      notice: 'The sum of all column widths should equal 12.'
