@@ -38,7 +38,7 @@ describe Cms::Generators::Widget::ColumnGenerator do
                 file 'show.html.haml'
                 file 'edit.html.haml'
                 file 'thumbnail.html.haml' do
-                  contains 'widget-icon-3cols'
+                  contains '.editing-icon-3cols'
                 end
               end
             end
@@ -68,7 +68,7 @@ describe Cms::Generators::Widget::ColumnGenerator do
     it 'uses icon-class which is not pluralized' do
       destination_root.should have_structure {
         file 'app/widgets/column1_widget/views/thumbnail.html.haml' do
-          contains 'widget-icon-1col'
+          contains ".editing-icon-1col\n"
         end
       }
     end

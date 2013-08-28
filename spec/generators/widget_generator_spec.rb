@@ -45,7 +45,7 @@ describe Cms::Generators::WidgetGenerator do
                 contains 'cms_edit_enum(@widget, :bar)'
               end
               file 'thumbnail.html.haml' do
-                contains 'widget-icon-text'
+                contains 'editing-icon-text'
               end
             end
 

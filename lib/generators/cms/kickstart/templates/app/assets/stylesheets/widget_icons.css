@@ -31,29 +31,29 @@
   -o-user-select: none;
   user-select: none;
 }
-
 .widget-icon:hover { cursor: pointer; }
-.widget-icon-ip:after { content: "\F000"; }
-.widget-icon-text:after { content: "\F001"; }
-.widget-icon-image:after { content: "\F002"; }
-.widget-icon-headline:after { content: "\F003"; }
-.widget-icon-video:after { content: "\F004"; }
-.widget-icon-map:after { content: "\F005"; }
-.widget-icon-table:after { content: "\F006"; }
-.widget-icon-slider:after { content: "\F007"; }
-.widget-icon-list:after { content: "\F008"; }
-.widget-icon-downloads:after { content: "\F009"; }
-.widget-icon-person:after { content: "\F00A"; }
-.widget-icon-presentation:after { content: "\F00B"; }
-.widget-icon-login:after { content: "\F00C"; }
-.widget-icon-teaser:after { content: "\F00D"; }
-.widget-icon-interactive:after { content: "\F00E"; }
-.widget-icon-hr:after { content: "\F00F"; }
-.widget-icon-1col:after { content: "\F010"; }
-.widget-icon-2cols:after { content: "\F011"; }
-.widget-icon-2colsl:after { content: "\F012"; }
-.widget-icon-2colsr:after { content: "\F013"; }
-.widget-icon-3cols:after { content: "\F014"; }
+
+.editing-icon-ip:after { content: "\F000"; }
+.editing-icon-text:after { content: "\F001"; }
+.editing-icon-image:after { content: "\F002"; }
+.editing-icon-headline:after { content: "\F003"; }
+.editing-icon-video:after { content: "\F004"; }
+.editing-icon-map:after { content: "\F005"; }
+.editing-icon-table:after { content: "\F006"; }
+.editing-icon-slider:after { content: "\F007"; }
+.editing-icon-list:after { content: "\F008"; }
+.editing-icon-downloads:after { content: "\F009"; }
+.editing-icon-person:after { content: "\F00A"; }
+.editing-icon-presentation:after { content: "\F00B"; }
+.editing-icon-login:after { content: "\F00C"; }
+.editing-icon-teaser:after { content: "\F00D"; }
+.editing-icon-interactive:after { content: "\F00E"; }
+.editing-icon-hr:after { content: "\F00F"; }
+.editing-icon-1col:after { content: "\F010"; }
+.editing-icon-2cols:after { content: "\F011"; }
+.editing-icon-2colsl:after { content: "\F012"; }
+.editing-icon-2colsr:after { content: "\F013"; }
+.editing-icon-3cols:after { content: "\F014"; }
 
 
 /* placeholder icons */
