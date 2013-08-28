@@ -23,7 +23,7 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
-              widget.icon = '&#xF010;'
+              widget.icon = '2cols'
               widget.attributes = column_attributes + column_size_attributes
             end
 

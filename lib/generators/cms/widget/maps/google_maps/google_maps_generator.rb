@@ -14,7 +14,7 @@ module Cms
             begin
               Widget::ApiGenerator.new(behavior: behavior) do |widget|
                 widget.name = obj_class_name
-                widget.icon = '&#xF008;'
+                widget.icon = 'map'
                 widget.description = 'Integrates a map that displays a pin for a given address.'
                 widget.attributes = [
                   {

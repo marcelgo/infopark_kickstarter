@@ -53,7 +53,7 @@ module Cms
         private
 
         def icon
-          @icon ||= '&#xF00A;'
+          @icon ||= '1col'
         end
 
         def title
