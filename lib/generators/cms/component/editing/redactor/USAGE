@@ -1,0 +1,18 @@
+Description:
+    Integrates and configures the html editor "redactor" for the Infopark inplace editing. The
+    editor comes with its own icon font for its editing buttons.
+
+Example:
+    `rails generate cms:component:editing:redactor`
+
+    Assets:
+      app/assets/fonts/redactor_icons.eot
+      app/assets/fonts/redactor_icons.ttf
+      app/assets/fonts/redactor_icons.woff
+
+      app/assets/javascripts/redactor.config.js
+      app/assets/javascripts/redactor.js
+
+      app/assets/stylesheets/redactor.css.less
+
+    Misc: Extends the application.js manifest.

@@ -251,6 +251,7 @@ module Cms
       end
 
       def add_initial_content
+        Rails::Generators.invoke('cms:component:editing', ['--editor=redactor'])
         Rails::Generators.invoke('cms:component:developer_tools')
         Rails::Generators.invoke('cms:component:search')
         Rails::Generators.invoke('cms:component:login_page')
