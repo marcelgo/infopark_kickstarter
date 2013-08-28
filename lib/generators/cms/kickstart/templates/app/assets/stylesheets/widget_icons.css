@@ -13,7 +13,7 @@
 
 /* widget gallery icons */
 
-.widget_icon {
+.widget-icon {
   font-family: 'widget_iconsregular';
   font-style:normal;
   color: #888;
@@ -32,28 +32,28 @@
   user-select: none;
 }
 
-.widget_icon:hover { cursor: pointer; }
-.widget_icon_ip:after { content: "\F000"; }
-.widget_icon_text:after { content: "\F001"; }
-.widget_icon_image:after { content: "\F002"; }
-.widget_icon_headline:after { content: "\F003"; }
-.widget_icon_video:after { content: "\F004"; }
-.widget_icon_map:after { content: "\F005"; }
-.widget_icon_table:after { content: "\F006"; }
-.widget_icon_slider:after { content: "\F007"; }
-.widget_icon_list:after { content: "\F008"; }
-.widget_icon_downlods:after { content: "\F009"; }
-.widget_icon_person:after { content: "\F00A"; }
-.widget_icon_presentation:after { content: "\F00B"; }
-.widget_icon_login:after { content: "\F00C"; }
-.widget_icon_teaser:after { content: "\F00D"; }
-.widget_icon_interactive:after { content: "\F00E"; }
-.widget_icon_hr:after { content: "\F00F"; }
-.widget_icon_1col:after { content: "\F010"; }
-.widget_icon_2cols:after { content: "\F011"; }
-.widget_icon_2colsl:after { content: "\F012"; }
-.widget_icon_2colsr:after { content: "\F013"; }
-.widget_icon_3cols:after { content: "\F014"; }
+.widget-icon:hover { cursor: pointer; }
+.widget-icon-ip:after { content: "\F000"; }
+.widget-icon-text:after { content: "\F001"; }
+.widget-icon-image:after { content: "\F002"; }
+.widget-icon-headline:after { content: "\F003"; }
+.widget-icon-video:after { content: "\F004"; }
+.widget-icon-map:after { content: "\F005"; }
+.widget-icon-table:after { content: "\F006"; }
+.widget-icon-slider:after { content: "\F007"; }
+.widget-icon-list:after { content: "\F008"; }
+.widget-icon-downlods:after { content: "\F009"; }
+.widget-icon-person:after { content: "\F00A"; }
+.widget-icon-presentation:after { content: "\F00B"; }
+.widget-icon-login:after { content: "\F00C"; }
+.widget-icon-teaser:after { content: "\F00D"; }
+.widget-icon-interactive:after { content: "\F00E"; }
+.widget-icon-hr:after { content: "\F00F"; }
+.widget-icon-1col:after { content: "\F010"; }
+.widget-icon-2cols:after { content: "\F011"; }
+.widget-icon-2colsl:after { content: "\F012"; }
+.widget-icon-2colsr:after { content: "\F013"; }
+.widget-icon-3cols:after { content: "\F014"; }
 
 
 /* placeholder icons */
