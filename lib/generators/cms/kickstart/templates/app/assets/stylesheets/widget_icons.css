@@ -18,7 +18,7 @@
   font-style:normal;
   color: #888;
   text-shadow: 0 1px 5px #fff;
-  font-size: 75px;
+  font-size: 65px;
   line-height: 105px;
   display: block;
   vertical-align: middle;
@@ -42,7 +42,7 @@
 .widget-icon-table:after { content: "\F006"; }
 .widget-icon-slider:after { content: "\F007"; }
 .widget-icon-list:after { content: "\F008"; }
-.widget-icon-downlods:after { content: "\F009"; }
+.widget-icon-downloads:after { content: "\F009"; }
 .widget-icon-person:after { content: "\F00A"; }
 .widget-icon-presentation:after { content: "\F00B"; }
 .widget-icon-login:after { content: "\F00C"; }
