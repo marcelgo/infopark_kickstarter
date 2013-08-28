@@ -1,0 +1,2 @@
+class ContentPageController < CmsController
+end

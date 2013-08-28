@@ -1,0 +1,13 @@
+.row-fluid
+  .span12
+    = simple_form_for(:login_presenter, url: cms_path(@login_page), method: :post) do |form|
+      = hidden_field_tag(:return_to, cms_path(@page))
+      = hidden_field_tag(:authenticity_token, form_authenticity_token)
+
+      = form.input(:login)
+
+      = form.input(:password)
+
+      = form.button(:submit)
+
+    = render({ state: :reset_password })

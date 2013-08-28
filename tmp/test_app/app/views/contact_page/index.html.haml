@@ -1,0 +1,15 @@
+.span12
+  = cms_tag(:h1, @obj, :headline)
+
+  = cms_tag(:div, @obj, :content)
+
+  = simple_form_for(@contact_page_presenter, url: cms_path(@obj)) do |form|
+    = form.error_notification
+
+    = form.input(:email)
+
+    = form.input(:subject)
+
+    = form.input(:message, as: :text, input_html: { rows: 10, class: 'span5' })
+
+    = form.button(:submit)

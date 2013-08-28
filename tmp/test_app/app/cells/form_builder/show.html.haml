@@ -1,0 +1,14 @@
+.span12
+  = cms_tag(:h1, @obj, :headline)
+
+  = cms_tag(:div, @obj, :content)
+
+  = simple_form_for(@presenter, url: cms_path(@obj)) do |form|
+    = form.input(:id, as: :hidden, input_html: { value: @presenter.id })
+    = form.input(:title, as: :hidden, input_html: { value: @presenter.id })
+    = form.input(:state, as: :hidden, input_html: { value: @presenter.state })
+
+    - @custom_attributes.each do |attribute|
+      = render({ state: :input }, form, attribute)
+
+    = form.button(:submit)

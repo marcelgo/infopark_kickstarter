@@ -22,10 +22,11 @@ describe Cms::Generators::Component::DeveloperToolsGenerator do
     destination_root.should have_structure {
       file 'Gemfile' do
         contains 'gem "pry-rails"'
-        contains 'gem "better_errors"'
-        contains 'gem "binding_of_caller"'
         contains 'gem "rails-footnotes"'
         contains 'gem "thin"'
+
+        contains 'gem "better_errors"'
+        contains 'gem "binding_of_caller"'
       end
 
       directory 'config' do

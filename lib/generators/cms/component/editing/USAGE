@@ -1,0 +1,16 @@
+Description:
+    Connects the Infopark API with the Ruby on Rails application to provide inplace editing
+    functionality. By default the html editor "redactor" is used.
+
+Example:
+    `rails generate cms:component:editing`
+    `rails generate cms:component:editing --editor=redactor`
+
+    Assets:
+      app/assets/javascripts/editing_toggle.js.coffee
+      app/assets/javascripts/editing.js.coffee
+
+      app/assets/stylesheets/editing.css.less
+
+    Misc: Executes editor dependent generator:
+          `rails generate cms:component:editing:redactor`

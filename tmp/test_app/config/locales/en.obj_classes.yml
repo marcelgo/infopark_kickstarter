@@ -1,0 +1,53 @@
+en:
+  obj_classes:
+    image:
+      title: 'Resource: Image'
+      description: 'Resource: Image'
+    video:
+      title: 'Resource: Video'
+      description: 'Resource: Video'
+    homepage:
+      title: 'Page: Homepage'
+      description: 'Page: Homepage'
+    root:
+      title: 'Root'
+      description: 'Root'
+    website:
+      title: 'Website'
+      description: 'Website'
+    container:
+      title: 'Container'
+      description: 'Container'
+    content_page:
+      title: 'Page: Content'
+      description: 'Page: Content'
+    error_page:
+      title: 'Page: Error'
+      description: 'Page: Error'
+    search_page:
+      title: 'Page: Search'
+      description: 'Page: Search'
+    login_page:
+      title: 'Page: Login'
+      description: 'Page: Login'
+    reset_password_page:
+      title: 'Page: ResetPassword'
+      description: 'Page: ResetPassword'
+    profile_page:
+      title: 'Page: Profile'
+      description: 'Page: Profile'
+    contact_page:
+      title: 'Page: Contact'
+      description: 'Page: Contact'
+    blog:
+      title: 'Page: Blog'
+      description: 'Page: Blog'
+    blog_post:
+      title: 'Page: Blog Post'
+      description: 'Page: Blog Post'
+    redirect:
+      title: 'Redirect'
+      description: 'Redirect'
+    form_builder:
+      title: 'Page: FormBuilder'
+      description: 'Page: FormBuilder'

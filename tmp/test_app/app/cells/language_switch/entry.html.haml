@@ -1,0 +1,7 @@
+%li
+  - if current_homepage?(@homepage)
+    = t(@homepage.locale, scope: 'language_switch')
+
+  - else
+    = link_to(cms_path(@homepage)) do
+      = t(@homepage.locale, scope: 'language_switch')
