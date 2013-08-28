@@ -1,37 +1,53 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins";
 
-a#edit-toggle {
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 1031;
-  margin-top: 10px;
-  margin-right: 10px;
-  text-decoration: none;
+// --- editing navbar
 
-  &:hover .ip_icon {
-    color: #6e84a8;
+#editing-navbar {
+  margin-top: 0;
+
+  .ip_icon:hover {
+    cursor: default;
   }
-}
 
-body.ip_editing_active {
+  li > p {
+    padding: 10px 15px 0px 15px;
+  }
+
   a#edit-toggle {
-    display: none;
+    &:hover .ip_icon {
+      color: #6e84a8;
+      cursor: pointer;
+    }
   }
 }
 
+@editingNavbarHeight: 42px;
 
-@ip_editing_menu_bar_height: 47px;
-
-body.ip_editing_active {
-  padding-top: (@ip_editing_menu_bar_height + 60px);
+body {
+  padding-top: (@editingNavbarHeight + 60px);
 
   .navbar {
-    padding-top: @ip_editing_menu_bar_height;
+    margin-top: @editingNavbarHeight;
   }
 }
 
+
+// --- infopark editing navbar
+
+@infoparkEditingNavbarHeight: 47px;
+
+body.ip_editing_active {
+  padding-top: (@infoparkEditingNavbarHeight + 60px);
+
+  .navbar {
+    margin-top: @infoparkEditingNavbarHeight;
+  }
+}
+
+
+
+// --- structure widget styles
 
 body.ip_editing_active {
   div[data-ip-widget-obj-class] {
@@ -61,6 +77,8 @@ body.ip_editing_active {
   }
 }
 
+
+// --- editable fields styles
 
 .ip_field_editable  {
  .transition(~"outline-color ease-in-out .8s");

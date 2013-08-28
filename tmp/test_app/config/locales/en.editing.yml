@@ -1,5 +1,8 @@
 en:
   editing:
+    welcome: 'Welcome, %{login}'
+    published_workspace_title: 'Published content'
+
     linklist:
       title: 'Title: %{title}'
       url: 'Url: %{url}'

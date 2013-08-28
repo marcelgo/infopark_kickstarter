@@ -1,4 +1,22 @@
 jQuery ->
+  editingNavbar = {
+    activate: () ->
+      $('#editing-inactive').show()
+
+    deactivate: () ->
+      $('#editing-inactive').hide()
+  }
+
+  editingNavbar.activate()
+
+  $('a#edit-toggle').on 'click', ->
+    if infopark.editing.is_active()
+      infopark.editing.deactivate()
+      editingNavbar.activate()
+    else
+      infopark.editing.activate()
+      editingNavbar.deactivate()
+
   infopark.on 'new_content', ->
     cmsEditEnums = $('[data-ip-field-type=enum], [data-ip-field-type=multienum]')
 

@@ -1,18 +1,25 @@
-#edit-toggle.ip_topbar
-  .ip_first_level
-    .ip_button_bar.ip_app.ip_no_hover
-      %span.ip_logo
-      %span.ip_product_name
-        CMS
+#editing-navbar.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      %button.btn.btn-navbar{type: 'button', data: { toggle: 'collapse', target: '.nav-collapse' }}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
 
-    .ip_button_bar.ip_no_hover
-      %i.ip_icon
-        &#xF011;
-      %span
-        = t('.current_workspace')
-        = @current_workspace
+      %a.brand
+        = t('editing.welcome', login: current_user.login)
 
-    .ip_button_bar.ip_right
-      %a
-        %i.ip_icon
-          &#xF03D;
+      .nav-collapse.collapse
+        %ul.nav.pull-right
+          %li
+            %p
+              %i.ip_icon
+                &#xF011;
+
+              %span
+                = @workspace_title
+
+          %li
+            %a#edit-toggle
+              %i.ip_icon
+                &#xF03D;
