@@ -1,4 +1,9 @@
 # v3.1.0
+  * Integrated the html editor "redactor" into the generated code, as it was removed from the core
+    Infopark API. This allows you to more easily choose your html editor of choice. In the course
+    of integrating the editor, we moved all inplace editing files into their own generator. We hope
+    that this makes it easier to update this part in the future. Get more details running
+    `rails generate cms:component:editing --help`.
   * Added inline editing for CMS date attributes. (Thanks @cedrics)
   * Bugfix: Made slideshare widget more robust against invalid slideshare API responses.
   * Removed `.widget` and `.editing` CSS classes in the `show.html.haml` and `edit.html.haml` of

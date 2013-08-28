@@ -1,8 +1,6 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins";
 
-@ip_editing_menu_bar_height: 47px;
-
 a#edit-toggle {
   position: fixed;
   right: 0;
@@ -18,16 +16,24 @@ a#edit-toggle {
 }
 
 body.ip_editing_active {
-  padding-top: (@ip_editing_menu_bar_height + 60px);
-
   a#edit-toggle {
     display: none;
   }
+}
+
+
+@ip_editing_menu_bar_height: 47px;
+
+body.ip_editing_active {
+  padding-top: (@ip_editing_menu_bar_height + 60px);
 
   .navbar {
     padding-top: @ip_editing_menu_bar_height;
   }
+}
 
+
+body.ip_editing_active {
   div[data-ip-widget-obj-class] {
     min-height: 30px;
   }
@@ -55,10 +61,28 @@ body.ip_editing_active {
   }
 }
 
-.ip_field_editable[data-ip-field-type=html]:empty:before {
-  content: '\F04F';
-}
 
-.ip_field_editable[data-ip-field-type=string]:empty:before {
-  content: '\F058';
+.ip_field_editable  {
+ .transition(~"outline-color ease-in-out .8s");
+
+  outline: 2px dotted #ffa500;
+  outline: 2px dotted rgba(255, 165, 0, .03);
+  text-shadow: none;
+
+  &:hover,
+  &:focus {
+    .transition(~"outline-color ease-in-out .3s");
+
+    outline: 2px dotted #ffa500;
+    outline: 2px dotted rgba(255, 165, 0, 1);
+    text-shadow: none;
+  }
+
+  &[data-ip-field-type=html]:empty:before {
+    content: '\F04F';
+  }
+
+  &[data-ip-field-type=string]:empty:before {
+    content: '\F058';
+  }
 }
