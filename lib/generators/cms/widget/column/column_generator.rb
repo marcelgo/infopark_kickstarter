@@ -10,9 +10,14 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         class_option :columns,
-          type: :string,
-          default: '2',
+          type: :numeric,
+          default: 2,
           desc: 'Number of columns'
+
+        class_option :max_columns,
+          type: :numeric,
+          default: 12,
+          desc: 'Maximum number of columns'
 
         def create_widget
           begin
@@ -22,7 +27,12 @@ module Cms
               widget.attributes = column_attributes + column_size_attributes
             end
 
-            template('en.locale.yml', "#{widget_path_for(folder_name)}/locales/en.#{folder_name}.yml", force: true)
+            template(
+              'en.locale.yml',
+              "#{widget_path_for(folder_name)}/locales/en.#{folder_name}.yml",
+              force: true
+            )
+
             template(
               'show.html.haml',
               "app/widgets/#{folder_name}/views/show.html.haml",
@@ -55,7 +65,7 @@ module Cms
             array + [{
               name: column_size_name(index),
               type: :string,
-              default: (12 / columns),
+              default: (max_columns / columns),
               title: column_size_title(index),
             }]
           end
@@ -73,8 +83,12 @@ module Cms
           end
         end
 
+        def max_columns
+          options[:max_columns]
+        end
+
         def columns
-          options[:columns].to_i
+          options[:columns]
         end
 
         def obj_class_name
@@ -90,11 +104,11 @@ module Cms
         end
 
         def column_name(column)
-          "column_#{column}".to_sym
+          "column_#{column}"
         end
 
         def column_size_name(column)
-          "column_#{column}_width".to_sym
+          "column_#{column}_width"
         end
 
         def column_size_title(column)

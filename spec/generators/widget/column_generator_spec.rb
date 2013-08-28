@@ -7,7 +7,7 @@ describe Cms::Generators::Widget::ColumnGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-  arguments ['--columns=3', '--example']
+  arguments ['--columns=3', '--max_columns=9', '--example']
 
   before do
     prepare_destination
@@ -41,9 +41,9 @@ describe Cms::Generators::Widget::ColumnGenerator do
             contains 'cms_attribute :column_1, type: :widget'
             contains 'cms_attribute :column_2, type: :widget'
             contains 'cms_attribute :column_3, type: :widget'
-            contains 'cms_attribute :column_1_width, type: :string, default: \'4\''
-            contains 'cms_attribute :column_2_width, type: :string, default: \'4\''
-            contains 'cms_attribute :column_3_width, type: :string, default: \'4\''
+            contains 'cms_attribute :column_1_width, type: :string, default: \'3\''
+            contains 'cms_attribute :column_2_width, type: :string, default: \'3\''
+            contains 'cms_attribute :column_3_width, type: :string, default: \'3\''
             contains 'include Widget'
           end
         end
