@@ -3,6 +3,7 @@ class EditToggleCell < Cell::Rails
 
   def show
     if EditModeDetection.editing_allowed?(session)
+      @current_workspace = RailsConnector::Workspace.current.title
       render
     end
   end
