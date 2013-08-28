@@ -55,10 +55,27 @@ body.ip_editing_active {
   }
 }
 
-.ip_field_editable[data-ip-field-type=html]:empty:before {
-  content: '\F04F';
-}
+.ip_field_editable  {
+ .transition(~"outline-color ease-in-out .8s");
 
-.ip_field_editable[data-ip-field-type=string]:empty:before {
-  content: '\F058';
+  outline: 2px dotted #ffa500;
+  outline: 2px dotted rgba(255, 165, 0, .03);
+  text-shadow: none;
+
+  &:hover,
+  &:focus {
+    .transition(~"outline-color ease-in-out .3s");
+
+    outline: 2px dotted #ffa500;
+    outline: 2px dotted rgba(255, 165, 0, 1);
+    text-shadow: none;
+  }
+
+  &[data-ip-field-type=html]:empty:before {
+    content: '\F04F';
+  }
+
+  &[data-ip-field-type=string]:empty:before {
+    content: '\F058';
+  }
 }
