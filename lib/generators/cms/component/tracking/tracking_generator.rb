@@ -7,9 +7,9 @@ module Cms
         SUPPORTED_PROVIDER = %w(google_analytics)
 
         class_option :provider,
-          :type => :string,
-          :default => 'google_analytics',
-          :desc => "Select what tracking provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
+          type: :string,
+          default: SUPPORTED_PROVIDER.first,
+          desc: "Select what tracking provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
 
         def validate_provider
           unless SUPPORTED_PROVIDER.include?(provider)

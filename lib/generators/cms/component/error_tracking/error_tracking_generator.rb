@@ -4,17 +4,17 @@ module Cms
       class ErrorTrackingGenerator < ::Rails::Generators::Base
         source_root File.expand_path('../templates', __FILE__)
 
-        SUPPORTED_PROVIDER = %w(airbrake honeybadger)
+        SUPPORTED_PROVIDER = %w(honeybadger airbrake)
 
         class_option :skip_deployment_notification,
-          :type => :boolean,
-          :default => false,
-          :desc => 'Skip to notify the error tracking provider of new deployments.'
+          type: :boolean,
+          default: false,
+          desc: 'Skip to notify the error tracking provider of new deployments.'
 
         class_option :provider,
-          :type => :string,
-          :default => 'honeybadger',
-          :desc => "Select what error tracking provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
+          type: :string,
+          default: SUPPORTED_PROVIDER.first,
+          desc: "Select what error tracking provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
 
         def validate_provider
           unless SUPPORTED_PROVIDER.include?(provider)
