@@ -1,0 +1,6 @@
+%b= t('widgets.<%= folder_name %>.grid_sum_notice')
+
+<%- column_size_attributes.each do |definition| -%>
+<%= generate_label(definition) %>
+<%= generate_edit_field(definition) %>
+<%- end -%>
