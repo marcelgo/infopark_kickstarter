@@ -20,7 +20,10 @@ describe Cms::Generators::Widget::ColumnGenerator do
         directory 'widgets' do
           directory 'column3_widget' do
             directory 'locales' do
-              file 'en.column3_widget.yml'
+              file 'en.column3_widget.yml' do
+                contains 'column3_widget'
+                contains 'notice:'
+              end
             end
 
             directory 'migrate' do

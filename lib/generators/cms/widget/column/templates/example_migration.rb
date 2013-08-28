@@ -7,6 +7,8 @@ class CreateColumn<%= columns %>WidgetExample < RailsConnector::Migration
     })
   end
 
+  private
+
   def add_widget(obj, attribute, widget)
     widget.reverse_merge!({
       _path: "_widgets/#{obj.id}/#{SecureRandom.hex(8)}",

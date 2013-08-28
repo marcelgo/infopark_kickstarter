@@ -2,5 +2,5 @@ en:
   widgets:
     column3_widget:
       title: '3 column widget'
-      description: 'The 3 column widget displays a box with 3 widget fields.'
-      grid_sum_notice: 'The sum of all widths should equal twelve.'
+      description: 'The 3 column widget displays a box with #{columns} widget fields.'
+      notice: 'The sum of all column widths should equal 12.'
