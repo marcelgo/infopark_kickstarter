@@ -37,7 +37,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'jquery-rails'
   gem.add_dependency 'haml'
   gem.add_dependency 'launchy'
-  gem.add_dependency 'less-rails-bootstrap'
+  gem.add_dependency 'less-rails-bootstrap', '~> 2.3'
   gem.add_dependency 'therubyracer'
   gem.add_dependency 'infopark_rails_connector', '>= 6.9.2.1.125136549'
   gem.add_dependency 'infopark_cloud_connector', '>= 6.9.2.1.125136549'

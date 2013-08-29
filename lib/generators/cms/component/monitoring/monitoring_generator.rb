@@ -7,9 +7,9 @@ module Cms
         SUPPORTED_PROVIDER = %w(newrelic)
 
         class_option :provider,
-          :type => :string,
-          :default => 'newrelic',
-          :desc => "Select what monitoring provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
+          type: :string,
+          default: SUPPORTED_PROVIDER.first,
+          desc: "Select what monitoring provider to use. (#{SUPPORTED_PROVIDER.join(' | ')})"
 
         def validate_provider
           unless SUPPORTED_PROVIDER.include?(options[:provider])

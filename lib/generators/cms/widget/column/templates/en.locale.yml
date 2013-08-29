@@ -1,0 +1,6 @@
+en:
+  widgets:
+    <%= folder_name %>:
+      title: '<%= columns.to_s %> column widget'
+      description: 'The <%= column_title(columns) %> column widget displays a box with <%= columns.to_s %> widget fields.'
+      notice: 'The sum of all column widths should equal <%= max_columns.to_s %>.'

@@ -1,18 +1,27 @@
+# Kickstarter gem related files
 .bundle/
 .yardoc
-config/local.yml
-config/rails_connectory.yml
-config/custom_cloud.yml
-tmp/*
-log/*.log
+/Gemfile.lock
 pkg/
-doc/*
-spec/tmp/*
-spec/dummy/db/*.sqlite3
-spec/dummy/log/*
-spec/dummy/config/*.yml
-spec/dummy/tmp/
-spec/dummy/.sass-cache
-Gemfile.lock
+doc/
+
+# Kickstarter configuration files
+config/rails_connector.yml
+config/custom_cloud.yml
+
+# Sublime editor files
 *.sublime-project
 *.sublime-workspace
+
+# Ignore randomly generated test files or configuration files in test
+# applications.
+tmp/generators/
+tmp/test_app/log/
+tmp/test_app/config/*.yml
+tmp/test_app/config/initializers/secret_token.rb
+tmp/test_app/tmp/
+tmp/test_app/cms/migrate/
+tmp/test_app/app/widgets/**/migrate/
+spec/dummy/log/
+spec/dummy/config/*.yml
+spec/dummy/tmp/

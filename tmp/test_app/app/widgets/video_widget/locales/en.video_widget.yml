@@ -1,0 +1,7 @@
+en:
+  widgets:
+    video_widget:
+      description: 'Displays a video player for the given video file.'
+      height: 'Height'
+      title: 'Video widget'
+      width: 'Width'

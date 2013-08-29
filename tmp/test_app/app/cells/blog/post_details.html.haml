@@ -1,0 +1,14 @@
+.blog-post
+  .media
+    = render(state: :gravatar)
+
+    .media-body
+      = cms_tag(:h2, @post, :headline, class: 'media-heading')
+
+      = render(state: :published_at)
+
+      = render(state: :published_by)
+
+  = cms_tag(:div, @post, :main_content)
+
+  = render(state: :comment)

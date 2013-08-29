@@ -75,7 +75,8 @@ module Cms
         gem('utf8-cleaner')
 
         gem_group(:assets) do
-          gem('less-rails-bootstrap')
+          gem('less-rails-bootstrap', '~> 2.3')
+          gem('bootstrap-datepicker-rails')
         end
 
         Bundler.with_clean_env do
@@ -250,6 +251,7 @@ module Cms
       end
 
       def add_initial_content
+        Rails::Generators.invoke('cms:component:editing', ['--editor=redactor'])
         Rails::Generators.invoke('cms:component:developer_tools')
         Rails::Generators.invoke('cms:component:search')
         Rails::Generators.invoke('cms:component:login_page')

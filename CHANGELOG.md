@@ -1,6 +1,29 @@
 # v3.1.0
+  * Integrated the html editor "redactor" into the generated code, as it was removed from the core
+    Infopark API. This allows you to more easily choose your html editor of choice. In the course
+    of integrating the editor, we moved all inplace editing files into their own generator. We hope
+    that this makes it easier to update this part in the future. Get more details running
+    `rails generate cms:component:editing --help`.
+  * Added inline editing for CMS date attributes. (Thanks @cedrics)
+  * Bugfix: Made slideshare widget more robust against invalid slideshare API responses.
+  * Removed `.widget` and `.editing` CSS classes in the `show.html.haml` and `edit.html.haml` of
+    widgets. They were not needed and we switched to use the public API provided by the
+    RailsConnector.
+  * Added a column widget generator that allows to create structure widgets that hold a certain
+    number of columns, which are widget attributes again. This means you can create nested widgets
+    and the editor can define the layout of a single row. The edit view of this widget allows to
+    adapt the column grid width. Run `rails generate cms:widget:column --help` for more information.
+  * Bugfix: The `better_errors` gem lead to segmentation faults in the test application, because it
+    was loaded in `test` mode. We only load the gem in development mode now to prevent the failures.
+    (Thanks @spiderpug)
+  * The Kickstarter and the dashboard currently depend on Twitter Bootstrap version 2. We are
+    working hard to support Twitter Bootstrap 3 in the near future.
+  * The integration test application is now checked in for more convenient development of
+    Kickstarter features. (Thanks @marcelgo)
   * The `add_widget` method inside of example migrations was changed, to only use the public
     RailsConnector API, instead of an API that might change in the future.
+  * Remove the need for the `local.yml` configuration and instead use the `rails_connector.yml`
+    and `custom_cloud.yml` provided by the console.
 
 # v3.0.0
   * All generated widgets now have an edit view. You can access the edit view via the widget edit
@@ -50,6 +73,7 @@
   * Added `headline` string attribute to `SearchPage`.
   * Added notice to restart the server when generating the developer tools. (Thanks @rouvenbehnke)
   * Removed `Gemfile.lock` from version control and updated gems. (Thanks @spiderpug)
+
 # v2.2.0
   * Updated most of the gems to the current version, eventhough we don't support Rails 4 yet.
   * Bugfix: Error page now uses a correct grid layout and displays the content correctly.

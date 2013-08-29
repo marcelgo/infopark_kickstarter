@@ -1,0 +1,29 @@
+.span12
+  = cms_tag(:h1, @obj, :headline)
+
+  = cms_tag(:div, @obj, :content)
+
+  = simple_form_for(@presenter, url: cms_path(@obj), html: { class: 'form-horizontal' }) do |form|
+    = form.error_notification
+
+    %fieldset
+      %legend
+        = t('.user_legend')
+
+      = form.input :id, as: :hidden, input_html: { value: form.object.id }
+
+      = form.input(:gender, as: :radio, collection: [:F, :M])
+
+      = form.input(:first_name)
+
+      = form.input(:last_name)
+
+      = form.input(:language, as: :select, collection: [:en, :de])
+
+      = form.input(:email)
+
+      = form.input(:want_email, as: :boolean, inline_label: true, label: false)
+
+    .control-group
+      .controls
+        = form.button(:submit, class: 'btn-primary')

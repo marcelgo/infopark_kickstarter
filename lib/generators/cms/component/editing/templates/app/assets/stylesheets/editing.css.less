@@ -1,0 +1,106 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+// --- editing navbar
+
+#editing-navbar {
+  margin-top: 0;
+
+  .ip_icon:hover {
+    cursor: default;
+  }
+
+  li > p {
+    padding: 10px 15px 0px 15px;
+  }
+
+  a#edit-toggle {
+    &:hover .ip_icon {
+      color: #6e84a8;
+      cursor: pointer;
+    }
+  }
+}
+
+@editingNavbarHeight: 42px;
+
+body {
+  padding-top: (@editingNavbarHeight + 60px);
+
+  .navbar {
+    margin-top: @editingNavbarHeight;
+  }
+}
+
+
+// --- infopark editing navbar
+
+@infoparkEditingNavbarHeight: 47px;
+
+body.ip_editing_active {
+  padding-top: (@infoparkEditingNavbarHeight + 60px);
+
+  .navbar {
+    margin-top: @infoparkEditingNavbarHeight;
+  }
+}
+
+
+
+// --- structure widget styles
+
+body.ip_editing_active {
+  div[data-ip-widget-obj-class] {
+    min-height: 30px;
+  }
+
+  div[data-ip-widget-obj-class*=Column] {
+    padding-top: 30px;
+    outline: 1px solid rgba(116, 224, 0, 0.2);
+
+    & > .ip_editing_marker {
+      margin-top: -30px;
+      border-color: rgb(116, 224, 0);
+    }
+
+    &:hover {
+      outline: 1px solid rgba(116, 224, 0, 1);
+    }
+
+    & *[class*=span] {
+      outline: 1px solid rgba(116, 224, 0, 0.2);
+
+      &:hover {
+        outline: 1px solid rgba(116, 224, 0, 1);
+      }
+    }
+  }
+}
+
+
+// --- editable fields styles
+
+.ip_field_editable  {
+ .transition(~"outline-color ease-in-out .8s");
+
+  outline: 2px dotted #ffa500;
+  outline: 2px dotted rgba(255, 165, 0, .03);
+  text-shadow: none;
+
+  &:hover,
+  &:focus {
+    .transition(~"outline-color ease-in-out .3s");
+
+    outline: 2px dotted #ffa500;
+    outline: 2px dotted rgba(255, 165, 0, 1);
+    text-shadow: none;
+  }
+
+  &[data-ip-field-type=html]:empty:before {
+    content: '\F04F';
+  }
+
+  &[data-ip-field-type=string]:empty:before {
+    content: '\F058';
+  }
+}

@@ -1,0 +1,6 @@
+en:
+  widgets:
+    column2_widget:
+      title: '2 column widget'
+      description: 'The Column-2 column widget displays a box with 2 widget fields.'
+      notice: 'The sum of all column widths should equal 12.'

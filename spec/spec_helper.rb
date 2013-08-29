@@ -1,5 +1,11 @@
 ENV['RAILS_ENV'] = 'test'
 
+# Copy config files to dummy app! This has to be done before the
+# rails env is loaded
+require File.expand_path('../../lib/infopark_kickstarter/rake/configuration_helper', __FILE__)
+dummy_config_path = File.expand_path('../dummy/config', __FILE__)
+InfoparkKickstarter::Rake::ConfigurationHelper.new(dummy_config_path).copy_configurations
+
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
 

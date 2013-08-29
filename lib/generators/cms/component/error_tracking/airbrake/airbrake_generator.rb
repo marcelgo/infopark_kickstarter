@@ -8,9 +8,9 @@ module Cms
           source_root File.expand_path('../templates', __FILE__)
 
           class_option :skip_deployment_notification,
-            :type => :boolean,
-            :default => false,
-            :desc => 'Skip to notify airbrake on new deployments.'
+            type: :boolean,
+            default: false,
+            desc: 'Skip to notify airbrake on new deployments.'
 
           def include_gemfile
             gem('airbrake')
