@@ -110,7 +110,7 @@ module InfoparkKickstarter
       end
 
       def obj_classes
-        Dashboard::ObjClass.all
+        InfoparkKickstarter::ObjClass.all
       end
 
       def permalinks(workspace)

@@ -15,4 +15,9 @@ require 'generators/cms/widget/example'
 require 'generators/cms/widget/api/api_generator'
 
 module InfoparkKickstarter
+  extend ActiveSupport::Autoload
+
+  autoload :Resource
+  autoload :Attribute
+  autoload :ObjClass
 end
