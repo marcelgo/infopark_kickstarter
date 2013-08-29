@@ -1,5 +1,4 @@
 require 'uri'
-require 'infopark_kickstarter/configuration'
 
 module Cms
   module Generators
