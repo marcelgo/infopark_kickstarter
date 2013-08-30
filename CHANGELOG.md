@@ -1,4 +1,6 @@
 # v3.1.0
+  * Bugfix: The editmarker overlapped the save and cancel button of the redactor inplace editor.
+    (Thanks @mremolt)
   * Removed deployment and code hosting rake tasks to allow free choice for these platforms.
   * Integrated the html editor "redactor" into the generated code, as it was removed from the core
     Infopark API. This allows you to more easily choose your html editor of choice. In the course
