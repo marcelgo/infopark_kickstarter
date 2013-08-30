@@ -245,7 +245,6 @@ module Cms
       end
 
       def extend_gitignore
-        append_file('.gitignore', "config/deploy.yml\n")
         append_file('.gitignore', "config/rails_connector.yml\n")
         append_file('.gitignore', "config/custom_cloud.yml\n")
       end
