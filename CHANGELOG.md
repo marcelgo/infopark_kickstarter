@@ -1,4 +1,5 @@
 # v3.1.0
+  * Removed deployment and code hosting rake tasks to allow free choice for these platforms.
   * Integrated the html editor "redactor" into the generated code, as it was removed from the core
     Infopark API. This allows you to more easily choose your html editor of choice. In the course
     of integrating the editor, we moved all inplace editing files into their own generator. We hope

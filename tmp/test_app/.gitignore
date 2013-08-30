@@ -13,6 +13,5 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-config/deploy.yml
 config/rails_connector.yml
 config/custom_cloud.yml

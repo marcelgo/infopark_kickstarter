@@ -42,7 +42,7 @@ module InfoparkKickstarter
       def create_configuration_files
         test_app_config = File.expand_path('../../../../tmp/test_app/config', __FILE__)
 
-        ConfigurationHelper.new(test_app_config).copy_configurations
+        ConfigurationHelper.new(test_app_config).copy
       end
 
       def bundle
