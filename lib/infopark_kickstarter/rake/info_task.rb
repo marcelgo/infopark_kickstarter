@@ -134,7 +134,7 @@ module InfoparkKickstarter
         json = JSON.parse(response)
 
         service_status = {
-          'Elastic Web Platform' => 'up and running',
+          'Platform' => 'up and running',
           'CMS' => 'up and running',
           'WebCRM' => 'up and running',
         }
