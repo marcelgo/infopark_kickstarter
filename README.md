@@ -4,8 +4,8 @@
 [![Code Climate](https://codeclimate.com/github/infopark/infopark_kickstarter.png)](https://codeclimate.com/github/infopark/infopark_kickstarter)
 [![Dependency Status](https://gemnasium.com/infopark/infopark_kickstarter.png)](https://gemnasium.com/infopark/infopark_kickstarter)
 
-Infopark Kickstarter provides generators and rake tasks to quickly setup or enhance an [Infopark
-Platform](http://infopark.de) Ruby on Rails project. All generated code
+Infopark Kickstarter provides generators and rake tasks to quickly setup or enhance an
+[Infopark](http://infopark.de) Ruby on Rails project. All generated code
 represents a working example, but can be fully customized within the application.
 
 
@@ -46,7 +46,7 @@ We would be very happy and thankful if you open new issues in order to further i
 Kickstarter. If you want to go a step further and extend the functionality or fix a problem, you can
 do so any time by following the steps below.
 
-1. Signup for a [free Infopark Platform account](http://www.infopark.de/) and setup a test CRM
+1. Signup for a [free Infopark account](http://www.infopark.de/) and setup a test CRM
    and CMS component in the Infopark console.
 
 2. Fork and clone the Infopark Kickstarter GitHub repository.
