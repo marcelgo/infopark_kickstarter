@@ -76,6 +76,9 @@ do so any time by following the steps below.
    look at the already existing generators and rake tasks to get an impression of our coding style
    and the general architecture.
 
+6. We are using the [GitHub Styleguides](https://github.com/styleguide) and would prefer if you
+   could stick to it.
+
 
 ## License
 Copyright (c) 2009 - 2013 Infopark AG (http://www.infopark.com)
