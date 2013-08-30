@@ -1,4 +1,6 @@
 # v3.1.0
+  * Extracted dashboard into its own gem
+    [infopark_dashboard](https://github.com/infopark/infopark_dashboard).
   * Bugfix: The editmarker overlapped the save and cancel button of the redactor inplace editor.
     (Thanks @mremolt)
   * Removed deployment and code hosting rake tasks to allow free choice for these platforms.

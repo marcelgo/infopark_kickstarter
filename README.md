@@ -18,8 +18,7 @@ Please visit our Dev Center to get the
 ## Testing
 
 There are two types of tests. First there are rspec tests of the Infopark Kickstarter
-engine. Those include tests for the dashboard and for all generators. You can run these tests by
-simply calling:
+engine. You can run these tests by simply calling:
 
     $ rake spec
 
