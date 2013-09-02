@@ -2,13 +2,12 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
-require 'generators/cms/widget/text/text_generator.rb'
+require 'generators/cms/widget/text/example/example_generator.rb'
 
-describe Cms::Generators::Widget::TextGenerator do
+describe Cms::Generators::Widget::Text::ExampleGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-  arguments ['--example']
 
   before do
     prepare_destination
@@ -24,25 +23,10 @@ describe Cms::Generators::Widget::TextGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'text_widget' do
-            directory 'views' do
-              file 'show.html.haml'
-              file 'thumbnail.html.haml'
-            end
-
-            directory 'locales' do
-              file 'en.text_widget.yml'
-            end
 
             directory 'migrate' do
-              migration 'create_text_widget'
+              migration 'create_text_widget_example'
             end
-          end
-        end
-
-        directory 'models' do
-          file 'text_widget.rb' do
-            contains 'cms_attribute :content, type: :html'
-            contains 'include Widget'
           end
         end
       end
