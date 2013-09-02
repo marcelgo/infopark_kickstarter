@@ -1,0 +1,20 @@
+.modal-header
+  %h3
+    Modal header
+
+.modal-body
+
+  #image-list
+    %ul.images
+      %li{'ng-repeat' => 'image in images'}
+        %strong
+          {{image.id}}
+
+        %img.thumbnail{'ng-src' => '{{image.path}}', 'ng-draggable-thumbnail' => true, 'object' => 'image'}
+
+
+  #selection-list
+    %strong
+      Your selection
+
+    #objects{'ng-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection'}

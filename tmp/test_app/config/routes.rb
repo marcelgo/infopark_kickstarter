@@ -3,6 +3,8 @@ TestApp::Application.routes.draw do
 
   mount InfoparkDashboard::Engine => "/cms/dashboard"
 
+  resources :mediabrowser, only: [:index]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -6,6 +6,7 @@ require './lib/rails_connector/cms_definitions'
 class Obj < ::RailsConnector::BasicObj
   include RailsConnector::CmsAttributes
   include RailsConnector::CmsDefinitions
+  include ActiveModel::Serialization
 
   def self.homepage
     default_homepage
