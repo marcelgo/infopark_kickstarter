@@ -1,6 +1,8 @@
 TestApp::Application.routes.draw do
   get 'sitemap.xml', controller: 'sitemap', action: 'index', format: 'xml'
 
+  mount InfoparkDashboard::Engine => "/cms/dashboard"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

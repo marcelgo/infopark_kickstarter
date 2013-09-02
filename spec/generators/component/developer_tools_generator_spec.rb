@@ -15,6 +15,11 @@ describe Cms::Generators::Component::DeveloperToolsGenerator do
   end
 
   def prepare_environments
+    config_path = "#{destination_root}/config"
+
+    mkdir_p(config_path)
+
+    File.open("#{config_path}/routes.rb", 'w') { |file| file.write('Dummy::Application.routes.draw do') }
     File.open("#{destination_root}/Gemfile", 'w')
   end
 
@@ -24,6 +29,7 @@ describe Cms::Generators::Component::DeveloperToolsGenerator do
         contains 'gem "pry-rails"'
         contains 'gem "rails-footnotes"'
         contains 'gem "thin"'
+        contains 'gem "infopark_dashboard"'
 
         contains 'gem "better_errors"'
         contains 'gem "binding_of_caller"'
@@ -32,6 +38,10 @@ describe Cms::Generators::Component::DeveloperToolsGenerator do
       directory 'config' do
         directory 'initializers' do
           file 'rails_footnotes.rb'
+        end
+
+        file 'routes.rb' do
+          contains 'mount InfoparkDashboard::Engine => "/cms/dashboard"'
         end
       end
 

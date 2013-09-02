@@ -61,6 +61,7 @@ group :test, :development do
   gem "pry-rails"
   gem "rails-footnotes"
   gem "thin"
+  gem "infopark_dashboard"
 end
 
 group :development do

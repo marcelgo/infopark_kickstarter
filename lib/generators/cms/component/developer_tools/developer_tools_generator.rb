@@ -9,6 +9,7 @@ module Cms
             gem('pry-rails')
             gem('rails-footnotes')
             gem('thin')
+            gem('infopark_dashboard')
           end
 
           gem_group(:development) do
@@ -19,6 +20,10 @@ module Cms
           Bundler.with_clean_env do
             run('bundle --quiet')
           end
+        end
+
+        def add_dashboard_route
+          route('mount InfoparkDashboard::Engine => "/cms/dashboard"')
         end
 
         def copy_app_directory
