@@ -2,9 +2,9 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
-require 'generators/cms/widget/image/image_generator.rb'
+require 'generators/cms/widget/image/example/example_generator.rb'
 
-describe Cms::Generators::Widget::ImageGenerator do
+describe Cms::Generators::Widget::Image::ExampleGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -23,25 +23,9 @@ describe Cms::Generators::Widget::ImageGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'image_widget' do
-            directory 'views' do
-              file 'show.html.haml'
-              file 'thumbnail.html.haml'
-            end
-
-            directory 'locales' do
-              file 'en.image_widget.yml'
-            end
-
             directory 'migrate' do
-              migration 'create_image_widget'
+              migration 'create_image_widget_example'
             end
-          end
-        end
-
-        directory 'models' do
-          file 'image_widget.rb' do
-            contains 'cms_attribute :source, type: :linklist, max_size: 1'
-            contains 'include Widget'
           end
         end
       end
