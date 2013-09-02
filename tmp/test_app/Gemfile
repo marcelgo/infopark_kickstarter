@@ -51,6 +51,7 @@ gem "simple_form"
 gem "haml-rails"
 gem "cells"
 gem "utf8-cleaner"
+gem "infopark_crm_connector"
 group :assets do
   gem "less-rails-bootstrap", "~> 2.3"
   gem "bootstrap-datepicker-rails"

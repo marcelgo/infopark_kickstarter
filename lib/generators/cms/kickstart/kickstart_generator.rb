@@ -1,5 +1,4 @@
 require 'uri'
-require 'infopark_kickstarter/configuration'
 
 module Cms
   module Generators
@@ -73,6 +72,7 @@ module Cms
         gem('haml-rails')
         gem('cells')
         gem('utf8-cleaner')
+        gem('infopark_crm_connector')
 
         gem_group(:assets) do
           gem('less-rails-bootstrap', '~> 2.3')

@@ -11,7 +11,7 @@ module Footnotes
       # If it's nil, Footnotes will use '#'.
       #
       def link
-        '/cms/dashboard'
+        InfoparkDashboard::Engine.routes.url_helpers.root_path
       end
 
       # Returns the title that represents this note.
