@@ -3,7 +3,6 @@ module Cms
     module Widget
       module Maps
         class GoogleMapsGenerator < ::Rails::Generators::Base
-          include Example
           include Migration
 
           Rails::Generators.hide_namespace(self.namespace)
@@ -28,10 +27,6 @@ module Cms
               directory('app', force: true)
             rescue Cms::Generators::DuplicateResourceError
             end
-          end
-
-          def create_example
-            example_migration_template(obj_class_name.underscore)
           end
 
           def notice
