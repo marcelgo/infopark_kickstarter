@@ -25,7 +25,6 @@ Gem::Specification.new do |gem|
   gem.files       = Dir[
     'app/**/*',
     'lib/**/*',
-    'config/routes.rb',
     'LICENSE',
     'Rakefile',
     'README.md',
