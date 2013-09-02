@@ -2,9 +2,9 @@ require 'spec_helper'
 
 require 'generator_spec/test_case'
 require 'rails/generators/test_case'
-require 'generators/cms/widget/person/person_generator.rb'
+require 'generators/cms/widget/person/example/example_generator.rb'
 
-describe Cms::Generators::Widget::PersonGenerator do
+describe Cms::Generators::Widget::Person::ExampleGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -23,25 +23,9 @@ describe Cms::Generators::Widget::PersonGenerator do
       directory 'app' do
         directory 'widgets' do
           directory 'person_widget' do
-            directory 'views' do
-              file 'show.html.haml'
-              file 'thumbnail.html.haml'
-            end
-
-            directory 'locales' do
-              file 'en.person_widget.yml'
-            end
-
             directory 'migrate' do
-              migration 'create_person_widget'
+              migration 'create_person_widget_example'
             end
-          end
-        end
-
-        directory 'models' do
-          file 'person_widget.rb' do
-            contains 'include Widget'
-            contains 'cms_attribute :person, type: :string'
           end
         end
       end
