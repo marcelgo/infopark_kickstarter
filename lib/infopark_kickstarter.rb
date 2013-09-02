@@ -1,7 +1,4 @@
 require 'rails/generators'
-require 'jquery-rails'
-require 'less-rails-bootstrap'
-require 'haml'
 require 'infopark_rails_connector'
 
 require 'infopark_kickstarter/engine'
