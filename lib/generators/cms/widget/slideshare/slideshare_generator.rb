@@ -2,7 +2,6 @@ module Cms
   module Generators
     module Widget
       class SlideshareGenerator < ::Rails::Generators::Base
-        include Example
         include Migration
 
         source_root File.expand_path('../templates', __FILE__)
@@ -27,10 +26,6 @@ module Cms
             directory('spec')
           rescue Cms::Generators::DuplicateResourceError
           end
-        end
-
-        def create_example
-          example_migration_template(obj_class_name.underscore)
         end
 
         def notice
