@@ -3,7 +3,6 @@ module Cms
     module Widget
       class LoginGenerator < ::Rails::Generators::Base
         include Migration
-        include Example
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -18,10 +17,6 @@ module Cms
             directory('app', force: true)
           rescue Cms::Generators::DuplicateResourceError
           end
-        end
-
-        def create_example
-          example_migration_template(obj_class_name.underscore)
         end
 
         def notice
