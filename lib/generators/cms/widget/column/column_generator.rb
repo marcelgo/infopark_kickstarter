@@ -3,7 +3,6 @@ module Cms
     module Widget
       class ColumnGenerator < ::Rails::Generators::Base
         include BasePaths
-        include Example
         include Actions
         include Migration
 
@@ -46,10 +45,6 @@ module Cms
             )
           rescue Cms::Generators::DuplicateResourceError
           end
-        end
-
-        def create_example
-          example_migration_template(obj_class_name.underscore)
         end
 
         def notice
