@@ -8,23 +8,32 @@
         &times;
 
 .modal-body
+  .row-fluid
+    .span6
+      .image-list
+        %ul.images
+          %li{'ng-repeat' => 'image in images'}
+            %strong
+              {{image.id}}
 
-  #image-list
-    %ul.images
-      %li{'ng-repeat' => 'image in images'}
+            %a{href: '', 'ng-click' => 'inspectObject(image)'}
+              %img.thumbnail{'ip-draggable-thumbnail' => true, 'image-url' => 'image.body_data_url', 'object' => 'image'}
+
+      .selection-list
         %strong
-          {{image.id}}
+          Your selection
 
-        %img.thumbnail{'ip-draggable-thumbnail' => true, 'image-url' => 'image.body_data_url', 'object' => 'image'}
+        #objects{'ip-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection'}
 
+    .span6
+      .inspector{'ng-show' => 'inspectedObject'}
+        %h4
+          Inspector
 
-  #selection-list
-    %strong
-      Your selection
+        %a.btn{'ng-click' => 'hideInspector()'}
+          %i.icon-remove
 
-    #objects{'ip-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection'}
-
-  .inspector
+        %ip-object-inspector{'model' => 'inspectedObject'}
 
 .modal-footer
   .pull-left

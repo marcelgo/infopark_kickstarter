@@ -23,6 +23,7 @@
 
 //= require angular/angular
 //= require angular/angular-resource
+//= require angular/angular-sanitize
 //= require mediabrowser/mediabrowser
 
 //= require_tree .

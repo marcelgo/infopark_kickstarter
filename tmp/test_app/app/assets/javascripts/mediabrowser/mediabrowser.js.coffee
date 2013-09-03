@@ -4,7 +4,7 @@
 #= require_tree ./directives
 #= require_tree ./services
 
-angular.module('ip-mediabrowser', ['ngResource'])
+angular.module('ip-mediabrowser', ['ngResource', 'ngSanitize'])
 
 # open angular app in dialog if clicked
 $ ->
