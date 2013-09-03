@@ -23,7 +23,7 @@
         %strong
           Your selection
 
-        #objects{'ip-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection'}
+        #objects{'ip-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection(image)'}
 
     .span6
       .inspector{'ng-show' => 'inspectedObject'}
