@@ -1,0 +1,8 @@
+%table.table
+  %tr{'ng-repeat' => 'item in images'}
+    %td
+      %a{href: '', 'ng-click' => 'inspectObject(item)'}
+        %img.thumbnail{'ip-draggable-thumbnail' => true, 'image-url' => 'item.body_data_url', 'object' => 'item'}
+
+    %td
+      {{item.id}}

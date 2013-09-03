@@ -11,22 +11,7 @@
   .row-fluid
     .span6
       .image-list
-        %ul.images
-          %li{'ng-repeat' => 'image in images'}
-            %strong
-              {{image.id}}
-
-            %a{href: '', 'ng-click' => 'inspectObject(image)'}
-              %img.thumbnail{'ip-draggable-thumbnail' => true, 'image-url' => 'image.body_data_url', 'object' => 'image'}
-
-      .selection-list
-        %strong
-          Your selection
-
-        .objects{'ip-thumbnail-dropzone' => true, 'item-list' => 'imageSelection'}
-          %ul
-            %li{'ng-repeat' => 'image in itemList'}
-              %img{'ng-src' => '{{image.body_data_url}}'}
+        != JST['mediabrowser/tabular']()
 
     .span6
       .inspector{'ng-show' => 'inspectedObject'}
@@ -37,6 +22,15 @@
           %i.icon-remove
 
         %ip-object-inspector{'model' => 'inspectedObject'}
+
+  .row-fluid.selection-list
+    .span12
+      %strong
+        Your selection
+
+    %ul.objects.media-list{'ip-thumbnail-dropzone' => true, 'item-list' => 'imageSelection'}
+      %li.media.pull-left{'ng-repeat' => 'image in itemList'}
+        %img{'ng-src' => '{{image.body_data_url}}'}
 
 .modal-footer
   .pull-left
