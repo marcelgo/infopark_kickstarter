@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/social_sharing/social_sharing_generator.rb'
+require 'generators/cms/component/social_sharing/example/example_generator.rb'
 
-describe Cms::Generators::Component::SocialSharingGenerator do
+describe Cms::Generators::Component::SocialSharing::ExampleGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
-  arguments ['--example']
 
   before do
     prepare_destination
@@ -26,15 +25,11 @@ describe Cms::Generators::Component::SocialSharingGenerator do
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          file 'social_sharing_cell.rb'
-
-          directory 'social_sharing' do
-            file 'show.html.haml'
-            file 'facebook.html.haml'
-            file 'google.html.haml'
-            file 'linkedin.html.haml'
-            file 'twitter.html.haml'
+        directory 'views' do
+          directory 'layouts' do
+            file 'application.html.haml' do
+              contains '= render_cell(:social_sharing, :show, cms_url(@obj))'
+            end
           end
         end
       end
