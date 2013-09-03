@@ -23,7 +23,10 @@
         %strong
           Your selection
 
-        #objects{'ip-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection(image)'}
+        .objects{'ip-thumbnail-dropzone' => true, 'item-list' => 'imageSelection'}
+          %ul
+            %li{'ng-repeat' => 'image in itemList'}
+              %img{'ng-src' => '{{image.body_data_url}}'}
 
     .span6
       .inspector{'ng-show' => 'inspectedObject'}

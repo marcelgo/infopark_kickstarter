@@ -1,7 +1,8 @@
-
 angular.module('ip-mediabrowser').directive 'ipThumbnailDropzone', ->
+  restrict: 'A'
   scope:
     onDrop: '&'
+    itemList: '='
   link: ($scope, $element, $attr) ->
     $element.droppable
       accept: 'img.thumbnail'
@@ -9,5 +10,7 @@ angular.module('ip-mediabrowser').directive 'ipThumbnailDropzone', ->
         droppedObject = ui.draggable
 
         image = droppedObject.data('object')
-        $scope.onDrop(image: image)
+
+        $scope.$apply ->
+          $scope.itemList.push image
 

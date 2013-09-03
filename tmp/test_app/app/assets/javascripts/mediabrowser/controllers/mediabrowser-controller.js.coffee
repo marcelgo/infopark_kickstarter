@@ -3,11 +3,6 @@ angular.module('ip-mediabrowser').controller 'IpMediabrowserController', ['$scop
   $scope.imageSelection = []
   $scope.inspectedObject = undefined
 
-  $scope.addImageToSelection = (image) ->
-    $scope.imageSelection.push(image)
-
-    console.log "Pushed to selection: ", image
-
   $scope.close = (event) ->
     modal = $(event.target).parents().filter('.modal')
 
