@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/component/language_switch/language_switch_generator.rb'
+require 'generators/cms/component/language_switch/example/example_generator.rb'
 
-describe Cms::Generators::Component::LanguageSwitchGenerator do
+describe Cms::Generators::Component::LanguageSwitch::ExampleGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -25,19 +25,12 @@ describe Cms::Generators::Component::LanguageSwitchGenerator do
   it 'creates files' do
     destination_root.should have_structure {
       directory 'app' do
-        directory 'cells' do
-          file 'language_switch_cell.rb'
-
-          directory 'language_switch' do
-            file 'show.html.haml'
-            file 'entry.html.haml'
+        directory 'views' do
+          directory 'layouts' do
+            file 'application.html.haml' do
+              contains '= render_cell(:language_switch, :show, @obj.homepages, @obj.homepage)'
+            end
           end
-        end
-      end
-
-      directory 'config' do
-        directory 'locales' do
-          file 'en.language_switch.yml'
         end
       end
     }
