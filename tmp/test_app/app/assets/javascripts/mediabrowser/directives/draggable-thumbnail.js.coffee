@@ -1,4 +1,3 @@
-
 angular.module('ip-mediabrowser').directive 'ipDraggableThumbnail', ->
   scope:
     object: '='
@@ -12,3 +11,5 @@ angular.module('ip-mediabrowser').directive 'ipDraggableThumbnail', ->
       revert: true
       cursor: 'move'
       containment: '.modal-body'
+      helper: 'clone'
+      cursor: 'crosshair'

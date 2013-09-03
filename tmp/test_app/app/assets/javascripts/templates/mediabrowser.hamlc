@@ -1,6 +1,11 @@
-.modal-header
-  %h3
-    Modal header
+.modal-header.clearfix
+  .pull-left
+    %h3
+      Mediabrowser
+  .pull-right
+    %h3
+      %button.close{'ng-click' => 'close($event)'}
+        &times;
 
 .modal-body
 
@@ -20,3 +25,11 @@
     #objects{'ip-thumbnail-dropzone' => true, 'on-drop' => 'addImageToSelection'}
 
   .inspector
+
+.modal-footer
+  .pull-left
+  .pull-right
+    %button.btn{'ng-click' => 'save($event)'}
+      Save
+    %button.btn{'ng-click' => 'close($event)'}
+      Close
