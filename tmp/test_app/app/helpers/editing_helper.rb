@@ -33,7 +33,6 @@ module EditingHelper
     end
   end
 
-
   def cms_edit_linklist(object, attribute_name)
     linklist = object.send(attribute_name)
 
@@ -46,7 +45,16 @@ module EditingHelper
             html = ''.html_safe
 
             html << content_tag(:li, I18n.t('editing.linklist.title', title: link.title))
-            html << content_tag(:li, I18n.t('editing.linklist.url', url: link.url))
+
+            li = content_tag(:li) do
+              content = I18n.t('editing.linklist.url', url: link.url)
+              content.concat(content_tag(:br))
+              content.concat(link_to('Edit link', '#', {class: 'media'}))
+
+              content.html_safe
+            end
+
+            html << content_tag(:li, li)
 
             html
           end

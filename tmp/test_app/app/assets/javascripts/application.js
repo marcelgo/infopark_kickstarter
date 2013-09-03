@@ -23,5 +23,6 @@
 
 //= require angular/angular
 //= require angular/angular-resource
+//= require mediabrowser/mediabrowser
 
 //= require_tree .

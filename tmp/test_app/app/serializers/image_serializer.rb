@@ -1,7 +1,3 @@
 class ImageSerializer < ActiveModel::Serializer
-  attributes :id, :path
-
-  def path
-    "/#{id}"
-  end
+  attributes :id, :body_data_url
 end
