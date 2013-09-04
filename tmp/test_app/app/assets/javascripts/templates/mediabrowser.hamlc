@@ -13,7 +13,7 @@
       &#61475;
 
   .content{'ng-hide' => 'loading'}
-    .row-fluid
+    .row-fluid.selection-options
       .span6
         %ul.pager
           %li.previous{'ng-show' => 'page > 1'}
@@ -21,8 +21,9 @@
               &lt;
 
           %li
-            Results
-            {{resultCount}}
+            %span
+              Results
+              {{resultCount}}
 
           %li.next{'ng-show' => 'page < maxPages'}
             %span.arrow{'ng-click' => 'navigate('next')'}

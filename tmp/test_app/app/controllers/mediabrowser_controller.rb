@@ -6,7 +6,7 @@ class MediabrowserController < ApplicationController
     end_index = start_index + limit - 1
 
     images, resultCount = RailsConnector::Workspace.default.as_current do
-      query = Obj.where(:_obj_class, :equals, 'Image').offset(start_index)
+      query = Obj.where(:_obj_class, :equals, 'Image').offset(start_index).order('_last_changed')
       [query.take(limit), query.count]
     end
 

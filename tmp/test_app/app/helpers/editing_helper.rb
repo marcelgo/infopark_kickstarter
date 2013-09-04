@@ -50,6 +50,7 @@ module EditingHelper
               content = I18n.t('editing.linklist.url', url: link.url)
               content.concat(content_tag(:br))
               content.concat(link_to('Edit link', '#', {class: 'media'}))
+              content.concat(content_tag(:div, '', {class: 'mediabrowser-selected-items'}))
 
               content.html_safe
             end

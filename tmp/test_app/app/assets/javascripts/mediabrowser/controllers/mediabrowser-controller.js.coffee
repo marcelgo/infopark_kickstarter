@@ -31,7 +31,11 @@ angular.module('ip-mediabrowser').controller 'IpMediabrowserController', ['$scop
     )
 
   $scope.save = (event) ->
-    console.log('TBD: store values')
+    ids = $.map($scope.imageSelection, (image) ->
+      image.id
+    )
+    $('.mediabrowser-selected-items').html(ids.join(', '))
+    $scope.close(event)
 
   $scope.hideInspector = () ->
     $scope.inspectedObject = undefined
