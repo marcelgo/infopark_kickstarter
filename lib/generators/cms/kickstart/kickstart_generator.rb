@@ -110,6 +110,16 @@ module Cms
         log(:info, 'enable widget locales')
       end
 
+      def update_application_configuration
+        directory('lib')
+        directory('config', force: true)
+      end
+
+      def extend_gitignore
+        append_file('.gitignore', "config/rails_connector.yml\n")
+        append_file('.gitignore', "config/custom_cloud.yml\n")
+      end
+
       def create_structure_migration_file
         begin
           Model::ApiGenerator.new(behavior: behavior) do |model|
@@ -237,16 +247,8 @@ module Cms
         migration_template('create_structure.rb', 'cms/migrate/create_structure.rb')
       end
 
-      def copy_app_directory
+      def override_application
         directory('app', force: true)
-        directory('lib')
-        directory('config', force: true)
-        directory('deploy')
-      end
-
-      def extend_gitignore
-        append_file('.gitignore', "config/rails_connector.yml\n")
-        append_file('.gitignore', "config/custom_cloud.yml\n")
       end
 
       def add_initial_content

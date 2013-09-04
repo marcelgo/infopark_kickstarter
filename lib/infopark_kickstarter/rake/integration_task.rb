@@ -18,8 +18,9 @@ module InfoparkKickstarter
             cd(app_path) do
               Bundler.with_clean_env do
                 bundle
-                reset_cms
                 call_generators
+                reset_cms
+                migrate
                 run_tests
               end
             end
@@ -77,7 +78,9 @@ module InfoparkKickstarter
         generators.each do |generator|
           sh("bundle exec rails generate #{generator}")
         end
+      end
 
+      def migrate
         sh('bundle exec rake cms:migrate')
       end
 
