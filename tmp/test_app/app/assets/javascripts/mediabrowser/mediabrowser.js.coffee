@@ -11,7 +11,9 @@ $ ->
   $(document).on 'click', 'a.media', ->
     modalContent = '<div id="ip-mediabrowser" class="modal"><div class="ng-view"></div></div>'
 
-    appContainment = $('body').append modalContent
+    unless $('#ip-mediabrowser').length
+      appContainment = $('body').append modalContent
+
     $('#ip-mediabrowser').modal('show')
 
     angular.bootstrap(appContainment, ['ip-mediabrowser'])

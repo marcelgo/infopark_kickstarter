@@ -10,6 +10,19 @@
 .modal-body
   .row-fluid
     .span6
+      %ul.pager
+        %li.previous{'ng-show' => 'page > 1'}
+          %span.arrow{'ng-click' => 'navigate('previous')'}
+            &lt;
+
+        %li
+          Results
+          {{resultCount}}
+
+        %li.next{'ng-show' => 'page < maxPages'}
+          %span.arrow{'ng-click' => 'navigate('next')'}
+            &gt;
+
       .image-list
         != JST['mediabrowser/tabular']()
 
