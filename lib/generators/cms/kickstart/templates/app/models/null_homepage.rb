@@ -24,6 +24,10 @@ class NullHomepage < Obj
     'Infopark Platform. Up and Running.'
   end
 
+  def obj_class
+    'NullHomepage'
+  end
+
   def active?
     true
   end

@@ -23,7 +23,7 @@ module Cms
         end
 
         def add_dashboard_route
-          route('mount InfoparkDashboard::Engine => "/cms/dashboard"')
+          route('mount InfoparkDashboard::Engine => "/cms/dashboard" if Rails.env.development?')
         end
 
         def copy_app_directory

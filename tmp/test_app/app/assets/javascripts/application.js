@@ -19,6 +19,7 @@
 //= require projekktor.config
 //= require redactor
 //= require redactor.config
+//= require editing
 //= require bootstrap-datepicker
 
 //= require angular/angular

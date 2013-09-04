@@ -1,7 +1,7 @@
 TestApp::Application.routes.draw do
   get 'sitemap.xml', controller: 'sitemap', action: 'index', format: 'xml'
 
-  mount InfoparkDashboard::Engine => "/cms/dashboard"
+  mount InfoparkDashboard::Engine => "/cms/dashboard" if Rails.env.development?
 
   resources :mediabrowser, only: [:index, :edit]
 

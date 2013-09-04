@@ -11,7 +11,7 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
-              widget.icon = '&#xF00A;'
+              widget.icon = 'person'
               widget.description = 'Displays a WebCRM person and shows their details.'
               widget.attributes = [
                 {

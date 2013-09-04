@@ -11,7 +11,7 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
-              widget.icon = '&#xF061;'
+              widget.icon = 'image'
               widget.description = 'Widget that holds an image.'
               widget.attributes = [
                 {

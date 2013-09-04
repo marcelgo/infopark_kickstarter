@@ -1,4 +1,6 @@
 # v3.1.0
+  * Added an editing icon font that is independend from the Infopark RailsConnector. This allows the
+    project developer to add arbitrary project specific icons that should be used for editing views.
   * Extracted dashboard into its own gem
     [infopark_dashboard](https://github.com/infopark/infopark_dashboard).
   * Bugfix: The editmarker overlapped the save and cancel button of the redactor inplace editor.

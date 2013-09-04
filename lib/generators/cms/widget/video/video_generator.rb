@@ -48,7 +48,7 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
-              widget.icon = '&#xF062;'
+              widget.icon = 'video'
               widget.description = 'Displays a video player for the given video file.'
               widget.attributes = [
                 {

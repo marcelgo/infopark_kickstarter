@@ -1,3 +1,13 @@
+configuration = YAML.load_file(Rails.root + 'config/rails_connector.yml')
+
+RailsConnector::Configuration.content_service_url = configuration['content_service']['url']
+RailsConnector::Configuration.content_service_login = configuration['content_service']['login']
+RailsConnector::Configuration.content_service_api_key = configuration['content_service']['api_key']
+
+RailsConnector::Configuration.cms_url = configuration['cms_api']['url']
+RailsConnector::Configuration.cms_login = configuration['cms_api']['login']
+RailsConnector::Configuration.cms_api_key = configuration['cms_api']['api_key']
+
 RailsConnector::Configuration.choose_homepage do |env|
   # Returns an introduction page, when no Homepage found. Usually, you can delete
   # the NullHomepage.new fallback once you first published your content. See
