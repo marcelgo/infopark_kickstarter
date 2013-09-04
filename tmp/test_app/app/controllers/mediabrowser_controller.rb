@@ -1,17 +1,16 @@
 class MediabrowserController < ApplicationController
   def index
-    images = RailsConnector::Workspace.default.as_current do
-      Image.all.to_a
-    end
-
     page = (params[:page].presence || 1).to_i
     limit = (params[:limit].presence || 10).to_i
     start_index = (page - 1) * limit
     end_index = start_index + limit - 1
-    resultCount = 111
-    maxPages = 3
 
-    images = images[start_index..end_index] || []
+    images, resultCount = RailsConnector::Workspace.default.as_current do
+      query = Obj.where(:_obj_class, :equals, 'Image').offset(start_index)
+      [query.take(limit), query.count]
+    end
+
+    maxPages = (resultCount / limit.to_f).ceil
 
     render json: images, meta: {resultCount: resultCount, maxPages: maxPages}, each_serializer: ImageSerializer, root: 'images'
   end
