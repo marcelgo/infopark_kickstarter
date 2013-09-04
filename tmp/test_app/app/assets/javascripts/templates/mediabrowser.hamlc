@@ -8,42 +8,47 @@
         &times;
 
 .modal-body
-  .row-fluid
-    .span6
-      %ul.pager
-        %li.previous{'ng-show' => 'page > 1'}
-          %span.arrow{'ng-click' => 'navigate('previous')'}
-            &lt;
+  .loading{'ng-show' => 'loading'}
+    %i.ip_icon.ip_spinning
+      &#61475;
 
-        %li
-          Results
-          {{resultCount}}
+  .content{'ng-hide' => 'loading'}
+    .row-fluid
+      .span6
+        %ul.pager
+          %li.previous{'ng-show' => 'page > 1'}
+            %span.arrow{'ng-click' => 'navigate('previous')'}
+              &lt;
 
-        %li.next{'ng-show' => 'page < maxPages'}
-          %span.arrow{'ng-click' => 'navigate('next')'}
-            &gt;
+          %li
+            Results
+            {{resultCount}}
 
-      .image-list
-        != JST['mediabrowser/tabular']()
+          %li.next{'ng-show' => 'page < maxPages'}
+            %span.arrow{'ng-click' => 'navigate('next')'}
+              &gt;
 
-    .span6
-      .inspector{'ng-show' => 'inspectedObject'}
-        %h4
-          Inspector
+        .image-list
+          != JST['mediabrowser/tabular']()
 
-        %a.btn{'ng-click' => 'hideInspector()'}
-          %i.icon-remove
+      .span6
+        .inspector{'ng-show' => 'inspectedObject'}
+          %h4
+            Inspector
 
-        %ip-object-inspector{'model' => 'inspectedObject'}
+          %a.btn{'ng-click' => 'hideInspector()'}
+            %i.icon-remove
 
-  .row-fluid.selection-list
-    .span12
-      %strong
-        Your selection
+          %ip-object-inspector{'model' => 'inspectedObject'}
 
-    %ul.objects.media-list{'ip-thumbnail-dropzone' => true, 'item-list' => 'imageSelection'}
-      %li.media.pull-left{'ng-repeat' => 'image in itemList'}
-        %img{'ng-src' => '{{image.body_data_url}}'}
+    .row-fluid.selection-list
+      .span12
+        %strong
+          Your selection
+
+      %ul.objects.media-list{'ip-thumbnail-dropzone' => true, 'item-list' => 'imageSelection'}
+        %li.media.pull-left{'ng-repeat' => 'image in itemList'}
+          %img{'ng-src' => '{{image.body_data_url}}'}
 
 .modal-footer
   .pull-left

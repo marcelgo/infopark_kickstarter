@@ -1,8 +1,10 @@
 angular.module('ip-mediabrowser').controller 'IpMediabrowserController', ['$scope', '$route', '$location', 'Image', ($scope, $route, $location, $Image) ->
+  $scope.loading = true
   $scope.queryResults = $Image.get({}, (result) ->
     $scope.images = result.images
     $scope.maxPages = result.meta.maxPages
     $scope.resultCount = result.meta.resultCount
+    $scope.loading = false
   )
   $scope.page = 1
   $scope.imageSelection = []
@@ -15,6 +17,8 @@ angular.module('ip-mediabrowser').controller 'IpMediabrowserController', ['$scop
       modal.modal('hide')
 
   $scope.navigate = (direction) ->
+    $scope.loading = true
+
     if direction == 'next'
       $scope.page += 1
     else
@@ -23,6 +27,7 @@ angular.module('ip-mediabrowser').controller 'IpMediabrowserController', ['$scop
     $scope.queryResults = $Image.get({page: $scope.page}, (result) ->
       $scope.images = result.images
       $scope.maxPages = result.meta.maxPages
+      $scope.loading = false
     )
 
   $scope.save = (event) ->
