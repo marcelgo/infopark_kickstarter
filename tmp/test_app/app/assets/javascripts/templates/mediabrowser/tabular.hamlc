@@ -5,4 +5,4 @@
         %img.thumbnail{'ip-draggable-thumbnail' => true, 'image-url' => 'item.body_data_url', 'object' => 'item'}
 
     %td
-      {{item.id}}
+      {{item.title || item.id}}
