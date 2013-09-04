@@ -11,6 +11,19 @@ module Cms
             directory('app')
           end
 
+          def update_application_css
+            file = 'app/assets/stylesheets/application.css'
+            insert_point = '*= require infopark_rails_connector'
+
+            data = []
+            data << ''
+            data << ' *= require redactor'
+
+            data = data.join("\n")
+
+            insert_into_file(file, data, after: insert_point)
+          end
+
           def update_application_js
             file = 'app/assets/javascripts/application.js'
             insert_point = "//= require infopark_rails_connector"

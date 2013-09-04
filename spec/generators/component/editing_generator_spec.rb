@@ -22,10 +22,13 @@ describe Cms::Generators::Component::EditingGenerator do
 
   def prepare_environments
     javascripts_path = "#{destination_root}/app/assets/javascripts"
+    stylesheets_path = "#{destination_root}/app/assets/stylesheets"
 
     mkdir_p(javascripts_path)
+    mkdir_p(stylesheets_path)
 
     File.open("#{javascripts_path}/application.js", 'w') { |file| file.write("//= require infopark_rails_connector\n") }
+    File.open("#{stylesheets_path}/application.css", 'w') { |file| file.write("*= require infopark_rails_connector\n") }
   end
 
   it 'creates files' do
@@ -34,11 +37,16 @@ describe Cms::Generators::Component::EditingGenerator do
         directory 'assets' do
           directory 'stylesheets' do
             file 'editing.css.less'
+            file 'application.css' do
+              contains '*= require editing'
+            end
           end
 
           directory 'javascripts' do
             file 'editing.js.coffee'
-            file 'edit_toggle.js.coffee'
+            file 'application.js' do
+              contains '//= require editing'
+            end
           end
         end
       end
