@@ -23,7 +23,7 @@ module Cms
           begin
             Widget::ApiGenerator.new(behavior: behavior) do |widget|
               widget.name = obj_class_name
-              widget.icon = '&#xF010;'
+              widget.icon = icon
               widget.attributes = column_attributes + column_size_attributes
             end
 
@@ -59,6 +59,10 @@ module Cms
         end
 
         private
+
+        def icon
+          "#{columns}#{'col'.pluralize(columns)}"
+        end
 
         def column_size_attributes
           (1..columns).inject([]) do |array, index|

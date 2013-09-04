@@ -10,7 +10,7 @@ describe Cms::Generators::WidgetGenerator do
   arguments [
     'news_widget',
     '--title=Test News Title',
-    '--icon=&#xF048;',
+    '--icon=text',
     '--description=Test News Description',
     '--attributes=foo:html', 'bar:enum',
     '--mandatory_attributes=foo', 'bar',
@@ -45,7 +45,7 @@ describe Cms::Generators::WidgetGenerator do
                 contains 'cms_edit_enum(@widget, :bar)'
               end
               file 'thumbnail.html.haml' do
-                contains '&#xF048;'
+                contains 'editing-icon-text'
               end
             end
 
