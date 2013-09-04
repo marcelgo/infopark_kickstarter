@@ -49,7 +49,7 @@ module Cms
       private
 
       def icon
-        options[:icon] || '1col'
+        options[:icon]
       end
 
       def title

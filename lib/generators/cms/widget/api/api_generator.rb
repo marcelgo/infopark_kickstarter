@@ -53,7 +53,7 @@ module Cms
         private
 
         def icon
-          @icon ||= '1col'
+          @icon ||= 'puzzle'
         end
 
         def title
