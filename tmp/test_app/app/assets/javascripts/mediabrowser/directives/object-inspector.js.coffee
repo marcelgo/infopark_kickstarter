@@ -6,7 +6,7 @@ angular.module('ip-mediabrowser')
   scope:
     model: '='
   template: '<div ng-bind-html-unsafe="editPage.markup"></div>'
-  controller: ['$scope', '$timeout', ($scope, $timeout) ->
+  controller: ['$scope', '$element', '$timeout', ($scope, $element, $timeout) ->
     $scope.editPage = undefined
 
     $scope.$watch 'model', ->
@@ -18,6 +18,6 @@ angular.module('ip-mediabrowser')
 
     $scope.refreshInplaceEditing = ->
       $timeout ->
-        window.infopark.editing.refresh()
+        window.infopark.editing.refresh($element)
   ]
 ]
