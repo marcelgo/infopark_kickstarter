@@ -22,14 +22,12 @@ body.ip_editing_active {
 }
 
 
-@ip_editing_menu_bar_height: 47px;
+// move navbar down, when editbar is active
+
+@infoparkEditingBarHeight: 47px;
 
 body.ip_editing_active {
-  padding-top: (@ip_editing_menu_bar_height + 60px);
-
-  .navbar {
-    padding-top: @ip_editing_menu_bar_height;
-  }
+  padding-top: @infoparkEditingBarHeight;
 }
 
 
