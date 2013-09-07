@@ -2,8 +2,6 @@ module Cms
   module Generators
     module Widget
       class SlideshareGenerator < ::Rails::Generators::Base
-        include Example
-
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
@@ -23,10 +21,6 @@ module Cms
 
           directory('app', force: true)
           directory('spec')
-        end
-
-        def create_example
-          example_migration_template(obj_class_name.underscore)
         end
 
         def notice

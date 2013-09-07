@@ -243,15 +243,7 @@ module Cms
 
       def create_example_content
         if examples?
-          Rails::Generators.invoke('cms:widget:teaser', ['--example'])
-          Rails::Generators.invoke('cms:widget:image', ['--example'])
-          Rails::Generators.invoke('cms:widget:headline', ['--example'])
-          Rails::Generators.invoke('cms:widget:maps', ['--example'])
-          Rails::Generators.invoke('cms:widget:text', ['--example'])
-
-          Rails::Generators.invoke('cms:component:profile_page', ['--cms_path=/website/en'])
-          Rails::Generators.invoke('cms:component:contact_page', ['--cms_path=/website/en'])
-          Rails::Generators.invoke('cms:component:blog', ['--cms_path=/website/en'])
+          Rails::Generators.invoke('cms:kickstart:example')
         end
       end
 

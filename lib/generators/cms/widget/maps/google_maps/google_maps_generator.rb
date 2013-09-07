@@ -3,8 +3,6 @@ module Cms
     module Widget
       module Maps
         class GoogleMapsGenerator < ::Rails::Generators::Base
-          include Example
-
           Rails::Generators.hide_namespace(self.namespace)
 
           source_root File.expand_path('../templates', __FILE__)
@@ -24,10 +22,6 @@ module Cms
             end
 
             directory('app', force: true)
-          end
-
-          def create_example
-            example_migration_template(obj_class_name.underscore)
           end
 
           def notice

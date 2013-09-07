@@ -2,8 +2,6 @@ module Cms
   module Generators
     module Widget
       class LoginGenerator < ::Rails::Generators::Base
-        include Example
-
         source_root File.expand_path('../templates', __FILE__)
 
         def create_widget
@@ -14,10 +12,6 @@ module Cms
           end
 
           directory('app', force: true)
-        end
-
-        def create_example
-          example_migration_template(obj_class_name.underscore)
         end
 
         def notice

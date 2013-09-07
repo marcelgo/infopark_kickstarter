@@ -3,7 +3,6 @@ module Cms
     module Widget
       class ColumnGenerator < ::Rails::Generators::Base
         include BasePaths
-        include Example
         include Actions
 
         source_root File.expand_path('../templates', __FILE__)
@@ -42,10 +41,6 @@ module Cms
             "app/widgets/#{folder_name}/views/edit.html.haml",
             force: true
           )
-        end
-
-        def create_example
-          example_migration_template(obj_class_name.underscore)
         end
 
         def notice
