@@ -76,7 +76,6 @@ module Cms
 
         gem_group(:assets) do
           gem('less-rails-bootstrap', '~> 2.3')
-          gem('bootstrap-datepicker-rails')
         end
 
         Bundler.with_clean_env do
