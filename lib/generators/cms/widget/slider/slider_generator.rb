@@ -3,28 +3,24 @@ module Cms
     module Widget
       class SliderGenerator < ::Rails::Generators::Base
         include Example
-        include Migration
 
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
-          begin
-            Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = obj_class_name
-              widget.icon = 'slider'
-              widget.description = 'Creates a rotating slider galerie from a list of images.'
-              widget.attributes = [
-                {
-                  name: 'images',
-                  type: :linklist,
-                  title: 'Images',
-                },
-              ]
-            end
-
-            directory('app', force: true)
-          rescue Cms::Generators::DuplicateResourceError
+          Widget::ApiGenerator.new(behavior: behavior) do |widget|
+            widget.name = obj_class_name
+            widget.icon = 'slider'
+            widget.description = 'Creates a rotating slider galerie from a list of images.'
+            widget.attributes = [
+              {
+                name: 'images',
+                type: :linklist,
+                title: 'Images',
+              },
+            ]
           end
+
+          directory('app', force: true)
         end
 
         def create_example

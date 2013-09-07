@@ -4,6 +4,7 @@ module Cms
       module Example
         include BasePaths
         include BaseAttributes
+        include Migration
 
         def self.included(base)
           base.class_option :example,

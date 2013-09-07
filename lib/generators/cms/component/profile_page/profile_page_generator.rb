@@ -14,35 +14,32 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
-          begin
-            Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = obj_class_name
-              model.title = 'Page: Profile'
-              model.page = true
-              model.attributes = [
-                {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: 'content',
-                  type: :html,
-                  title: 'Content',
-                },
-                {
-                  name: show_in_navigation_attribute_name,
-                  type: :boolean,
-                  title: 'Show in navigation',
-                },
-                {
-                  name: sort_key_attribute_name,
-                  type: :string,
-                  title: 'Sort key',
-                },
-              ]
-            end
-          rescue Cms::Generators::DuplicateResourceError
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = obj_class_name
+            model.title = 'Page: Profile'
+            model.page = true
+            model.attributes = [
+              {
+                name: 'headline',
+                type: :string,
+                title: 'Headline',
+              },
+              {
+                name: 'content',
+                type: :html,
+                title: 'Content',
+              },
+              {
+                name: show_in_navigation_attribute_name,
+                type: :boolean,
+                title: 'Show in navigation',
+              },
+              {
+                name: sort_key_attribute_name,
+                type: :string,
+                title: 'Sort key',
+              },
+            ]
           end
         end
 

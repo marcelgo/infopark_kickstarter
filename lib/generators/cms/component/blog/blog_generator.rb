@@ -21,65 +21,59 @@ module Cms
         end
 
         def create_migration
-          begin
-            Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = blog_class_name
-              model.title = 'Page: Blog'
-              model.page = true
-              model.attributes = [
-                {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: blog_disqus_shortname_attribute_name,
-                  type: :string,
-                  title: 'Disqus Shortname',
-                },
-                {
-                  name: blog_description_attribute_name,
-                  type: :text,
-                  title: 'Description',
-                },
-              ]
-            end
-          rescue Cms::Generators::DuplicateResourceError
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = blog_class_name
+            model.title = 'Page: Blog'
+            model.page = true
+            model.attributes = [
+              {
+                name: 'headline',
+                type: :string,
+                title: 'Headline',
+              },
+              {
+                name: blog_disqus_shortname_attribute_name,
+                type: :string,
+                title: 'Disqus Shortname',
+              },
+              {
+                name: blog_description_attribute_name,
+                type: :text,
+                title: 'Description',
+              },
+            ]
           end
 
-          begin
-            Model::ApiGenerator.new(behavior: behavior) do |model|
-              model.name = blog_post_class_name
-              model.title = 'Page: Blog Post'
-              model.thumbnail = false
-              model.page = true
-              model.attributes = [
-                {
-                  name: 'headline',
-                  type: :string,
-                  title: 'Headline',
-                },
-                {
-                  name: blog_post_author_attribute_name,
-                  type: :string,
-                  title: 'Author',
-                },
-                {
-                  name: widget_attribute_name,
-                  type: :widget,
-                  title: 'Main content',
-                },
-                {
-                  name: blog_post_abstract_attribute_name,
-                  type: :html,
-                  title: 'Abstract',
-                },
-              ]
-            end
-
-            Rails::Generators.invoke('cms:controller', [blog_post_class_name])
-          rescue Cms::Generators::DuplicateResourceError
+          Model::ApiGenerator.new(behavior: behavior) do |model|
+            model.name = blog_post_class_name
+            model.title = 'Page: Blog Post'
+            model.thumbnail = false
+            model.page = true
+            model.attributes = [
+              {
+                name: 'headline',
+                type: :string,
+                title: 'Headline',
+              },
+              {
+                name: blog_post_author_attribute_name,
+                type: :string,
+                title: 'Author',
+              },
+              {
+                name: widget_attribute_name,
+                type: :widget,
+                title: 'Main content',
+              },
+              {
+                name: blog_post_abstract_attribute_name,
+                type: :html,
+                title: 'Abstract',
+              },
+            ]
           end
+
+          Rails::Generators.invoke('cms:controller', [blog_post_class_name])
         end
 
         def add_discovery_link

@@ -11,7 +11,6 @@ module InfoparkKickstarter
           desc 'Run Kickstarter Integration Tests'
 
           task :integration do
-            prepare_directory
             create_application
             create_configuration_files
 
@@ -30,19 +29,15 @@ module InfoparkKickstarter
 
       private
 
-      def prepare_directory
-        rm_rf(app_path)
-        mkdir_p(config_path)
-      end
-
       def create_application
-        sh("rails new #{app_path} --skip-test-unit --skip-active-record --template template.rb")
+        rm_rf(app_path)
+
+        sh("rails new #{app_path} --skip-test-unit --skip-active-record --skip-bundle --template template.rb")
       end
 
       def create_configuration_files
-        test_app_config = File.expand_path('../../../../tmp/test_app/config', __FILE__)
-
-        ConfigurationHelper.new(test_app_config).copy
+        path = Pathname.new(app_path) + 'config'
+        ConfigurationHelper.new(path).copy
       end
 
       def bundle
@@ -89,11 +84,7 @@ module InfoparkKickstarter
       end
 
       def app_path
-        'tmp/test_app'
-      end
-
-      def config_path
-        "#{app_path}/config"
+        File.expand_path('../../../../tmp/test_app', __FILE__)
       end
     end
   end

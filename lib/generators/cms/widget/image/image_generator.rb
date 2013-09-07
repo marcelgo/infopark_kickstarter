@@ -3,29 +3,25 @@ module Cms
     module Widget
       class ImageGenerator < ::Rails::Generators::Base
         include Example
-        include Migration
 
         source_root File.expand_path('../templates', __FILE__)
 
         def create_widget
-          begin
-            Widget::ApiGenerator.new(behavior: behavior) do |widget|
-              widget.name = obj_class_name
-              widget.icon = 'image'
-              widget.description = 'Widget that holds an image.'
-              widget.attributes = [
-                {
-                  name: 'source',
-                  type: :linklist,
-                  title: 'Source',
-                  max_size: 1,
-                },
-              ]
-            end
-
-            directory('app', force: true)
-          rescue Cms::Generators::DuplicateResourceError
+          Widget::ApiGenerator.new(behavior: behavior) do |widget|
+            widget.name = obj_class_name
+            widget.icon = 'image'
+            widget.description = 'Widget that holds an image.'
+            widget.attributes = [
+              {
+                name: 'source',
+                type: :linklist,
+                title: 'Source',
+                max_size: 1,
+              },
+            ]
           end
+
+          directory('app', force: true)
         end
 
         def create_example

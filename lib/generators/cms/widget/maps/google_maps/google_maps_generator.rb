@@ -4,30 +4,26 @@ module Cms
       module Maps
         class GoogleMapsGenerator < ::Rails::Generators::Base
           include Example
-          include Migration
 
           Rails::Generators.hide_namespace(self.namespace)
 
           source_root File.expand_path('../templates', __FILE__)
 
           def create_migration
-            begin
-              Widget::ApiGenerator.new(behavior: behavior) do |widget|
-                widget.name = obj_class_name
-                widget.icon = 'map'
-                widget.description = 'Integrates a map that displays a pin for a given address.'
-                widget.attributes = [
-                  {
-                    name: 'address',
-                    type: :string,
-                    title: 'Address',
-                  },
-                ]
-              end
-
-              directory('app', force: true)
-            rescue Cms::Generators::DuplicateResourceError
+            Widget::ApiGenerator.new(behavior: behavior) do |widget|
+              widget.name = obj_class_name
+              widget.icon = 'map'
+              widget.description = 'Integrates a map that displays a pin for a given address.'
+              widget.attributes = [
+                {
+                  name: 'address',
+                  type: :string,
+                  title: 'Address',
+                },
+              ]
             end
+
+            directory('app', force: true)
           end
 
           def create_example
