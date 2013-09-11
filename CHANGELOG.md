@@ -1,4 +1,5 @@
 # v3.1.0
+  * Updated to Infopark SDK (infopark_rails_connector and infopark_cloud_connector) version 6.9.4.
   * We changed the general way to create examples for certain generators. Before you could pass in
     the option `--example` and then add some other options like `--cms_path` to further configure
     the examples. We have moved all examples into their own generator, which means you can now call
