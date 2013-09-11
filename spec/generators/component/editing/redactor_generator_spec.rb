@@ -43,7 +43,7 @@ describe Cms::Generators::Component::Editing::RedactorGenerator do
           end
 
           directory 'javascripts' do
-            file 'redactor.config.js'
+            file 'redactor.config.js.coffee'
 
             file 'application.js' do
               contains '//= require redactor'
