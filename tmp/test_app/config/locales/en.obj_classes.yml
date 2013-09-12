@@ -1,8 +1,5 @@
 en:
   obj_classes:
-    image:
-      title: 'Resource: Image'
-      description: 'Resource: Image'
     video:
       title: 'Resource: Video'
       description: 'Resource: Video'

@@ -120,12 +120,7 @@ module Cms
       end
 
       def create_structure_migration_file
-        Model::ApiGenerator.new(behavior: behavior) do |model|
-          model.name = 'Image'
-          model.type = :generic
-          model.title = 'Resource: Image'
-          model.thumbnail = false
-        end
+        migration_template('create_image.rb', 'cms/migrate/create_image.rb')
 
         Model::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Video'
