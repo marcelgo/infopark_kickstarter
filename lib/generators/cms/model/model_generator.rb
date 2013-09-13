@@ -47,13 +47,8 @@ module Cms
         default: false,
         desc: 'Turn the model into a page object'
 
-      class_option :widget,
-        type: :boolean,
-        default: false,
-        desc: 'Turn the model into a widget object'
-
       def create
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = name
           model.title = title
           model.description = description
@@ -63,7 +58,6 @@ module Cms
           model.mandatory_attributes = mandatory_attributes
           model.thumbnail = thumbnail?
           model.page = page?
-          model.widget = widget?
         end
       end
 
@@ -75,10 +69,6 @@ module Cms
 
       def page?
         options[:page]
-      end
-
-      def widget?
-        options[:widget]
       end
 
       def type

@@ -17,7 +17,7 @@ module Cms
         end
 
         def create_migration
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = blog_class_name
             model.title = 'Page: Blog'
             model.page = true
@@ -40,7 +40,7 @@ module Cms
             ]
           end
 
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = blog_post_class_name
             model.title = 'Page: Blog Post'
             model.thumbnail = false

@@ -20,8 +20,6 @@ module Cms
         attr_accessor :thumbnail
         attr_accessor :page
         attr_accessor :widget
-        attr_accessor :edit_view_path
-        attr_accessor :edit_view_object_name
 
         def initialize(config = {})
           yield self if block_given?
@@ -82,10 +80,6 @@ module Cms
 
         def create_migration_file
           migration_template('migration.rb', "#{migration_path}/create_#{file_name}.rb")
-        end
-
-        def create_edit_view
-          template('edit.html.haml', "#{edit_view_path}/edit.html.haml")
         end
 
         def turn_into_page
@@ -156,28 +150,6 @@ module Cms
 
         def model_path
           @model_path ||= 'app/models'
-        end
-
-        def edit_view_path
-          @edit_view_path ||= "app/views/#{class_name.underscore}"
-        end
-
-        def edit_view_object_name
-          @edit_view_object_name ||= "@obj"
-        end
-
-        def attributes_without_widgets
-          attributes.select do |definition|
-            definition[:type] != :widget
-          end
-        end
-
-        def edit_view_attributes
-          attributes_without_widgets.map do |definition|
-            definition[:object_name] = edit_view_object_name
-
-            definition
-          end
         end
       end
     end

@@ -1,21 +1,19 @@
 module Cms
   module Generators
-    module Widget
+    module ObjClass
       class ApiGenerator < ::Rails::Generators::NamedBase
-        include Actions
-        include BasePaths
-
         Rails::Generators.hide_namespace(self.namespace)
 
         source_root File.expand_path('../templates', __FILE__)
 
-        attr_accessor :name
-        attr_accessor :icon
         attr_accessor :title
         attr_accessor :description
+        attr_accessor :type
+        attr_accessor :thumbnail
         attr_accessor :attributes
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
+        attr_accessor :page
 
         def initialize(config = {})
           yield self if block_given?
@@ -28,57 +26,29 @@ module Cms
         def create_model
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = name
+            model.type = type
             model.title = title
             model.description = description
-            model.migration_path = "#{widget_path}/migrate"
-            model.thumbnail = false
-            model.widget = true
+            model.thumbnail = thumbnail
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
+            model.page = page
           end
-
-          template('en.locale.yml', "#{widget_path}/locales/en.#{file_name}.yml")
-          template('show.html.haml', "#{widget_path}/views/show.html.haml")
-          template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
 
         def create_edit_view
           EditView::ApiGenerator.new(behavior: behavior) do |model|
-            model.path = "#{widget_path}/views"
+            model.path = "app/views/#{class_name.underscore}"
             model.definitions = attributes
-            model.object_variable = '@widget'
+            model.object_variable = '@obj'
           end
         end
 
         private
 
-        def icon
-          @icon ||= 'puzzle'
-        end
-
-        def title
-          @title ||= human_name
-        end
-
-        def description
-          @description ||= ''
-        end
-
         def attributes
           @attributes ||= []
-        end
-
-        def preset_attributes
-          @preset_attributes ||= {}
-        end
-
-        def mandatory_attributes
-          @mandatory_attributes ||= []
-        end
-
-        def widget_path
-          widget_path_for(file_name)
         end
       end
     end

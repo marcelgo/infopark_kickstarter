@@ -9,7 +9,7 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Page: Contact'
             model.page = true

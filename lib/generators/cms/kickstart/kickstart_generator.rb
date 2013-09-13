@@ -120,14 +120,14 @@ module Cms
       end
 
       def create_structure_migration_file
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Image'
           model.type = :generic
           model.title = 'Resource: Image'
           model.thumbnail = false
         end
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Video'
           model.type = :generic
           model.title = 'Resource: Video'
@@ -139,7 +139,7 @@ module Cms
 
         class_name = 'Homepage'
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = class_name
           model.title = 'Page: Homepage'
           model.thumbnail = false
@@ -164,19 +164,19 @@ module Cms
 
         Rails::Generators.invoke('cms:controller', [class_name])
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Root'
           model.title = 'Root'
           model.thumbnail = false
         end
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Website'
           model.title = 'Website'
           model.thumbnail = false
         end
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Container'
           model.title = 'Container'
           model.thumbnail = false
@@ -188,7 +188,7 @@ module Cms
 
         class_name = 'ContentPage'
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = class_name
           model.title = 'Page: Content'
           model.page = true
@@ -205,7 +205,7 @@ module Cms
 
         class_name = 'ErrorPage'
 
-        Model::ApiGenerator.new(behavior: behavior) do |model|
+        ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = class_name
           model.title = 'Page: Error'
           model.thumbnail = false

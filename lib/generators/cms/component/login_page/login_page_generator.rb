@@ -8,7 +8,7 @@ module Cms
         source_root File.expand_path('../templates', __FILE__)
 
         def create_migration
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = login_obj_class_name
             model.title = 'Page: Login'
             model.thumbnail = false
@@ -37,7 +37,7 @@ module Cms
             ]
           end
 
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = reset_password_obj_class_name
             model.title = 'Page: ResetPassword'
             model.thumbnail = false

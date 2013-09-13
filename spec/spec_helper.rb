@@ -25,9 +25,10 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.before do
-    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::ControllerGenerator.send(:include, TestDestinationRoot)
-    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::EditView::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::ObjClass::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
   end
 end

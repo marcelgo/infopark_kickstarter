@@ -8,6 +8,7 @@ require 'generators/cms/base_attributes'
 require 'generators/cms/edit_view/api/api_generator'
 require 'generators/cms/migration'
 require 'generators/cms/model/api/api_generator'
+require 'generators/cms/obj_class/api/api_generator'
 require 'generators/cms/widget/example'
 require 'generators/cms/widget/api/api_generator'
 
