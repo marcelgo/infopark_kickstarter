@@ -26,14 +26,16 @@ module Cms
       def generate_edit_field(attribute)
         name = attribute[:name]
         type = attribute[:type]
+        object_name = attribute[:object_name]
 
-        "= cms_edit_#{type}(@widget, :#{name})"
+        "= cms_edit_#{type}(#{object_name}, :#{name})"
       end
 
       def generate_label(attribute)
         name = attribute[:name]
+        object_name = attribute[:object_name]
 
-        "= cms_edit_label(@widget, :#{name})"
+        "= cms_edit_label(#{object_name}, :#{name})"
       end
 
       def add_model_attribute(model, attribute, model_path = 'app/models')

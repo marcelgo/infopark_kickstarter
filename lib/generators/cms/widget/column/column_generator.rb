@@ -68,13 +68,19 @@ module Cms
 
         def column_attributes
           (1..columns).inject([]) do |array, index|
-            array << {
+            array + [{
               name: column_name(index),
               type: :widget,
               title: column_title(index),
-            }
+            }]
+          end
+        end
 
-            array
+        def column_size_edit_view_attributes
+          column_size_attributes.map do |definition|
+            definition[:object_name] = '@widget'
+
+            definition
           end
         end
 
