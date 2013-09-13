@@ -1,53 +1,54 @@
+---
 en:
   obj_classes:
     image:
-      title: 'Resource: Image'
-      description: 'Resource: Image'
+      title: ! 'Resource: Image'
+      description: 
     video:
-      title: 'Resource: Video'
-      description: 'Resource: Video'
+      title: ! 'Resource: Video'
+      description: 
     homepage:
-      title: 'Page: Homepage'
-      description: 'Page: Homepage'
+      title: ! 'Page: Homepage'
+      description: 
     root:
-      title: 'Root'
-      description: 'Root'
+      title: Root
+      description: 
     website:
-      title: 'Website'
-      description: 'Website'
+      title: Website
+      description: 
     container:
-      title: 'Container'
-      description: 'Container'
+      title: Container
+      description: 
     content_page:
-      title: 'Page: Content'
-      description: 'Page: Content'
+      title: ! 'Page: Content'
+      description: 
     error_page:
-      title: 'Page: Error'
-      description: 'Page: Error'
+      title: ! 'Page: Error'
+      description: 
     search_page:
-      title: 'Page: Search'
-      description: 'Page: Search'
+      title: ! 'Page: Search'
+      description: 
     login_page:
-      title: 'Page: Login'
-      description: 'Page: Login'
+      title: ! 'Page: Login'
+      description: 
     reset_password_page:
-      title: 'Page: ResetPassword'
-      description: 'Page: ResetPassword'
+      title: ! 'Page: ResetPassword'
+      description: 
     profile_page:
-      title: 'Page: Profile'
-      description: 'Page: Profile'
+      title: ! 'Page: Profile'
+      description: 
     contact_page:
-      title: 'Page: Contact'
-      description: 'Page: Contact'
+      title: ! 'Page: Contact'
+      description: 
     blog:
-      title: 'Page: Blog'
-      description: 'Page: Blog'
+      title: ! 'Page: Blog'
+      description: 
     blog_post:
-      title: 'Page: Blog Post'
-      description: 'Page: Blog Post'
+      title: ! 'Page: Blog Post'
+      description: 
     redirect:
-      title: 'Redirect'
-      description: 'Redirect'
+      title: Redirect
+      description: 
     form_builder:
-      title: 'Page: FormBuilder'
-      description: 'Page: FormBuilder'
+      title: ! 'Page: FormBuilder'
+      description: 

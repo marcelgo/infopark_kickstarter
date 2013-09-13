@@ -2,7 +2,6 @@ module Cms
   module Generators
     module Widget
       class ApiGenerator < ::Rails::Generators::NamedBase
-        include Actions
         include BasePaths
 
         Rails::Generators.hide_namespace(self.namespace)
@@ -29,16 +28,13 @@ module Cms
           Model::ApiGenerator.new(behavior: behavior) do |model|
             model.name = name
             model.title = title
-            model.description = description
             model.migration_path = "#{widget_path}/migrate"
             model.thumbnail = false
-            model.widget = true
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
           end
 
-          template('en.locale.yml', "#{widget_path}/locales/en.#{file_name}.yml")
           template('show.html.haml', "#{widget_path}/views/show.html.haml")
           template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
@@ -48,6 +44,29 @@ module Cms
             model.path = "#{widget_path}/views"
             model.definitions = attributes
             model.object_variable = '@widget'
+          end
+        end
+
+        def turn_model_into_widget
+          path = "app/models/#{class_name.underscore}.rb"
+
+          uncomment_lines(path, 'include Widget')
+        end
+
+        def add_locale
+          Locale::ApiGenerator.new(behavior: behavior) do |locale|
+            locale.name = name
+            locale.path = "#{widget_path}/locales/en.#{file_name}.yml"
+            locale.translations = {
+              'en' => {
+                'widgets' => {
+                  file_name => {
+                    'title' => title,
+                    'description' => description,
+                  },
+                },
+              },
+            }
           end
         end
 

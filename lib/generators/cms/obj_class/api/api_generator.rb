@@ -14,6 +14,7 @@ module Cms
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
         attr_accessor :page
+        attr_accessor :icon
 
         def initialize(config = {})
           yield self if block_given?
@@ -28,8 +29,8 @@ module Cms
             model.name = name
             model.type = type
             model.title = title
-            model.description = description
             model.thumbnail = thumbnail
+            model.icon = icon
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
@@ -42,6 +43,23 @@ module Cms
             model.path = "app/views/#{class_name.underscore}"
             model.definitions = attributes
             model.object_variable = '@obj'
+          end
+        end
+
+        def add_locale
+          Locale::ApiGenerator.new(behavior: behavior) do |locale|
+            locale.name = name
+            locale.path = 'config/locales/en.obj_classes.yml'
+            locale.translations = {
+              'en' => {
+                'obj_classes' => {
+                  file_name => {
+                    'title' => title,
+                    'description' => description,
+                  },
+                },
+              },
+            }
           end
         end
 

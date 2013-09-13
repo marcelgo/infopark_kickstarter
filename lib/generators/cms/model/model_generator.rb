@@ -47,12 +47,18 @@ module Cms
         default: false,
         desc: 'Turn the model into a page object'
 
+      class_option :icon,
+        type: :string,
+        default: 'box',
+        desc: 'Icon CSS class name'
+
       def create
         ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = name
           model.title = title
           model.description = description
           model.type = type
+          model.icon = icon
           model.attributes = attributes
           model.preset_attributes = preset_attributes
           model.mandatory_attributes = mandatory_attributes
@@ -73,6 +79,10 @@ module Cms
 
       def type
         options[:type]
+      end
+
+      def icon
+        options[:icon]
       end
 
       def title

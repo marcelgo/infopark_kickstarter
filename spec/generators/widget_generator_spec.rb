@@ -51,8 +51,8 @@ describe Cms::Generators::WidgetGenerator do
 
             directory 'locales' do
               file 'en.news_widget.yml' do
-                contains "title: 'Test News Title'"
-                contains "description: 'Test News Description'"
+                contains "title: Test News Title"
+                contains "description: Test News Description"
               end
             end
 
