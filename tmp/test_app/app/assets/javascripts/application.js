@@ -16,8 +16,8 @@
 //= require infopark_rails_connector
 //= require projekktor
 //= require projekktor.config
+//= require_tree ./editors
 //= require redactor
-//= require redactor.config
 //= require editing
 //= require bootstrap-datepicker
 
