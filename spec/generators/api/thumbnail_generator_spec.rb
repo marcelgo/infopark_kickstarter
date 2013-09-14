@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/thumbnail/api/api_generator'
+require 'generators/cms/api/thumbnail/thumbnail_generator'
 
-describe Cms::Generators::Thumbnail::ApiGenerator do
+describe Cms::Generators::Api::ThumbnailGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -11,7 +11,7 @@ describe Cms::Generators::Thumbnail::ApiGenerator do
   before do
     prepare_destination
 
-    Cms::Generators::Thumbnail::ApiGenerator.new do |config|
+    Cms::Generators::Api::ThumbnailGenerator.new do |config|
       config.name = 'foo'
       config.icon = 'foo'
       config.path = 'app/views/foo'

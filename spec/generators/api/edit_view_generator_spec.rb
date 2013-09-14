@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/edit_view/api/api_generator'
+require 'generators/cms/api/edit_view/edit_view_generator'
 
-describe Cms::Generators::EditView::ApiGenerator do
+describe Cms::Generators::Api::EditViewGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -11,7 +11,7 @@ describe Cms::Generators::EditView::ApiGenerator do
   before do
     prepare_destination
 
-    Cms::Generators::EditView::ApiGenerator.new do |config|
+    Cms::Generators::Api::EditViewGenerator.new do |config|
       config.path = 'app/views/foo'
       config.object_variable = '@obj'
       config.definitions = [

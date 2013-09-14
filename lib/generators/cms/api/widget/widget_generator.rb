@@ -1,7 +1,7 @@
 module Cms
   module Generators
-    module Widget
-      class ApiGenerator < ::Rails::Generators::NamedBase
+    module Api
+      class WidgetGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
 
         include BasePaths
@@ -24,7 +24,7 @@ module Cms
         end
 
         def create_model
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          Api::ModelGenerator.new(behavior: behavior) do |model|
             model.name = name
             model.title = title
             model.migration_path = "#{widget_path}/migrate"
@@ -39,7 +39,7 @@ module Cms
         end
 
         def create_edit_view
-          EditView::ApiGenerator.new(behavior: behavior) do |model|
+          Api::EditViewGenerator.new(behavior: behavior) do |model|
             model.path = "#{widget_path}/views"
             model.definitions = attributes
             model.object_variable = '@widget'
@@ -47,7 +47,7 @@ module Cms
         end
 
         def create_thumbnail
-          Thumbnail::ApiGenerator.new(behavior: behavior) do |thumbnail|
+          Api::ThumbnailGenerator.new(behavior: behavior) do |thumbnail|
             thumbnail.name = name
             thumbnail.path = "#{widget_path}/views"
             thumbnail.icon = icon
@@ -63,7 +63,7 @@ module Cms
         end
 
         def add_locale
-          Locale::ApiGenerator.new(behavior: behavior) do |locale|
+          Api::LocaleGenerator.new(behavior: behavior) do |locale|
             locale.name = name
             locale.path = "#{widget_path}/locales/en.#{file_name}.yml"
             locale.translations = {

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 require 'generator_spec/test_case'
-require 'generators/cms/locale/api/api_generator'
+require 'generators/cms/api/locale/locale_generator'
 
-describe Cms::Generators::Locale::ApiGenerator do
+describe Cms::Generators::Api::LocaleGenerator do
   include GeneratorSpec::TestCase
 
   destination File.expand_path('../../../../tmp/generators', __FILE__)
@@ -11,7 +11,7 @@ describe Cms::Generators::Locale::ApiGenerator do
   before do
     prepare_destination
 
-    Cms::Generators::Locale::ApiGenerator.new do |config|
+    Cms::Generators::Api::LocaleGenerator.new do |config|
       config.name = 'foo'
       config.path = 'config/locales/en.foo.yml'
       config.translations = {

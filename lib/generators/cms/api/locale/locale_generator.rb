@@ -1,7 +1,7 @@
 module Cms
   module Generators
-    module Locale
-      class ApiGenerator < ::Rails::Generators::NamedBase
+    module Api
+      class LocaleGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
 
         source_root File.expand_path('../templates', __FILE__)

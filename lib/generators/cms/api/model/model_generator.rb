@@ -1,7 +1,7 @@
 module Cms
   module Generators
-    module Model
-      class ApiGenerator < ::Rails::Generators::NamedBase
+    module Api
+      class ModelGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
         include Actions
         include Migration

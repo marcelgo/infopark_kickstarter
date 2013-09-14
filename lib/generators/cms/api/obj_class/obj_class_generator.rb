@@ -1,7 +1,7 @@
 module Cms
   module Generators
-    module ObjClass
-      class ApiGenerator < ::Rails::Generators::NamedBase
+    module Api
+      class ObjClassGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
 
         source_root File.expand_path('../templates', __FILE__)
@@ -25,7 +25,7 @@ module Cms
         end
 
         def create_model
-          Model::ApiGenerator.new(behavior: behavior) do |model|
+          Api::ModelGenerator.new(behavior: behavior) do |model|
             model.name = name
             model.type = type
             model.title = title
@@ -38,7 +38,7 @@ module Cms
         end
 
         def create_edit_view
-          EditView::ApiGenerator.new(behavior: behavior) do |model|
+          Api::EditViewGenerator.new(behavior: behavior) do |model|
             model.path = "app/views/#{file_name}"
             model.definitions = attributes
             model.object_variable = '@obj'
@@ -47,7 +47,7 @@ module Cms
 
         def create_thumbnail
           if thumbnail?
-            Thumbnail::ApiGenerator.new(behavior: behavior) do |thumbnail|
+            Api::ThumbnailGenerator.new(behavior: behavior) do |thumbnail|
               thumbnail.name = name
               thumbnail.path = "app/views/#{file_name}"
               thumbnail.icon = icon
@@ -58,7 +58,7 @@ module Cms
         end
 
         def add_locale
-          Locale::ApiGenerator.new(behavior: behavior) do |locale|
+          Api::LocaleGenerator.new(behavior: behavior) do |locale|
             locale.name = name
             locale.path = 'config/locales/en.obj_classes.yml'
             locale.translations = {

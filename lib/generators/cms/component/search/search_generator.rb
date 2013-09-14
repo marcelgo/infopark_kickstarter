@@ -34,7 +34,7 @@ module Cms
         def create_migration
           class_name = 'SearchPage'
 
-          ObjClass::ApiGenerator.new(behavior: behavior) do |model|
+          Api::ObjClassGenerator.new(behavior: behavior) do |model|
             model.name = class_name
             model.title = 'Search'
             model.thumbnail = false

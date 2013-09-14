@@ -1,7 +1,7 @@
 module Cms
   module Generators
-    module Thumbnail
-      class ApiGenerator < ::Rails::Generators::NamedBase
+    module Api
+      class ThumbnailGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
 
         source_root File.expand_path('../templates', __FILE__)

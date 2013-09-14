@@ -1,7 +1,7 @@
 module Cms
   module Generators
-    module EditView
-      class ApiGenerator < ::Rails::Generators::Base
+    module Api
+      class EditViewGenerator < ::Rails::Generators::Base
         Rails::Generators.hide_namespace(self.namespace)
 
         source_root File.expand_path('../templates', __FILE__)
