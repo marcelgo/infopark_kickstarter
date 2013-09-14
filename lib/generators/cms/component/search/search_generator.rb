@@ -36,7 +36,7 @@ module Cms
 
           ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
-            model.title = 'Page: Search'
+            model.title = 'Search'
             model.thumbnail = false
             model.page = true
             model.attributes = [

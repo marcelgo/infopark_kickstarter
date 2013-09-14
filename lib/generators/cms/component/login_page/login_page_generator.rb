@@ -10,7 +10,7 @@ module Cms
         def create_migration
           ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = login_obj_class_name
-            model.title = 'Page: Login'
+            model.title = 'Login'
             model.thumbnail = false
             model.page = true
             model.attributes = [
@@ -39,7 +39,7 @@ module Cms
 
           ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = reset_password_obj_class_name
-            model.title = 'Page: ResetPassword'
+            model.title = 'ResetPassword'
             model.thumbnail = false
             model.page = true
             model.attributes = [

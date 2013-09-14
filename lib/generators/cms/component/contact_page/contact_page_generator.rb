@@ -11,7 +11,7 @@ module Cms
         def create_migration
           ObjClass::ApiGenerator.new(behavior: behavior) do |model|
             model.name = class_name
-            model.title = 'Page: Contact'
+            model.title = 'Contact'
             model.page = true
             model.attributes = [
               {

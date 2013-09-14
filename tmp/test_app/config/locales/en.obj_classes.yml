@@ -2,13 +2,13 @@
 en:
   obj_classes:
     image:
-      title: ! 'Resource: Image'
+      title: Image
       description: 
     video:
-      title: ! 'Resource: Video'
+      title: Video
       description: 
     homepage:
-      title: ! 'Page: Homepage'
+      title: Homepage
       description: 
     root:
       title: Root
@@ -20,35 +20,35 @@ en:
       title: Container
       description: 
     content_page:
-      title: ! 'Page: Content'
+      title: Content
       description: 
     error_page:
-      title: ! 'Page: Error'
+      title: Error
       description: 
     search_page:
-      title: ! 'Page: Search'
+      title: Search
       description: 
     login_page:
-      title: ! 'Page: Login'
+      title: Login
       description: 
     reset_password_page:
-      title: ! 'Page: ResetPassword'
+      title: ResetPassword
       description: 
     profile_page:
-      title: ! 'Page: Profile'
+      title: Profile
       description: 
     contact_page:
-      title: ! 'Page: Contact'
+      title: Contact
       description: 
     blog:
-      title: ! 'Page: Blog'
+      title: Blog
       description: 
     blog_post:
-      title: ! 'Page: Blog Post'
+      title: Blog Post
       description: 
     redirect:
       title: Redirect
       description: 
     form_builder:
-      title: ! 'Page: FormBuilder'
+      title: FormBuilder
       description: 

@@ -123,14 +123,14 @@ module Cms
         ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Image'
           model.type = :generic
-          model.title = 'Resource: Image'
+          model.title = 'Image'
           model.thumbnail = false
         end
 
         ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = 'Video'
           model.type = :generic
-          model.title = 'Resource: Video'
+          model.title = 'Video'
           model.thumbnail = false
           model.attributes = [
             title_attribute,
@@ -141,7 +141,7 @@ module Cms
 
         ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = class_name
-          model.title = 'Page: Homepage'
+          model.title = 'Homepage'
           model.thumbnail = false
           model.attributes = [
             title_attribute,
@@ -190,7 +190,7 @@ module Cms
 
         ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = class_name
-          model.title = 'Page: Content'
+          model.title = 'Content'
           model.page = true
           model.attributes = [
             title_attribute,
@@ -207,7 +207,7 @@ module Cms
 
         ObjClass::ApiGenerator.new(behavior: behavior) do |model|
           model.name = class_name
-          model.title = 'Page: Error'
+          model.title = 'Error'
           model.thumbnail = false
           model.page = true
           model.attributes = [
