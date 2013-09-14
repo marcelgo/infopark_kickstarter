@@ -2,13 +2,12 @@ module Cms
   module Generators
     module Widget
       class ApiGenerator < ::Rails::Generators::NamedBase
-        include BasePaths
-
         Rails::Generators.hide_namespace(self.namespace)
+
+        include BasePaths
 
         source_root File.expand_path('../templates', __FILE__)
 
-        attr_accessor :name
         attr_accessor :icon
         attr_accessor :title
         attr_accessor :description
@@ -29,14 +28,14 @@ module Cms
             model.name = name
             model.title = title
             model.migration_path = "#{widget_path}/migrate"
-            model.thumbnail = false
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
           end
+        end
 
+        def create_show_view
           template('show.html.haml', "#{widget_path}/views/show.html.haml")
-          template('thumbnail.html.haml', "#{widget_path}/views/thumbnail.html.haml")
         end
 
         def create_edit_view
@@ -44,6 +43,16 @@ module Cms
             model.path = "#{widget_path}/views"
             model.definitions = attributes
             model.object_variable = '@widget'
+          end
+        end
+
+        def create_thumbnail
+          Thumbnail::ApiGenerator.new(behavior: behavior) do |thumbnail|
+            thumbnail.name = name
+            thumbnail.path = "#{widget_path}/views"
+            thumbnail.icon = icon
+            thumbnail.title_key = "widgets.#{file_name}.title"
+            thumbnail.description_key = "widgets.#{file_name}.description"
           end
         end
 
@@ -86,14 +95,6 @@ module Cms
 
         def attributes
           @attributes ||= []
-        end
-
-        def preset_attributes
-          @preset_attributes ||= {}
-        end
-
-        def mandatory_attributes
-          @mandatory_attributes ||= []
         end
 
         def widget_path

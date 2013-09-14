@@ -30,6 +30,7 @@ RSpec.configure do |config|
     Cms::Generators::Locale::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Model::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::ObjClass::ApiGenerator.send(:include, TestDestinationRoot)
+    Cms::Generators::Thumbnail::ApiGenerator.send(:include, TestDestinationRoot)
     Cms::Generators::Widget::ApiGenerator.send(:include, TestDestinationRoot)
   end
 end

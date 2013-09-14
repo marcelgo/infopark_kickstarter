@@ -9,11 +9,11 @@ module Cms
         attr_accessor :title
         attr_accessor :description
         attr_accessor :type
-        attr_accessor :thumbnail
         attr_accessor :attributes
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
         attr_accessor :page
+        attr_accessor :thumbnail
         attr_accessor :icon
 
         def initialize(config = {})
@@ -29,7 +29,6 @@ module Cms
             model.name = name
             model.type = type
             model.title = title
-            model.thumbnail = thumbnail
             model.icon = icon
             model.attributes = attributes
             model.preset_attributes = preset_attributes
@@ -40,9 +39,21 @@ module Cms
 
         def create_edit_view
           EditView::ApiGenerator.new(behavior: behavior) do |model|
-            model.path = "app/views/#{class_name.underscore}"
+            model.path = "app/views/#{file_name}"
             model.definitions = attributes
             model.object_variable = '@obj'
+          end
+        end
+
+        def create_thumbnail
+          if thumbnail?
+            Thumbnail::ApiGenerator.new(behavior: behavior) do |thumbnail|
+              thumbnail.name = name
+              thumbnail.path = "app/views/#{file_name}"
+              thumbnail.icon = icon
+              thumbnail.title_key = "obj_classes.#{file_name}.title"
+              thumbnail.description_key = "obj_classes.#{file_name}.description"
+            end
           end
         end
 
@@ -64,6 +75,14 @@ module Cms
         end
 
         private
+
+        def thumbnail?
+          @thumbnail.nil? ? true : @thumbnail
+        end
+
+        def icon
+          @icon ||= 'box'
+        end
 
         def attributes
           @attributes ||= []

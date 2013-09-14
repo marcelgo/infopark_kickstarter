@@ -16,7 +16,6 @@ module Cms
         attr_accessor :mandatory_attributes
         attr_accessor :migration_path
         attr_accessor :model_path
-        attr_accessor :thumbnail
         attr_accessor :icon
         attr_accessor :page
 
@@ -30,12 +29,6 @@ module Cms
 
         def create_model_file
           template('model.rb', File.join(model_path, "#{file_name}.rb"))
-        end
-
-        def create_model_thumbnail
-          if thumbnail?
-            template('thumbnail.html.haml', File.join('app/views/', file_name, 'thumbnail.html.haml'))
-          end
         end
 
         def handle_attributes
@@ -59,12 +52,12 @@ module Cms
         end
 
         def create_migration_file
-          migration_template('migration.rb', "#{migration_path}/create_#{file_name}.rb")
+          migration_template('migration.rb', File.join(migration_path, "create_#{file_name}.rb"))
         end
 
-        def turn_into_page
+        def turn_model_into_page
           if page?
-            path = "#{model_path}/#{class_name.underscore}.rb"
+            path = File.join(model_path, "#{file_name}.rb")
 
             uncomment_lines(path, 'include Page')
           end
@@ -72,16 +65,8 @@ module Cms
 
         private
 
-        def icon
-          @icon ||= 'box'
-        end
-
         def page?
           @page.nil? ? false : @page
-        end
-
-        def thumbnail?
-          @thumbnail.nil? ? true : @thumbnail
         end
 
         def type
