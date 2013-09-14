@@ -4,7 +4,6 @@ require 'infopark_kickstarter/engine'
 
 require 'generators/cms/actions'
 require 'generators/cms/base_paths'
-require 'generators/cms/base_attributes'
 require 'generators/cms/migration'
 require 'generators/cms/widget/example'
 
