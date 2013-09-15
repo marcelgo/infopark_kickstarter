@@ -5,6 +5,7 @@ module Cms
         Rails::Generators.hide_namespace(self.namespace)
 
         include BasePaths
+        include Migration
 
         source_root File.expand_path('../templates', __FILE__)
 
@@ -26,12 +27,16 @@ module Cms
         def create_model
           Api::ModelGenerator.new(behavior: behavior) do |model|
             model.name = name
-            model.title = title
-            model.migration_path = "#{widget_path}/migrate"
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
           end
+        end
+
+        def create_migration
+          path = "#{widget_path}/migrate/create_#{file_name}.rb"
+
+          migration_template('migration.rb', path)
         end
 
         def create_show_view

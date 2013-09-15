@@ -1,38 +1,8 @@
 ---
 en:
   obj_classes:
-    image:
-      title: Image
-      description: 
-    video:
-      title: Video
-      description: 
-    homepage:
-      title: Homepage
-      description: 
-    root:
-      title: Root
-      description: 
-    website:
-      title: Website
-      description: 
-    container:
-      title: Container
-      description: 
     content_page:
       title: Content
-      description: 
-    error_page:
-      title: Error
-      description: 
-    search_page:
-      title: Search
-      description: 
-    login_page:
-      title: Login
-      description: 
-    reset_password_page:
-      title: ResetPassword
       description: 
     profile_page:
       title: Profile
@@ -42,9 +12,6 @@ en:
       description: 
     blog:
       title: Blog
-      description: 
-    blog_post:
-      title: Blog Post
       description: 
     redirect:
       title: Redirect

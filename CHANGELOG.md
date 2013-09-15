@@ -3,6 +3,10 @@
     automatically generated widget edit views and we extended it now to also support all object
     classes. Like the widget edit view, the generated edit view holds all object class attributes.
 
+# v3.1.1
+  * Bugfix: Initial migration failed on newly created projects, because the `Image` obj class
+    already existed.
+
 # v3.1.0
   * Updated to Infopark SDK (infopark_rails_connector and infopark_cloud_connector) version 6.9.4.
   * We changed the general way to create examples for certain generators. Before you could pass in

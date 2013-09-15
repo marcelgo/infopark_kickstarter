@@ -4,6 +4,8 @@ module Cms
       class ObjClassGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
 
+        include Migration
+
         source_root File.expand_path('../templates', __FILE__)
 
         attr_accessor :title
@@ -15,6 +17,7 @@ module Cms
         attr_accessor :page
         attr_accessor :thumbnail
         attr_accessor :icon
+        attr_accessor :migration
 
         def initialize(config = {})
           yield self if block_given?
@@ -27,13 +30,16 @@ module Cms
         def create_model
           Api::ModelGenerator.new(behavior: behavior) do |model|
             model.name = name
-            model.type = type
-            model.title = title
-            model.icon = icon
             model.attributes = attributes
             model.preset_attributes = preset_attributes
             model.mandatory_attributes = mandatory_attributes
             model.page = page
+          end
+        end
+
+        def create_migration
+          if migration?
+            migration_template('migration.rb', "cms/migrate/create_#{file_name}.rb")
           end
         end
 
@@ -58,23 +64,33 @@ module Cms
         end
 
         def add_locale
-          Api::LocaleGenerator.new(behavior: behavior) do |locale|
-            locale.name = name
-            locale.path = 'config/locales/en.obj_classes.yml'
-            locale.translations = {
-              'en' => {
-                'obj_classes' => {
-                  file_name => {
-                    'title' => title,
-                    'description' => description,
+          if thumbnail?
+            Api::LocaleGenerator.new(behavior: behavior) do |locale|
+              locale.name = name
+              locale.path = 'config/locales/en.obj_classes.yml'
+              locale.translations = {
+                'en' => {
+                  'obj_classes' => {
+                    file_name => {
+                      'title' => title,
+                      'description' => description,
+                    },
                   },
                 },
-              },
-            }
+              }
+            end
           end
         end
 
         private
+
+        def type
+          @type ||= :publication
+        end
+
+        def migration?
+          @migration.nil? ? true : @migration
+        end
 
         def thumbnail?
           @thumbnail.nil? ? true : @thumbnail

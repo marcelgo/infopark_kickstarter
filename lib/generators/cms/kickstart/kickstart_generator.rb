@@ -119,14 +119,21 @@ module Cms
         append_file('.gitignore', "config/custom_cloud.yml\n")
       end
 
-      def create_structure_migration_file
+      # TODO: remove special migration once the CMS tenant is properly reset after signup. This
+      # should also allow to remove the "migration" variable on Api::ObjClassGenerator.
+      def create_special_case_image
         Api::ObjClassGenerator.new(behavior: behavior) do |model|
           model.name = 'Image'
           model.type = :generic
           model.title = 'Image'
           model.thumbnail = false
+          model.migration = false
         end
 
+        migration_template('create_image.rb', 'cms/migrate/create_image')
+      end
+
+      def create_structure_migration_file
         Api::ObjClassGenerator.new(behavior: behavior) do |model|
           model.name = 'Video'
           model.type = :generic

@@ -48,8 +48,8 @@ describe Cms::Generators::ModelGenerator do
             contains "name: 'News'"
             contains "title: 'Test News Title'"
             contains "type: 'generic'"
-            contains '{:name=>"foo", :type=>"html"},'
-            contains '{:name=>"bar", :type=>"enum"},'
+            contains '{:name=>"foo", :type=>"html"}'
+            contains '{:name=>"bar", :type=>"enum"}'
             contains 'mandatory_attributes: ["foo", "bar"]'
             contains 'preset_attributes: {"foo"=>"f", "bar"=>"b"}'
           end

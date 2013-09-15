@@ -34,7 +34,7 @@ module Cms
 
         data = data.join("\n")
 
-        insert_into_file(file, data, :after => insert_point)
+        insert_into_file(file, data, after: insert_point)
       end
     end
   end

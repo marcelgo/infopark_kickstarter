@@ -3,20 +3,14 @@ module Cms
     module Api
       class ModelGenerator < ::Rails::Generators::NamedBase
         Rails::Generators.hide_namespace(self.namespace)
+
         include Actions
-        include Migration
 
         source_root File.expand_path('../templates', __FILE__)
 
-        attr_accessor :name
-        attr_accessor :title
-        attr_accessor :type
         attr_accessor :attributes
         attr_accessor :preset_attributes
         attr_accessor :mandatory_attributes
-        attr_accessor :migration_path
-        attr_accessor :model_path
-        attr_accessor :icon
         attr_accessor :page
 
         def initialize(config = {})
@@ -28,7 +22,7 @@ module Cms
         end
 
         def create_model_file
-          template('model.rb', File.join(model_path, "#{file_name}.rb"))
+          template('model.rb', path)
         end
 
         def handle_attributes
@@ -51,14 +45,8 @@ module Cms
           end
         end
 
-        def create_migration_file
-          migration_template('migration.rb', File.join(migration_path, "create_#{file_name}.rb"))
-        end
-
         def turn_model_into_page
           if page?
-            path = File.join(model_path, "#{file_name}.rb")
-
             uncomment_lines(path, 'include Page')
           end
         end
@@ -67,10 +55,6 @@ module Cms
 
         def page?
           @page.nil? ? false : @page
-        end
-
-        def type
-          @type ||= :publication
         end
 
         def attributes
@@ -85,12 +69,12 @@ module Cms
           @mandatory_attributes ||= []
         end
 
-        def migration_path
-          @migration_path ||= 'cms/migrate'
+        def path
+          File.join('app', 'models', model_file_name)
         end
 
-        def model_path
-          @model_path ||= 'app/models'
+        def model_file_name
+          "#{file_name}.rb"
         end
       end
     end
