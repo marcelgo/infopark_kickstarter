@@ -6,44 +6,12 @@ module Cms
       include Migration
       include BasePaths
 
-      class_option :configuration_path,
-        type: :string,
-        default: nil,
-        desc: 'Path to a JSON configuration file.'
-
       class_option :examples,
         type: :boolean,
         default: false,
         desc: 'Creates example content along with setting up your project.'
 
       source_root File.expand_path('../templates', __FILE__)
-
-      def initialize(args = [], options = {}, config = {})
-        options << '--force'
-
-        super(args, options, config)
-      end
-
-      def read_config_file
-        path = options[:configuration_path]
-
-        if path
-          contents = if URI(path).is_a?(URI::HTTP)
-            open(path, 'Accept' => 'application/json') { |io| io.read }
-          else
-            File.read(path)
-          end
-
-          configuration = JSON(contents)
-
-          configuration.each do |generator|
-            name = generator['name']
-            options = Array(generator['options'])
-
-            Rails::Generators.invoke(name, options, behavior: behavior)
-          end
-        end
-      end
 
       def remove_index_html
         path = Rails.root + 'public/index.html'
