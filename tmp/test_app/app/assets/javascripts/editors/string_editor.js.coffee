@@ -6,7 +6,7 @@ $ ->
   infopark.on 'editing', ->
     template = ->
       $('<div class="string-editor-box">
-         <input type="text" class="string-editor" />
+         <input type="text" />
          </div>')
 
     getBox = (element) ->
@@ -15,8 +15,24 @@ $ ->
     editMarker = (cmsField) ->
       cmsField.closest('[data-ip-widget-obj-class]').find('.ip_editing_marker')
 
-    save = (e) ->
-      inputField = $(e.currentTarget)
+    disableEditMode = (box) ->
+      cmsField = box.data('cmsField')
+
+      cmsField.show()
+      editMarker(cmsField).show()
+      box.remove()
+
+    keyUp = (event) ->
+      key = event.keyCode || event.which
+
+      switch key
+        when 13 # Enter
+          save(event)
+        when 27 # Esc
+          cancel(event)
+
+    save = (event) ->
+      inputField = $(event.currentTarget)
       content = inputField.val()
       box = getBox(inputField)
       cmsField = box.data('cmsField')
@@ -25,33 +41,20 @@ $ ->
 
       cmsField.infopark('save', content).done ->
         cmsField.html(content)
-        disableEditMode(box, cmsField)
+        disableEditMode(box)
       .fail ->
         box.removeClass('saving')
 
-    disableEditMode = (box, cmsField) ->
-      cmsField.show()
-      editMarker(cmsField).show()
-      box.remove()
+    cancel = (event) ->
+      box = getBox($(event.currentTarget))
 
-    cancel = (e) ->
-      box = getBox($(e.currentTarget))
-      cmsField = box.data('cmsField')
+      disableEditMode(box)
 
-      disableEditMode(box, cmsField)
-
-    keyUp = (e) ->
-      key = event.keyCode || event.which
-      switch key
-        when 13 # Enter
-          save(e)
-        when 27 # Esc
-          cancel(e)
-
-    $('body').on 'click', '[data-ip-field-type=string]', (e) ->
-      e.preventDefault()
+    $('body').on 'click', '[data-ip-field-type=string]', (event) ->
+      event.preventDefault()
 
       cmsField = $(this)
+
       template()
         .data('cmsField', cmsField)
         .insertAfter(cmsField)
