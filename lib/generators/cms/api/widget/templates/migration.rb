@@ -2,7 +2,7 @@ class Create<%= class_name %> < ::RailsConnector::Migration
   def up
     create_obj_class(
       name: '<%= class_name %>',
-      type: '<%= type %>',
+      type: 'publication',
       title: '<%= title %>',
       attributes: [
         <%- attributes.each do |definition| -%>
