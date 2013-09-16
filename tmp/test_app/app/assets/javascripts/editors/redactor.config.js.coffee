@@ -48,15 +48,13 @@ $ ->
     content.find("[data-ip-field-type='html']")
 
   addOnclickRedactorHandlers = (content) ->
-    redactorOptions = redactorOptions()
-
     htmlFields(content).on 'click', (event) ->
       event.preventDefault()
       cmsField = $(this)
 
       unless cmsField.data('redactor')
         cmsField.html(cmsField.infopark('content') || '')
-        cmsField.redactor(redactorOptions)
+        cmsField.redactor(redactorOptions())
 
   infopark.on 'editing', ->
     addOnclickRedactorHandlers($('body'))
