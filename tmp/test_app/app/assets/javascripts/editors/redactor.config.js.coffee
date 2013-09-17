@@ -1,21 +1,16 @@
 $ ->
   timeout = undefined
   savedContent = undefined
+  originalContent = ''
 
   saveAction = (buttonName, buttonDom, buttonObject) ->
-    editor = @
-    editor.getBox().addClass('saving')
-
-    if !editor.opts.visual
-      editor.toggle(true)
-
-    saveContents(editor, true)
-
+    @getBox().addClass('saving')
+    saveContents(@, true)
 
   cancelAction = (buttonName, buttonDom, buttonObject) ->
-    editor = @
-    editor.set(editor.$element.infopark('content') || '')
-    editor.destroy()
+    @set(originalContent)
+    saveContents(@)
+    @destroy()
 
   redactorOptions = () ->
     customButtonDefinition =
@@ -41,6 +36,8 @@ $ ->
       ]
       removeEmptyTags: false
       linebreaks: false
+      initCallback: (_) ->
+        originalContent = @get()
       changeCallback: (_) ->
         autosaveAction(@)
       blurCallback: (_) ->
