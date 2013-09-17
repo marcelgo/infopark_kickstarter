@@ -8,9 +8,7 @@ $ ->
     saveContents(@, true)
 
   cancelAction = (buttonName, buttonDom, buttonObject) ->
-    @set(originalContent)
-    saveContents(@)
-    @destroy()
+    cancelEditing(@)
 
   redactorOptions = () ->
     customButtonDefinition =
@@ -42,8 +40,13 @@ $ ->
         autosaveAction(@)
       blurCallback: (_) ->
         saveContents(@)
-      keyupCallback: (_) ->
-        autosaveAction(@)
+      keyupCallback: (event) ->
+        key = event.keyCode || event.which
+
+        if key == 27
+          cancelEditing(@)
+        else
+          autosaveAction(@)
       pasteAfterCallback: (html) ->
         autosaveAction(@)
         html
@@ -63,6 +66,11 @@ $ ->
       # close editor in case of no save needed
       if closeEditor
         editor.destroy()
+
+  cancelEditing = (editor) ->
+    editor.set(originalContent)
+    saveContents(editor)
+    editor.destroy()
 
   autosaveAction = (editor) ->
     if timeout
